@@ -6,15 +6,15 @@ const NaoEncontrada = () => {
     return (
         <div className="flex relative bg-[linear-gradient(135deg,#0f172a_0%,#1e1b4b_100%)] min-h-screen items-center justify-center text-[#f9fafb] leading-[1.6] overflow-hidden select-none">
             <div className="relative w-full max-w-[600px] p-8 z-20">
-                <div className="bg-[#1f2937] border-[#374151] border rounded-[20px] py-14 px-12 text-center animate-fadeInUp" style={{ boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5)' }}>
-                    <div className="text-[80px] mb-4 animate-float">🔍</div>
-                    <h1 className="bg-linear-to-br from-blue-500 to-purple-500 bg-clip-text text-transparent text-[120px] font-extrabold leading-none mb-4 animate-glow">404</h1>
-                    <h1 className="text-[32px] font-bold text-[#f9fafb] mb-4">Página Não Encontrada</h1>
-                    <p className="text-[16px] text-[#9ca3af] leading-normal mb-8"> 
+                <div className="bg-[#1f2937] border-[#374151] border rounded-[20px] py-10 md:py-14 px-6 md:px-12 text-center animate-fadeInUp" style={{ boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5)' }}>
+                    <div className="text-[60px] md:text-[80px] mb-4 animate-float">🔍</div>
+                    <h1 className="bg-linear-to-br from-blue-500 to-purple-500 bg-clip-text text-transparent text-[80px] md:text-[120px] font-extrabold leading-none mb-4 animate-glow">404</h1>
+                    <h1 className="text-[24px] md:text-[32px] font-bold text-[#f9fafb] mb-4">Página Não Encontrada</h1>
+                    <p className="text-[15px] md:text-[16px] text-[#9ca3af] leading-normal mb-8"> 
                         Desculpe, a página que você está procurando não existe ou foi movida.
                     </p>
 
-                    <div className="flex gap-4 justify-center mb-10 flex-wrap">
+                    <div className="flex gap-3 md:gap-4 justify-center mb-10 flex-col md:flex-row">
                         <button className="inline-block px-3.5 py-7 rounded-[10px] text-[15px] font-semibold bg-[#3b82f6] text-[#FFF] border-2 border-[#3b82f6] hover:bg-[#2563eb] hover:border-[#2563eb] hover:-translate-y-0.5 hover:" onClick={() => navegar(-1)}>Voltar para Página Anterior</button>
                         <button className="inline-block px-3.5 py-7 rounded-[10px] text-[15px] font-semibold text-[#f9fafb] border-2 border-[#374151] hover:bg-[#111827] hover:border-[#9ca3af] hover:-translate-y-0.5" onClick={() => navegar("/inicio")}>Ir para o DashBoard</button>
                     </div>
