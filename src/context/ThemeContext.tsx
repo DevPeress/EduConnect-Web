@@ -13,6 +13,11 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   function toggleTheme() {
     setDark(prev => !prev);
+    if (dark) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+    }
   }
 
   return (
