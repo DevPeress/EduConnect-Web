@@ -42,11 +42,10 @@ html, body, #root {
 
 @theme {
   --animate-float: float 3s ease-in-out infinite;
-    @keyframes float {
-      0%, 100% {
+  @keyframes float {
+    0%, 100% {
       transform: translateY(0);
-    }
-    50% {
+    } 50% {
       transform: translateY(-10px);
     }
   }
@@ -56,8 +55,7 @@ html, body, #root {
     from {
       opacity: 0;
       transform: translateY(30px);
-    }
-    to {
+    } to {
       opacity: 1;
       transform: translateY(0);
     }
@@ -67,8 +65,7 @@ html, body, #root {
   @keyframes glow {
     0%, 100% {
       filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.5));
-    }
-    50% {
+    } 50% {
       filter: drop-shadow(0 0 40px rgba(59, 130, 246, 0.8));
     }
   }
@@ -78,8 +75,7 @@ html, body, #root {
     0%, 100% {
       transform: scale(1);
       opacity: 0.1;
-    }
-    50% {
+    } 50% {
       transform: scale(1.1);
       opacity: 0.15;
     }
