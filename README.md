@@ -1,73 +1,54 @@
-# React + TypeScript + Vite
+# Edu Connect (Front-End)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![React](https://img.shields.io/badge/React-%2320232a.svg?logo=react&logoColor=%2361DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=fff)
 
-Currently, two official plugins are available:
+## Descrição
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+O Edu Connect é o Front-End de um sistema escolar desenvolvido em React com TypeScript, voltado para a gestão e navegação intuitiva dentro de um ambiente educacional.
 
-## React Compiler
+## 🧰 Tecnologias Utilizadas
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
 
-## Expanding the ESLint configuration
+### Front-End e Linguagens:
+- [React](https://react.dev/)
+- [TypeScript](https://www.typescriptlang.org/)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Qualidade de Código:
+- [ESLint](https://eslint.org/?utm_source=chatgpt.com)
+- [Prettier](https://prettier.io/?utm_source=chatgpt.com)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## ✨ Funcionalidades
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- Página 404 personalizada para informar e redirecionar o usuário em caso de rotas inexistentes.
+- Estrutura modularizada para fácil manutenção e escalabilidade.
+- Organização baseada em componentização e contextos globais.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## ⚙️ Instalação
+
+```bash
+# Clone o repositório
+git clone https://github.com/DevPeress/EduConnect-Web
+cd EduConnect-WEb
+
+# Instale as dependências
+npm install
+
+# Inicie o servidor de desenvolvimento
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🗂 Estrutura do Projeto
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+📁 EduConnect
+ ┣ 📂 src 
+    ┣ 📂 assets         # Imagens e ícones utilizados no site
+    ┣ 📂 components     # Componentes reutilizáveis
+    ┣ 📂 context        # Contextos globais
+    ┣ 📂 paginas        # Páginas principais do site
+       ┣ 📂 pagina      # Configuração específica de cada página
+    ┣ 📄 App.tsx        # Roteamento principal com React Router DOM
+    ┣ 📄 Index.css      # Tailwind CSS, animações e temas
+    ┣ 📄 main.tsx       # Ponto de entrada principal do projeto React
 ```
