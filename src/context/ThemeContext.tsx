@@ -1,10 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import type { ReactNode } from "react";
-
-interface ThemeType {
-  dark: boolean;
-  toggleTheme: () => void;
-};
+import type { ThemeType } from "../types/types";
 
 const ThemeContext = createContext<ThemeType | undefined>(undefined);
 
@@ -27,7 +23,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   }, [dark]);
 
   return (
-    <ThemeContext.Provider value={{ dark, toggleTheme }}>
+    <ThemeContext.Provider value={{ toggleTheme }}>
       <html lang="pt-br">
         <body>
           {children}
