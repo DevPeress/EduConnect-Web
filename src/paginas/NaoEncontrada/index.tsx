@@ -10,7 +10,7 @@ const NaoEncontrada = () => {
     
     return (
         <div className="flex relative bg-linear-(--bg-liner) min-h-screen items-center justify-center leading-[1.6] text-(--text-primary) overflow-hidden select-none">
-            <div className="relative w-full max-w-[600px] p-8 z-20">
+            <div className="relative w-full max-w-[600px] p-7 z-20">
                 <div className="bg-(--bg-card) border border-(--border-color) rounded-[20px] py-10 md:py-14 px-6 md:px-12 text-center animate-fadeInUp" style={{ boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5)' }}>
                     <div className="ml-55 md:ml-100 max-w-15">
                         { dark ? 
