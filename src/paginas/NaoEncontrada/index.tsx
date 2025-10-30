@@ -7,7 +7,6 @@ const NaoEncontrada = () => {
     const navegar = useNavigate();
     const tema = useTheme();
     const dark = tema.dark;
-    const trocarTema = tema.toggleTheme;
     
     return (
         <div className="flex relative bg-linear-(--bg-liner) min-h-screen items-center justify-center leading-[1.6] text-(--text-primary) overflow-hidden select-none">
@@ -15,9 +14,9 @@ const NaoEncontrada = () => {
                 <div className="bg-(--bg-card) border border-(--border-color) rounded-[20px] py-10 md:py-14 px-6 md:px-12 text-center animate-fadeInUp" style={{ boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5)' }}>
                     <div className="ml-55 md:ml-100 max-w-15">
                         { dark ? 
-                            <img src={Dia} alt="" onClick={() => trocarTema} /> 
+                            <img src={Dia} alt="" onClick={() => tema.toggleTheme()} /> 
                             : 
-                            <img src={Noite} alt="" onClick={() => trocarTema} /> 
+                            <img src={Noite} alt="" onClick={() => tema.toggleTheme()} /> 
                         }
                     </div>
 
