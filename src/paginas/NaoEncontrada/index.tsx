@@ -7,35 +7,35 @@ const NaoEncontrada = () => {
     const navegar = useNavigate();
     const tema = useTheme();
     const dark = tema.dark;
-    
+
     return (
         <div className="flex relative bg-linear-(--bg-liner) min-h-screen items-center justify-center leading-[1.6] text-(--text-primary) overflow-hidden select-none">
             <div className="relative w-full max-w-[600px] p-7 z-20">
                 <div className="bg-(--bg-card) border border-(--border-color) rounded-[20px] py-10 md:py-14 px-6 md:px-12 text-center animate-fadeInUp" style={{ boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5)' }}>
                     <div className="ml-55 md:ml-100 max-w-15">
-                        { dark ? 
-                            <img src={Dia} alt="" onClick={() => tema.toggleTheme()} /> 
-                            : 
-                            <img src={Noite} alt="" onClick={() => tema.toggleTheme()} /> 
+                        {dark ?
+                            <img src={Dia} alt="" onClick={() => tema.toggleTheme()} />
+                            :
+                            <img src={Noite} alt="" onClick={() => tema.toggleTheme()} />
                         }
                     </div>
 
                     <div className="text-[60px] md:text-[80px] mb-4 animate-float">🔍</div>
                     <h1 className="bg-linear-to-br from-blue-500 to-purple-500 bg-clip-text text-transparent text-[80px] md:text-[120px] font-extrabold leading-none mb-4 animate-glow">404</h1>
                     <h1 className="text-(--text-primary) text-[24px] md:text-[32px] font-bold mb-4">Página Não Encontrada</h1>
-                    <p className="text-(--text-secondary) text-[15px] md:text-[16px] leading-normal mb-8"> 
+                    <p className="text-(--text-secondary) text-[15px] md:text-[16px] leading-normal mb-8">
                         Desculpe, a página que você está procurando não existe ou foi movida.
                     </p>
 
                     <div className="flex gap-3 md:gap-4 justify-center mb-10 flex-col md:flex-row">
-                        <button 
-                            className="bg-(--primary-color) inline-block px-3.5 py-7 rounded-[10px] border-(--primary-color) text-[15px] font-semibold text-[#FFF] border-2 hover:bg-(--primary-hover) hover:border-(--primary-hover) hover:-translate-y-0.5" 
+                        <button
+                            className="bg-(--primary-color) inline-block px-3.5 py-7 rounded-[10px] border-(--primary-color) text-[15px] font-semibold text-[#FFF] border-2 hover:bg-(--primary-hover) hover:border-(--primary-hover) hover:-translate-y-0.5"
                             onClick={() => navegar(-1)}
                         >
                             Voltar para Página Anterior
                         </button>
-                        <button 
-                            className="inline-block px-3.5 py-7 rounded-[10px] bg-(--border-color) text-[15px] text-(--text-primary) font-semibold border-2 hover:bg-(--bg-input) hover:border-(--text-secondary) hover:-translate-y-0.5" 
+                        <button
+                            className="inline-block px-3.5 py-7 rounded-[10px] bg-(--border-color) text-[15px] text-(--text-primary) font-semibold border-2 hover:bg-(--bg-input) hover:border-(--text-secondary) hover:-translate-y-0.5"
                             onClick={() => navegar("/inicio")}
                         >
                             Ir para o DashBoard
