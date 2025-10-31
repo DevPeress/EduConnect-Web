@@ -1,12 +1,33 @@
+import { useState, type FormEvent } from 'react';
 import Dia from '../../assets/Dia.svg';
 import Noite from '../../assets/Noite.svg';
 import { useTheme } from "../../context/ThemeContext";
+import type { LoginType } from '../../types/types';
 
 const Login = () => {
     const tema = useTheme();
     const dark = tema.dark;
+    const [dados, setDados] = useState<LoginType>({ email: "", senha: "" })
 
-    return(
+    const AlterarDados = (texto: string, tipo: keyof LoginType) => {
+        setDados((prevDados) => ({
+            ...prevDados,
+            [tipo]: texto
+        }))
+    }
+
+    const Login = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+
+        const email = dados.email;
+        const verificarEmail = email.includes("@") && email.includes(".com");
+        if (!verificarEmail) 
+            return alert("E-mail ou senha estão incorretos");
+
+        // FETCH
+    }
+
+    return (
         <div className="flex relative bg-linear-(--bg-liner) min-h-screen items-center justify-center leading-[1.6] text-(--text-primary) overflow-hidden select-none">
             <div className="relative w-full max-w-[600px] p-7 z-20">
                 <div className="bg-(--bg-card) border border-(--border-color) rounded-[20px] py-10 md:py-14 px-6 md:px-12 text-center animate-fadeInUp" style={{ boxShadow: '0 20px 60px rgba(0, 0, 0, 0.5)' }}>
@@ -23,20 +44,24 @@ const Login = () => {
                         Fala o login para continuar
                     </p>
 
-                    <form  className='flex flex-col gap-5' onSubmit={Login} >
+                    <form className='flex flex-col gap-5' onSubmit={(e) => Login(e)} >
                         <div className='flex flex-col gap-2 text-left'>
                             <label className='text-(--text-primary) text-[14px] font-medium' htmlFor="email">E-mail</label>
-                            <input 
+                            <input
                                 className='w-full px-3 py-4 border-2 border-(--border-color) rounded-lg text-[15px] text-(--text-primary) bg-(--bg-input) focus:outline-none focus:border-(--primary-color)'
-                                type="email" name="email" id="email" placeholder='seu@gmail.com' required 
+                                value={dados.email}
+                                onChange={(e) => AlterarDados(e.target.value, "email")}
+                                type="email" name="email" id="email" placeholder='seu@gmail.com' required
                             />
                         </div>
 
                         <div className='flex flex-col gap-2 text-left'>
                             <label className='text-(--text-primary) text-[14px] font-medium' htmlFor="password">Senha</label>
-                            <input 
+                            <input
                                 className='w-full px-3 py-4 border-2 border-(--border-color) rounded-lg text-[15px] text-(--text-primary) bg-(--bg-input)  focus:outline-none focus:border-(--primary-color)'
-                                type="password" name="password" id="password" placeholder='••••••••' required 
+                                value={dados.senha}
+                                onChange={(e) => AlterarDados(e.target.value, "senha")}
+                                type="password" name="password" id="password" placeholder='••••••••' required
                             />
                         </div>
 
