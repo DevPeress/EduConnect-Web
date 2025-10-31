@@ -24,7 +24,7 @@ const FundoBolhas = ({ children }: { children: ReactNode }) => {
 
             <div className="fixed top-0 left-0 w-full h-full pointer-events-none">
                 <div className="absolute rounded-[50%] opacity-[.1] animate-pulse w-[300px] h-[300px] bg-(--primary-color) -top-[150px] -right-[150px]"></div>
-                <div className="absolute rounded-[50%] opacity-[.1] animate-pulse w-[400px] h-[400px] bg-[#8b5cf6] -bottom-[200px] -left-[200px]"></div>
+                <div className="absolute rounded-[50%] opacity-[.1] animate-pulse w-[400px] h-[400px] bg-(--text-primary) -bottom-[200px] -left-[200px]"></div>
                 <div className="absolute rounded-[50%] opacity-[.1] animate-pulse w-[200px] h-[200px] bg-(--primary-color) top-[50%] right-[10%]"></div>
             </div>
         </div>
