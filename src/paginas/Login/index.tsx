@@ -23,7 +23,33 @@ const Login = () => {
                         Fala o login para continuar
                     </p>
 
-                    
+                    <form  className='flex flex-col gap-5' onSubmit={Login} >
+                        <div className='flex flex-col gap-2 text-left'>
+                            <label className='text-(--text-primary) text-[14px] font-medium' htmlFor="email">E-mail</label>
+                            <input 
+                                className='w-full px-3 py-4 border-2 border-(--border-color) rounded-lg text-[15px] text-(--text-primary) bg-(--bg-input) focus:outline-none focus:border-(--primary-color)'
+                                type="email" name="email" id="email" placeholder='seu@gmail.com' required 
+                            />
+                        </div>
+
+                        <div className='flex flex-col gap-2 text-left'>
+                            <label className='text-(--text-primary) text-[14px] font-medium' htmlFor="password">Senha</label>
+                            <input 
+                                className='w-full px-3 py-4 border-2 border-(--border-color) rounded-lg text-[15px] text-(--text-primary) bg-(--bg-input)  focus:outline-none focus:border-(--primary-color)'
+                                type="password" name="password" id="password" placeholder='••••••••' required 
+                            />
+                        </div>
+
+                        <div className='flex justify-between items-center mt-1'>
+                            <label className="flex items-center gap-8 cursor-pointer text-[14px] text-(--text-secondary)">
+                                <input type="checkbox" className='w-4 h-4 cursor-pointer accent-(--primary-color)' />
+                                <span >Lembrar de mim</span>
+                            </label>
+                            <a className='text-(--primary-color) text-[14px] font-medium hover:text-(--primary-hover) hover:underline'>Esqueceu a senha?</a>
+                        </div>
+
+                        <button type='submit' className='w-full px-3.5 py-6 bg-(--primary-color) text-white border-none rounded-lg text-[16px] font-semibold cursor-pointer mt-2 hover:bg-(--primary-hover) hover:-translate-y-0.5'>Entrar</button>
+                    </form>
                 </div>
             </div>
 
