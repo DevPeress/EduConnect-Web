@@ -22,7 +22,7 @@ const NaoEncontrada = () => {
                 </button>
                 <button
                     className="inline-block px-3.5 py-7 rounded-[10px] bg-(--border-color) text-[15px] text-(--text-primary) font-semibold border-2 hover:bg-(--bg-input) hover:border-(--text-secondary) hover:-translate-y-0.5"
-                    onClick={() => navegar("/inicio")}
+                    onClick={() => navegar("/login")}
                 >
                     Ir para o DashBoard
                 </button>
