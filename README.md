@@ -18,6 +18,9 @@ O Edu Connect é o Front-End de um sistema escolar desenvolvido em React com Typ
 - [TailWind Css](https://tailwindcss.com/)
 - [Vite](https://vitejs.dev/)
 
+### 🔗 Comunicação com API
+- [Axios](https://axios-http.com/)
+
 ### 🧹 Qualidade de Código:
 - [ESLint](https://eslint.org/)
 - [TypeScript ESLint](https://typescript-eslint.io/)
