@@ -10,19 +10,27 @@ O Edu Connect é o Front-End de um sistema escolar desenvolvido em React com Typ
 ## 🧰 Tecnologias Utilizadas
 
 
-### Front-End e Linguagens:
+### ⚛️ Front-End e Linguagens:
 - [React](https://react.dev/)
 - [TypeScript](https://www.typescriptlang.org/)
 
-### Qualidade de Código:
-- [ESLint](https://eslint.org/?utm_source=chatgpt.com)
-- [Prettier](https://prettier.io/?utm_source=chatgpt.com)
+### 🎨 Estilização e Build
+- [TailWind Css](https://tailwindcss.com/)
+- [Vite](https://vitejs.dev/)
+
+### 🧹 Qualidade de Código:
+- [ESLint](https://eslint.org/)
+- [TypeScript ESLint](https://typescript-eslint.io/)
+
+### 🚦 Gerenciamento de Rotas
+- [React Router Dom](https://reactrouter.com/)
 
 ## ✨ Funcionalidades
 
-- Página 404 personalizada para informar e redirecionar o usuário em caso de rotas inexistentes.
-- Estrutura modularizada para fácil manutenção e escalabilidade.
-- Organização baseada em componentização e contextos globais.
+ -Página 404 personalizada: informa o usuário sobre rotas inexistentes e oferece redirecionamento intuitivo.
+- Arquitetura modularizada: facilita a manutenção, evolução e reutilização de componentes.
+- Organização baseada em componentização e contextos globais: garante melhor separação de responsabilidades e gerenciamento de estado eficiente.
+- Página de login funcional: permite autenticação segura e redirecionamento automático conforme o nível de acesso do usuário.
 
 ## ⚙️ Instalação
 
