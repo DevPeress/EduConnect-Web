@@ -9,7 +9,14 @@ function App() {
       <Routes>
         <Route path="" element={ <Inicial /> } />
         <Route path="login" element={ <Login /> } />
+
+        {/* 
+        <Route element={<PrivateRoute isAuthenticated={isLoggedIn} userRole={userRole} allowedRoles={['admin']} />}>
+          <Route path="/admin" element={<AdminDashboard />} />
+        </Route>
+        */}
         
+        {/* Página não encontrada */}
         <Route path="*" element={ <NaoEncontrada /> } />
       </Routes>
     </BrowserRouter>
