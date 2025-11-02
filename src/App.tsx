@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import NaoEncontrada from "./paginas/NaoEncontrada"
 import Login from "./paginas/Login"
 import Inicial from "./paginas/Inicial"
+import SemAcesso from "./paginas/SemAcesso"
 
 function App() {
   return (
@@ -16,6 +17,8 @@ function App() {
         </Route>
         */}
         
+        {/* Página de sem acesso */}
+        <Route path="/sem-acesso" element={ <SemAcesso /> } />
         {/* Página não encontrada */}
         <Route path="*" element={ <NaoEncontrada /> } />
       </Routes>
