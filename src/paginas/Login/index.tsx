@@ -52,11 +52,11 @@ const Login = () => {
                 </div>
 
                 <div className='flex justify-between items-center mt-1'>
-                    <label className="flex items-center gap-8 cursor-pointer text-[14px] text-(--text-secondary)">
+                    <label className="flex items-center gap-8 cursor-pointer text-[12px] md:text-[14px] text-(--text-secondary)">
                         <input type="checkbox" className='w-4 h-4 cursor-pointer accent-(--primary-color)' />
-                        <span >Lembrar de mim</span>
+                        <span className='-ml-4 '>Lembrar de mim</span>
                     </label>
-                    <a className='text-(--primary-color) text-[14px] font-medium hover:text-(--primary-hover) hover:underline'>Esqueceu a senha?</a>
+                    <a className='text-(--primary-color) text-[12px] md:text-[14px] font-medium hover:text-(--primary-hover) hover:underline'>Esqueceu a senha?</a>
                 </div>
 
                 <button type='submit' className='w-full px-3.5 py-6 bg-(--primary-color) text-white border-none rounded-lg text-[16px] font-semibold cursor-pointer mt-2 hover:bg-(--primary-hover) hover:-translate-y-0.5'>Entrar</button>
