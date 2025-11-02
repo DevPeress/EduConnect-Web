@@ -30,7 +30,8 @@ O Edu Connect é o Front-End de um sistema escolar desenvolvido em React com Typ
 
 ## ✨ Funcionalidades
 
- -Página 404 personalizada: informa o usuário sobre rotas inexistentes e oferece redirecionamento intuitivo.
+- Página 404 personalizada: informa o usuário sobre rotas inexistentes e oferece redirecionamento intuitivo.
+- Página 403 personalizada: informa o usuário sobre rotas não permitida para ele e oferece redirecionamento intuitivo.
 - Arquitetura modularizada: facilita a manutenção, evolução e reutilização de componentes.
 - Organização baseada em componentização e contextos globais: garante melhor separação de responsabilidades e gerenciamento de estado eficiente.
 - Página de login funcional: permite autenticação segura e redirecionamento automático conforme o nível de acesso do usuário.
