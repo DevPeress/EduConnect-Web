@@ -18,7 +18,7 @@ function App() {
         */}
         
         {/* Página de sem acesso */}
-        <Route path="/sem-acesso" element={ <SemAcesso /> } />
+        <Route path="/not-authorized" element={ <SemAcesso /> } />
         {/* Página não encontrada */}
         <Route path="*" element={ <NaoEncontrada /> } />
       </Routes>
