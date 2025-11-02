@@ -1,11 +1,5 @@
 import { Navigate, Outlet } from "react-router-dom";
-
-interface PrivateRouteProps {
-  isAuthenticated: boolean;
-  userRole: string; 
-  allowedRoles: string[]; 
-  redirectTo?: string;
-}
+import type { PrivateRouteProps } from "../types/types";
 
 const PrivateRoute = ({ isAuthenticated, userRole, allowedRoles, redirectTo = "/login" }: PrivateRouteProps) => {
   if (!isAuthenticated) {
