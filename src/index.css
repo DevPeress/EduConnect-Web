@@ -22,6 +22,9 @@ html, body, #root {
   --bg-input: #9ca3af;
   --error-color: #ef4444;
   --success-color: #10b981;
+  --alert-color: #ef44445d;
+  --shadowalert-color: rgba(239, 68, 68, 1);
+  --shadowalert-color2: rgba(239, 68, 68, 0);
   --bg-liner: 135deg, #667eea 0%, #764ba2 100%;
 }
 
@@ -36,6 +39,9 @@ html, body, #root {
   --bg-input: #111827;
   --error-color: #ef4444;
   --success-color: #10b981;
+  --alert-color: #EF444419;
+  --shadowalert-color: rgba(239, 68, 68, 0.3);
+  --shadowalert-color2: rgba(239, 68, 68, 0);
   --bg-liner: 135deg, #0f172a 0%, #1e1b4b 100%;
 }
 
@@ -84,10 +90,10 @@ html, body, #root {
   @keyframes pulse {
     0%, 100% {
       transform: scale(1);
-      box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.3);
+      box-shadow: 0 0 0 0 var(--shadowalert-color);
     } 50% {
       transform: scale(1.05);
-      box-shadow: 0 0 0 10px rgba(239, 68, 68, 0);
+      box-shadow: 0 0 0 10px var(--shadowalert-color2);
     }
   }
 
