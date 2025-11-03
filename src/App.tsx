@@ -30,7 +30,7 @@ function App() {
           {/* Página de sem acesso */}
           <Route path="/not-authorized" element={ <SemAcesso Logado={user.length > 2 ? true : false} Cargo={cargo} /> } />
           {/* Página não encontrada */}
-          <Route path="*" element={ <NaoEncontrada /> } />
+          <Route path="*" element={ <NaoEncontrada Logado={user.length > 2 ? true : false} Cargo={cargo} /> } />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
