@@ -7,8 +7,9 @@ import { AuthProvider, useAuth } from "./context/AuthContext"
 
 function App() {
   const auth = useAuth();
+
   const setAuth = (cargo: string, token: string) => {
-    auth.setAuth(cargo, token)
+    auth.setAuth(cargo, token);
   }
 
   return (
