@@ -1,6 +1,6 @@
 import { createContext, useState, useEffect, useContext } from "react";
 import type { ReactNode } from "react";
-import type { AuthContextType } from "../types/types";
+import type { AuthContextType } from "../../types/types";
 
 const AuthContext = createContext<AuthContextType>({
   cargo: "",
