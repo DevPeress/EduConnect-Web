@@ -14,3 +14,18 @@ export interface PrivateRouteProps {
   allowedRoles: string[]; 
   redirectTo?: string;
 }
+
+export interface LoginResponse {
+  cargo: string;
+  token: string;
+}
+
+export interface LoginProps {
+  TrocarInfos: (cargo: string, token: string) => void
+}
+
+export interface AuthContextType {
+  cargo: string;
+  token: string;
+  setAuth: (cargo: string, token: string) => void;
+}

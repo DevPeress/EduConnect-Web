@@ -3,26 +3,34 @@ import NaoEncontrada from "./paginas/NaoEncontrada"
 import Login from "./paginas/Login"
 import Inicial from "./paginas/Inicial"
 import SemAcesso from "./paginas/SemAcesso"
+import { AuthProvider, useAuth } from "./context/AuthContext"
 
 function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="" element={ <Inicial /> } />
-        <Route path="login" element={ <Login /> } />
+  const auth = useAuth();
+  const setAuth = (cargo: string, token: string) => {
+    auth.setAuth(cargo, token)
+  }
 
-        {/* 
-        <Route element={<PrivateRoute isAuthenticated={isLoggedIn} userRole={userRole} allowedRoles={['admin']} />}>
-          <Route path="/admin" element={<AdminDashboard />} />
-        </Route>
-        */}
-        
-        {/* Página de sem acesso */}
-        <Route path="/not-authorized" element={ <SemAcesso /> } />
-        {/* Página não encontrada */}
-        <Route path="*" element={ <NaoEncontrada /> } />
-      </Routes>
-    </BrowserRouter>
+  return (
+    <AuthProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={ <Inicial /> } />
+          <Route path="/login" element={ <Login TrocarInfos={setAuth} /> }  />
+
+          {/* 
+          <Route element={<PrivateRoute isAuthenticated={isLoggedIn} userRole={userRole} allowedRoles={['admin']} />}>
+            <Route path="/admin" element={<AdminDashboard />} />
+          </Route>
+          */}
+          
+          {/* Página de sem acesso */}
+          <Route path="/not-authorized" element={ <SemAcesso /> } />
+          {/* Página não encontrada */}
+          <Route path="*" element={ <NaoEncontrada /> } />
+        </Routes>
+      </BrowserRouter>
+    </AuthProvider>
   )
 }
 

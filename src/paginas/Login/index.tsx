@@ -1,8 +1,9 @@
 import { useState, type FormEvent } from 'react';
-import type { LoginType } from '../../types/types';
+import type { LoginProps, LoginResponse, LoginType } from '../../types/types';
 import FundoBolhas from '../../components/FundoBolhas';
+import { http } from '../../utils/axios';
 
-const Login = () => {
+const Login = ({ TrocarInfos }: LoginProps) => {
     const [dados, setDados] = useState<LoginType>({ email: "", senha: "" })
 
     const AlterarDados = (texto: string, tipo: keyof LoginType) => {
@@ -12,15 +13,26 @@ const Login = () => {
         }))
     }
 
-    const Login = (e: FormEvent<HTMLFormElement>) => {
+    const Login = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         const email = dados.email;
+        const senha = dados.senha;
         const verificarEmail = email.includes("@") && email.includes(".com");
         if (!verificarEmail)
             return alert("E-mail ou senha estão incorretos");
 
         // FETCH
+        await http.post<LoginResponse>("/login", {
+            email,
+            senha
+        })
+        .then(function (response) {
+            TrocarInfos(response.data.cargo, response.data.token)
+        })
+        .then(function (error) {
+            console.log(error)
+        })
     }
 
     return (
