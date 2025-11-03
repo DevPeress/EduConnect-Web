@@ -1,8 +1,20 @@
 import { useNavigate } from "react-router-dom";
 import FundoBolhas from "../../components/FundoBolhas";
 
-const SemAcesso = () => {
+interface Acessos {
+    logado: boolean;
+    pagina: string;
+    mensagem: string;
+    cargos?: string[];
+}
+
+const SemAcesso = ({ Logado, Cargo }:  { Logado: boolean, Cargo: string }) => {
     const navegar = useNavigate();
+
+    const Options: Acessos[] = [
+        { logado: false, pagina: "/login", mensagem: "Ir para o Login" },
+        { logado: true, pagina: "/login", mensagem: "Ir para o Login", cargos: ["Admin"] },
+    ]
     
     return (
         <FundoBolhas>
@@ -26,12 +38,21 @@ const SemAcesso = () => {
                 >
                     Voltar para Página Anterior
                 </button>
-                <button
-                    className="inline-block px-3.5 py-7 rounded-[10px] bg-(--border-color) text-[15px] text-(--text-primary) font-semibold border-2 hover:bg-(--bg-input) hover:border-(--text-secondary) hover:-translate-y-0.5"
-                    onClick={() => navegar("/login")}
-                >
-                    Ir para o Login
-                </button>
+                {Options.map((item) => {
+                    const verify = !item.cargos || item.cargos.includes(Cargo)
+                    
+                    if (Logado === item.logado && verify) {
+                        return (
+                            <button
+                                key={item.pagina}
+                                className="inline-block px-3.5 py-7 rounded-[10px] bg-(--border-color) text-[15px] text-(--text-primary) font-semibold border-2 hover:bg-(--bg-input) hover:border-(--text-secondary) hover:-translate-y-0.5"
+                                onClick={() => navegar(item.pagina)}
+                            >
+                                {item.mensagem}
+                            </button>
+                        )
+                    }
+                })}
             </div>
 
         </FundoBolhas>

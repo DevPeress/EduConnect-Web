@@ -7,6 +7,8 @@ import { AuthProvider, useAuth } from "./context/AuthContext"
 
 function App() {
   const auth = useAuth();
+  const user = auth.token;
+  const cargo = auth.cargo;
 
   const setAuth = (cargo: string, token: string) => {
     auth.setAuth(cargo, token);
@@ -26,7 +28,7 @@ function App() {
           */}
           
           {/* Página de sem acesso */}
-          <Route path="/not-authorized" element={ <SemAcesso /> } />
+          <Route path="/not-authorized" element={ <SemAcesso Logado={user.length > 2 ? true : false} Cargo={cargo} /> } />
           {/* Página não encontrada */}
           <Route path="*" element={ <NaoEncontrada /> } />
         </Routes>
