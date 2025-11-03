@@ -1,17 +1,26 @@
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import { useAuth } from "../../context/AuthContext";
+import type { OptionsInicial } from "../../types/types";
 
-const Inicial = () => {
+const Inicial = ({ Logado, Cargo }: { Logado: boolean, Cargo: string }) => {
     const navegar = useNavigate();
-    const auth = useAuth();
-    const token = auth.token;
+
+    const Options: OptionsInicial[] = [
+        { cargo: ["Admin"], pagina: "/admin" }
+    ]
     
     useEffect(() => {
-        navegar(token ? "/incio" : "/login")
-    }, [navegar, token])
+        if (!Logado) {
+            navegar("/login");
+            return;
+        }
 
-    return null
+        const opcao = Options.find(option => option.cargo.includes(Cargo));
+        navegar(opcao ? opcao.pagina : "/not-authorized");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [Logado, Cargo, navegar])
+
+    return null;
 }
 
 export default Inicial;

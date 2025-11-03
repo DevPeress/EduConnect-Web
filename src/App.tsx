@@ -18,7 +18,7 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={ <Inicial /> } />
+          <Route path="/" element={ <Inicial Logado={user.length > 2 ? true : false} Cargo={cargo} /> } />
           <Route path="/login" element={ <Login TrocarInfos={setAuth} /> }  />
 
           {/* 
