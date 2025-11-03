@@ -29,3 +29,10 @@ export interface AuthContextType {
   token: string;
   setAuth: (cargo: string, token: string) => void;
 }
+
+export interface Acessos {
+  logado: boolean;
+  pagina: string;
+  mensagem: string;
+  cargos?: string[];
+}

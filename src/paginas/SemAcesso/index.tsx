@@ -1,12 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import FundoBolhas from "../../components/FundoBolhas";
-
-interface Acessos {
-    logado: boolean;
-    pagina: string;
-    mensagem: string;
-    cargos?: string[];
-}
+import type { Acessos } from "../../types/types";
 
 const SemAcesso = ({ Logado, Cargo }:  { Logado: boolean, Cargo: string }) => {
     const navegar = useNavigate();
