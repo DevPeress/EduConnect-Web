@@ -13,7 +13,7 @@ const SemAcesso = ({ Logado, Cargo }:  { Logado: boolean, Cargo: string }) => {
 
     const Options: Acessos[] = [
         { logado: false, pagina: "/login", mensagem: "Ir para o Login" },
-        { logado: true, pagina: "/login", mensagem: "Ir para o Login", cargos: ["Admin"] },
+        { logado: true, pagina: "/login", mensagem: "Ir para Área Administrativa", cargos: ["Admin"] },
     ]
     
     return (
