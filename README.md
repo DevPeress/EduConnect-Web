@@ -60,6 +60,8 @@ npm run dev
     ┣ 📂 context        # Contextos globais
     ┣ 📂 paginas        # Páginas principais do site
        ┣ 📂 pagina      # Configuração específica de cada página
+    ┣ 📂 types          # Tipagens TypeScript do projeto.
+    ┣ 📂 utils          # Funções utilitárias e helpers que podem ser usadas em várias partes do projeto
     ┣ 📄 App.tsx        # Roteamento principal com React Router DOM
     ┣ 📄 Index.css      # Tailwind CSS, animações e temas
     ┣ 📄 main.tsx       # Ponto de entrada principal do projeto React
