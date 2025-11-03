@@ -36,8 +36,3 @@ export interface Acessos {
   mensagem: string;
   cargos?: string[];
 }
-
-export interface OptionsInicial {
-  cargo: string[];
-  pagina: string;
-}
