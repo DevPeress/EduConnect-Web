@@ -1,13 +1,15 @@
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
+import { useAuth } from "../../context/AuthContext";
 
 const Inicial = () => {
-    const navegar = useNavigate()
+    const navegar = useNavigate();
+    const auth = useAuth();
+    const token = auth.token;
     
     useEffect(() => {
-        const token = false;
         navegar(token ? "/incio" : "/login")
-    }, [navegar])
+    }, [navegar, token])
 
     return null
 }
