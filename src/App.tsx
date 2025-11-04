@@ -4,7 +4,6 @@ import Login from "./paginas/Login";
 import Inicial from "./paginas/Inicial";
 import SemAcesso from "./paginas/SemAcesso";
 import { AuthProvider, useAuth } from "./context/AuthContext";
-import PrivateRoute from "./middleware";
 import InicioAdm from "./paginas/Administracao/Inicio";
 
 function App() {
@@ -23,10 +22,12 @@ function App() {
           <Route path="/" element={ <Inicial Logado={user} Cargo={cargo} /> } />
           <Route path="/login" element={ <Login TrocarInfos={setAuth} /> }  />
 
+          {/*
           <Route element={<PrivateRoute isAuthenticated={user} userRole={cargo} allowedRoles={['Admin']} />}>
             <Route path="/admin" element={<InicioAdm />} />
           </Route>
-          
+          */}
+          <Route path="/admin" element={<InicioAdm />} />
           {/* Página de sem acesso */}
           <Route path="/not-authorized" element={ <SemAcesso Logado={user} Cargo={cargo} /> } />
           {/* Página não encontrada */}
