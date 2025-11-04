@@ -1,13 +1,15 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"
-import NaoEncontrada from "./paginas/NaoEncontrada"
-import Login from "./paginas/Login"
-import Inicial from "./paginas/Inicial"
-import SemAcesso from "./paginas/SemAcesso"
-import { AuthProvider, useAuth } from "./context/AuthContext"
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import NaoEncontrada from "./paginas/NaoEncontrada";
+import Login from "./paginas/Login";
+import Inicial from "./paginas/Inicial";
+import SemAcesso from "./paginas/SemAcesso";
+import { AuthProvider, useAuth } from "./context/AuthContext";
+import PrivateRoute from "./middleware";
+import InicioAdm from "./paginas/Administracao/Inicio";
 
 function App() {
   const auth = useAuth();
-  const user = auth.token;
+  const user: boolean = auth.token.length > 2;
   const cargo = auth.cargo;
 
   const setAuth = (cargo: string, token: string) => {
@@ -18,19 +20,17 @@ function App() {
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={ <Inicial Logado={user.length > 2 ? true : false} Cargo={cargo} /> } />
+          <Route path="/" element={ <Inicial Logado={user} Cargo={cargo} /> } />
           <Route path="/login" element={ <Login TrocarInfos={setAuth} /> }  />
 
-          {/* 
-          <Route element={<PrivateRoute isAuthenticated={isLoggedIn} userRole={userRole} allowedRoles={['admin']} />}>
-            <Route path="/admin" element={<AdminDashboard />} />
+          <Route element={<PrivateRoute isAuthenticated={user} userRole={cargo} allowedRoles={['Admin']} />}>
+            <Route path="/admin" element={<InicioAdm />} />
           </Route>
-          */}
           
           {/* Página de sem acesso */}
-          <Route path="/not-authorized" element={ <SemAcesso Logado={user.length > 2 ? true : false} Cargo={cargo} /> } />
+          <Route path="/not-authorized" element={ <SemAcesso Logado={user} Cargo={cargo} /> } />
           {/* Página não encontrada */}
-          <Route path="*" element={ <NaoEncontrada Logado={user.length > 2 ? true : false} Cargo={cargo} /> } />
+          <Route path="*" element={ <NaoEncontrada Logado={user} Cargo={cargo} /> } />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
