@@ -24,7 +24,7 @@ const NavBarAdmin = () => {
   ];
 
   return (
-    <nav className="flex-1 px-6 py-6">
+    <nav className="flex-1 px-3.5 py-4">
         <div className="mb-6">
             <span className="block text-[11px] font-semibold text-(--text-muted) uppercase leading-[0.5px] px-2 py-2 mb-2">Principal</span>
             {Principal.slice(0,4).map((item) => {
@@ -43,7 +43,7 @@ const NavBarAdmin = () => {
                             background: paginaAtual ? "var(--primary-color)" : "",
                         }}
                     >
-                    <img className="w-5 h-5" src={item.svg} alt="" />
+                    <img className="w-6 h-6" src={item.svg} alt="" />
                     <span>{item.nome}</span>
                     </Link>
                 );
@@ -68,7 +68,7 @@ const NavBarAdmin = () => {
                             background: paginaAtual ? "var(--primary-color)" : "",
                         }}
                     >
-                    <img className="w-5 h-5" src={item.svg} alt="" />
+                    <img className="w-6 h-6" src={item.svg} alt="" />
                     <span>{item.nome}</span>
                     </Link>
                 );
