@@ -12,14 +12,17 @@ html, body, #root {
 }
 
 :root {
+  --primary-color: #3b82f6;
   --primary-color: #2563eb;
   --primary-hover: #1d4ed8;
   --text-primary: #1f2937;
   --text-secondary: #6b7280;
+  --text-muted: #6b7280;
   --border-color: #e5e7eb;
   --bg-body: #f3f4f6;
   --bg-card: #ffffff;
   --bg-input: #9ca3af;
+  --bg-sidebar: #1a1f2e;
   --error-color: #ef4444;
   --success-color: #10b981;
   --alert-color: #ef44445d;
@@ -30,13 +33,16 @@ html, body, #root {
 
 [data-theme="dark"] { 
   --primary-color: #3b82f6;
+  --primary-color: #3b82f6;
   --primary-hover: #2563eb;
   --text-primary: #f9fafb;
   --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
   --border-color: #374151;
   --bg-body: #0f172a;
   --bg-card: #1f2937;
   --bg-input: #111827;
+  --bg-sidebar: #1a1f2e;
   --error-color: #ef4444;
   --success-color: #10b981;
   --alert-color: #EF444419;
