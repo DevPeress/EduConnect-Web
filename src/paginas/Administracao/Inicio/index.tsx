@@ -1,4 +1,5 @@
 import NavBarAdmin from "../../../components/Administracao/navBar";
+import SidebarFooter from "../../../components/SideBar-Footer";
 
 const InicioAdm = () => {
     return(
@@ -11,6 +12,7 @@ const InicioAdm = () => {
                 </div>
 
                 <NavBarAdmin />
+                <SidebarFooter />
             </aside>
         </div>
     )

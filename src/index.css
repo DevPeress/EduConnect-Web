@@ -29,6 +29,7 @@ html, body, #root {
   --shadowalert-color: rgba(239, 68, 68, 1);
   --shadowalert-color2: rgba(239, 68, 68, 0);
   --bg-liner: 135deg, #667eea 0%, #764ba2 100%;
+  --red: #ef4444;
 }
 
 [data-theme="dark"] { 
@@ -49,6 +50,7 @@ html, body, #root {
   --shadowalert-color: rgba(239, 68, 68, 0.3);
   --shadowalert-color2: rgba(239, 68, 68, 0);
   --bg-liner: 135deg, #0f172a 0%, #1e1b4b 100%;
+  --red: #ef4444;
 }
 
 @theme {
