@@ -38,8 +38,8 @@ export interface Acessos {
 };
 
 export interface NavAdmin {
-  to: string,
-  nome: string,
-  pagina: string,
-  svg: string
+  to: string;
+  nome: string;
+  pagina: string;
+  svg: () => JSX.Element;
 }

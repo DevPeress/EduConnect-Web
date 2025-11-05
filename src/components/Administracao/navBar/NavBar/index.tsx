@@ -1,14 +1,14 @@
 import { useLocation } from "react-router-dom";
-import DashBoard from "../../../assets/DashBoard.svg";
-import Alunos from "../../../assets/Alunos.svg";
-import Professores from "../../../assets/Professores.svg";
-import Turmas from "../../../assets/Turmas.svg";
-import Notas from "../../../assets/Notas.svg";
-import Calendario from "../../../assets/Calendario.svg";
-import Financeiro from "../../../assets/Financeiro.svg";
-import Relatorio from "../../../assets/Relatorios.png";
 import type { NavAdmin } from "../../../../types/types";
 import LinkAdmin from "../LinkAdmin";
+import DashBoard from "../Icons/DashBoard";
+import Alunos from "../Icons/Alunos";
+import Professores from "../Icons/Professores";
+import Turmas from "../Icons/Turmas";
+import Notas from "../Icons/Notas";
+import Calendario from "../Icons/Calendario";
+import Financeiro from "../Icons/Financeiro";
+import Relatorios from "../Icons/Relatorios";
 
 const NavBarAdmin = () => {
   const location = useLocation();
@@ -40,7 +40,7 @@ const NavBarAdmin = () => {
       to: "/login",
       nome: "Relatórios",
       pagina: "/admin/relatorio",
-      svg: Relatorio,
+      svg: Relatorios,
     },
   ];
 
@@ -53,7 +53,9 @@ const NavBarAdmin = () => {
         {Principal.slice(0, 4).map((item) => {
           const paginaAtual: boolean = location.pathname === item.pagina;
 
-          return <LinkAdmin item={item} paginaAtual={paginaAtual} />;
+          return (
+            <LinkAdmin key={item.nome} item={item} paginaAtual={paginaAtual} />
+          );
         })}
       </div>
 
@@ -64,7 +66,9 @@ const NavBarAdmin = () => {
         {Principal.splice(4, 8).map((item) => {
           const paginaAtual: boolean = location.pathname === item.pagina;
 
-          return <LinkAdmin item={item} paginaAtual={paginaAtual} />;
+          return (
+            <LinkAdmin key={item.nome} item={item} paginaAtual={paginaAtual} />
+          );
         })}
       </div>
     </nav>
