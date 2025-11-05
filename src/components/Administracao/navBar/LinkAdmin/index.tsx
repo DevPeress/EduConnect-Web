@@ -1,7 +1,13 @@
 import { Link } from "react-router-dom";
 import type { NavAdmin } from "../../../../types/types";
 
-const LinkAdmin = ({ item, paginaAtual }: { item: NavAdmin, paginaAtual: boolean }) => {
+const LinkAdmin = ({
+  item,
+  paginaAtual,
+}: {
+  item: NavAdmin;
+  paginaAtual: boolean;
+}) => {
   return (
     <Link
       to={"/login"}
