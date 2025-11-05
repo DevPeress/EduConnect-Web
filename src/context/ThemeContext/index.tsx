@@ -6,20 +6,20 @@ const ThemeContext = createContext<ThemeType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [dark, setDark] = useState<boolean>(() => {
-    return localStorage.getItem('theme') === 'dark'
+    return localStorage.getItem("theme") === "dark";
   });
 
   function toggleTheme() {
-    setDark(prev => !prev)
+    setDark((prev) => !prev);
   }
 
   useEffect(() => {
     if (dark) {
-      document.documentElement.setAttribute('data-theme', 'dark');
+      document.documentElement.setAttribute("data-theme", "dark");
     } else {
-      document.documentElement.removeAttribute('data-theme');
+      document.documentElement.removeAttribute("data-theme");
     }
-    localStorage.setItem('theme', dark ? 'dark' : 'light');
+    localStorage.setItem("theme", dark ? "dark" : "light");
   }, [dark]);
 
   return (
