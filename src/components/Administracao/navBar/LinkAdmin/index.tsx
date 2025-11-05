@@ -4,7 +4,6 @@ import type { NavAdmin } from "../../../../types/types";
 const LinkAdmin = ({ item, paginaAtual }: { item: NavAdmin, paginaAtual: boolean }) => {
   return (
     <Link
-      key={item.nome}
       to={"/login"}
       className="flex items-center gap-3 px-[11px] py-3 rounded-[10px] text-[14px] font-medium relative hover:bg-(--bg-hover) hover:text-(--text-primary)"
       style={{
@@ -13,7 +12,7 @@ const LinkAdmin = ({ item, paginaAtual }: { item: NavAdmin, paginaAtual: boolean
         background: paginaAtual ? "var(--primary-color)" : "",
       }}
     >
-      <img className="w-6 h-6" src={item.svg} alt="" />
+      {item.svg && <item.svg />}
       <span>{item.nome}</span>
     </Link>
   );
