@@ -27,7 +27,7 @@ const InicioAdm = () => {
   ]);
 
   return (
-    <div className="flex min-h-full overflow-hidden">
+    <div className="flex min-h-full">
       <AsideAdmin />
 
       <main className="flex-1 ml-72 flex flex-col bg-(--bg-body)">
