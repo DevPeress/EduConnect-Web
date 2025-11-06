@@ -1,6 +1,6 @@
 import { useState } from "react";
 import CardsAdmin from "../../../components/Administracao/CardsAdmin";
-import NavBarAdmin from "../../../components/Administracao/navBar/NavBar";
+import NavBarAdmin from "../../../components/Administracao/NavBar/NavBarAdmin";
 import Header from "../../../components/Header";
 import SidebarFooter from "../../../components/SideBar-Footer";
 import type { CardsAdminType } from "../../../types/types";
