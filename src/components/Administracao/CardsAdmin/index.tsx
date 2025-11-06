@@ -23,18 +23,20 @@ const CardsAdmin = ({ dados }: { dados: CardsAdminType }) => {
   };
 
   const Info = (tipo: string, valor: number) => {
-    const analise: boolean = valor >= 0
-    switch(tipo) {
-        case "Alunos":
-            return analise ? "+" + valor + " este mês" : "-" + valor + " este mês"
-        case "Professores":
-            return analise ? valor + " novos contratados" : valor + " novas demissões"
-        case "Turmas":
-            return analise ? valor + " turma nova" : "Sema alterações"
-        case "Presença":
-            return valor >= 50 ? "Acima da meta" : "Abaixo da meta"
+    const analise: boolean = valor >= 0;
+    switch (tipo) {
+      case "Alunos":
+        return analise ? "+" + valor + " este mês" : "-" + valor + " este mês";
+      case "Professores":
+        return analise
+          ? valor + " novos contratados"
+          : valor + " novas demissões";
+      case "Turmas":
+        return analise ? valor + " turma nova" : "Sema alterações";
+      case "Presença":
+        return valor >= 50 ? "Acima da meta" : "Abaixo da meta";
     }
-  }
+  };
 
   return (
     <div
@@ -76,9 +78,12 @@ const CardsAdmin = ({ dados }: { dados: CardsAdminType }) => {
           {Card(tipo)?.mensagem}
         </p>
         <h3 className="text-[32px] font-bold mb-1 text-(--text-primary) leading-8">
-          {formatNumero(dados.total)}{tipo === "Presença" ? "%" : null}
+          {formatNumero(dados.total)}
+          {tipo === "Presença" ? "%" : null}
         </h3>
-        <span className="text-[13px] text-(--text-secondary)">{Info(tipo,dados.aumento)}</span>
+        <span className="text-[13px] text-(--text-secondary)">
+          {Info(tipo, dados.aumento)}
+        </span>
       </div>
     </div>
   );

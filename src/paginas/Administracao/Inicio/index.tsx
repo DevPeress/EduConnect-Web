@@ -9,8 +9,8 @@ const InicioAdm = () => {
     { dado: "Alunos", total: 1245, aumento: 150, porcentagem: 12 },
     { dado: "Professores", total: 87, aumento: 3, porcentagem: 3.5 },
     { dado: "Turmas", total: 42, aumento: 0, porcentagem: 0 },
-    { dado: "Presença", total: 94.5, aumento: 94.5, porcentagem: 2.3 }
-  ])
+    { dado: "Presença", total: 94.5, aumento: 94.5, porcentagem: 2.3 },
+  ]);
 
   return (
     <div className="flex min-h-full overflow-hidden">
@@ -30,7 +30,9 @@ const InicioAdm = () => {
           </div>
 
           <div className="grid grid-cols-4 gap-6 mb-6">
-            {dados.map((item) => <CardsAdmin key={item.dado} dados={item} />)}
+            {dados.map((item) => (
+              <CardsAdmin key={item.dado} dados={item} />
+            ))}
           </div>
         </div>
       </main>
