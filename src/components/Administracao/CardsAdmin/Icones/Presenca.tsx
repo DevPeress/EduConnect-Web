@@ -1,0 +1,20 @@
+const PresencaCard = () => {
+  return (
+    <div className="w-12 h-12 rounded-[10px] flex items-center justify-center shrink-0 bg-[#8B5CF61A] text-(--purple)">
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+      </svg>
+    </div>
+  );
+};
+
+export default PresencaCard;
