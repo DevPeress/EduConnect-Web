@@ -45,9 +45,9 @@ const NavBarAdmin = () => {
   ];
 
   return (
-    <nav className="flex-1 px-3.5 py-4">
-      <div className="mb-6">
-        <span className="block text-[11px] font-semibold text-(--text-muted) uppercase leading-[0.5px] px-2 py-2 mb-2">
+    <nav className="flex-1 px-3.5 py-3.5">
+      <div className="mb-4">
+        <span className="block text-[11px] font-semibold text-(--text-muted) uppercase leading-[0.5px] px-2 py-1 mb-1">
           Principal
         </span>
         {Principal.slice(0, 4).map((item) => {
@@ -59,8 +59,8 @@ const NavBarAdmin = () => {
         })}
       </div>
 
-      <div className="mb-6">
-        <span className="block text-[11px] font-semibold text-(--text-muted) uppercase leading-[0.5px] px-2 py-2 mb-2">
+      <div>
+        <span className="block text-[11px] font-semibold text-(--text-muted) uppercase leading-[0.5px] px-2 py-1 mb-1">
           Acadêmico
         </span>
         {Principal.splice(4, 8).map((item) => {
