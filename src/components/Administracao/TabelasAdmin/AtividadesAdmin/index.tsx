@@ -1,8 +1,47 @@
 import { Link } from "react-router-dom";
 import type { AtividadeType } from "../../../../types/types";
-import TabelasAdmin from "..";
 
-const AtividadesRecentesAdmin = ({ atividades }: { atividades: AtividadeType[] }) => {
+const AtividadesRecentesAdmin = ({
+  atividades,
+}: {
+  atividades: AtividadeType[];
+}) => {
+  const PegarDados = (tipo: string, dado: string) => {
+    switch (tipo) {
+      case "Nota":
+        return { emoji: "📝", mensagem: "Nova nota lançada - " + dado };
+      case "Presença":
+        return {
+          emoji: "✅",
+          mensagem: "Presença Registrada - " + dado,
+        };
+      case "Novo Aluno":
+        return {
+          emoji: "👤",
+          mensagem: "Novo aluno matriculado - " + dado,
+        };
+      case "Reunião":
+        return {
+          emoji: "📅",
+          mensagem: "Reunião Agendada - " + dado,
+        };
+      case "Material":
+        return {
+          emoji: "📚",
+          mensagem: "Material didático atualizado - " + dado,
+        };
+    }
+  };
+
+  const ConverterTempo = (tempo: number) => {
+    if (tempo <= 59) {
+      return "Há " + tempo + " minutos";
+    } else {
+      const valor: number = Math.round(tempo / 60);
+      return "Há " + valor + " horas";
+    }
+  };
+
   return (
     <div
       className="bg-(--bg-card) border-2 border-(--border-color) rounded-xl overflow-hidden "
@@ -24,7 +63,28 @@ const AtividadesRecentesAdmin = ({ atividades }: { atividades: AtividadeType[] }
       </div>
       <div className="p-6">
         {atividades.map((item, index) => (
-          <TabelasAdmin key={index} valores={item} />
+          <div
+            key={index}
+            className="flex gap-3.5 py-3.5 px-0 border-b-2 border-b-(--border-color)"
+          >
+            <div
+              className="w-10 h-10 rounded-[10px] flex items-center justify-center text-[18px] shrink-0"
+              style={{
+                color: "var(--blue)",
+                background: "rgba(59, 130, 246, 0.15)",
+              }}
+            >
+              {PegarDados(item.tipo, item.dado)?.emoji}
+            </div>
+            <div className="flex-1">
+              <p className="text-[14px] text-(--text-primary) mb-1 font-medium">
+                {PegarDados(item.tipo, item.dado)?.mensagem}
+              </p>
+              <span className="text-[12px] text-(--text-muted)">
+                {ConverterTempo(item.horario)}
+              </span>
+            </div>
+          </div>
         ))}
       </div>
     </div>
