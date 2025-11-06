@@ -3,8 +3,8 @@ import CardsAdmin from "../../../components/Administracao/CardsAdmin";
 import Header from "../../../components/Header";
 import type { AtividadeType, CardsAdminType } from "../../../types/types";
 import AsideAdmin from "../../../components/Administracao/Aside";
-import TabelasAdmin from "../../../components/Administracao/TabelasAdmin";
-import { Link } from "react-router-dom";
+import AtividadesRecentesAdmin from "../../../components/Administracao/TabelasAdmin/AtividadesAdmin";
+import CalendarioAdmin from "../../../components/Administracao/TabelasAdmin/CalendarioAdmin";
 
 const InicioAdm = () => {
   const [dados] = useState<CardsAdminType[]>([
@@ -46,30 +46,9 @@ const InicioAdm = () => {
           </div>
 
           <div className="grid grid-cols-[repeat(auto-fit,minmax(450px,1fr))] gap-3 mb-6">
-            <div
-              className="bg-(--bg-card) border-2 border-(--border-color) rounded-xl overflow-hidden "
-              style={{ boxShadow: "0 1px 2px rgba(0, 0, 0, 0.3)" }}
-            >
-              <div
-                className="py-5 px-6 border-b-2 border-b-(--border-color) flex justify-between items-center"
-                style={{ background: "rgba(0, 0, 0, 0.2)" }}
-              >
-                <h2 className="text-[16px] font-semibold text-(--text-primary)">
-                  Atividades Recentes
-                </h2>
-                <Link
-                  to={""}
-                  className="text-(--primary-color) text-[13px] font-semibold"
-                >
-                  Ver todas
-                </Link>
-              </div>
-              <div className="p-6">
-                {atividades.map((item, index) => (
-                  <TabelasAdmin key={index} valores={item} />
-                ))}
-              </div>
-            </div>
+            <AtividadesRecentesAdmin atividades={atividades} />
+
+            <CalendarioAdmin atividades={atividades} />
           </div>
         </div>
       </main>
