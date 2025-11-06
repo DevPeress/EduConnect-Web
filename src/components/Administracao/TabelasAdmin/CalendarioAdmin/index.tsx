@@ -27,17 +27,12 @@ const CalendarioAdmin = ({ calendario }: { calendario: CalendarioType[] }) => {
             key={index}
             className="flex gap-3.5 py-3.5 px-0 border-b-2 border-b-(--border-color)"
           >
-            <div
-              className="w-10 h-10 rounded-[10px] flex items-center justify-center text-[18px] shrink-0"
-              style={{
-                color: "var(--blue)",
-                background: "rgba(59, 130, 246, 0.15)",
-              }}
-            >
-              {item.dia}
+            <div className="w-16 h-16 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] flex flex-col items-center justify-center shrink-0">
+              <span className="text-[24px] font-bold text-(--text-primary) leading-7">{item.dia}</span>
+              <span className="text-[11px] font-semibold text-(--text-muted) uppercase leading-3.5">{item.mes}</span>
             </div>
             <div className="flex-1">
-              <p className="text-[14px] text-(--text-primary) mb-1 font-medium">
+              <p className="text-[14px] text-(--text-primary) mt-2 mb-1 font-medium">
                 {item.tipo}
               </p>
               <span className="text-[12px] text-(--text-muted)">

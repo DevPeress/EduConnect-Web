@@ -59,6 +59,7 @@ export interface AtividadeType {
 
 export interface CalendarioType {
   dia: string;
+  mes: string;
   tipo: string;
   horario: string;
 };

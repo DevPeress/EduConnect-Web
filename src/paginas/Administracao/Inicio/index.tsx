@@ -23,7 +23,7 @@ const InicioAdm = () => {
   ]);
 
   const [calendario] = useState<CalendarioType[]>([
-    { dia: "24 Out", tipo: "Reunião de Pais", horario: "19:00 - Auditório Principal" }
+    { dia: "24", mes: "Out", tipo: "Reunião de Pais", horario: "19:00 - Auditório Principal" }
   ]);
 
   return (
