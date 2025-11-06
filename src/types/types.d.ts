@@ -56,3 +56,9 @@ export interface AtividadeType {
   dado: string;
   horario: number;
 };
+
+export interface CalendarioType {
+  dia: string;
+  tipo: string;
+  horario: string;
+};

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import CardsAdmin from "../../../components/Administracao/CardsAdmin";
 import Header from "../../../components/Header";
-import type { AtividadeType, CardsAdminType } from "../../../types/types";
+import type { AtividadeType, CalendarioType, CardsAdminType } from "../../../types/types";
 import AsideAdmin from "../../../components/Administracao/Aside";
 import AtividadesRecentesAdmin from "../../../components/Administracao/TabelasAdmin/AtividadesAdmin";
 import CalendarioAdmin from "../../../components/Administracao/TabelasAdmin/CalendarioAdmin";
@@ -20,6 +20,10 @@ const InicioAdm = () => {
     { tipo: "Novo Aluno", dado: "João Silva", horario: 120 },
     { tipo: "Reunião", dado: "Conselho de Classe", horario: 180 },
     { tipo: "Material", dado: "Português", horario: 300 },
+  ]);
+
+  const [calendario] = useState<CalendarioType[]>([
+    { dia: "24 Out", tipo: "Reunião de Pais", horario: "19:00 - Auditório Principal" }
   ]);
 
   return (
@@ -48,7 +52,7 @@ const InicioAdm = () => {
           <div className="grid grid-cols-[repeat(auto-fit,minmax(450px,1fr))] gap-3 mb-6">
             <AtividadesRecentesAdmin atividades={atividades} />
 
-            <CalendarioAdmin atividades={atividades} />
+            <CalendarioAdmin calendario={calendario} />
           </div>
         </div>
       </main>
