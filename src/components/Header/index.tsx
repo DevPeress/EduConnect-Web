@@ -1,7 +1,14 @@
+import Dia from "../../assets/Dia.svg";
+import Noite from "../../assets/Noite.svg";
+import { useTheme } from "../../context/ThemeContext";
+
 const Header = () => {
+  const tema = useTheme();
+  const dark = tema.dark;
+
   return (
     <header className="bg-(--bg-card) border-b-2 border-(--border-color) px-9.5 py-3 flex justify-between items-center sticky top-0 z-10">
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-4 ml-[62vw]">
         <button className="relative bg-transparent border-none text-(--text-secondary) cursor-pointer p-2 rounded-[10px] hover:bg-(--bg-hover) hover:text-(--text-primary)">
           <svg
             width="20"
@@ -62,6 +69,13 @@ const Header = () => {
           >
             <polyline points="6 9 12 15 18 9"></polyline>
           </svg>
+        </div>
+        <div className="max-w-15">
+          {dark ? (
+            <img src={Dia} alt="" onClick={() => tema.toggleTheme()} />
+          ) : (
+            <img src={Noite} alt="" onClick={() => tema.toggleTheme()} />
+          )}
         </div>
       </div>
     </header>
