@@ -33,8 +33,8 @@ const InicioAdm = () => {
       <main className="flex-1 ml-72 flex flex-col bg-(--bg-body)">
         <Header />
 
-        <div className="p-8 max-w-[1600px] my-0 mx-auto w-full">
-          <div className="mb-8">
+        <div className="py-2 px-8 max-w-[1600px] m-0 mx-auto w-full">
+          <div className="mb-4">
             <h1 className="text-[28px] font-bold mb-1 text-(--text-primary)">
               Bem-Vindo
             </h1>
