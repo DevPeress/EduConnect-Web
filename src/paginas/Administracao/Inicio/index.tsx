@@ -29,7 +29,7 @@ const InicioAdm = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-4 gap-6 mb-6">
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-6 mb-6">
             {dados.map((item) => (
               <CardsAdmin key={item.dado} dados={item} />
             ))}
