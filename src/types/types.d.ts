@@ -50,3 +50,9 @@ export interface CardsAdminType {
   aumento: number;
   porcentagem: number;
 };
+
+export interface AtividadeType {
+  tipo: string;
+  dado: string;
+  horario: number;
+};
