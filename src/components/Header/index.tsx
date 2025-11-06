@@ -8,7 +8,8 @@ const Header = () => {
 
   return (
     <header className="bg-(--bg-card) border-b-2 border-(--border-color) px-9.5 py-3 flex justify-between items-center sticky top-0 z-10">
-      <div className="flex items-center gap-4 ml-[62vw]">
+      <div></div>
+      <div className="flex items-center gap-4">
         <button className="relative bg-transparent border-none text-(--text-secondary) cursor-pointer p-2 rounded-[10px] hover:bg-(--bg-hover) hover:text-(--text-primary)">
           <svg
             width="20"
