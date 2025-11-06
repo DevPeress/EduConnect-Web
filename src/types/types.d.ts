@@ -42,4 +42,11 @@ export interface NavAdmin {
   nome: string;
   pagina: string;
   svg: () => JSX.Element;
-}
+};
+
+export interface CardsAdminType {
+  dado: string;
+  total: number;
+  aumento: number;
+  porcentagem: number;
+};
