@@ -13,8 +13,7 @@ html, body, #root {
 }
 
 :root {
-  --primary-color: #3b82f6;
-  --primary-color: #2563eb;
+  --primary-color: #2563eb;  
   --primary-hover: #1d4ed8;
   --text-primary: #1f2937;
   --text-secondary: #6b7280;
@@ -48,7 +47,6 @@ html, body, #root {
 }
 
 [data-theme="dark"] { 
-  --primary-color: #3b82f6;
   --primary-color: #3b82f6;
   --primary-hover: #2563eb;
   --text-primary: #f9fafb;
