@@ -56,7 +56,10 @@ const AcoesAdmin = () => {
       <div className="p-6">
         <div className="flex flex-col gap-1">
           {tipos.map((item) => (
-            <button className="flex items-center gap-3.5 p-3.5 bg-transparent border-2 border-(--border-color) rounded-[10px] cursor-pointer text-left w-full hover:bg-(--bg-hover) hover:border-(--border-light) hover:translate-x-1">
+            <button
+              key={item}
+              className="flex items-center gap-3.5 p-3.5 bg-transparent border-2 border-(--border-color) rounded-[10px] cursor-pointer text-left w-full hover:bg-(--bg-hover) hover:border-(--border-light) hover:translate-x-1"
+            >
               <div
                 className="w-10 h-10 rounded-[10px] flex items-center justify-center shrink-0"
                 style={{
