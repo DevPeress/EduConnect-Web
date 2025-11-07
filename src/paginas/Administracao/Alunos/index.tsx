@@ -11,10 +11,27 @@ const AlunosAdmin = () => {
   const [selecionada, setSelecionada] = useState<string>("Todas as Salas");
   const [status, setStatus] = useState<string>("Todos os Status");
   const [pesquisa] = useState<string>("");
+  const [mostrar, setMostrar] = useState<number>(6);
   const [pagina, setPagina] = useState<{ atual: number; maxima: number }>({
     atual: 1,
-    maxima: 5,
+    maxima: 1,
   });
+
+  const AtualizarPagina = () => {
+    setMostrar((prevDados) =>
+      prevDados + 6 > alunos.length ? alunos.length : prevDados + 6
+    );
+    setPagina((prevDados) => ({
+      ...prevDados, atual: prevDados.atual + 1 > prevDados.maxima ? prevDados.maxima : prevDados.atual + 1
+    }))
+  };
+
+  const VoltarPagina = () => {
+    setMostrar((prevDados) => (prevDados - 6 <= 6 ? 6 : prevDados - 6));
+    setPagina((prevDados) => ({
+      ...prevDados, atual: prevDados.atual - 1 > 1 ? prevDados.atual - 1 : 1
+    }))
+  };
 
   const head: string[] = [
     "Matrículo",
@@ -39,7 +56,7 @@ const AlunosAdmin = () => {
       media: 8.5,
     },
     {
-      ra: "2024001",
+      ra: "2024002",
       nome: "Fabrício Peres",
       nasc: "3 de Abr, 2024",
       turma: "9º A",
@@ -49,7 +66,7 @@ const AlunosAdmin = () => {
       media: 8.5,
     },
     {
-      ra: "2024001",
+      ra: "2024003",
       nome: "Fabrício Peres",
       nasc: "3 de Abr, 2024",
       turma: "9º A",
@@ -59,7 +76,7 @@ const AlunosAdmin = () => {
       media: 8.5,
     },
     {
-      ra: "2024001",
+      ra: "2024004",
       nome: "Fabrício Peres",
       nasc: "3 de Abr, 2024",
       turma: "9º A",
@@ -69,7 +86,7 @@ const AlunosAdmin = () => {
       media: 8.5,
     },
     {
-      ra: "2024001",
+      ra: "2024005",
       nome: "Fabrício Peres",
       nasc: "3 de Abr, 2024",
       turma: "9º A",
@@ -79,7 +96,7 @@ const AlunosAdmin = () => {
       media: 8.5,
     },
     {
-      ra: "2024001",
+      ra: "2024006",
       nome: "Fabrício Peres",
       nasc: "3 de Abr, 2024",
       turma: "9º A",
@@ -89,7 +106,7 @@ const AlunosAdmin = () => {
       media: 8.5,
     },
     {
-      ra: "2024001",
+      ra: "2024007",
       nome: "Fabrício Peres",
       nasc: "3 de Abr, 2024",
       turma: "9º A",
@@ -99,7 +116,7 @@ const AlunosAdmin = () => {
       media: 8.5,
     },
     {
-      ra: "2024001",
+      ra: "2024008",
       nome: "Fabrício Peres",
       nasc: "3 de Abr, 2024",
       turma: "9º A",
@@ -109,7 +126,7 @@ const AlunosAdmin = () => {
       media: 8.5,
     },
     {
-      ra: "2024001",
+      ra: "2024009",
       nome: "Fabrício Peres",
       nasc: "3 de Abr, 2024",
       turma: "9º A",
@@ -119,7 +136,7 @@ const AlunosAdmin = () => {
       media: 8.5,
     },
     {
-      ra: "2024001",
+      ra: "20240010",
       nome: "Fabrício Peres",
       nasc: "3 de Abr, 2024",
       turma: "9º A",
@@ -129,7 +146,7 @@ const AlunosAdmin = () => {
       media: 8.5,
     },
     {
-      ra: "2024001",
+      ra: "20240011",
       nome: "Fabrício Peres",
       nasc: "3 de Abr, 2024",
       turma: "9º A",
@@ -139,7 +156,7 @@ const AlunosAdmin = () => {
       media: 8.5,
     },
     {
-      ra: "2024001",
+      ra: "20240012",
       nome: "Fabrício Peres",
       nasc: "3 de Abr, 2024",
       turma: "9º A",
@@ -221,7 +238,7 @@ const AlunosAdmin = () => {
               </tr>
             </thead>
             <tbody>
-              {AlunosFiltrados.slice(0, 6).map((item) => (
+              {AlunosFiltrados.slice(mostrar - 6, mostrar).map((item) => (
                 <tr
                   key={item.ra}
                   className="hover:bg-[#3B82F60D] text-(--text-primary)"
@@ -298,15 +315,18 @@ const AlunosAdmin = () => {
 
         <div className="flex justify-center items-center gap-5 mt-8 pt-5 border-t-2 border-(--border-color)">
           <button
+            onClick={VoltarPagina}
             className="py-2.5 px-4 bg-transparent border-2 border-(--border-color) text-(--text-primary) text-[14px] font-medium cursor-pointer hover:bg-(--bg-input) hover:border-(--border-light)"
-            disabled
           >
             Anterior
           </button>
           <div className="text-[14px] text-(--text-secondary)">
             Página {pagina.atual} de {pagina.maxima} ({alunos.length} alunos)
           </div>
-          <button className="py-2.5 px-4 bg-transparent border-2 border-(--border-color) text-(--text-primary) text-[14px] font-medium cursor-pointer hover:bg-(--bg-input) hover:border-(--border-light)">
+          <button
+            onClick={AtualizarPagina}
+            className="py-2.5 px-4 bg-transparent border-2 border-(--border-color) text-(--text-primary) text-[14px] font-medium cursor-pointer hover:bg-(--bg-input) hover:border-(--border-light)"
+          >
             Próximo
           </button>
         </div>
