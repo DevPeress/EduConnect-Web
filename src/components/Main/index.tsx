@@ -10,7 +10,7 @@ const Main = ({
   titulo: string;
   desc: string;
   children: ReactNode;
-  botao: { ativo: boolean, adicionar: () => void , mensagem?: string };
+  botao: { ativo: boolean, adicionar?: () => void , mensagem?: string };
 }) => {
   return (
     <main className="flex-1 ml-72 flex flex-col bg-(--bg-body)">
