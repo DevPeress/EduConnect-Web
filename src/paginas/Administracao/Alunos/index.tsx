@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Aside from "../../../components/Aside";
 import Main from "../../../components/Main";
 import SelectAlunos from "../../../components/Administracao/SelectAlunos";
@@ -11,6 +11,11 @@ const AlunosAdmin = () => {
   const [selecionada, setSelecionada] = useState<string>("Todas as Salas");
   const [status, setStatus] = useState<string>("Todos os Status");
   const [pesquisa] = useState<string>("");
+  const [pagina, setPagina] = useState<{ atual: number; maxima: number }>({
+    atual: 1,
+    maxima: 5,
+  });
+
   const head: string[] = [
     "Matrículo",
     "Nome",
@@ -23,6 +28,86 @@ const AlunosAdmin = () => {
   ];
 
   const [alunos] = useState<AlunosType[]>([
+    {
+      ra: "2024001",
+      nome: "Fabrício Peres",
+      nasc: "3 de Abr, 2024",
+      turma: "9º A",
+      email: "fabricio.santos@gmail.com",
+      telefone: "(11) 95599-2605",
+      status: "Ativo",
+      media: 8.5,
+    },
+    {
+      ra: "2024001",
+      nome: "Fabrício Peres",
+      nasc: "3 de Abr, 2024",
+      turma: "9º A",
+      email: "fabricio.santos@gmail.com",
+      telefone: "(11) 95599-2605",
+      status: "Ativo",
+      media: 8.5,
+    },
+    {
+      ra: "2024001",
+      nome: "Fabrício Peres",
+      nasc: "3 de Abr, 2024",
+      turma: "9º A",
+      email: "fabricio.santos@gmail.com",
+      telefone: "(11) 95599-2605",
+      status: "Ativo",
+      media: 8.5,
+    },
+    {
+      ra: "2024001",
+      nome: "Fabrício Peres",
+      nasc: "3 de Abr, 2024",
+      turma: "9º A",
+      email: "fabricio.santos@gmail.com",
+      telefone: "(11) 95599-2605",
+      status: "Ativo",
+      media: 8.5,
+    },
+    {
+      ra: "2024001",
+      nome: "Fabrício Peres",
+      nasc: "3 de Abr, 2024",
+      turma: "9º A",
+      email: "fabricio.santos@gmail.com",
+      telefone: "(11) 95599-2605",
+      status: "Ativo",
+      media: 8.5,
+    },
+    {
+      ra: "2024001",
+      nome: "Fabrício Peres",
+      nasc: "3 de Abr, 2024",
+      turma: "9º A",
+      email: "fabricio.santos@gmail.com",
+      telefone: "(11) 95599-2605",
+      status: "Ativo",
+      media: 8.5,
+    },
+    {
+      ra: "2024001",
+      nome: "Fabrício Peres",
+      nasc: "3 de Abr, 2024",
+      turma: "9º A",
+      email: "fabricio.santos@gmail.com",
+      telefone: "(11) 95599-2605",
+      status: "Ativo",
+      media: 8.5,
+    },
+    {
+      ra: "2024001",
+      nome: "Fabrício Peres",
+      nasc: "3 de Abr, 2024",
+      turma: "9º A",
+      email: "fabricio.santos@gmail.com",
+      telefone: "(11) 95599-2605",
+      status: "Ativo",
+      media: 8.5,
+    },
     {
       ra: "2024001",
       nome: "Fabrício Peres",
@@ -58,6 +143,10 @@ const AlunosAdmin = () => {
       return conteudo.includes(termo) && correspondeTurma && correspondeStatus;
     });
   }, [alunos, pesquisa, selecionada, status]);
+
+  useEffect(() => {
+    setPagina((prevDados) => ({ ...prevDados, maxima: Math.round(alunos.length / 6) }));
+  }, [alunos]);
 
   return (
     <>
@@ -96,7 +185,7 @@ const AlunosAdmin = () => {
               </tr>
             </thead>
             <tbody>
-              {AlunosFiltrados.map((item) => (
+              {AlunosFiltrados.slice(0, 6).map((item) => (
                 <tr
                   key={item.ra}
                   className="hover:bg-[#3B82F60D] text-(--text-primary)"
@@ -169,6 +258,21 @@ const AlunosAdmin = () => {
               ))}
             </tbody>
           </table>
+        </div>
+
+        <div className="flex justify-center items-center gap-5 mt-8 pt-5 border-t-2 border-(--border-color)">
+          <button
+            className="py-2.5 px-4 bg-transparent border-2 border-(--border-color) text-(--text-primary) text-[14px] font-medium cursor-pointer hover:bg-(--bg-input) hover:border-(--border-light)"
+            disabled
+          >
+            Anterior
+          </button>
+          <div className="text-[14px] text-(--text-secondary)">
+            Página {pagina.atual} de {pagina.maxima} ({alunos.length} alunos)
+          </div>
+          <button className="py-2.5 px-4 bg-transparent border-2 border-(--border-color) text-(--text-primary) text-[14px] font-medium cursor-pointer hover:bg-(--bg-input) hover:border-(--border-light)">
+            Próximo
+          </button>
         </div>
       </Main>
     </>
