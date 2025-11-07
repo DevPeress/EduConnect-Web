@@ -239,7 +239,7 @@ const AlunosAdmin = () => {
 
         <div className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden mb-6">
           <table className="w-full border-collapse">
-            <thead style={{ background: "rgba(0, 0, 0, 0.2)" }}>
+            <thead className="bg-(--cabecalho)">
               <tr>
                 {head.map((item) => (
                   <th
