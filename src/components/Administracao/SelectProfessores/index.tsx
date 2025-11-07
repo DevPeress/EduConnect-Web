@@ -1,4 +1,4 @@
-const SelectAlunos = ({ salas, selecionada, status }: { salas: string[], selecionada: (valor: string) => void, status: (valor: string) => void }) => {
+const SelectProfessores = ({ salas, selecionada, status }: { salas: string[], selecionada: (valor: string) => void, status: (valor: string) => void }) => {
   return (
     <>
       <select
@@ -14,12 +14,13 @@ const SelectAlunos = ({ salas, selecionada, status }: { salas: string[], selecio
         className="bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] py-2.5 px-3.5 text-(--text-primary) text-[14px] cursor-pointer min-w-[180px] hover:border-(--border-light)"
       >
         <option>Todos os Status</option>
-        <option>Ativo</option>
-        <option>Inativo</option>
-        <option>Suspenso</option>
+        <option>Trabalhando</option>
+        <option>Férias</option>
+        <option>Afastado</option>
+        <option>Desligado</option>
       </select>
     </>
   );
 };
 
-export default SelectAlunos;
+export default SelectProfessores;
