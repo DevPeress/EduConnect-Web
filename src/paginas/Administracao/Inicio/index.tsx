@@ -38,7 +38,7 @@ const InicioAdm = () => {
   ]);
 
   return (
-    <div>
+    <div className="flex min-h-full">
       <AsideAdmin />
 
       <Main titulo="Bem-Vindo" desc="Visão geral da Escola e Estatísticas"> 
