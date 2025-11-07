@@ -22,15 +22,20 @@ const AlunosAdmin = () => {
       prevDados + 6 > alunos.length ? alunos.length : prevDados + 6
     );
     setPagina((prevDados) => ({
-      ...prevDados, atual: prevDados.atual + 1 > prevDados.maxima ? prevDados.maxima : prevDados.atual + 1
-    }))
+      ...prevDados,
+      atual:
+        prevDados.atual + 1 > prevDados.maxima
+          ? prevDados.maxima
+          : prevDados.atual + 1,
+    }));
   };
 
   const VoltarPagina = () => {
     setMostrar((prevDados) => (prevDados - 6 <= 6 ? 6 : prevDados - 6));
     setPagina((prevDados) => ({
-      ...prevDados, atual: prevDados.atual - 1 > 1 ? prevDados.atual - 1 : 1
-    }))
+      ...prevDados,
+      atual: prevDados.atual - 1 > 1 ? prevDados.atual - 1 : 1,
+    }));
   };
 
   const head: string[] = [
@@ -59,7 +64,7 @@ const AlunosAdmin = () => {
       ra: "2024002",
       nome: "Fabrício Peres",
       nasc: "3 de Abr, 2024",
-      turma: "9º A",
+      turma: "9º B",
       email: "fabricio.santos@gmail.com",
       telefone: "(11) 95599-2605",
       status: "Ativo",
@@ -69,10 +74,10 @@ const AlunosAdmin = () => {
       ra: "2024003",
       nome: "Fabrício Peres",
       nasc: "3 de Abr, 2024",
-      turma: "9º A",
+      turma: "9º B",
       email: "fabricio.santos@gmail.com",
       telefone: "(11) 95599-2605",
-      status: "Ativo",
+      status: "Inativo",
       media: 8.5,
     },
     {
@@ -82,14 +87,14 @@ const AlunosAdmin = () => {
       turma: "9º A",
       email: "fabricio.santos@gmail.com",
       telefone: "(11) 95599-2605",
-      status: "Ativo",
+      status: "Inativo",
       media: 8.5,
     },
     {
       ra: "2024005",
       nome: "Fabrício Peres",
       nasc: "3 de Abr, 2024",
-      turma: "9º A",
+      turma: "9º B",
       email: "fabricio.santos@gmail.com",
       telefone: "(11) 95599-2605",
       status: "Ativo",
@@ -102,17 +107,17 @@ const AlunosAdmin = () => {
       turma: "9º A",
       email: "fabricio.santos@gmail.com",
       telefone: "(11) 95599-2605",
-      status: "Ativo",
+      status: "Suspenso",
       media: 8.5,
     },
     {
       ra: "2024007",
       nome: "Fabrício Peres",
       nasc: "3 de Abr, 2024",
-      turma: "9º A",
+      turma: "9º B",
       email: "fabricio.santos@gmail.com",
       telefone: "(11) 95599-2605",
-      status: "Ativo",
+      status: "Suspenso",
       media: 8.5,
     },
     {
