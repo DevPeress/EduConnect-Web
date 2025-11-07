@@ -4,11 +4,13 @@ import Header from "../Header";
 const Main = ({
   titulo,
   desc,
+  botao,
   children,
 }: {
   titulo: string;
   desc: string;
   children: ReactNode;
+  botao: { ativo: boolean, adicionar: () => void , mensagem?: string };
 }) => {
   return (
     <main className="flex-1 ml-72 flex flex-col bg-(--bg-body)">
@@ -23,8 +25,9 @@ const Main = ({
           </div>
 
           <button
-            className="flex items-center gap-2.5 py-3 px-6 bg-(--primary-color) text-white border-none rounded-[10px] text-[14px] cursor-pointer hover:bg-(--primary-hover) hover:-translate-y-0.5"
-            style={{ boxShadow: " 0 4px 12px rgba(59, 130, 246, 0.3)" }}
+            onClick={botao.adicionar}
+            className="items-center gap-2.5 py-3 px-6 bg-(--primary-color) text-white border-none rounded-[10px] text-[14px] cursor-pointer hover:bg-(--primary-hover) hover:-translate-y-0.5"
+            style={{ boxShadow: " 0 4px 12px rgba(59, 130, 246, 0.3)", display: botao.ativo ? "flex" : "none" }}
           >
             <svg
               className="shrink-0"
@@ -40,7 +43,7 @@ const Main = ({
               <line x1="12" y1="5" x2="12" y2="19"></line>
               <line x1="5" y1="12" x2="19" y2="12"></line>
             </svg>
-            Novo Aluno
+            {botao.mensagem}
           </button>
         </div>
 
