@@ -18,12 +18,12 @@ html, body, #root {
   --text-primary: #1f2937;
   --text-secondary: #6b7280;
   --text-muted: #6b7280;
-  --border-color: #e5e7eb;
+  --border-color: #D1D5DB; 
   --border-light: #4b5563;
   --bg-body: #f3f4f6;
   --bg-card: #ffffff;
   --bg-input: #9ca3af;
-  --bg-sidebar: #1a1f2e;
+  --bg-sidebar: #e5e7eb;
   --error-color: #ef4444;
   --success-color: #10b981;
   --alert-color: #ef44445d;
