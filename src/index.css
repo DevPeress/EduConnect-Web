@@ -36,6 +36,11 @@ html, body, #root {
   --green: #10b981;
   --orange: #f59e0b;
   --purple: #8b5cf6;
+
+  --aluno-card: #BFDBFE;
+  --presenca-card: #DDD6FE;
+  --professor-card: #A7F3D0;
+  --turma-card: #FDE68A;
 }
 
 [data-theme="dark"] { 
@@ -62,6 +67,11 @@ html, body, #root {
   --green: #10b981;
   --orange: #f59e0b;
   --purple: #8b5cf6;
+
+  --aluno-card: #3B82F61A;
+  --presenca-card: #8B5CF61A;
+  --professor-card: #10B9811A;
+  --turma-card: #F59E0B1A;
 }
 
 @theme {

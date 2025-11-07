@@ -1,6 +1,6 @@
 const AlunosCard = () => {
   return (
-    <div className="w-12 h-12 rounded-[10px] flex items-center justify-center shrink-0 bg-[#3B82F61A] text-(--blue)">
+    <div className="w-12 h-12 rounded-[10px] flex items-center justify-center shrink-0 bg-(--aluno-card) text-(--blue)">
       <svg
         width="24"
         height="24"
@@ -22,7 +22,7 @@ const AlunosCard = () => {
 
 const PresencaCard = () => {
   return (
-    <div className="w-12 h-12 rounded-[10px] flex items-center justify-center shrink-0 bg-[#8B5CF61A] text-(--purple)">
+    <div className="w-12 h-12 rounded-[10px] flex items-center justify-center shrink-0 bg-(--presenca-card) text-(--purple)">
       <svg
         width="24"
         height="24"
@@ -41,7 +41,7 @@ const PresencaCard = () => {
 
 const ProfessoresCard = () => {
   return (
-    <div className="w-12 h-12 rounded-[10px] flex items-center justify-center shrink-0 bg-[#10B9811A] text-(--green)">
+    <div className="w-12 h-12 rounded-[10px] flex items-center justify-center shrink-0 bg-(--professor-card) text-(--green)">
       <svg
         width="24"
         height="24"
@@ -61,7 +61,7 @@ const ProfessoresCard = () => {
 
 const TurmasCard = () => {
   return (
-    <div className="w-12 h-12 rounded-[10px] flex items-center justify-center shrink-0 bg-[#F59E0B1A] text-(--orange)">
+    <div className="w-12 h-12 rounded-[10px] flex items-center justify-center shrink-0 bg-(--turma-card) text-(--orange)">
       <svg
         width="24"
         height="24"
