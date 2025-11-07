@@ -19,7 +19,7 @@ const AlunosAdmin = () => {
 
   const AtualizarPagina = () => {
     setMostrar((prevDados) =>
-      prevDados + 6 > alunos.length ? alunos.length : prevDados + 6
+      prevDados + 6
     );
     setPagina((prevDados) => ({
       ...prevDados,
@@ -192,7 +192,9 @@ const AlunosAdmin = () => {
       const correspondeStatus =
         status === "Todos os Status" ||
         itens.status.toLowerCase() === status.toLowerCase();
-      return conteudo.includes(termo) && correspondeTurma && correspondeStatus;
+      const correspondetes =
+        conteudo.includes(termo) && correspondeTurma && correspondeStatus;
+      return correspondetes;
     });
   }, [alunos, pesquisa, selecionada, status]);
 
@@ -200,11 +202,11 @@ const AlunosAdmin = () => {
     setPagina((prevDados) => ({
       ...prevDados,
       maxima:
-        alunos.length % 6 === 0
-          ? alunos.length / 6
-          : Math.floor(alunos.length / 6) + 1,
+        AlunosFiltrados.length % 6 === 0
+          ? AlunosFiltrados.length / 6
+          : Math.floor(AlunosFiltrados.length / 6) + 1,
     }));
-  }, [alunos]);
+  }, [AlunosFiltrados]);
 
   return (
     <>
@@ -326,7 +328,7 @@ const AlunosAdmin = () => {
             Anterior
           </button>
           <div className="text-[14px] text-(--text-secondary)">
-            Página {pagina.atual} de {pagina.maxima} ({alunos.length} alunos)
+            Página {pagina.atual} de {pagina.maxima} ({AlunosFiltrados.length} alunos)
           </div>
           <button
             onClick={AtualizarPagina}
