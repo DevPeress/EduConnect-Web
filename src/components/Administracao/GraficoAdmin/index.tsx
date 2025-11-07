@@ -36,15 +36,13 @@ const GraficoAdmin = () => {
         <div className="flex gap-6 justify-center">
           <div className="flex items-center gap-2 text-[13px] text-(--text-secondary)">
             <span
-              className="w-3 h-3 rounded-[3px]"
-              style={{ background: "#3b82f6" }}
+              className="w-3 h-3 rounded-[3px] bg-(--blue)"
             ></span>
             <span className="">Média Geral</span>
           </div>
           <div className="flex items-center gap-2 text-[13px] text-(--text-secondary)">
             <span
-              className="w-3 h-3 rounded-[3px]"
-              style={{ background: "#10b981" }}
+              className="w-3 h-3 rounded-[3px] bg-(--green)"
             ></span>
             <span className="">Meta</span>
           </div>
