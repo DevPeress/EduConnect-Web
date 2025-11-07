@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import type { NavAdmin } from "../../../../types/types";
+import type { NavAdmin } from "../../types/types";
 
-const LinkAdmin = ({
+const LinkPaginas = ({
   item,
   paginaAtual,
 }: {
@@ -24,4 +24,4 @@ const LinkAdmin = ({
   );
 };
 
-export default LinkAdmin;
+export default LinkPaginas;

@@ -1,6 +1,5 @@
 import { useLocation } from "react-router-dom";
 import type { NavAdmin } from "../../../../types/types";
-import LinkAdmin from "../LinkAdmin";
 import DashBoard from "../Icons/DashBoard";
 import Alunos from "../Icons/Alunos";
 import Professores from "../Icons/Professores";
@@ -9,6 +8,7 @@ import Notas from "../Icons/Notas";
 import Calendario from "../Icons/Calendario";
 import Financeiro from "../Icons/Financeiro";
 import Relatorios from "../Icons/Relatorios";
+import LinkPaginas from "../../../LinkPaginas";
 
 const NavBarAdmin = () => {
   const location = useLocation();
@@ -50,7 +50,7 @@ const NavBarAdmin = () => {
           const paginaAtual: boolean = location.pathname === item.pagina;
 
           return (
-            <LinkAdmin key={item.nome} item={item} paginaAtual={paginaAtual} />
+            <LinkPaginas key={item.nome} item={item} paginaAtual={paginaAtual} />
           );
         })}
       </div>
@@ -63,7 +63,7 @@ const NavBarAdmin = () => {
           const paginaAtual: boolean = location.pathname === item.pagina;
 
           return (
-            <LinkAdmin key={item.nome} item={item} paginaAtual={paginaAtual} />
+            <LinkPaginas key={item.nome} item={item} paginaAtual={paginaAtual} />
           );
         })}
       </div>
