@@ -86,7 +86,10 @@ const AlunosAdmin = () => {
             <thead style={{ background: "rgba(0, 0, 0, 0.2)" }}>
               <tr>
                 {head.map((item) => (
-                  <th key={item} className="py-4 px-5 text-left text-[13px] font-semibold text-(--text-muted) uppercase leading-4 border-b-2 border-(--border-color)">
+                  <th
+                    key={item}
+                    className="py-4 px-5 text-left text-[13px] font-semibold text-(--text-muted) uppercase leading-4 border-b-2 border-(--border-color)"
+                  >
                     {item}
                   </th>
                 ))}
