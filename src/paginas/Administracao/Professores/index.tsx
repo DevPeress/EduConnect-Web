@@ -107,7 +107,7 @@ const ProfessoresAdmin = () => {
       telefone: "(11) 95599-2605",
       status: "Suspenso",
       media: 8.5,
-    }
+    },
   ]);
 
   const ProfessoresFiltrados = useMemo(() => {
@@ -146,6 +146,10 @@ const ProfessoresAdmin = () => {
     }));
   }, [ProfessoresFiltrados]);
 
+  const AdicionarProfessor = () => {
+    return;
+  };
+
   return (
     <>
       <Aside />
@@ -153,6 +157,11 @@ const ProfessoresAdmin = () => {
       <Main
         titulo="Gerenciamento de Professores"
         desc="Visualize e Gerencie as informações dos professores"
+        botao={{
+          ativo: true,
+          mensagem: "Novo Professor",
+          adicionar: AdicionarProfessor,
+        }}
       >
         <div className="flex justify-between items-center gap-5 mb-6 flex-wrap">
           <div className="flex gap-3 flex-wrap">
