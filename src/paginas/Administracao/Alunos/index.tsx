@@ -118,6 +118,36 @@ const AlunosAdmin = () => {
       status: "Ativo",
       media: 8.5,
     },
+    {
+      ra: "2024001",
+      nome: "Fabrício Peres",
+      nasc: "3 de Abr, 2024",
+      turma: "9º A",
+      email: "fabricio.santos@gmail.com",
+      telefone: "(11) 95599-2605",
+      status: "Ativo",
+      media: 8.5,
+    },
+    {
+      ra: "2024001",
+      nome: "Fabrício Peres",
+      nasc: "3 de Abr, 2024",
+      turma: "9º A",
+      email: "fabricio.santos@gmail.com",
+      telefone: "(11) 95599-2605",
+      status: "Ativo",
+      media: 8.5,
+    },
+    {
+      ra: "2024001",
+      nome: "Fabrício Peres",
+      nasc: "3 de Abr, 2024",
+      turma: "9º A",
+      email: "fabricio.santos@gmail.com",
+      telefone: "(11) 95599-2605",
+      status: "Ativo",
+      media: 8.5,
+    },
   ]);
 
   const AlunosFiltrados = useMemo(() => {
@@ -145,7 +175,13 @@ const AlunosAdmin = () => {
   }, [alunos, pesquisa, selecionada, status]);
 
   useEffect(() => {
-    setPagina((prevDados) => ({ ...prevDados, maxima: Math.round(alunos.length / 6) }));
+    setPagina((prevDados) => ({
+      ...prevDados,
+      maxima:
+        alunos.length % 6 === 0
+          ? alunos.length / 6
+          : Math.floor(alunos.length / 6) + 1,
+    }));
   }, [alunos]);
 
   return (
