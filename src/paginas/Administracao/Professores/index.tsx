@@ -47,7 +47,7 @@ const ProfessoresAdmin = () => {
     "Ação",
   ];
 
-  const [alunos] = useState<AlunosType[]>([
+  const [professores] = useState<AlunosType[]>([
     {
       ra: "2024001",
       nome: "Fabrício Peres",
@@ -170,9 +170,9 @@ const ProfessoresAdmin = () => {
     },
   ]);
 
-  const AlunosFiltrados = useMemo(() => {
+  const ProfessoresFiltrados = useMemo(() => {
     const termo = pesquisa.toLowerCase();
-    return alunos.filter((itens) => {
+    return professores.filter((itens) => {
       const conteudo = `
         ${itens.ra.toLowerCase()}
         ${itens.nome.toLowerCase()}
@@ -194,17 +194,17 @@ const ProfessoresAdmin = () => {
         conteudo.includes(termo) && correspondeTurma && correspondeStatus;
       return correspondetes;
     });
-  }, [alunos, pesquisa, selecionada, status]);
+  }, [professores, pesquisa, selecionada, status]);
 
   useEffect(() => {
     setPagina((prevDados) => ({
       ...prevDados,
       maxima:
-        AlunosFiltrados.length % 6 === 0
-          ? AlunosFiltrados.length / 6
-          : Math.floor(AlunosFiltrados.length / 6) + 1,
+        ProfessoresFiltrados.length % 6 === 0
+          ? ProfessoresFiltrados.length / 6
+          : Math.floor(ProfessoresFiltrados.length / 6) + 1,
     }));
-  }, [AlunosFiltrados]);
+  }, [ProfessoresFiltrados]);
 
   return (
     <>
@@ -243,7 +243,7 @@ const ProfessoresAdmin = () => {
               </tr>
             </thead>
             <tbody>
-              {AlunosFiltrados.slice(mostrar - 6, mostrar).map((item) => (
+              {ProfessoresFiltrados.slice(mostrar - 6, mostrar).map((item) => (
                 <tr
                   key={item.ra}
                   className="hover:bg-[#3B82F60D] text-(--text-primary)"
@@ -346,8 +346,8 @@ const ProfessoresAdmin = () => {
             Anterior
           </button>
           <div className="text-[14px] text-(--text-secondary)">
-            Página {pagina.atual} de {pagina.maxima} ({AlunosFiltrados.length}{" "}
-            alunos)
+            Página {pagina.atual} de {pagina.maxima} (
+            {ProfessoresFiltrados.length} professores)
           </div>
           <button
             onClick={() =>
