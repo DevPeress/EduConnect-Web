@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import Aside from "../../../components/Aside";
-import Header from "../../../components/Header";
+import Main from "../../../components/Main";
 
 const AlunosAdmin = () => {
   const [modo, setModo] = useState<boolean>(false);
@@ -37,9 +37,11 @@ const AlunosAdmin = () => {
         `;
 
       const correspondeTurma =
-        selecionada === "Todas as Salas" || itens.turma.toLowerCase() === selecionada.toLowerCase();
+        selecionada === "Todas as Salas" ||
+        itens.turma.toLowerCase() === selecionada.toLowerCase();
       const correspondeStatus =
-        status === "Todos os Status" || itens.status.toLowerCase() === status.toLowerCase();
+        status === "Todos os Status" ||
+        itens.status.toLowerCase() === status.toLowerCase();
       return conteudo.includes(termo) && correspondeTurma && correspondeStatus;
     });
   }, [alunos, pesquisa, selecionada, status]);
@@ -48,8 +50,10 @@ const AlunosAdmin = () => {
     <>
       <Aside />
 
-      <main className="flex-1 ml-72 flex flex-col bg-(--bg-body)">
-        <Header />
+      <Main
+        titulo="Bem-Vindo"
+        desc="Visualize e Gerencie as informações dos estudantes"
+      >
         <div className="py-2 px-8 max-w-[1600px] m-0 mx-auto w-full">
           <div className="mb-4">
             <h1 className="text-[28px] font-bold mb-1 text-(--text-primary)">
@@ -243,7 +247,7 @@ const AlunosAdmin = () => {
             </table>
           </div>
         </div>
-      </main>
+      </Main>
     </>
   );
 };
