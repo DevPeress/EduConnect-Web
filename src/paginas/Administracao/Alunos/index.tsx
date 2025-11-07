@@ -206,6 +206,10 @@ const AlunosAdmin = () => {
     }));
   }, [AlunosFiltrados]);
 
+  const AdicionarProfessor = () => {
+    return;
+  };
+
   return (
     <>
       <Aside />
@@ -213,6 +217,11 @@ const AlunosAdmin = () => {
       <Main
         titulo="Gerenciamento de Alunos"
         desc="Visualize e Gerencie as informações dos estudantes"
+        botao={{
+          ativo: true,
+          mensagem: "Novo Aluno",
+          adicionar: AdicionarProfessor,
+        }}
       >
         <div className="flex justify-between items-center gap-5 mb-6 flex-wrap">
           <div className="flex gap-3 flex-wrap">
