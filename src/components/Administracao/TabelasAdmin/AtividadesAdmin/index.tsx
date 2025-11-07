@@ -67,11 +67,7 @@ const AtividadesRecentesAdmin = ({
             className="flex gap-3.5 py-3.5 px-0 border-b-2 border-b-(--border-color)"
           >
             <div
-              className="w-10 h-10 rounded-[10px] flex items-center justify-center text-[18px] shrink-0"
-              style={{
-                color: "var(--blue)",
-                background: "rgba(59, 130, 246, 0.15)",
-              }}
+              className="w-10 h-10 rounded-[10px] flex items-center justify-center text-[18px] shrink-0 text-(--blue) bg-(--atividades-recentes)"
             >
               {PegarDados(item.tipo, item.dado)?.emoji}
             </div>

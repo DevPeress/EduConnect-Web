@@ -31,7 +31,7 @@ html, body, #root {
   --shadowalert-color: rgba(239, 68, 68, 1);
   --shadowalert-color2: rgba(239, 68, 68, 0);
   --bg-liner: 135deg, #667eea 0%, #764ba2 100%;
-  
+
   --red: #ef4444;
   --blue: #3b82f6;
   --green: #10b981;
@@ -44,6 +44,7 @@ html, body, #root {
   --turma-card: #FDE68A;
 
   --cabecalho: #D6D6D6;
+  --atividades-recentes: #E2ECFE;
 }
 
 [data-theme="dark"] { 
@@ -78,6 +79,7 @@ html, body, #root {
   --turma-card: #F59E0B1A;
 
   --cabecalho: #00000033;
+  --atividades-recentes: #3B82F626;
 }
 
 @theme {
