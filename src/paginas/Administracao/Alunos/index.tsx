@@ -17,7 +17,7 @@ const AlunosAdmin = () => {
     maxima: 1,
   });
 
-  const AtualizarPagina = () => {
+  const ProximaPagina = () => {
     setMostrar((prevDados) => prevDados + 6);
     setPagina((prevDados) => ({
       ...prevDados,
@@ -29,10 +29,10 @@ const AlunosAdmin = () => {
   };
 
   const VoltarPagina = () => {
-    setMostrar((prevDados) => (prevDados - 6 <= 6 ? 6 : prevDados - 6));
+    setMostrar((prevDados) => prevDados - 6);
     setPagina((prevDados) => ({
       ...prevDados,
-      atual: prevDados.atual - 1 > 1 ? prevDados.atual - 1 : 1,
+      atual: prevDados.atual - 1,
     }));
   };
 
@@ -336,7 +336,7 @@ const AlunosAdmin = () => {
 
         <div className="flex justify-center items-center gap-5 mt-8 pt-5 border-t-2 border-(--border-color)">
           <button
-            onClick={VoltarPagina}
+            onClick={() => (pagina.atual === 1 ? null : VoltarPagina())}
             className="py-2.5 px-4 bg-transparent border-2 border-(--border-color) text-(--text-primary) text-[14px] font-medium rounded-lg hover:bg-(--bg-input) hover:border-(--border-light)"
             style={{
               opacity: pagina.atual === 1 ? "0.5" : "1",
@@ -350,11 +350,14 @@ const AlunosAdmin = () => {
             alunos)
           </div>
           <button
-            onClick={AtualizarPagina}
+            onClick={() =>
+              pagina.atual === pagina.maxima ? null : ProximaPagina()
+            }
             className="py-2.5 px-4 bg-transparent border-2 border-(--border-color) text-(--text-primary) text-[14px] font-medium rounded-lg hover:bg-(--bg-input) hover:border-(--border-light)"
             style={{
               opacity: pagina.maxima === pagina.atual ? "0.5" : "1",
-              cursor: pagina.maxima === pagina.atual ? "not-allowed" : "pointer",
+              cursor:
+                pagina.maxima === pagina.atual ? "not-allowed" : "pointer",
             }}
           >
             Próximo
