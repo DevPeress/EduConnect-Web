@@ -1,3 +1,6 @@
+import { Aluno, Nota, Presenca, Relatorio } from "./Icones";
+
+
 const AcoesAdmin = () => {
   const tipos = [
     "Novo Aluno",
@@ -8,13 +11,13 @@ const AcoesAdmin = () => {
   const Acao = (tipo: string) => {
     switch (tipo) {
       case "Novo Aluno":
-        return "Cadastrar novo Estudante";
+        return { msg: "Cadastrar novo Estudante", svg: <Aluno /> };
       case "Lançar Nota":
-        return "Registrar avaliações";
+        return { msg: "Registrar avaliações", svg: <Nota /> };
       case "Registrar Presença":
-        return "Marcar frequência";
+        return { msg: "Marcar frequência", svg: <Presenca /> };
       case "Gerar Relatório":
-        return "Visualizar Dados";
+        return { msg: "Visualizar Dados", svg: <Relatorio /> };
     }
   };
 
@@ -42,26 +45,14 @@ const AcoesAdmin = () => {
                   color: "var(--blue)",
                 }}
               >
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <line x1="12" y1="5" x2="12" y2="19"></line>
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                </svg>
+                {Acao(item)?.svg}
               </div>
               <div className="flex-1 flex flex-col gap-0.5">
                 <span className="text-[14px] font-semibold text-(--text-primary)">
                   {item}
                 </span>
                 <span className="text-[12px] text-(--text-muted)">
-                  {Acao(item)}
+                  {Acao(item)?.msg}
                 </span>
               </div>
               <svg
