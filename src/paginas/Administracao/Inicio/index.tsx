@@ -38,7 +38,7 @@ const InicioAdm = () => {
   ]);
 
   return (
-    <div className="flex min-h-full">
+    <>
       <Aside />
 
       <Main titulo="Bem-Vindo" desc="Visão geral da Escola e Estatísticas"> 
@@ -60,7 +60,7 @@ const InicioAdm = () => {
             <AcoesAdmin />
           </div>
       </Main>
-    </div>
+    </>
   );
 };
 

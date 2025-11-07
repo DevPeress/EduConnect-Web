@@ -3,7 +3,7 @@ import Header from "../../../components/Header";
 
 const AlunosAdmin = () => {
   return (
-    <div className="flex min-h-full">
+    <>
       <Aside />
 
       <main className="flex-1 ml-72 flex flex-col bg-(--bg-body)">
@@ -37,7 +37,7 @@ const AlunosAdmin = () => {
           </div>
         </div>
       </main>
-    </div>
+    </>
   );
 };
 
