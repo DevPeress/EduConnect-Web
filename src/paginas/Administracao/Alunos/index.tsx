@@ -10,6 +10,16 @@ const AlunosAdmin = () => {
   const [selecionada, setSelecionada] = useState<string>("Todas as Salas");
   const [status, setStatus] = useState<string>("Todos os Status");
   const [pesquisa] = useState<string>("");
+  const head: string[] = [
+    "Matrículo",
+    "Nome",
+    "Turma",
+    "E-mail",
+    "Telefone",
+    "Status",
+    "Média",
+    "Ação",
+  ];
 
   const [alunos] = useState([
     {
@@ -74,30 +84,11 @@ const AlunosAdmin = () => {
           <table className="w-full border-collapse">
             <thead style={{ background: "rgba(0, 0, 0, 0.2)" }}>
               <tr>
-                <th className="py-4 px-5 text-left text-[13px] font-semibold text-(--text-muted) uppercase leading-4 border-b-2 border-(--border-color)">
-                  Matrícula
-                </th>
-                <th className="py-4 px-5 text-left text-[13px] font-semibold text-(--text-muted) uppercase leading-4 border-b-2 border-(--border-color)">
-                  Nome
-                </th>
-                <th className="py-4 px-5 text-left text-[13px] font-semibold text-(--text-muted) uppercase leading-4 border-b-2 border-(--border-color)">
-                  Turma
-                </th>
-                <th className="py-4 px-5 text-left text-[13px] font-semibold text-(--text-muted) uppercase leading-4 border-b-2 border-(--border-color)">
-                  Email
-                </th>
-                <th className="py-4 px-5 text-left text-[13px] font-semibold text-(--text-muted) uppercase leading-4 border-b-2 border-(--border-color)">
-                  Telefone
-                </th>
-                <th className="py-4 px-5 text-left text-[13px] font-semibold text-(--text-muted) uppercase leading-4 border-b-2 border-(--border-color)">
-                  Status
-                </th>
-                <th className="py-4 px-5 text-left text-[13px] font-semibold text-(--text-muted) uppercase leading-4 border-b-2 border-(--border-color)">
-                  Média
-                </th>
-                <th className="py-4 px-5 text-left text-[13px] font-semibold text-(--text-muted) uppercase leading-4 border-b-2 border-(--border-color)">
-                  Ação
-                </th>
+                {head.map((item) => (
+                  <th key={item} className="py-4 px-5 text-left text-[13px] font-semibold text-(--text-muted) uppercase leading-4 border-b-2 border-(--border-color)">
+                    {item}
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
