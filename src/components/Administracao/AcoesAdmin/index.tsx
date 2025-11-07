@@ -1,6 +1,5 @@
 import { Aluno, Nota, Presenca, Relatorio } from "./Icones";
 
-
 const AcoesAdmin = () => {
   const tipos = [
     "Novo Aluno",
@@ -11,13 +10,33 @@ const AcoesAdmin = () => {
   const Acao = (tipo: string) => {
     switch (tipo) {
       case "Novo Aluno":
-        return { msg: "Cadastrar novo Estudante", svg: <Aluno /> };
+        return {
+          msg: "Cadastrar novo Estudante",
+          svg: <Aluno />,
+          bg: "rgba(59, 130, 246, 0.15)",
+          color: "var(--blue)",
+        };
       case "Lançar Nota":
-        return { msg: "Registrar avaliações", svg: <Nota /> };
+        return {
+          msg: "Registrar avaliações",
+          svg: <Nota />,
+          bg: "rgba(16, 185, 129, 0.15)",
+          color: "var(--green)",
+        };
       case "Registrar Presença":
-        return { msg: "Marcar frequência", svg: <Presenca /> };
+        return {
+          msg: "Marcar frequência",
+          svg: <Presenca />,
+          bg: "rgba(245, 158, 11, 0.15)",
+          color: "var(--orange)",
+        };
       case "Gerar Relatório":
-        return { msg: "Visualizar Dados", svg: <Relatorio /> };
+        return {
+          msg: "Visualizar Dados",
+          svg: <Relatorio />,
+          bg: "rgba(139, 92, 246, 0.15)",
+          color: "var(--purple)",
+        };
     }
   };
 
@@ -41,8 +60,8 @@ const AcoesAdmin = () => {
               <div
                 className="w-10 h-10 rounded-[10px] flex items-center justify-center shrink-0"
                 style={{
-                  background: "rgba(59, 130, 246, 0.15)",
-                  color: "var(--blue)",
+                  background: Acao(item)?.bg,
+                  color: Acao(item)?.color,
                 }}
               >
                 {Acao(item)?.svg}
