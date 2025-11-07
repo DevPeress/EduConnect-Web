@@ -5,7 +5,7 @@ import SelectAlunos from "../../../components/Administracao/SelectAlunos";
 import ModoExibicao from "../../../components/Administracao/ModoExibicao";
 import type { AlunosType } from "../../../types/types";
 
-const AlunosAdmin = () => {
+const ProfessoresAdmin = () => {
   const [modo, setModo] = useState<boolean>(false);
   const [salas] = useState<string[]>(["Todas as Salas", "9º A", "9º B"]);
   const [selecionada, setSelecionada] = useState<string>("Todas as Salas");
@@ -368,4 +368,4 @@ const AlunosAdmin = () => {
   );
 };
 
-export default AlunosAdmin;
+export default ProfessoresAdmin;
