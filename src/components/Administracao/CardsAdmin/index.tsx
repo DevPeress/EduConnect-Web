@@ -1,9 +1,6 @@
 import type { CardsAdminType } from "../../../types/types";
 import { formatNumero } from "../../../utils/codigos";
-import AlunosCard from "./Icones/Alunos";
-import PresencaCard from "./Icones/Presenca";
-import ProfessoresCard from "./Icones/Professores";
-import TurmasCard from "./Icones/Turmas";
+import { AlunosCard, PresencaCard, ProfessoresCard, TurmasCard } from "./Icones";
 
 const CardsAdmin = ({ dados }: { dados: CardsAdminType }) => {
   const tipo: string = dados.dado;
