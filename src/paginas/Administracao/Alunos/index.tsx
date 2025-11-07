@@ -18,9 +18,7 @@ const AlunosAdmin = () => {
   });
 
   const AtualizarPagina = () => {
-    setMostrar((prevDados) =>
-      prevDados + 6
-    );
+    setMostrar((prevDados) => prevDados + 6);
     setPagina((prevDados) => ({
       ...prevDados,
       atual:
@@ -280,7 +278,23 @@ const AlunosAdmin = () => {
                     {item.telefone}
                   </td>
                   <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
-                    <span className="inline-block py-1.5 px-3 rounded-[20px] text-[12px] font-semibold">
+                    <span
+                      className="inline-block py-1.5 px-3 rounded-[20px] text-[12px] font-semibold"
+                      style={{
+                        background:
+                          item.status === "Ativo"
+                            ? "rgba(16, 185, 129, 0.15)"
+                            : item.status === "Inativo"
+                            ? "rgba(156, 163, 175, 0.15)"
+                            : "rgba(239, 68, 68, 0.15)",
+                        color:
+                          item.status === "Ativo"
+                            ? "var(--green)"
+                            : item.status === "Inativo"
+                            ? "var(--text-secondary)"
+                            : "var(--red)",
+                      }}
+                    >
                       {item.status}
                     </span>
                   </td>
@@ -323,16 +337,25 @@ const AlunosAdmin = () => {
         <div className="flex justify-center items-center gap-5 mt-8 pt-5 border-t-2 border-(--border-color)">
           <button
             onClick={VoltarPagina}
-            className="py-2.5 px-4 bg-transparent border-2 border-(--border-color) text-(--text-primary) text-[14px] font-medium cursor-pointer hover:bg-(--bg-input) hover:border-(--border-light)"
+            className="py-2.5 px-4 bg-transparent border-2 border-(--border-color) text-(--text-primary) text-[14px] font-medium rounded-lg hover:bg-(--bg-input) hover:border-(--border-light)"
+            style={{
+              opacity: pagina.atual === 1 ? "0.5" : "1",
+              cursor: pagina.atual === 1 ? "not-allowed" : "pointer",
+            }}
           >
             Anterior
           </button>
           <div className="text-[14px] text-(--text-secondary)">
-            Página {pagina.atual} de {pagina.maxima} ({AlunosFiltrados.length} alunos)
+            Página {pagina.atual} de {pagina.maxima} ({AlunosFiltrados.length}{" "}
+            alunos)
           </div>
           <button
             onClick={AtualizarPagina}
-            className="py-2.5 px-4 bg-transparent border-2 border-(--border-color) text-(--text-primary) text-[14px] font-medium cursor-pointer hover:bg-(--bg-input) hover:border-(--border-light)"
+            className="py-2.5 px-4 bg-transparent border-2 border-(--border-color) text-(--text-primary) text-[14px] font-medium rounded-lg hover:bg-(--bg-input) hover:border-(--border-light)"
+            style={{
+              opacity: pagina.maxima === pagina.atual ? "0.5" : "1",
+              cursor: pagina.maxima === pagina.atual ? "not-allowed" : "pointer",
+            }}
           >
             Próximo
           </button>
