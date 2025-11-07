@@ -3,6 +3,7 @@ import Aside from "../../../components/Aside";
 import Main from "../../../components/Main";
 import SelectAlunos from "../../../components/Administracao/SelectAlunos";
 import ModoExibicao from "../../../components/Administracao/ModoExibicao";
+import type { AlunosType } from "../../../types/types";
 
 const AlunosAdmin = () => {
   const [modo, setModo] = useState<boolean>(false);
@@ -21,7 +22,7 @@ const AlunosAdmin = () => {
     "Ação",
   ];
 
-  const [alunos] = useState([
+  const [alunos] = useState<AlunosType[]>([
     {
       ra: "2024001",
       nome: "Fabrício Peres",

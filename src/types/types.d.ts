@@ -62,3 +62,14 @@ export interface CalendarioType {
   tipo: string;
   horario: string;
 };
+
+export interface AlunosType {
+  ra: string;
+  nome: string;
+  nasc: string;
+  turma: string;
+  email: string;
+  telefone: string;
+  status: string
+  media: number;
+}
