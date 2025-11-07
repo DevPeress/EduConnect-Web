@@ -48,8 +48,7 @@ const AtividadesRecentesAdmin = ({
       style={{ boxShadow: "0 1px 2px rgba(0, 0, 0, 0.3)" }}
     >
       <div
-        className="py-5 px-6 border-b-2 border-b-(--border-color) flex justify-between items-center"
-        style={{ background: "rgba(0, 0, 0, 0.2)" }}
+        className="py-5 px-6 border-b-2 border-b-(--border-color) flex justify-between items-center bg-(--cabecalho)"
       >
         <h2 className="text-[16px] font-semibold text-(--text-primary)">
           Atividades Recentes
