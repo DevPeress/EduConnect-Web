@@ -37,7 +37,7 @@ const AlunosAdmin = () => {
   };
 
   const head: string[] = [
-    "Matrículo",
+    "Matrícula",
     "Nome",
     "Turma",
     "E-mail",
