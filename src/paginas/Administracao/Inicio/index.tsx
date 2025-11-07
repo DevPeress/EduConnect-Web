@@ -1,6 +1,5 @@
 import { useState } from "react";
 import CardsAdmin from "../../../components/Administracao/CardsAdmin";
-import Header from "../../../components/Header";
 import type {
   AtividadeType,
   CalendarioType,
@@ -11,6 +10,7 @@ import AtividadesRecentesAdmin from "../../../components/Administracao/TabelasAd
 import CalendarioAdmin from "../../../components/Administracao/TabelasAdmin/CalendarioAdmin";
 import GraficoAdmin from "../../../components/Administracao/GraficoAdmin";
 import AcoesAdmin from "../../../components/Administracao/AcoesAdmin";
+import Main from "../../../components/Main";
 
 const InicioAdm = () => {
   const [dados] = useState<CardsAdminType[]>([
@@ -38,23 +38,11 @@ const InicioAdm = () => {
   ]);
 
   return (
-    <div className="flex min-h-full">
+    <div>
       <AsideAdmin />
 
-      <main className="flex-1 ml-72 flex flex-col bg-(--bg-body)">
-        <Header />
-
-        <div className="py-2 px-8 max-w-[1600px] m-0 mx-auto w-full">
-          <div className="mb-4">
-            <h1 className="text-[28px] font-bold mb-1 text-(--text-primary)">
-              Bem-Vindo
-            </h1>
-            <p className="text-[15px] text-(--text-secondary)">
-              Visão geral da Escola e Estatísticas
-            </p>
-          </div>
-
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-6 mb-6">
+      <Main titulo="Bem-Vindo" desc="Visão geral da Escola e Estatísticas"> 
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-6 mb-6">
             {dados.map((item) => (
               <CardsAdmin key={item.dado} dados={item} />
             ))}
@@ -71,8 +59,7 @@ const InicioAdm = () => {
 
             <AcoesAdmin />
           </div>
-        </div>
-      </main>
+      </Main>
     </div>
   );
 };
