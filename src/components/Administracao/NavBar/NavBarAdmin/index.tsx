@@ -13,31 +13,27 @@ import Relatorios from "../Icons/Relatorios";
 const NavBarAdmin = () => {
   const location = useLocation();
   const Principal: NavAdmin[] = [
-    { to: "/login", nome: "DashBoard", pagina: "/admin/dashboard", svg: DashBoard },
-    { to: "/login", nome: "Alunos", pagina: "/admin/alunos", svg: Alunos },
+    { nome: "DashBoard", pagina: "/admin/dashboard", svg: DashBoard },
+    { nome: "Alunos", pagina: "/admin/alunos", svg: Alunos },
     {
-      to: "/login",
       nome: "Professores",
       pagina: "/admin/professores",
       svg: Professores,
     },
-    { to: "/login", nome: "Turmas", pagina: "/admin/turmos", svg: Turmas },
+    { nome: "Turmas", pagina: "/admin/turmos", svg: Turmas },
 
-    { to: "/login", nome: "Notas", pagina: "/admin/notas", svg: Notas },
+    { nome: "Notas", pagina: "/admin/notas", svg: Notas },
     {
-      to: "/login",
       nome: "Calendário",
       pagina: "/admin/calendario",
       svg: Calendario,
     },
     {
-      to: "/login",
       nome: "Financeiro",
       pagina: "/admin/financeiro",
       svg: Financeiro,
     },
     {
-      to: "/login",
       nome: "Relatórios",
       pagina: "/admin/relatorio",
       svg: Relatorios,

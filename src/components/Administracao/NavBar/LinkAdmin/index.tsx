@@ -10,7 +10,7 @@ const LinkAdmin = ({
 }) => {
   return (
     <Link
-      to={"/login"}
+      to={item.pagina}
       className="flex items-center gap-3 px-[11px] py-3 rounded-[10px] text-[14px] font-medium relative hover:bg-(--bg-hover) hover:text-(--text-primary)"
       style={{
         color: paginaAtual ? "white" : "var(--text-secondary)",
