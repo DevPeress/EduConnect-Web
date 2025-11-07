@@ -1,5 +1,5 @@
 import Logo from "../../../public/Logo.svg";
-import NavBarAdmin from "../Administracao/NavBar/NavBarAdmin";
+import NavBarAdmin from "../Administracao/NavBar";
 import SidebarFooter from "../SideBar-Footer";
 
 const Aside = () => {
