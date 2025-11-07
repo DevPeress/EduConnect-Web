@@ -73,9 +73,9 @@ const Header = () => {
         </div>
         <div className="max-w-15">
           {dark ? (
-            <img src={Dia} alt="" onClick={() => tema.toggleTheme()} />
-          ) : (
             <img src={Noite} alt="" onClick={() => tema.toggleTheme()} />
+          ) : (
+            <img src={Dia} alt="" onClick={() => tema.toggleTheme()} />
           )}
         </div>
       </div>
