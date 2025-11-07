@@ -10,6 +10,7 @@ import AsideAdmin from "../../../components/Administracao/AsideAdmin";
 import AtividadesRecentesAdmin from "../../../components/Administracao/TabelasAdmin/AtividadesAdmin";
 import CalendarioAdmin from "../../../components/Administracao/TabelasAdmin/CalendarioAdmin";
 import GraficoAdmin from "../../../components/Administracao/GraficoAdmin";
+import AcoesAdmin from "../../../components/Administracao/AcoesAdmin";
 
 const InicioAdm = () => {
   const [dados] = useState<CardsAdminType[]>([
@@ -68,19 +69,7 @@ const InicioAdm = () => {
           <div className="grid grid-cols-[1.5fr_1fr] gap-3 mb-6">
             <GraficoAdmin />
 
-            <div
-              className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden"
-              style={{ boxShadow: "0 1px 2px rgba(0, 0, 0, 0.3)" }}
-            >
-              <div
-                className="py-5 px-6 border-b-2 border-(--border-color) flex justify-between items-center"
-                style={{ background: "rgba(0, 0, 0, 0.2)" }}
-              >
-                <h2 className="text-[16px] font-semibold text-(--text-primary)">
-                  Ações Rápidas
-                </h2>
-              </div>
-            </div>
+            <AcoesAdmin />
           </div>
         </div>
       </main>
