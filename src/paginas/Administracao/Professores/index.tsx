@@ -195,7 +195,7 @@ const ProfessoresAdmin = () => {
               {ProfessoresFiltrados.slice(mostrar - 6, mostrar).map((item) => (
                 <tr
                   key={item.ra}
-                  className="hover:bg-[#3B82F60D] text-(--text-primary)"
+                  className="hover:bg-(--bg-input) text-(--text-primary)"
                 >
                   <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
                     <span className="font-semibold text-(--primary-color) text-[13px]">
@@ -248,7 +248,7 @@ const ProfessoresAdmin = () => {
                     </span>
                   </td>
                   <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
-                    <span className="inline-block py-1.5 px-3 text-(--primary-color) rounded-md font-semibold text-[13px] bg-[#3B82F626]">
+                    <span className="inline-block py-1.5 px-3 text-(--primary-color) rounded-md font-semibold text-[13px] bg-(--aluno-card)">
                       {item.media}
                     </span>
                   </td>
