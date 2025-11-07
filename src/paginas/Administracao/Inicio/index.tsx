@@ -65,7 +65,9 @@ const InicioAdm = () => {
             <CalendarioAdmin calendario={calendario} />
           </div>
 
-          <div className="grid grid-cols[repeat(auto-fit,minmax(1.5fr,1fr))] gap-6 mb-8">
+          <div className="grid grid-cols-[1.5fr_1fr] gap-3 mb-6">
+            <GraficoAdmin />
+
             <div
               className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden"
               style={{ boxShadow: "0 1px 2px rgba(0, 0, 0, 0.3)" }}
@@ -75,15 +77,9 @@ const InicioAdm = () => {
                 style={{ background: "rgba(0, 0, 0, 0.2)" }}
               >
                 <h2 className="text-[16px] font-semibold text-(--text-primary)">
-                  Desempenho Acadêmico
+                  Ações Rápidas
                 </h2>
-                <select className="bg-(--bg-input) border-2 border-(--border-color) rounded-md py-1.5 px-3 text-(--text-primary) text-[13px] cursor-pointer outline-none">
-                  <option>Último mês</option>
-                  <option>Último trimestre</option>
-                  <option>Último ano</option>
-                </select>
               </div>
-              <GraficoAdmin />
             </div>
           </div>
         </div>
