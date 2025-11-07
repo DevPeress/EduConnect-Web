@@ -13,7 +13,7 @@ import Relatorios from "../Icons/Relatorios";
 const NavBarAdmin = () => {
   const location = useLocation();
   const Principal: NavAdmin[] = [
-    { to: "/login", nome: "DashBoard", pagina: "/admin", svg: DashBoard },
+    { to: "/login", nome: "DashBoard", pagina: "/admin/dashboard", svg: DashBoard },
     { to: "/login", nome: "Alunos", pagina: "/admin/alunos", svg: Alunos },
     {
       to: "/login",
