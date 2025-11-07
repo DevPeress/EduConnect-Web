@@ -211,8 +211,8 @@ const ProfessoresAdmin = () => {
       <Aside />
 
       <Main
-        titulo="Gerenciamento de Alunos"
-        desc="Visualize e Gerencie as informações dos estudantes"
+        titulo="Gerenciamento de Professores"
+        desc="Visualize e Gerencie as informações dos professores"
       >
         <div className="flex justify-between items-center gap-5 mb-6 flex-wrap">
           <div className="flex gap-3 flex-wrap">
