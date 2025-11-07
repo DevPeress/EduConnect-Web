@@ -6,6 +6,8 @@ const AlunosAdmin = () => {
   const [modo, setModo] = useState<boolean>(false);
   const [salas] = useState<string[]>(["Todas as Salas", "9º A", "9º B"]);
   const [selecionada, setSelecionada] = useState<string>("Todas as Salas");
+  const [status, setStatus] = useState<string>("Todos os Status");
+  const [pesquisa] = useState<string>("");
 
   const [alunos] = useState([
     {
@@ -15,14 +17,32 @@ const AlunosAdmin = () => {
       turma: "9º A",
       email: "fabricio.santos@gmail.com",
       telefone: "(11) 95599-2605",
-      status: 1,
+      status: "Ativo",
       media: 8.5,
     },
   ]);
 
   const AlunosFiltrados = useMemo(() => {
-    const 
-  }, [alunos])
+    const termo = pesquisa.toLowerCase();
+    return alunos.filter((itens) => {
+      const conteudo = `
+        ${itens.ra.toLowerCase()}
+        ${itens.nome.toLowerCase()}
+        ${itens.nasc.toLowerCase()}
+        ${itens.turma.toLowerCase()}
+        ${itens.email.toLowerCase()}
+        ${itens.telefone.toLowerCase()}
+        ${itens.status.toLowerCase()}
+        ${itens.media}
+        `;
+
+      const correspondeTurma =
+        selecionada === "Todas as Salas" || itens.turma.toLowerCase() === selecionada.toLowerCase();
+      const correspondeStatus =
+        status === "Todos os Status" || itens.status.toLowerCase() === status.toLowerCase();
+      return conteudo.includes(termo) && correspondeTurma && correspondeStatus;
+    });
+  }, [alunos, pesquisa, selecionada, status]);
 
   return (
     <>
@@ -42,15 +62,19 @@ const AlunosAdmin = () => {
 
           <div className="flex justify-between items-center gap-5 mb-6 flex-wrap">
             <div className="flex gap-3 flex-wrap">
-              <select className="bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] py-2.5 px-3.5 text-(--text-primary) text-[14px] cursor-pointer min-w-[180px] hover:border-(--border-light)">
+              <select
+                onChange={(e) => setSelecionada(e.target.value)}
+                className="bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] py-2.5 px-3.5 text-(--text-primary) text-[14px] cursor-pointer min-w-[180px] hover:border-(--border-light)"
+              >
                 {salas.map((item) => (
-                  <option key={item} onChange={() => setSelecionada(item)}>
-                    {item}
-                  </option>
+                  <option key={item}>{item}</option>
                 ))}
               </select>
-              <select className="bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] py-2.5 px-3.5 text-(--text-primary) text-[14px] cursor-pointer min-w-[180px] hover:border-(--border-light)">
-                <option>Todos os status</option>
+              <select
+                onChange={(e) => setStatus(e.target.value)}
+                className="bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] py-2.5 px-3.5 text-(--text-primary) text-[14px] cursor-pointer min-w-[180px] hover:border-(--border-light)"
+              >
+                <option>Todos os Status</option>
                 <option>Ativo</option>
                 <option>Inativo</option>
                 <option>Suspenso</option>
@@ -144,7 +168,7 @@ const AlunosAdmin = () => {
                 </tr>
               </thead>
               <tbody>
-                {alunos.map((item) => (
+                {AlunosFiltrados.map((item) => (
                   <tr
                     key={item.ra}
                     className="hover:bg-[#3B82F60D] text-(--text-primary)"
