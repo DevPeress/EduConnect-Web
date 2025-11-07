@@ -308,7 +308,7 @@ const AlunosAdmin = () => {
                     </span>
                   </td>
                   <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
-                    <span className="inline-block py-1.5 px-3 text-(--primary-color) rounded-md font-semibold text-[13px] bg-[#3B82F626]">
+                    <span className="inline-block py-1.5 px-3 text-(--primary-color) rounded-md font-semibold text-[13px] bg-(--aluno-card)">
                       {item.media}
                     </span>
                   </td>
