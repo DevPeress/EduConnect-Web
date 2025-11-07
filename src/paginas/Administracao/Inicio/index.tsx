@@ -41,24 +41,24 @@ const InicioAdm = () => {
     <>
       <Aside />
 
-      <Main titulo="Bem-Vindo" desc="Visão geral da Escola e Estatísticas"> 
+      <Main titulo="Bem-Vindo" desc="Visão geral da Escola e Estatísticas">
         <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-6 mb-6">
-            {dados.map((item) => (
-              <CardsAdmin key={item.dado} dados={item} />
-            ))}
-          </div>
+          {dados.map((item) => (
+            <CardsAdmin key={item.dado} dados={item} />
+          ))}
+        </div>
 
-          <div className="grid grid-cols-[repeat(auto-fit,minmax(450px,1fr))] gap-3 mb-6">
-            <AtividadesRecentesAdmin atividades={atividades} />
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(450px,1fr))] gap-3 mb-6">
+          <AtividadesRecentesAdmin atividades={atividades} />
 
-            <CalendarioAdmin calendario={calendario} />
-          </div>
+          <CalendarioAdmin calendario={calendario} />
+        </div>
 
-          <div className="grid grid-cols-[1.5fr_1fr] gap-3 mb-6">
-            <GraficoAdmin />
+        <div className="grid grid-cols-[1.5fr_1fr] gap-3 mb-6">
+          <GraficoAdmin />
 
-            <AcoesAdmin />
-          </div>
+          <AcoesAdmin />
+        </div>
       </Main>
     </>
   );
