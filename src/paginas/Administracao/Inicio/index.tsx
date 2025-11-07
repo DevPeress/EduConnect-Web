@@ -41,7 +41,13 @@ const InicioAdm = () => {
     <>
       <Aside />
 
-      <Main titulo="Bem-Vindo" desc="Visão geral da Escola e Estatísticas">
+      <Main
+        titulo="Bem-Vindo"
+        desc="Visão geral da Escola e Estatísticas"
+        botao={{
+          ativo: false,
+        }}
+      >
         <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-6 mb-6">
           {dados.map((item) => (
             <CardsAdmin key={item.dado} dados={item} />
