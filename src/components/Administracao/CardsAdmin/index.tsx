@@ -74,7 +74,7 @@ const CardsAdmin = ({ dados }: { dados: CardsAdminType }) => {
       </div>
 
       <div className="flex flex-col">
-        <p className="text-[13px] text-(--text-muted) mb-1.5 font-medium">
+        <p className="text-[13px] text-(--text-muted) mb-1 font-medium">
           {Card(tipo)?.mensagem}
         </p>
         <h3 className="text-[32px] font-bold mb-1 text-(--text-primary) leading-8">
