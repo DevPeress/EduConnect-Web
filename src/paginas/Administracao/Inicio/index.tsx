@@ -5,12 +5,12 @@ import type {
   CalendarioType,
   CardsAdminType,
 } from "../../../types/types";
-import AsideAdmin from "../../../components/Administracao/AsideAdmin";
 import AtividadesRecentesAdmin from "../../../components/Administracao/TabelasAdmin/AtividadesAdmin";
 import CalendarioAdmin from "../../../components/Administracao/TabelasAdmin/CalendarioAdmin";
 import GraficoAdmin from "../../../components/Administracao/GraficoAdmin";
 import AcoesAdmin from "../../../components/Administracao/AcoesAdmin";
 import Main from "../../../components/Main";
+import Aside from "../../../components/Aside";
 
 const InicioAdm = () => {
   const [dados] = useState<CardsAdminType[]>([
@@ -39,7 +39,7 @@ const InicioAdm = () => {
 
   return (
     <div className="flex min-h-full">
-      <AsideAdmin />
+      <Aside />
 
       <Main titulo="Bem-Vindo" desc="Visão geral da Escola e Estatísticas"> 
         <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-6 mb-6">

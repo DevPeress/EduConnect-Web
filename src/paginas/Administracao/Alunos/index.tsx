@@ -1,10 +1,10 @@
-import AsideAdmin from "../../../components/Administracao/AsideAdmin";
+import Aside from "../../../components/Aside";
 import Header from "../../../components/Header";
 
 const AlunosAdmin = () => {
   return (
     <div className="flex min-h-full">
-      <AsideAdmin />
+      <Aside />
 
       <main className="flex-1 ml-72 flex flex-col bg-(--bg-body)">
         <Header />

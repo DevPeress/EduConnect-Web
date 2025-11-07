@@ -1,8 +1,8 @@
-import SidebarFooter from "../../SideBar-Footer";
-import NavBarAdmin from "../NavBar/NavBarAdmin";
 import Logo from "../../../../public/Logo.svg";
+import NavBarAdmin from "../Administracao/NavBar/NavBarAdmin";
+import SidebarFooter from "../SideBar-Footer";
 
-const AsideAdmin = () => {
+const Aside = () => {
   return (
     <aside className="flex flex-col fixed h-full w-72 bg-(--bg-sidebar) border-r-2 border-(--border-color)">
       <div className="px-6 py-6 border-b-2 border-(--border-color)">
@@ -18,4 +18,4 @@ const AsideAdmin = () => {
   );
 };
 
-export default AsideAdmin;
+export default Aside;
