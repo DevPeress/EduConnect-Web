@@ -41,6 +41,8 @@ html, body, #root {
   --presenca-card: #DDD6FE;
   --professor-card: #A7F3D0;
   --turma-card: #FDE68A;
+
+  --cabecalho: #D6D6D6;
 }
 
 [data-theme="dark"] { 
@@ -72,6 +74,8 @@ html, body, #root {
   --presenca-card: #8B5CF61A;
   --professor-card: #10B9811A;
   --turma-card: #F59E0B1A;
+
+  --cabecalho: #00000033;
 }
 
 @theme {
