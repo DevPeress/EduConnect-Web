@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState } from "react";
 import Aside from "../../../components/Aside";
 import Main from "../../../components/Main";
-import SelectAlunos from "../../../components/Administracao/SelectAlunos";
 import ModoExibicao from "../../../components/Administracao/ModoExibicao";
 import type { AlunosType } from "../../../types/types";
+import SelectProfessores from "../../../components/Administracao/SelectProfessores";
 
 const ProfessoresAdmin = () => {
   const [modo, setModo] = useState<boolean>(false);
@@ -216,7 +216,7 @@ const ProfessoresAdmin = () => {
       >
         <div className="flex justify-between items-center gap-5 mb-6 flex-wrap">
           <div className="flex gap-3 flex-wrap">
-            <SelectAlunos
+            <SelectProfessores
               salas={salas}
               selecionada={setSelecionada}
               status={setStatus}
