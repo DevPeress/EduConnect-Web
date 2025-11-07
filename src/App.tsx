@@ -5,6 +5,7 @@ import Inicial from "./paginas/Inicial";
 import SemAcesso from "./paginas/SemAcesso";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import InicioAdm from "./paginas/Administracao/Inicio";
+import AlunosAdmin from "./paginas/Administracao/Alunos";
 
 function App() {
   const auth = useAuth();
@@ -24,10 +25,10 @@ function App() {
 
           {/*
           <Route element={<PrivateRoute isAuthenticated={user} userRole={cargo} allowedRoles={['Admin']} />}>
-            <Route path="/admin" element={<InicioAdm />} />
           </Route>
           */}
-          <Route path="/admin" element={<InicioAdm />} />
+          <Route path="/admin/dashboard" element={<InicioAdm />} />
+          <Route path="/admin/alunos" element={<AlunosAdmin />} />
           {/* Página de sem acesso */}
           <Route path="/not-authorized" element={ <SemAcesso Logado={user} Cargo={cargo} /> } />
           {/* Página não encontrada */}
