@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import Aside from "../../../components/Aside";
 import Main from "../../../components/Main";
+import SelectAlunos from "../../../components/Administracao/SelectAlunos";
 
 const AlunosAdmin = () => {
   const [modo, setModo] = useState<boolean>(false);
@@ -66,23 +67,7 @@ const AlunosAdmin = () => {
 
           <div className="flex justify-between items-center gap-5 mb-6 flex-wrap">
             <div className="flex gap-3 flex-wrap">
-              <select
-                onChange={(e) => setSelecionada(e.target.value)}
-                className="bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] py-2.5 px-3.5 text-(--text-primary) text-[14px] cursor-pointer min-w-[180px] hover:border-(--border-light)"
-              >
-                {salas.map((item) => (
-                  <option key={item}>{item}</option>
-                ))}
-              </select>
-              <select
-                onChange={(e) => setStatus(e.target.value)}
-                className="bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] py-2.5 px-3.5 text-(--text-primary) text-[14px] cursor-pointer min-w-[180px] hover:border-(--border-light)"
-              >
-                <option>Todos os Status</option>
-                <option>Ativo</option>
-                <option>Inativo</option>
-                <option>Suspenso</option>
-              </select>
+                <SelectAlunos salas={salas} selecionada={setSelecionada} status={setStatus} />
             </div>
 
             <div className="flex gap-2 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] p-1.5">
