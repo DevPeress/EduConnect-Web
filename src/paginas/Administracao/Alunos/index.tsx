@@ -255,7 +255,7 @@ const AlunosAdmin = () => {
               {AlunosFiltrados.slice(mostrar - 6, mostrar).map((item) => (
                 <tr
                   key={item.ra}
-                  className="hover:bg-[#3B82F60D] text-(--text-primary)"
+                  className="hover:bg-(--bg-input) text-(--text-primary)"
                 >
                   <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
                     <span className="font-semibold text-(--primary-color) text-[13px]">
