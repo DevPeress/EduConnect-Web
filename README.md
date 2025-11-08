@@ -35,6 +35,8 @@ O Edu Connect é o Front-End de um sistema escolar desenvolvido em React com Typ
 - Arquitetura modularizada: facilita a manutenção, evolução e reutilização de componentes.
 - Organização baseada em componentização e contextos globais: garante melhor separação de responsabilidades e gerenciamento de estado eficiente.
 - Página de login funcional: permite autenticação segura e redirecionamento automático conforme o nível de acesso do usuário.
+- Página inicial para administradores: exibe dados gerais como número de alunos, professores, turmas e presença; inclui gráfico analítico sobre esses dados, além de um painel com atividades recentes realizadas no sistema e um calendário informativo.
+- Páginas de professores e alunos: permitem filtrar por tipos, exibem a lista completa de alunos e professores, e possibilitam o cadastro de novos registros diretamente pela interface.
 
 ## ⚙️ Instalação
 
