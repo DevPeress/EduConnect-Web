@@ -72,4 +72,13 @@ export interface AlunosType {
   telefone: string;
   status: string
   media: number;
+};
+
+export interface CadastroAlunoContextType {
+  setMenu: (valor: boolean) => void;
+};
+
+export interface CadastroAlunoType {
+  nome: string;
+  idade: number;
 }
