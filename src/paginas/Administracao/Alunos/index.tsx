@@ -209,20 +209,20 @@ const AlunosAdmin = () => {
   }, [AlunosFiltrados]);
 
   const AdicionarAluno = async () => {
-    const dados = await Cadastro.setMenu(true);
+    const dados = await Cadastro.openMenu();
     if (!dados)
       return;
     setAlunos((prevDados) => [
       ...prevDados,
       {
-        ra: "20240012",
-        nome: "Fabrício Peres",
+        ra: dados.matricula.toString(),
+        nome: dados.nome,
         nasc: "3 de Abr, 2024",
-        turma: "9º A",
-        email: "fabricio.santos@gmail.com",
-        telefone: "(11) 95599-2605",
-        status: "Ativo",
-        media: 8.5,
+        turma: dados.turma,
+        email: dados.email,
+        telefone: dados.telefone,
+        status: dados.status,
+        media: 0,
       }
     ])
     return;
