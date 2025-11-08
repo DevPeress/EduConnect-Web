@@ -3,7 +3,7 @@ import NaoEncontrada from "./paginas/NaoEncontrada";
 import Login from "./paginas/Login";
 import Inicial from "./paginas/Inicial";
 import SemAcesso from "./paginas/SemAcesso";
-import { AuthProvider, useAuth } from "./context/AuthContext";
+import { useAuth } from "./context/AuthContext";
 import InicioAdm from "./paginas/Administracao/Inicio";
 import AlunosAdmin from "./paginas/Administracao/Alunos";
 import ProfessoresAdmin from "./paginas/Administracao/Professores";
@@ -18,26 +18,25 @@ function App() {
   }
 
   return (
-    <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={ <Inicial Logado={user} Cargo={cargo} /> } />
-          <Route path="/login" element={ <Login TrocarInfos={setAuth} /> }  />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Inicial Logado={user} Cargo={cargo} />} />
+        <Route path="/login" element={<Login TrocarInfos={setAuth} />} />
 
-          {/*
+        {/*
           <Route element={<PrivateRoute isAuthenticated={user} userRole={cargo} allowedRoles={['Admin']} />}>
           </Route>
           */}
-          <Route path="/admin/dashboard" element={<InicioAdm />} />
-          <Route path="/admin/alunos" element={<AlunosAdmin />} />
-          <Route path="/admin/professores" element={<ProfessoresAdmin />} />
-          {/* Página de sem acesso */}
-          <Route path="/not-authorized" element={ <SemAcesso Logado={user} Cargo={cargo} /> } />
-          {/* Página não encontrada */}
-          <Route path="*" element={ <NaoEncontrada Logado={user} Cargo={cargo} /> } />
-        </Routes>
-      </BrowserRouter>
-    </AuthProvider>
+        <Route path="/admin/dashboard" element={<InicioAdm />} />
+        <Route path="/admin/alunos" element={<AlunosAdmin />} />
+        <Route path="/admin/professores" element={<ProfessoresAdmin />} />
+        {/* Página de sem acesso */}
+        <Route path="/not-authorized" element={<SemAcesso Logado={user} Cargo={cargo} />} />
+        {/* Página não encontrada */}
+        <Route path="*" element={<NaoEncontrada Logado={user} Cargo={cargo} />} />
+      </Routes>
+    </BrowserRouter>
+
   )
 }
 
