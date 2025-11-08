@@ -206,7 +206,7 @@ const AlunosAdmin = () => {
     }));
   }, [AlunosFiltrados]);
 
-  const AdicionarProfessor = () => {
+  const AdicionarAluno = () => {
     return;
   };
 
@@ -220,7 +220,7 @@ const AlunosAdmin = () => {
         botao={{
           ativo: true,
           mensagem: "Novo Aluno",
-          adicionar: AdicionarProfessor,
+          adicionar: AdicionarAluno,
         }}
       >
         <div className="flex justify-between items-center gap-5 mb-6 flex-wrap">
