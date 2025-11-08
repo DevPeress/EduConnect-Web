@@ -4,8 +4,10 @@ import Main from "../../../components/Main";
 import SelectAlunos from "../../../components/Administracao/SelectAlunos";
 import ModoExibicao from "../../../components/Administracao/ModoExibicao";
 import type { AlunosType } from "../../../types/types";
+import { useCadastroAluno } from "../../../context/CadastroAlunoContext";
 
 const AlunosAdmin = () => {
+  const Cadastro = useCadastroAluno();
   const [modo, setModo] = useState<boolean>(false);
   const [salas] = useState<string[]>(["Todas as Salas", "9º A", "9º B"]);
   const [selecionada, setSelecionada] = useState<string>("Todas as Salas");
@@ -47,7 +49,7 @@ const AlunosAdmin = () => {
     "Ação",
   ];
 
-  const [alunos] = useState<AlunosType[]>([
+  const [alunos, setAlunos] = useState<AlunosType[]>([
     {
       ra: "2024001",
       nome: "Fabrício Peres",
@@ -206,7 +208,23 @@ const AlunosAdmin = () => {
     }));
   }, [AlunosFiltrados]);
 
-  const AdicionarAluno = () => {
+  const AdicionarAluno = async () => {
+    const dados = await Cadastro.setMenu(true);
+    if (!dados)
+      return;
+    setAlunos((prevDados) => [
+      ...prevDados,
+      {
+        ra: "20240012",
+        nome: "Fabrício Peres",
+        nasc: "3 de Abr, 2024",
+        turma: "9º A",
+        email: "fabricio.santos@gmail.com",
+        telefone: "(11) 95599-2605",
+        status: "Ativo",
+        media: 8.5,
+      }
+    ])
     return;
   };
 
@@ -294,14 +312,14 @@ const AlunosAdmin = () => {
                           item.status === "Ativo"
                             ? "rgba(16, 185, 129, 0.15)"
                             : item.status === "Inativo"
-                            ? "rgba(156, 163, 175, 0.15)"
-                            : "rgba(239, 68, 68, 0.15)",
+                              ? "rgba(156, 163, 175, 0.15)"
+                              : "rgba(239, 68, 68, 0.15)",
                         color:
                           item.status === "Ativo"
                             ? "var(--green)"
                             : item.status === "Inativo"
-                            ? "var(--text-secondary)"
-                            : "var(--red)",
+                              ? "var(--text-secondary)"
+                              : "var(--red)",
                       }}
                     >
                       {item.status}
