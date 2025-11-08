@@ -7,7 +7,7 @@ export function CadastroAlunoProvider() {
   const [dados, setDados] = useState<CadastroAlunoType>({
     nome: "", idade: 0
   })
-  const [resolveCallback, setResolveCallback] = useState<((data: CadastroAlunoType  | null) => void) | null>(null);
+  const [resolveCallback, setResolveCallback] = useState<((data: CadastroAlunoType | null) => void) | null>(null);
 
   const Confirm = () => {
     if (resolveCallback) resolveCallback({ nome: dados.nome, idade: dados.idade });
@@ -15,13 +15,13 @@ export function CadastroAlunoProvider() {
 
   return (
     <CadastroAlunoContext.Provider value={{ setMenu }}>
-      {menu ? 
-        <> 
+      {menu && (
+        <>
           <div onChange={() => setResolveCallback(null)}></div>
           <div onChange={() => setDados({ nome: "", idade: 0 })}></div>
           <button onClick={Confirm}></button>
         </>
-        : null
+      )
       }
     </CadastroAlunoContext.Provider>
   );

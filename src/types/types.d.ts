@@ -75,7 +75,7 @@ export interface AlunosType {
 };
 
 export interface CadastroAlunoContextType {
-  setMenu: (boolean) => CadastroAlunoType;
+  setMenu: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export interface CadastroAlunoType {
