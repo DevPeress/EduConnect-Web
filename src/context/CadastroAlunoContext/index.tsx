@@ -5,20 +5,39 @@ const CadastroAlunoContext = createContext<CadastroAlunoContextType | undefined>
 export function CadastroAlunoProvider() {
   const [menu, setMenu] = useState<boolean>(false);
   const [dados, setDados] = useState<CadastroAlunoType>({
-    nome: "", idade: 0
+    matricula: 0, status: "", nome: "", turma: "", email: "", telefone: "", endereco: ""
   })
   const [resolveCallback, setResolveCallback] = useState<((data: CadastroAlunoType | null) => void) | null>(null);
 
+  const openMenu = (): Promise<CadastroAlunoType | null> => {
+    setMenu(true);
+    return new Promise((resolve) => {
+      setResolveCallback(() => resolve);
+    });
+  };
+
   const Confirm = () => {
-    if (resolveCallback) resolveCallback({ nome: dados.nome, idade: dados.idade });
-  }
+    if (resolveCallback) {
+      resolveCallback(dados);
+      setResolveCallback(null);
+    }
+    setMenu(false);
+  };
+
+  const Cancel = () => {
+    if (resolveCallback) {
+      resolveCallback(null);
+      setResolveCallback(null);
+    }
+    setMenu(false);
+  };
 
   return (
-    <CadastroAlunoContext.Provider value={{ setMenu }}>
+    <CadastroAlunoContext.Provider value={{ openMenu, setDados }}>
       {menu && (
         <>
-          <div onChange={() => setResolveCallback(null)}></div>
-          <div onChange={() => setDados({ nome: "", idade: 0 })}></div>
+          <div onChange={() => setResolveCallback(null)} onClick={Cancel}></div>
+          <div onChange={() => setDados({ matricula: 0, status: "", nome: "", turma: "", email: "", telefone: "", endereco: "" })}></div>
           <button onClick={Confirm}></button>
         </>
       )
