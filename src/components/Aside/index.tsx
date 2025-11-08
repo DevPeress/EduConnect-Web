@@ -1,4 +1,4 @@
-import Logo from "../../../public/Logo.svg";
+import Logo from "/Logo.svg";
 import NavBarAdmin from "../Administracao/NavBar";
 import SidebarFooter from "../SideBar-Footer";
 
