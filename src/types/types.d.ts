@@ -10,8 +10,8 @@ export interface LoginType {
 
 export interface PrivateRouteProps {
   isAuthenticated: boolean;
-  userRole: string; 
-  allowedRoles: string[]; 
+  userRole: string;
+  allowedRoles: string[];
   redirectTo?: string;
 };
 
@@ -74,11 +74,17 @@ export interface AlunosType {
   media: number;
 };
 
-export interface CadastroAlunoContextType {
-  setMenu: React.Dispatch<React.SetStateAction<boolean>>;
+export type CadastroAlunoContextType = {
+  openMenu: () => Promise<CadastroAlunoType | null>;
+  setDados: React.Dispatch<React.SetStateAction<CadastroAlunoType>>;
 };
 
 export interface CadastroAlunoType {
+  matricula: number;
+  status: string;
   nome: string;
-  idade: number;
+  turma: string;
+  email: string;
+  telefone: string;
+  endereco: string;
 }
