@@ -75,7 +75,7 @@ export interface AlunosType {
 };
 
 export interface CadastroAlunoContextType {
-  setMenu: (valor: boolean) => void;
+  setMenu: (valor: boolean) => CadastroAlunoType;
 };
 
 export interface CadastroAlunoType {
