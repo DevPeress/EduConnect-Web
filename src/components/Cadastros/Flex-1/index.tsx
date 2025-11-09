@@ -13,11 +13,24 @@ const CadastroFlex1 = ({ titulo, infos, setInfos, place }: { titulo: string, inf
 
     const tipo: string = Tipo(titulo);
 
+    const TipoDiv = () => {
+        switch (tipo) {
+            case "nome":
+                return (
+                    <input value={infos[tipo]} onChange={(e) => setInfos((prevDados: any) => ({ ...prevDados, [tipo]: e.target.value }))} type="text" className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" id="nome" name="nome" placeholder={place} required />
+                )
+            case "endereco":
+                return (
+                    <input value={infos[tipo]} onChange={(e) => setInfos((prevDados: any) => ({ ...prevDados, [tipo]: e.target.value }))} type="texarea" className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" id="endereco" name="endereco" placeholder={place} required />
+                )
+        }
+    }
+
     return (
         <div className="grid grid-cols-1 gap-5 mb-5">
             <div className="flex flex-col gap-2">
-                <label className="text-[14px] font-semibold text-(--text-primary)" htmlFor="m">{titulo} <span className="text-(--red) ml-0.5">*</span></label>
-                <input value={infos[tipo]} onChange={(e) => setInfos((prevDados: any) => ({ ...prevDados, [tipo]: e.target.value }))} className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" type="text" id="nome" name="nome" placeholder={place} required />
+                <label className="text-[14px] font-semibold text-(--text-primary)" htmlFor={tipo}>{titulo} <span className="text-(--red) ml-0.5">*</span></label>
+                {TipoDiv()}
             </div>
         </div>
     )
