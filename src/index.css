@@ -80,6 +80,10 @@ html, body, #root {
   --atividades-recentes: #3B82F626;
 }
 
+textarea {
+  resize: none;
+}
+
 @theme {
   --animate-float: float 3s ease-in-out infinite;
 
@@ -198,4 +202,17 @@ html, body, #root {
       transform: translateX(8px);
     }
   }
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
 }
