@@ -74,17 +74,7 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
 
               <div className="mb-7">
                 <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">Contato</h3>
-                <div className="grid grid-cols-2 gap-5 mb-5">
-                  <div className="flex flex-col gap-2">
-                    <label className="text-[14px] font-semibold text-(--text-primary)" htmlFor="email">E-mail <span className="text-(--red) ml-0.5">*</span></label>
-                    <input value={dados.email} onChange={(e) => setDados((prevDados) => ({ ...prevDados, email: e.target.value }))} className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" type="email" id="email" name="email" required />
-                  </div>
-
-                  <div className="flex flex-col gap-2">
-                    <label className="text-[14px] font-semibold text-(--text-primary)" htmlFor="telefone">Telefone <span className="text-(--red) ml-0.5">*</span></label>
-                    <input value={dados.telefone} onChange={(e) => setDados((prevDados) => ({ ...prevDados, telefone: e.target.value }))} className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" type="telefone" id="telefone" name="telefone" required />
-                  </div>
-                </div>
+                <CadastroFlex2 opcao1="E-mail" opcao2="Telefone" infos={dados} setInfos={setDados} />
 
                 <CadastroFlex1 titulo="Endereço" infos={dados} setInfos={setDados} place="Rua, número, bairro, cidade - Estado" />
               </div>
