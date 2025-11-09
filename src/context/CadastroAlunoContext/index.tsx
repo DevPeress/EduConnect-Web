@@ -67,7 +67,7 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
                 </svg>
                 Cadastrar Novo Aluno
               </h2>
-              <button className="bg-transparent border-none text-(--text-secondary) cursor-pointer p-2 rounded-[10px] flex items-center justify-center hover:bg-(--alert-color) hover:text-(--red)" type="button">
+              <button onClick={Cancel} className="bg-transparent border-none text-(--text-secondary) cursor-pointer p-2 rounded-[10px] flex items-center justify-center hover:bg-(--alert-color) hover:text-(--red)" type="button">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="18" y1="6" x2="6" y2="18"></line>
                   <line x1="6" y1="6" x2="18" y2="18"></line>
@@ -146,9 +146,17 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
                 </div>
               </div>
             </form>
+            <div className="py-5 px-7 border-t border-(--border-color) flex justify-end gap-3 bg-[#0000001A]">
+              <button onClick={Cancel} type="button" className="py-3 px-6 rounded-[10px] text-[14px] font-semibold cursor-pointer border-none flex items-center gap-2 bg-transparent text-(--text-secondary) border border-(--border-color) hover:bg-(--alert-color) hover:text-(--text-secondary)">Cancelar</button>
+              <button onClick={Confirm} type="submit" className="py-3 px-6 rounded-[10px] text-[14px] font-semibold cursor-pointer border-none flex items-center gap-2 bg-(--primary-color) text-white border border-(--primary-color) hover:bg-(--primary-hover) -translate-y-0.5">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                Salvar Aluno
+              </button>
+            </div>
           </div>
         </div>
-
       )
       }
     </CadastroAlunoContext.Provider>
