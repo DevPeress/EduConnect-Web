@@ -22,8 +22,8 @@ const CadastroFlex2 = ({ opcao1, opcao2, infos, setInfos }: { opcao1: string, op
     const tipo1: string = Tipo(opcao1);
     const tipo2: string = Tipo(opcao2);
 
-    const TipoDiv = () => {
-        switch (tipo2) {
+    const TipoDiv = (Escolhas: string) => {
+        switch (Escolhas) {
             case "nasc":
                 return (
                     <input value={infos[tipo2]} onChange={(e) => setInfos((prevDados: any) => ({ ...prevDados, [tipo2]: e.target.value }))} type="date" className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" id="nasc" name="nasc" required />
@@ -34,7 +34,7 @@ const CadastroFlex2 = ({ opcao1, opcao2, infos, setInfos }: { opcao1: string, op
                 )
             case "telefone":
                 return (
-                    <input value={infos[tipo2]} onChange={(e) => setInfos((prevDados: any) => ({ ...prevDados, [tipo2]: e.target.value }))} type="string" className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" id="telefone" name="telefone" required />
+                    <input value={infos[tipo2]} onChange={(e) => setInfos((prevDados: any) => ({ ...prevDados, [tipo2]: e.target.value }))} type="text" className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" id="telefone" name="telefone" required />
                 )
             case "status":
                 return (
@@ -58,13 +58,13 @@ const CadastroFlex2 = ({ opcao1, opcao2, infos, setInfos }: { opcao1: string, op
     return (
         <div className="grid grid-cols-2 gap-5 mb-5">
             <div className="flex flex-col gap-2">
-                <label className="text-[14px] font-semibold text-(--text-primary)" htmlFor={tipo2}>{opcao1} <span className="text-(--red) ml-0.5">*</span></label>
-                <input value={infos[tipo1]} onChange={(e) => setInfos((prevDados: any) => ({ ...prevDados, [tipo1]: e.target.value }))} className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" type="text" id="matricula" name="matricula" required />
+                <label className="text-[14px] font-semibold text-(--text-primary)" htmlFor={tipo1}>{opcao1} <span className="text-(--red) ml-0.5">*</span></label>
+                {TipoDiv(tipo1)}
             </div>
 
             <div className="flex flex-col gap-2">
-                <label className="text-[14px] font-semibold text-(--text-primary)" htmlFor="status">{opcao2} <span className="text-(--red) ml-0.5">*</span></label>
-                {TipoDiv()}
+                <label className="text-[14px] font-semibold text-(--text-primary)" htmlFor={tipo2}>{opcao2} <span className="text-(--red) ml-0.5">*</span></label>
+                {TipoDiv(tipo2)}
             </div>
         </div>
     )
