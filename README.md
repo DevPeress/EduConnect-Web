@@ -1,54 +1,73 @@
-# Edu Connect (Front-End)
+# 🏫 Edu Connect — Front-End
 
 ![React](https://img.shields.io/badge/React-%2320232a.svg?logo=react&logoColor=%2361DAFB)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=fff)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?logo=tailwind-css&logoColor=fff)
+![Vite](https://img.shields.io/badge/Vite-B73BFE?logo=vite&logoColor=FFD62E)
 
 ## Descrição
 
-O Edu Connect é o Front-End de um sistema escolar desenvolvido em React com TypeScript, voltado para a gestão e navegação intuitiva dentro de um ambiente educacional.
+O **Edu Connect** é o front-end de um sistema escolar moderno desenvolvido com **React e TypeScript**, projetado para oferecer uma **gestão educacional prática, intuitiva e visualmente atraente**.
 
 ## 🧰 Tecnologias Utilizadas
 
-
-### ⚛️ Front-End e Linguagens:
+### ⚛️ Framework e Linguagem
 - [React](https://react.dev/)
 - [TypeScript](https://www.typescriptlang.org/)
 
 ### 🎨 Estilização e Build
-- [TailWind Css](https://tailwindcss.com/)
+- [Tailwind CSS](https://tailwindcss.com/)
 - [Vite](https://vitejs.dev/)
+
+### 💬 Notificações e Feedbacks
+- [React Hot Toast](https://react-hot-toast.com/)
 
 ### 🔗 Comunicação com API
 - [Axios](https://axios-http.com/)
 
-### 🧹 Qualidade de Código:
+### 🚦 Gerenciamento de Rotas
+- [React Router DOM](https://reactrouter.com/)
+
+### 🧹 Qualidade de Código
 - [ESLint](https://eslint.org/)
 - [TypeScript ESLint](https://typescript-eslint.io/)
 
-### 🚦 Gerenciamento de Rotas
-- [React Router Dom](https://reactrouter.com/)
-
 ## ✨ Funcionalidades
 
-- Página 404 personalizada: informa o usuário sobre rotas inexistentes e oferece redirecionamento intuitivo.
-- Página 403 personalizada: informa o usuário sobre rotas não permitida para ele e oferece redirecionamento intuitivo.
-- Arquitetura modularizada: facilita a manutenção, evolução e reutilização de componentes.
-- Organização baseada em componentização e contextos globais: garante melhor separação de responsabilidades e gerenciamento de estado eficiente.
-- Página de login funcional: permite autenticação segura e redirecionamento automático conforme o nível de acesso do usuário.
-- Página inicial para administradores: exibe dados gerais como número de alunos, professores, turmas e presença; inclui gráfico analítico sobre esses dados, além de um painel com atividades recentes realizadas no sistema e um calendário informativo.
-- Páginas de professores e alunos: permitem filtrar por tipos, exibem a lista completa de alunos e professores, e possibilitam o cadastro de novos registros diretamente pela interface.
+
+- **Páginas personalizadas**
+  - Página 404: informa sobre rotas inexistentes com redirecionamento intuitivo.
+  - Página 403: informa sobre rotas sem permissão de acesso.
+
+- **Autenticação**
+  - Página de login funcional com redirecionamento automático conforme o nível de acesso.
+
+- **Dashboard Administrativo**
+  - Exibição de dados gerais (alunos, professores, turmas e presença).
+  - Gráfico analítico dinâmico.
+  - Painel de atividades recentes.
+  - Calendário informativo integrado.
+
+- **Gestão de Usuários**
+  - Páginas específicas para **alunos** e **professores**.
+  - Filtro por tipo.
+  - Cadastro direto via interface.
+
+- **Arquitetura Modular**
+  - Baseada em componentização e contextos globais.
+  - Facilita manutenção, evolução e reutilização de componentes.
 
 ## ⚙️ Instalação
 
 ```bash
 # Clone o repositório
 git clone https://github.com/DevPeress/EduConnect-Web
-cd EduConnect-WEb
+cd EduConnect-Web
 
 # Instale as dependências
 npm install
 
-# Inicie o servidor de desenvolvimento
+# Execute o ambiente de desenvolvimento
 npm run dev
 ```
 
