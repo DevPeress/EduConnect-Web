@@ -436,6 +436,28 @@ const AlunosAdmin = () => {
                   <input className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" type="text" id="nome" name="nome" placeholder="Digite o nome completo do aluno" readOnly required />
                 </div>
               </div>
+
+              <div className="grid grid-cols-2 gap-5 mb-5">
+                <div className="flex flex-col gap-2">
+                  <label className="text-[14px] font-semibold text-(--text-primary)" htmlFor="dataNascimento">Matrícula <span className="text-(--red) ml-0.5">*</span></label>
+                  <input className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" type="date" id="dataNascimento" name="dataNascimento" required readOnly />
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  <label className="text-[14px] font-semibold text-(--text-primary)" htmlFor="turma">Turma <span className="text-(--red) ml-0.5">*</span></label>
+                  <select className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px]  focus:outline-none focus:border-(--primary-color)" id="turma" name="turma" required>
+                    <option value="">Selecione a turma</option>
+                    <option value="9º A">9º A</option>
+                    <option value="9º B">9º B</option>
+                    <option value="8º A">8º A</option>
+                    <option value="8º B">8º B</option>
+                    <option value="7º A">7º A</option>
+                    <option value="7º B">7º B</option>
+                    <option value="6º A">6º A</option>
+                    <option value="6º B">6º B</option>
+                  </select>
+                </div>
+              </div>
             </div>
           </form>
         </div>
