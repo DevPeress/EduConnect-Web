@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import type { CadastroAlunoContextType, CadastroAlunoType } from "../../types/types";
+//import { http } from "../../utils/axios";
 
 const CadastroAlunoContext = createContext<CadastroAlunoContextType | undefined>(undefined);
 export function CadastroAlunoProvider() {
@@ -16,8 +17,26 @@ export function CadastroAlunoProvider() {
     });
   };
 
-  const Confirm = () => {
+  const Confirm = async () => {
     if (resolveCallback) {
+      //await http
+      //.post<CadastroAlunoType>("aluno/cadastro", {
+      //matricula: dados.matricula,
+      //status: dados.status,
+      //nome: dados.nome,
+      //turma: dados.turma,
+      //email: dados.email,
+      //telefone: dados.telefone,
+      //endereco: dados.endereco
+      //})
+      //.then(function () {
+      //  resolveCallback(dados);
+      //  setResolveCallback(null);
+      //})
+      //.then(function (error) {
+      //  console.log(error);
+      //});
+
       resolveCallback(dados);
       setResolveCallback(null);
     }

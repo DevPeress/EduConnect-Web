@@ -212,7 +212,7 @@ const AlunosAdmin = () => {
     const dados = await Cadastro.openMenu();
     if (!dados)
       return;
-    setAlunos((prevDados) => [
+    return setAlunos((prevDados) => [
       ...prevDados,
       {
         ra: dados.matricula.toString(),
@@ -225,7 +225,6 @@ const AlunosAdmin = () => {
         media: 0,
       }
     ])
-    return;
   };
 
   return (
