@@ -2,6 +2,7 @@ import { createContext, useContext, useState, type ReactNode } from "react";
 import type { CadastroAlunoContextType, CadastroAlunoType } from "../../types/types";
 import CadastroTitulo from "../../components/Cadastros/Titulo";
 import CadastroFlex2 from "../../components/Cadastros/Flex-2";
+import CadastroFlex1 from "../../components/Cadastros/Flex-1";
 //import { http } from "../../utils/axios";
 
 const CadastroAlunoContext = createContext<CadastroAlunoContextType | undefined>(undefined);
@@ -66,12 +67,7 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
                 <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">Informações Pessoais</h3>
                 <CadastroFlex2 opcao1="Matrícula" opcao2="Status" infos={dados} setInfos={setDados} />
 
-                <div className="grid grid-cols-1 gap-5 mb-5">
-                  <div className="flex flex-col gap-2">
-                    <label className="text-[14px] font-semibold text-(--text-primary)" htmlFor="m">Nome Completo <span className="text-(--red) ml-0.5">*</span></label>
-                    <input value={dados.nome} onChange={(e) => setDados((prevDados) => ({ ...prevDados, nome: e.target.value }))} className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" type="text" id="nome" name="nome" placeholder="Digite o nome completo do aluno" required />
-                  </div>
-                </div>
+                <CadastroFlex1 titulo="Nome completo" infos={dados} setInfos={setDados} place="Digite o nome completo do aluno" />
 
                 <CadastroFlex2 opcao1="Data de Nascimento" opcao2="Turma" infos={dados} setInfos={setDados} />
               </div>
@@ -90,12 +86,7 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 gap-5 mb-5">
-                  <div className="flex flex-col gap-2">
-                    <label className="text-[14px] font-semibold text-(--text-primary)" htmlFor="Endereço">Endereço <span className="text-(--red) ml-0.5">*</span></label>
-                    <textarea value={dados.endereco} onChange={(e) => setDados((prevDados) => ({ ...prevDados, endereco: e.target.value }))} className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" id="Endereço" name="Endereço" placeholder="Rua, número, bairro, cidade - Estado"></textarea>
-                  </div>
-                </div>
+                <CadastroFlex1 titulo="Endereço" infos={dados} setInfos={setDados} place="Rua, número, bairro, cidade - Estado" />
               </div>
             </form>
             <div className="py-5 px-7 border-t border-(--border-color) flex justify-end gap-3 bg-[#0000001A]">
