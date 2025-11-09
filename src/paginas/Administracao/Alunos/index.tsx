@@ -422,7 +422,7 @@ const AlunosAdmin = () => {
 
                 <div className="flex flex-col gap-2">
                   <label className="text-[14px] font-semibold text-(--text-primary)" htmlFor="status">Status <span className="text-(--red) ml-0.5">*</span></label>
-                  <select className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px]  focus:outline-none focus:border-(--primary-color)" id="status" name="status" required>
+                  <select className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" id="status" name="status" required>
                     <option value="Ativo">Ativo</option>
                     <option value="Inativo">Inativo</option>
                     <option value="Suspenso">Suspenso</option>
@@ -445,7 +445,7 @@ const AlunosAdmin = () => {
 
                 <div className="flex flex-col gap-2">
                   <label className="text-[14px] font-semibold text-(--text-primary)" htmlFor="turma">Turma <span className="text-(--red) ml-0.5">*</span></label>
-                  <select className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px]  focus:outline-none focus:border-(--primary-color)" id="turma" name="turma" required>
+                  <select className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" id="turma" name="turma" required>
                     <option value="">Selecione a turma</option>
                     <option value="9º A">9º A</option>
                     <option value="9º B">9º B</option>
@@ -456,6 +456,28 @@ const AlunosAdmin = () => {
                     <option value="6º A">6º A</option>
                     <option value="6º B">6º B</option>
                   </select>
+                </div>
+              </div>
+            </div>
+
+            <div className="mb-7">
+              <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">Contato</h3>
+              <div className="grid grid-cols-2 gap-5 mb-5">
+                <div className="flex flex-col gap-2">
+                  <label className="text-[14px] font-semibold text-(--text-primary)" htmlFor="email">E-mail <span className="text-(--red) ml-0.5">*</span></label>
+                  <input className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" type="email" id="matricemailula" name="email" readOnly required />
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  <label className="text-[14px] font-semibold text-(--text-primary)" htmlFor="Endereço">Status <span className="text-(--red) ml-0.5">*</span></label>
+                  <textarea className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" id="Endereço" name="Endereço" placeholder="Rua, número, bairro, cidade - Estado"></textarea>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 gap-5 mb-5">
+                <div className="flex flex-col gap-2">
+                  <label className="text-[14px] font-semibold text-(--text-primary)" htmlFor="m">Nome Completo <span className="text-(--red) ml-0.5">*</span></label>
+                  <input className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" type="text" id="nome" name="nome" placeholder="Digite o nome completo do aluno" readOnly required />
                 </div>
               </div>
             </div>

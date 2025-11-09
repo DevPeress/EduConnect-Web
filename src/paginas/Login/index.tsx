@@ -76,7 +76,7 @@ const Login = ({ TrocarInfos }: LoginProps) => {
               Senha
             </label>
             <input
-              className="w-full px-3 py-4 border-2 border-(--border-color) rounded-lg text-[15px] text-(--text-primary) bg-(--bg-input)  focus:outline-none focus:border-(--primary-color)"
+              className="w-full px-3 py-4 border-2 border-(--border-color) rounded-lg text-[15px] text-(--text-primary) bg-(--bg-input) focus:outline-none focus:border-(--primary-color)"
               value={dados.senha}
               onChange={(e) => AlterarDados(e.target.value, "senha")}
               type="password"
