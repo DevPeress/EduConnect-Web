@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
 import type { CadastroAlunoContextType, CadastroAlunoType } from "../../types/types";
 import CadastroTitulo from "../../components/Cadastros/Titulo";
+import CadastroFlex2 from "../../components/Cadastros/Flex-2";
 //import { http } from "../../utils/axios";
 
 const CadastroAlunoContext = createContext<CadastroAlunoContextType | undefined>(undefined);
@@ -63,21 +64,7 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
             <form className="p-7 overflow-y-auto flex-1">
               <div className="mb-7">
                 <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">Informações Pessoais</h3>
-                <div className="grid grid-cols-2 gap-5 mb-5">
-                  <div className="flex flex-col gap-2">
-                    <label className="text-[14px] font-semibold text-(--text-primary)" htmlFor="matricula">Matrícula <span className="text-(--red) ml-0.5">*</span></label>
-                    <input className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" type="text" id="matricula" name="matricula" required />
-                  </div>
-
-                  <div className="flex flex-col gap-2">
-                    <label className="text-[14px] font-semibold text-(--text-primary)" htmlFor="status">Status <span className="text-(--red) ml-0.5">*</span></label>
-                    <select value={dados.status} onChange={(e) => setDados((prevDados) => ({ ...prevDados, status: e.target.value }))} className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" id="status" name="status" required>
-                      <option value="Ativo">Ativo</option>
-                      <option value="Inativo">Inativo</option>
-                      <option value="Suspenso">Suspenso</option>
-                    </select>
-                  </div>
-                </div>
+                <CadastroFlex2 opcao1="Matrícula" opcao2="Status" infos={dados} setInfos={setDados} />
 
                 <div className="grid grid-cols-1 gap-5 mb-5">
                   <div className="flex flex-col gap-2">
@@ -86,27 +73,7 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
                   </div>
                 </div>
 
-                <div className="grid grid-cols-2 gap-5 mb-5">
-                  <div className="flex flex-col gap-2">
-                    <label className="text-[14px] font-semibold text-(--text-primary)" htmlFor="dataNascimento">Data de Nascimento <span className="text-(--red) ml-0.5">*</span></label>
-                    <input className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" type="date" id="dataNascimento" name="dataNascimento" required />
-                  </div>
-
-                  <div className="flex flex-col gap-2">
-                    <label className="text-[14px] font-semibold text-(--text-primary)" htmlFor="turma">Turma <span className="text-(--red) ml-0.5">*</span></label>
-                    <select value={dados.turma} onChange={(e) => setDados((prevDados) => ({ ...prevDados, turma: e.target.value }))} className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" id="turma" name="turma" required>
-                      <option value="">Selecione a turma</option>
-                      <option value="9º A">9º A</option>
-                      <option value="9º B">9º B</option>
-                      <option value="8º A">8º A</option>
-                      <option value="8º B">8º B</option>
-                      <option value="7º A">7º A</option>
-                      <option value="7º B">7º B</option>
-                      <option value="6º A">6º A</option>
-                      <option value="6º B">6º B</option>
-                    </select>
-                  </div>
-                </div>
+                <CadastroFlex2 opcao1="Data de Nascimento" opcao2="Turma" infos={dados} setInfos={setDados} />
               </div>
 
               <div className="mb-7">
