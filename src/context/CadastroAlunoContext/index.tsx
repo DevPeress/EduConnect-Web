@@ -1,9 +1,9 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, type ReactNode } from "react";
 import type { CadastroAlunoContextType, CadastroAlunoType } from "../../types/types";
 //import { http } from "../../utils/axios";
 
 const CadastroAlunoContext = createContext<CadastroAlunoContextType | undefined>(undefined);
-export function CadastroAlunoProvider() {
+export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
   const [menu, setMenu] = useState<boolean>(false);
   const [dados, setDados] = useState<CadastroAlunoType>({
     matricula: 0, status: "", nome: "", turma: "", email: "", telefone: "", endereco: ""
@@ -53,6 +53,7 @@ export function CadastroAlunoProvider() {
 
   return (
     <CadastroAlunoContext.Provider value={{ openMenu, setDados }}>
+      {children}
       {menu && (
         <>
           <div onChange={() => setResolveCallback(null)} onClick={Cancel}></div>
