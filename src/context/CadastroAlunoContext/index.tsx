@@ -81,12 +81,12 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
                 <div className="grid grid-cols-2 gap-5 mb-5">
                   <div className="flex flex-col gap-2">
                     <label className="text-[14px] font-semibold text-(--text-primary)" htmlFor="matricula">Matrícula <span className="text-(--red) ml-0.5">*</span></label>
-                    <input className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" type="text" id="matricula" name="matricula" readOnly required />
+                    <input className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" type="text" id="matricula" name="matricula" required />
                   </div>
 
                   <div className="flex flex-col gap-2">
                     <label className="text-[14px] font-semibold text-(--text-primary)" htmlFor="status">Status <span className="text-(--red) ml-0.5">*</span></label>
-                    <select className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" id="status" name="status" required>
+                    <select value={dados.status} onChange={(e) => setDados((prevDados) => ({ ...prevDados, status: e.target.value }))} className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" id="status" name="status" required>
                       <option value="Ativo">Ativo</option>
                       <option value="Inativo">Inativo</option>
                       <option value="Suspenso">Suspenso</option>
@@ -97,19 +97,19 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
                 <div className="grid grid-cols-1 gap-5 mb-5">
                   <div className="flex flex-col gap-2">
                     <label className="text-[14px] font-semibold text-(--text-primary)" htmlFor="m">Nome Completo <span className="text-(--red) ml-0.5">*</span></label>
-                    <input className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" type="text" id="nome" name="nome" placeholder="Digite o nome completo do aluno" readOnly required />
+                    <input value={dados.nome} onChange={(e) => setDados((prevDados) => ({ ...prevDados, nome: e.target.value }))} className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" type="text" id="nome" name="nome" placeholder="Digite o nome completo do aluno" required />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-5 mb-5">
                   <div className="flex flex-col gap-2">
-                    <label className="text-[14px] font-semibold text-(--text-primary)" htmlFor="dataNascimento">Matrícula <span className="text-(--red) ml-0.5">*</span></label>
-                    <input className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" type="date" id="dataNascimento" name="dataNascimento" required readOnly />
+                    <label className="text-[14px] font-semibold text-(--text-primary)" htmlFor="dataNascimento">Data de Nascimento <span className="text-(--red) ml-0.5">*</span></label>
+                    <input className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" type="date" id="dataNascimento" name="dataNascimento" required />
                   </div>
 
                   <div className="flex flex-col gap-2">
                     <label className="text-[14px] font-semibold text-(--text-primary)" htmlFor="turma">Turma <span className="text-(--red) ml-0.5">*</span></label>
-                    <select className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" id="turma" name="turma" required>
+                    <select value={dados.turma} onChange={(e) => setDados((prevDados) => ({ ...prevDados, turma: e.target.value }))} className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" id="turma" name="turma" required>
                       <option value="">Selecione a turma</option>
                       <option value="9º A">9º A</option>
                       <option value="9º B">9º B</option>
@@ -129,19 +129,19 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
                 <div className="grid grid-cols-2 gap-5 mb-5">
                   <div className="flex flex-col gap-2">
                     <label className="text-[14px] font-semibold text-(--text-primary)" htmlFor="email">E-mail <span className="text-(--red) ml-0.5">*</span></label>
-                    <input className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" type="email" id="email" name="email" readOnly required />
+                    <input value={dados.email} onChange={(e) => setDados((prevDados) => ({ ...prevDados, email: e.target.value }))} className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" type="email" id="email" name="email" required />
                   </div>
 
                   <div className="flex flex-col gap-2">
                     <label className="text-[14px] font-semibold text-(--text-primary)" htmlFor="telefone">Telefone <span className="text-(--red) ml-0.5">*</span></label>
-                    <input className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" type="telefone" id="telefone" name="telefone" readOnly required />
+                    <input value={dados.telefone} onChange={(e) => setDados((prevDados) => ({ ...prevDados, telefone: e.target.value }))} className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" type="telefone" id="telefone" name="telefone" required />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 gap-5 mb-5">
                   <div className="flex flex-col gap-2">
                     <label className="text-[14px] font-semibold text-(--text-primary)" htmlFor="Endereço">Endereço <span className="text-(--red) ml-0.5">*</span></label>
-                    <textarea className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" id="Endereço" name="Endereço" placeholder="Rua, número, bairro, cidade - Estado"></textarea>
+                    <textarea value={dados.endereco} onChange={(e) => setDados((prevDados) => ({ ...prevDados, endereco: e.target.value }))} className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" id="Endereço" name="Endereço" placeholder="Rua, número, bairro, cidade - Estado"></textarea>
                   </div>
                 </div>
               </div>
@@ -149,7 +149,7 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
             <div className="py-5 px-7 border-t border-(--border-color) flex justify-end gap-3 bg-[#0000001A]">
               <button onClick={Cancel} type="button" className="py-3 px-6 rounded-[10px] text-[14px] font-semibold cursor-pointer border-none flex items-center gap-2 bg-transparent text-(--text-secondary) border border-(--border-color) hover:bg-(--alert-color) hover:text-(--text-secondary)">Cancelar</button>
               <button onClick={Confirm} type="submit" className="py-3 px-6 rounded-[10px] text-[14px] font-semibold cursor-pointer border-none flex items-center gap-2 bg-(--primary-color) text-white border border-(--primary-color) hover:bg-(--primary-hover) -translate-y-0.5">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
                 Salvar Aluno
