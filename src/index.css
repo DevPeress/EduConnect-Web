@@ -13,12 +13,12 @@ html, body, #root {
 }
 
 :root {
-  --primary-color: #2563eb;  
+  --primary-color: #2563eb;
   --primary-hover: #1d4ed8;
   --text-primary: #1f2937;
   --text-secondary: #6b7280;
   --text-muted: #6b7280;
-  --border-color: #D1D5DB; 
+  --border-color: #D1D5DB;
   --border-light: #4b5563;
   --bg-body: #f3f4f6;
   --bg-card: #ffffff;
@@ -46,7 +46,7 @@ html, body, #root {
   --atividades-recentes: #E2ECFE;
 }
 
-[data-theme="dark"] { 
+[data-theme="dark"] {
   --primary-color: #3b82f6;
   --primary-hover: #2563eb;
   --text-primary: #f9fafb;
@@ -82,64 +82,118 @@ html, body, #root {
 
 @theme {
   --animate-float: float 3s ease-in-out infinite;
+
   @keyframes float {
-    0%, 100% {
+
+    0%,
+    100% {
       transform: translateY(0);
-    } 50% {
+    }
+
+    50% {
       transform: translateY(-10px);
     }
   }
 
   --animate-fadeInUp: fadeInUp 0.6s ease-out;
+
   @keyframes fadeInUp {
     from {
       opacity: 0;
       transform: translateY(30px);
-    } to {
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  --animate-fadeIn: fadeIn 0.3s ease;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  --animate-slideUp: fadeIn 0.3s ease;
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    to {
       opacity: 1;
       transform: translateY(0);
     }
   }
 
   --animate-glow: glow 2s ease-in-out infinite;
+
   @keyframes glow {
-    0%, 100% {
+
+    0%,
+    100% {
       filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.5));
-    } 50% {
+    }
+
+    50% {
       filter: drop-shadow(0 0 40px rgba(59, 130, 246, 0.8));
     }
   }
 
   --animate-pulse: pulse 4s ease-in-out infinite;
+
   @keyframes pulse {
-    0%, 100% {
+
+    0%,
+    100% {
       transform: scale(1);
       opacity: 0.1;
-    } 50% {
+    }
+
+    50% {
       transform: scale(1.1);
       opacity: 0.15;
     }
   }
 
   --animate-pulse403: pulse 2s ease-in-out infinite;
+
   @keyframes pulse {
-    0%, 100% {
+
+    0%,
+    100% {
       transform: scale(1);
       box-shadow: 0 0 0 0 var(--shadowalert-color);
-    } 50% {
+    }
+
+    50% {
       transform: scale(1.05);
       box-shadow: 0 0 0 10px var(--shadowalert-color2);
     }
   }
 
   --animate-shake: shake 0.5s ease-in-out 2s;
+
   @keyframes shake {
-    0%, 100% {
+
+    0%,
+    100% {
       transform: translateX(0);
     }
+
     25% {
       transform: translateX(-8px);
     }
+
     75% {
       transform: translateX(8px);
     }
