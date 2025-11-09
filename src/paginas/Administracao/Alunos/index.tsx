@@ -465,19 +465,19 @@ const AlunosAdmin = () => {
               <div className="grid grid-cols-2 gap-5 mb-5">
                 <div className="flex flex-col gap-2">
                   <label className="text-[14px] font-semibold text-(--text-primary)" htmlFor="email">E-mail <span className="text-(--red) ml-0.5">*</span></label>
-                  <input className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" type="email" id="matricemailula" name="email" readOnly required />
+                  <input className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" type="email" id="email" name="email" readOnly required />
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <label className="text-[14px] font-semibold text-(--text-primary)" htmlFor="Endereço">Status <span className="text-(--red) ml-0.5">*</span></label>
-                  <textarea className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" id="Endereço" name="Endereço" placeholder="Rua, número, bairro, cidade - Estado"></textarea>
+                  <label className="text-[14px] font-semibold text-(--text-primary)" htmlFor="telefone">Telefone <span className="text-(--red) ml-0.5">*</span></label>
+                  <input className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" type="telefone" id="telefone" name="telefone" readOnly required />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 gap-5 mb-5">
                 <div className="flex flex-col gap-2">
-                  <label className="text-[14px] font-semibold text-(--text-primary)" htmlFor="m">Nome Completo <span className="text-(--red) ml-0.5">*</span></label>
-                  <input className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" type="text" id="nome" name="nome" placeholder="Digite o nome completo do aluno" readOnly required />
+                  <label className="text-[14px] font-semibold text-(--text-primary)" htmlFor="Endereço">Endereço <span className="text-(--red) ml-0.5">*</span></label>
+                  <textarea className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" id="Endereço" name="Endereço" placeholder="Rua, número, bairro, cidade - Estado"></textarea>
                 </div>
               </div>
             </div>
