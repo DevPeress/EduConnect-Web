@@ -74,6 +74,17 @@ export interface AlunosType {
   media: number;
 };
 
+export interface ProfessorType {
+  codigo: string;
+  nome: string;
+  turma: string;
+  email: string;
+  telefone: string;
+  status: string;
+  nasc: string;
+};
+
+
 export type CadastroAlunoContextType = {
   openMenu: () => Promise<CadastroAlunoType | null>;
   setDados: React.Dispatch<React.SetStateAction<CadastroAlunoType>>;

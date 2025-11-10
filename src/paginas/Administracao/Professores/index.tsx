@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import Aside from "../../../components/Aside";
 import Main from "../../../components/Main";
 import ModoExibicao from "../../../components/Administracao/ModoExibicao";
-import type { AlunosType } from "../../../types/types";
+import type { ProfessorType } from "../../../types/types";
 import SelectProfessores from "../../../components/Administracao/SelectProfessores";
 
 const ProfessoresAdmin = () => {
@@ -37,76 +37,33 @@ const ProfessoresAdmin = () => {
   };
 
   const head: string[] = [
-    "Matrículo",
+    "Código",
     "Nome",
-    "Turma",
+    "Turmas",
     "E-mail",
     "Telefone",
     "Status",
-    "Média",
-    "Ação",
+    "Ação"
   ];
 
-  const [professores] = useState<AlunosType[]>([
+  const [professores] = useState<ProfessorType[]>([
     {
-      ra: "2024001",
       nome: "Fabrício Peres",
-      nasc: "3 de Abr, 2024",
       turma: "9º A",
       email: "fabricio.santos@gmail.com",
       telefone: "(11) 95599-2605",
       status: "Ativo",
-      media: 8.5,
+      codigo: "01",
+      nasc: "3 de Abr, 2024",
     },
     {
-      ra: "2024002",
       nome: "Fabrício Peres",
-      nasc: "3 de Abr, 2024",
-      turma: "9º B",
-      email: "fabricio.santos@gmail.com",
-      telefone: "(11) 95599-2605",
-      status: "Ativo",
-      media: 8.5,
-    },
-    {
-      ra: "2024003",
-      nome: "Fabrício Peres",
-      nasc: "3 de Abr, 2024",
-      turma: "9º B",
-      email: "fabricio.santos@gmail.com",
-      telefone: "(11) 95599-2605",
-      status: "Inativo",
-      media: 8.5,
-    },
-    {
-      ra: "2024004",
-      nome: "Fabrício Peres",
-      nasc: "3 de Abr, 2024",
       turma: "9º A",
       email: "fabricio.santos@gmail.com",
       telefone: "(11) 95599-2605",
-      status: "Inativo",
-      media: 8.5,
-    },
-    {
-      ra: "2024005",
-      nome: "Fabrício Peres",
-      nasc: "3 de Abr, 2024",
-      turma: "9º B",
-      email: "fabricio.santos@gmail.com",
-      telefone: "(11) 95599-2605",
       status: "Ativo",
-      media: 8.5,
-    },
-    {
-      ra: "2024006",
-      nome: "Fabrício Peres",
+      codigo: "02",
       nasc: "3 de Abr, 2024",
-      turma: "9º A",
-      email: "fabricio.santos@gmail.com",
-      telefone: "(11) 95599-2605",
-      status: "Suspenso",
-      media: 8.5,
     },
   ]);
 
@@ -114,14 +71,13 @@ const ProfessoresAdmin = () => {
     const termo = pesquisa.toLowerCase();
     return professores.filter((itens) => {
       const conteudo = `
-        ${itens.ra.toLowerCase()}
+        ${itens.codigo.toLowerCase()}
         ${itens.nome.toLowerCase()}
-        ${itens.nasc.toLowerCase()}
         ${itens.turma.toLowerCase()}
         ${itens.email.toLowerCase()}
         ${itens.telefone.toLowerCase()}
         ${itens.status.toLowerCase()}
-        ${itens.media}
+        ${itens.nasc.toLowerCase()}
         `;
 
       const correspondeTurma =
@@ -194,12 +150,12 @@ const ProfessoresAdmin = () => {
             <tbody>
               {ProfessoresFiltrados.slice(mostrar - 6, mostrar).map((item) => (
                 <tr
-                  key={item.ra}
+                  key={item.codigo}
                   className="hover:bg-(--bg-input) text-(--text-primary)"
                 >
                   <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
                     <span className="font-semibold text-(--primary-color) text-[13px]">
-                      {item.ra}
+                      {item.codigo}
                     </span>
                   </td>
                   <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
@@ -245,11 +201,6 @@ const ProfessoresAdmin = () => {
                       }}
                     >
                       {item.status}
-                    </span>
-                  </td>
-                  <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
-                    <span className="inline-block py-1.5 px-3 text-(--primary-color) rounded-md font-semibold text-[13px] bg-(--aluno-card)">
-                      {item.media}
                     </span>
                   </td>
                   <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
