@@ -19,7 +19,7 @@ export function CadastroProfessorProvider({
   const [menu, setMenu] = useState<boolean>(false);
   const [dados, setDados] = useState<CadastroProfessorType>({
     codigo: "",
-    status: "",
+    status: "Ativo",
     nome: "",
     cpf: "",
     contratacao: "",
