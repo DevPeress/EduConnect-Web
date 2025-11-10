@@ -30,6 +30,7 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
 
   const openMenu = (): Promise<CadastroAlunoType | null> => {
     setMenu(true);
+    setDados((prevDados) => ({ ...prevDados, matricula: "MA123091" }));
     return new Promise((resolve) => {
       setResolveCallback(() => resolve);
     });
