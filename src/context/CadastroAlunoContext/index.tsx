@@ -9,7 +9,7 @@ const CadastroAlunoContext = createContext<CadastroAlunoContextType | undefined>
 export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
   const [menu, setMenu] = useState<boolean>(false);
   const [dados, setDados] = useState<CadastroAlunoType>({
-    matricula: 0, status: "", nome: "", turma: "", email: "", telefone: "", endereco: ""
+    matricula: 0, status: "", nome: "", turma: "", email: "", telefone: "", endereco: "", nascimento: ""
   })
   const [resolveCallback, setResolveCallback] = useState<((data: CadastroAlunoType | null) => void) | null>(null);
 
