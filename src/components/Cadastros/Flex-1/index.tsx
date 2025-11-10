@@ -1,5 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-const CadastroFlex1 = ({ titulo, infos, setInfos, place }: { titulo: string, infos: any, setInfos: (prevDados: any) => void, place: string }) => {
+import type { CadastroAlunoType } from "../../../types/types";
+
+const CadastroFlex1 = ({ titulo, infos, setInfos, place }: { titulo: string, infos: CadastroAlunoType, setInfos: React.Dispatch<React.SetStateAction<CadastroAlunoType>>, place: string }) => {
     const Tipo = (dado: string) => {
         switch (dado) {
             case "Nome completo":
@@ -17,11 +18,11 @@ const CadastroFlex1 = ({ titulo, infos, setInfos, place }: { titulo: string, inf
         switch (tipo) {
             case "nome":
                 return (
-                    <input value={infos[tipo]} onChange={(e) => setInfos((prevDados: any) => ({ ...prevDados, [tipo]: e.target.value }))} type="text" className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" id="nome" name="nome" placeholder={place} required />
+                    <input value={infos[tipo]} onChange={(e) => setInfos((prevDados) => ({ ...prevDados, [tipo]: e.target.value }))} type="text" className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" id="nome" name="nome" placeholder={place} required />
                 )
             case "endereco":
                 return (
-                    <input value={infos[tipo]} onChange={(e) => setInfos((prevDados: any) => ({ ...prevDados, [tipo]: e.target.value }))} type="texarea" className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" id="endereco" name="endereco" placeholder={place} required />
+                    <input value={infos[tipo]} onChange={(e) => setInfos((prevDados) => ({ ...prevDados, [tipo]: e.target.value }))} type="textarea" className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" id="endereco" name="endereco" placeholder={place} required />
                 )
         }
     }
