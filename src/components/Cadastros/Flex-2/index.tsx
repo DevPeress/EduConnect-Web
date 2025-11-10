@@ -60,7 +60,7 @@ const CadastroFlex2 = <T extends CadastroAlunoType | CadastroProfessorType>({
     let texto = e.target.value;
     if (Escolhas === "cpf") texto = formatCPF(texto);
 
-    if (Escolhas === "telefone") texto = formatTelefone(texto);
+    if (Escolhas === "telefone" || Escolhas === "emergencia") texto = formatTelefone(texto);
 
     setInfos((prev) => ({
       ...prev,
