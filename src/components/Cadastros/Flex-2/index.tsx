@@ -85,7 +85,7 @@ const CadastroFlex2 = <T extends CadastroAlunoType | CadastroProfessorType>({
   };
 
   const TipoDiv = (Escolhas: keyof T) => {
-    const valor = infos[Escolhas] as string;
+    const valor: string = infos[Escolhas] as string;
 
     if (selectOptions[String(Escolhas)]) {
       return (
@@ -106,9 +106,22 @@ const CadastroFlex2 = <T extends CadastroAlunoType | CadastroProfessorType>({
       );
     }
 
-    const type = inputTypes[String(Escolhas)] ?? "text";
+    const type: string = inputTypes[String(Escolhas)] ?? "text";
+    const apenasLer: boolean =
+      Escolhas === "codigo" || Escolhas === "matricula";
 
-    return (
+    return apenasLer ? (
+      <input
+        value={valor}
+        onChange={(e) => handleChange(e, Escolhas)}
+        type={type}
+        className={baseClass}
+        id={String(Escolhas)}
+        name={String(Escolhas)}
+        required
+        readOnly
+      />
+    ) : (
       <input
         value={valor}
         onChange={(e) => handleChange(e, Escolhas)}
