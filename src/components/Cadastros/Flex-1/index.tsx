@@ -1,4 +1,7 @@
-import type { CadastroAlunoType, CadastroProfessorType } from "../../../types/types";
+import type {
+  CadastroAlunoType,
+  CadastroProfessorType,
+} from "../../../types/types";
 
 type CadastroFlex1Props<T extends CadastroAlunoType | CadastroProfessorType> = {
   titulo: string;
