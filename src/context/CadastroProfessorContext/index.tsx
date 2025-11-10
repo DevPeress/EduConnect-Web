@@ -6,6 +6,7 @@ import type {
 import CadastroTitulo from "../../components/Cadastros/Titulo";
 import CadastroFlex2 from "../../components/Cadastros/Flex-2";
 import CadastroFlex1 from "../../components/Cadastros/Flex-1";
+import ValidarProfessor from "./validao";
 //import { http } from "../../utils/axios";
 
 const CadastroProfessorContext = createContext<
@@ -45,6 +46,9 @@ export function CadastroProfessorProvider({
   };
 
   const Confirm = async () => {
+    const validar = ValidarProfessor(dados);
+    if (!validar) return;
+
     if (resolveCallback) {
       //await http
       //.post<CadastroProfessorType>("prfessor/cadastro", {
