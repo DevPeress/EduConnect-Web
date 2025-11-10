@@ -6,6 +6,7 @@ import type {
 import CadastroTitulo from "../../components/Cadastros/Titulo";
 import CadastroFlex2 from "../../components/Cadastros/Flex-2";
 import CadastroFlex1 from "../../components/Cadastros/Flex-1";
+import ValidarAluno from "./validacao";
 //import { http } from "../../utils/axios";
 
 const CadastroAlunoContext = createContext<
@@ -35,6 +36,9 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
   };
 
   const Confirm = async () => {
+    const validar = ValidarAluno(dados);
+    if (!validar) return;
+
     if (resolveCallback) {
       //await http
       //.post<CadastroAlunoType>("aluno/cadastro", {
