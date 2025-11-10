@@ -37,6 +37,7 @@ export function CadastroProfessorProvider({
 
   const openMenu = (): Promise<CadastroProfessorType | null> => {
     setMenu(true);
+    setDados((prevDados) => ({ ...prevDados, codigo: "PO123091" }));
     return new Promise((resolve) => {
       setResolveCallback(() => resolve);
     });
