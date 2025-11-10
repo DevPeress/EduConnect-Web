@@ -20,16 +20,30 @@ const CadastroFlex2 = <T extends CadastroAlunoType | CadastroProfessorType>({
     switch (dado) {
       case "Matrícula":
         return "matricula";
+      case "Código":
+        return "codigo";
       case "Status":
         return "status";
       case "Data de Nascimento":
         return "nascimento";
+      case "Data de Contratação":
+        return "contratacao";
       case "Turma":
         return "turma";
       case "E-mail":
         return "email";
       case "Telefone":
         return "telefone";
+      case "Disciplina Principal":
+        return "disciplina";
+      case "Formação Academica":
+        return "formacao";
+      case "Endereço":
+        return "endereco";
+      case "Telefone de Emergência":
+        return "emergencia";
+      case "CPF/Documento":
+        return "cpf";
       default:
         return "";
     }
@@ -38,102 +52,67 @@ const CadastroFlex2 = <T extends CadastroAlunoType | CadastroProfessorType>({
   const tipo1 = Tipo(opcao1) as keyof T;
   const tipo2 = Tipo(opcao2) as keyof T;
 
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    Escolhas: keyof T
+  ) => {
+    setInfos((prev) => ({
+      ...prev,
+      [Escolhas]: e.target.value as T[keyof T],
+    }));
+  };
+
+  const baseClass =
+    "w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)";
+
+  const selectOptions: Record<string, string[]> = {
+    status: ["Ativo", "Inativo", "Suspenso"],
+    turma: ["1A", "2B", "3C"],
+  };
+
+  const inputTypes: Record<string, string> = {
+    nascimento: "date",
+    contratacao: "date",
+    email: "email",
+    cpf: "text",
+    telefone: "text",
+  };
+
   const TipoDiv = (Escolhas: keyof T) => {
-    switch (Escolhas) {
-      case "nascimento":
-        return (
-          <input
-            value={infos[Escolhas] as string}
-            onChange={(e) =>
-              setInfos((prev) => ({
-                ...prev,
-                [Escolhas]: e.target.value as T[keyof T],
-              }))
-            }
-            type="date"
-            className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)"
-            id="nasc"
-            name="nasc"
-            required
-          />
-        );
-      case "email":
-        return (
-          <input
-            value={infos[Escolhas] as string}
-            onChange={(e) =>
-              setInfos((prev) => ({
-                ...prev,
-                [Escolhas]: e.target.value as T[keyof T],
-              }))
-            }
-            type="email"
-            className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)"
-            id="email"
-            name="email"
-            required
-          />
-        );
-      case "telefone":
-        return (
-          <input
-            value={infos[Escolhas] as string}
-            onChange={(e) =>
-              setInfos((prev) => ({
-                ...prev,
-                [Escolhas]: e.target.value as T[keyof T],
-              }))
-            }
-            type="text"
-            className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)"
-            id="telefone"
-            name="telefone"
-            required
-          />
-        );
-      case "status":
-        return (
-          <select
-            value={infos[Escolhas] as string}
-            onChange={(e) =>
-              setInfos((prev) => ({
-                ...prev,
-                [Escolhas]: e.target.value as T[keyof T],
-              }))
-            }
-            className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)"
-            id={String(Escolhas)}
-            name={String(Escolhas)}
-            required
-          >
-            <option value="Ativo">Ativo</option>
-            <option value="Inativo">Inativo</option>
-            <option value="Suspenso">Suspenso</option>
-          </select>
-        );
-      case "turma":
-        return (
-          <select
-            value={infos[Escolhas] as string}
-            onChange={(e) =>
-              setInfos((prev) => ({
-                ...prev,
-                [Escolhas]: e.target.value as T[keyof T],
-              }))
-            }
-            className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)"
-            id={String(Escolhas)}
-            name={String(Escolhas)}
-            required
-          >
-            <option value="Ativo">Ativo</option>
-            <option value="Inativo">Inativo</option>
-            <option value="Suspenso">Suspenso</option>
-          </select>
-        );
-      default:
-        return null;
+    const valor = infos[Escolhas] as string;
+
+    if (selectOptions[String(Escolhas)]) {
+      return (
+        <select
+          value={valor}
+          onChange={(e) => handleChange(e, Escolhas)}
+          className={baseClass}
+          id={String(Escolhas)}
+          name={String(Escolhas)}
+          required
+        >
+          {selectOptions[String(Escolhas)].map((opcao) => (
+            <option key={opcao} value={opcao}>
+              {opcao}
+            </option>
+          ))}
+        </select>
+      );
     }
+
+    const type = inputTypes[String(Escolhas)] ?? "text";
+
+    return (
+      <input
+        value={valor}
+        onChange={(e) => handleChange(e, Escolhas)}
+        type={type}
+        className={baseClass}
+        id={String(Escolhas)}
+        name={String(Escolhas)}
+        required
+      />
+    );
   };
 
   return (
