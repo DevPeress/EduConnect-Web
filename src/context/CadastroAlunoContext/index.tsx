@@ -16,9 +16,9 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
   const [menu, setMenu] = useState<boolean>(false);
   const [dados, setDados] = useState<CadastroAlunoType>({
     matricula: "",
-    status: "",
+    status: "Ativo",
     nome: "",
-    turma: "",
+    turma: "Selecionar Turma",
     email: "",
     telefone: "",
     endereco: "",
