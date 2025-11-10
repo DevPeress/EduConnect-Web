@@ -24,19 +24,29 @@ const Login = ({ TrocarInfos }: LoginProps) => {
     if (!verificarEmail)
       return toast.error("E-mail ou senha estão incorretos");
 
-    // FETCH
-    await http
-      .post<LoginResponse>("/login", {
-        email,
-        senha,
-      })
-      .then(function (response) {
-        TrocarInfos(response.data.cargo, response.data.token);
-      })
-      .then(function (error) {
-        console.log(error);
-        return toast.error("Erro ao realizar o login!")
-      });
+    const loginPromise = http.post<LoginResponse>("/login", { email, senha });
+    await toast.promise(
+      loginPromise,
+      {
+        loading: "Entrando...",
+        success: (response) => {
+          TrocarInfos(response.data.cargo, response.data.token);
+          return "Login realizado com sucesso!";
+        },
+        error: (err) => {
+          console.error(err);
+          return "Erro ao realizar o login!";
+        },
+      },
+      {
+        success: {
+          duration: 4000,
+        },
+        error: {
+          duration: 6000,
+        },
+      }
+    );
   };
 
   return (
