@@ -4,8 +4,10 @@ import Main from "../../../components/Main";
 import ModoExibicao from "../../../components/Administracao/ModoExibicao";
 import type { ProfessorType } from "../../../types/types";
 import SelectProfessores from "../../../components/Administracao/SelectProfessores";
+import { useCadastroProfessor } from "../../../context/CadastroProfessorContext";
 
 const ProfessoresAdmin = () => {
+  const { openMenu } = useCadastroProfessor();
   const [modo, setModo] = useState<boolean>(false);
   const [salas] = useState<string[]>(["Todas as Salas", "9º A", "9º B"]);
   const [selecionada, setSelecionada] = useState<string>("Todas as Salas");
@@ -46,7 +48,7 @@ const ProfessoresAdmin = () => {
     "Ação"
   ];
 
-  const [professores] = useState<ProfessorType[]>([
+  const [professores, setProfessores] = useState<ProfessorType[]>([
     {
       nome: "Fabrício Peres",
       turma: "9º A",
@@ -102,8 +104,22 @@ const ProfessoresAdmin = () => {
     }));
   }, [ProfessoresFiltrados]);
 
-  const AdicionarProfessor = () => {
-    return;
+  const AdicionarProfessor = async () => {
+    const dados = await openMenu();
+    if (!dados)
+      return
+    return setProfessores((prevDados) => [
+      ...prevDados,
+      {
+        nome: dados.nome,
+        turma: dados.turma,
+        email: dados.email,
+        telefone: dados.telefone,
+        status: dados.status,
+        codigo: dados.codigo,
+        nasc: dados.nascimento,
+      }
+    ])
   };
 
   return (
@@ -163,7 +179,7 @@ const ProfessoresAdmin = () => {
                       <img
                         className="w-10 h-10 rounded-[50%] object-cover border-2 border-(--border-color)"
                         src="https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg?auto=compress&cs=tinysrgb&w=60"
-                        alt="Imagem do Aluno"
+                        alt="Imagem do Professor"
                       />
                       <div>
                         <p className="font-semibold">{item.nome}</p>
@@ -190,14 +206,14 @@ const ProfessoresAdmin = () => {
                           item.status === "Ativo"
                             ? "rgba(16, 185, 129, 0.15)"
                             : item.status === "Inativo"
-                            ? "rgba(156, 163, 175, 0.15)"
-                            : "rgba(239, 68, 68, 0.15)",
+                              ? "rgba(156, 163, 175, 0.15)"
+                              : "rgba(239, 68, 68, 0.15)",
                         color:
                           item.status === "Ativo"
                             ? "var(--green)"
                             : item.status === "Inativo"
-                            ? "var(--text-secondary)"
-                            : "var(--red)",
+                              ? "var(--text-secondary)"
+                              : "var(--red)",
                       }}
                     >
                       {item.status}
