@@ -95,7 +95,7 @@ export type CadastroProfessorContextType = {
 };
 
 export interface CadastroAlunoType {
-  matricula: number;
+  matricula: string;
   nascimento: string;
   status: string;
   nome: string;
@@ -106,7 +106,7 @@ export interface CadastroAlunoType {
 };
 
 export interface CadastroProfessorType {
-  codigo: number;
+  codigo: string;
   nascimento: string;
   status: string;
   nome: string;
