@@ -1,19 +1,19 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
-import type { CadastroAlunoContextType, CadastroAlunoType } from "../../types/types";
+import type { CadastroProfessorContextType, CadastroProfessorType } from "../../types/types";
 import CadastroTitulo from "../../components/Cadastros/Titulo";
 import CadastroFlex2 from "../../components/Cadastros/Flex-2";
 import CadastroFlex1 from "../../components/Cadastros/Flex-1";
 //import { http } from "../../utils/axios";
 
-const CadastroAlunoContext = createContext<CadastroAlunoContextType | undefined>(undefined);
+const CadastroAlunoContext = createContext<CadastroProfessorContextType | undefined>(undefined);
 export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
   const [menu, setMenu] = useState<boolean>(false);
-  const [dados, setDados] = useState<CadastroAlunoType>({
-    matricula: 0, status: "", nome: "", turma: "", email: "", telefone: "", endereco: "", nascimento: ""
+  const [dados, setDados] = useState<CadastroProfessorType>({
+    codigo: 0, nascimento: "", status: "", nome: "", turma: "", email: "", telefone: "", endereco: ""
   })
-  const [resolveCallback, setResolveCallback] = useState<((data: CadastroAlunoType | null) => void) | null>(null);
+  const [resolveCallback, setResolveCallback] = useState<((data: CadastroProfessorType | null) => void) | null>(null);
 
-  const openMenu = (): Promise<CadastroAlunoType | null> => {
+  const openMenu = (): Promise<CadastroProfessorType | null> => {
     setMenu(true);
     return new Promise((resolve) => {
       setResolveCallback(() => resolve);
