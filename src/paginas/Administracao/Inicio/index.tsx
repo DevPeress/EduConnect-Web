@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CardsAdmin from "../../../components/Administracao/CardsAdmin";
 import type {
   AtividadeType,
@@ -14,7 +14,7 @@ import Aside from "../../../components/Aside";
 import Loader from "../../../components/Loader";
 
 const InicioAdm = () => {
-  const [loading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [dados] = useState<CardsAdminType[]>([
     { dado: "Alunos", total: 1245, aumento: 150, porcentagem: 12 },
     { dado: "Professores", total: 87, aumento: 3, porcentagem: 3.5 },
@@ -39,7 +39,9 @@ const InicioAdm = () => {
     },
   ]);
 
-  if (loading) return (<Loader> Carregando dados da Página </Loader>)
+  useEffect(() => {
+    setLoading(false);
+  }, []);
 
   return (
     <>
@@ -52,23 +54,27 @@ const InicioAdm = () => {
           ativo: false,
         }}
       >
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-6 mb-6">
-          {dados.map((item) => (
-            <CardsAdmin key={item.dado} dados={item} />
-          ))}
-        </div>
+        {loading ? (
+          <Loader> Carregando dados da Página </Loader>
+        ) : (
+          <>
+            <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-6 mb-6">
+              {dados.map((item) => (
+                <CardsAdmin key={item.dado} dados={item} />
+              ))}
+            </div>
+            <div className="grid grid-cols-[repeat(auto-fit,minmax(450px,1fr))] gap-3 mb-6">
+              <AtividadesRecentesAdmin atividades={atividades} />
 
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(450px,1fr))] gap-3 mb-6">
-          <AtividadesRecentesAdmin atividades={atividades} />
+              <CalendarioAdmin calendario={calendario} />
+            </div>
+            <div className="grid grid-cols-[1.5fr_1fr] gap-3 mb-6">
+              <GraficoAdmin />
 
-          <CalendarioAdmin calendario={calendario} />
-        </div>
-
-        <div className="grid grid-cols-[1.5fr_1fr] gap-3 mb-6">
-          <GraficoAdmin />
-
-          <AcoesAdmin />
-        </div>
+              <AcoesAdmin />
+            </div>
+          </>
+        )}
       </Main>
     </>
   );
