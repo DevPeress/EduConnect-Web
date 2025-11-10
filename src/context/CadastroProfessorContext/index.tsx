@@ -29,7 +29,7 @@ export function CadastroProfessorProvider({
     email: "",
     telefone: "",
     emergencia: "",
-    endereco: ""
+    endereco: "",
   });
   const [resolveCallback, setResolveCallback] = useState<
     ((data: CadastroProfessorType | null) => void) | null
@@ -65,6 +65,20 @@ export function CadastroProfessorProvider({
       resolveCallback(dados);
       setResolveCallback(null);
     }
+    setDados({
+      codigo: "",
+      status: "",
+      nome: "",
+      cpf: "",
+      contratacao: "",
+      disciplina: "",
+      formacao: "",
+      turmas: [""],
+      email: "",
+      telefone: "",
+      emergencia: "",
+      endereco: "",
+    });
     setMenu(false);
   };
 
@@ -73,6 +87,20 @@ export function CadastroProfessorProvider({
       resolveCallback(null);
       setResolveCallback(null);
     }
+    setDados({
+      codigo: "",
+      status: "",
+      nome: "",
+      cpf: "",
+      contratacao: "",
+      disciplina: "",
+      formacao: "",
+      turmas: [""],
+      email: "",
+      telefone: "",
+      emergencia: "",
+      endereco: "",
+    });
     setMenu(false);
   };
 
