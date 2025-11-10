@@ -81,6 +81,7 @@ export type CadastroAlunoContextType = {
 
 export interface CadastroAlunoType {
   matricula: number;
+  nascimento: string;
   status: string;
   nome: string;
   turma: string;
