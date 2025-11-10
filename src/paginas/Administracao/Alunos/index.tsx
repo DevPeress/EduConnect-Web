@@ -217,7 +217,7 @@ const AlunosAdmin = () => {
       {
         ra: dados.matricula.toString(),
         nome: dados.nome,
-        nasc: "3 de Abr, 2024",
+        nasc: dados.nascimento,
         turma: dados.turma,
         email: dados.email,
         telefone: dados.telefone,
