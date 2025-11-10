@@ -30,6 +30,7 @@ export function CadastroProfessorProvider({
     telefone: "",
     emergencia: "",
     endereco: "",
+    nasc: ""
   });
   const [resolveCallback, setResolveCallback] = useState<
     ((data: CadastroProfessorType | null) => void) | null
@@ -79,6 +80,7 @@ export function CadastroProfessorProvider({
       telefone: "",
       emergencia: "",
       endereco: "",
+      nasc: ""
     });
     setMenu(false);
   };
@@ -101,6 +103,7 @@ export function CadastroProfessorProvider({
       telefone: "",
       emergencia: "",
       endereco: "",
+      nasc: ""
     });
     setMenu(false);
   };
