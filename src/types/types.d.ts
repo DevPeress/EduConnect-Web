@@ -107,7 +107,7 @@ export interface CadastroAlunoType {
 
 export interface CadastroProfessorType {
   codigo: string;
-  nascimento: string;
+  contratacao: string;
   status: string;
   nome: string;
   turma: string;
