@@ -1,6 +1,11 @@
 import type { CardsAdminType } from "../../../types/types";
-import { formatNumero } from "../../../utils/codigos";
-import { AlunosCard, PresencaCard, ProfessoresCard, TurmasCard } from "./Icones";
+import { formatBRL } from "../../../utils/codigos";
+import {
+  AlunosCard,
+  PresencaCard,
+  ProfessoresCard,
+  TurmasCard,
+} from "./Icones";
 
 const CardsAdmin = ({ dados }: { dados: CardsAdminType }) => {
   const tipo: string = dados.dado;
@@ -75,7 +80,7 @@ const CardsAdmin = ({ dados }: { dados: CardsAdminType }) => {
           {Card(tipo)?.mensagem}
         </p>
         <h3 className="text-[32px] font-bold mb-1 text-(--text-primary) leading-8">
-          {formatNumero(dados.total)}
+          {formatBRL(dados.total)}
           {tipo === "Presença" ? "%" : null}
         </h3>
         <span className="text-[13px] text-(--text-secondary)">
