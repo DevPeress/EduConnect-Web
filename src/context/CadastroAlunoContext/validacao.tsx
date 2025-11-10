@@ -7,6 +7,7 @@ const ValidarAluno = (dados: CadastroAlunoType) => {
   const telefone = dados.telefone;
   const endereco = dados.endereco;
   const nascimento = dados.nascimento;
+  const turma = dados.turma;
 
   if (!nome || nome.length < 3) {
     toast.error("Nome inválido!");
@@ -15,6 +16,11 @@ const ValidarAluno = (dados: CadastroAlunoType) => {
 
   if (!nascimento) {
     toast.error("Data de Nascimento inválida!");
+    return false;
+  }
+
+  if (turma == "Selecionar Turma") {
+    toast.error("Seleciona a turma do aluno!");
     return false;
   }
 
