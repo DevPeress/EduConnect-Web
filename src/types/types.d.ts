@@ -77,11 +77,10 @@ export interface AlunosType {
 export interface ProfessorType {
   codigo: string;
   nome: string;
-  turma: string;
+  turmas: string[];
   email: string;
   telefone: string;
   status: string;
-  nasc: string;
 };
 
 export type CadastroAlunoContextType = {
