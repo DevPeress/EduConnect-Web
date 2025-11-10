@@ -1,5 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-const CadastroFlex2 = ({ opcao1, opcao2, infos, setInfos }: { opcao1: string, opcao2: string, infos: any, setInfos: (prevDados: any) => void }) => {
+import type { CadastroAlunoType } from "../../../types/types";
+
+const CadastroFlex2 = ({ opcao1, opcao2, infos, setInfos }: { opcao1: string, opcao2: string, infos: CadastroAlunoType, setInfos: React.Dispatch<React.SetStateAction<CadastroAlunoType>> }) => {
     const Tipo = (dado: string) => {
         switch (dado) {
             case "Matrícula":
@@ -7,7 +8,7 @@ const CadastroFlex2 = ({ opcao1, opcao2, infos, setInfos }: { opcao1: string, op
             case "Status":
                 return "status";
             case "Data de Nascimento":
-                return "nasc";
+                return "nascimento";
             case "Turma":
                 return "turma";
             case "E-mail":
@@ -24,21 +25,21 @@ const CadastroFlex2 = ({ opcao1, opcao2, infos, setInfos }: { opcao1: string, op
 
     const TipoDiv = (Escolhas: string) => {
         switch (Escolhas) {
-            case "nasc":
+            case "nascimento":
                 return (
-                    <input value={infos[tipo2]} onChange={(e) => setInfos((prevDados: any) => ({ ...prevDados, [tipo2]: e.target.value }))} type="date" className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" id="nasc" name="nasc" required />
+                    <input value={infos[Escolhas]} onChange={(e) => setInfos((prevDados) => ({ ...prevDados, [Escolhas]: e.target.value }))} type="date" className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" id="nasc" name="nasc" required />
                 )
             case "email":
                 return (
-                    <input value={infos[tipo2]} onChange={(e) => setInfos((prevDados: any) => ({ ...prevDados, [tipo2]: e.target.value }))} type="email" className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" id="email" name="email" required />
+                    <input value={infos[Escolhas]} onChange={(e) => setInfos((prevDados) => ({ ...prevDados, [Escolhas]: e.target.value }))} type="email" className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" id="email" name="email" required />
                 )
             case "telefone":
                 return (
-                    <input value={infos[tipo2]} onChange={(e) => setInfos((prevDados: any) => ({ ...prevDados, [tipo2]: e.target.value }))} type="text" className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" id="telefone" name="telefone" required />
+                    <input value={infos[Escolhas]} onChange={(e) => setInfos((prevDados) => ({ ...prevDados, [Escolhas]: e.target.value }))} type="text" className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" id="telefone" name="telefone" required />
                 )
             case "status":
                 return (
-                    <select value={infos[tipo2]} onChange={(e) => setInfos((prevDados: any) => ({ ...prevDados, [tipo2]: e.target.value }))} className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" id="status" name="status" required>
+                    <select value={infos[Escolhas]} onChange={(e) => setInfos((prevDados) => ({ ...prevDados, [Escolhas]: e.target.value }))} className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" id="status" name="status" required>
                         <option value="Ativo">Ativo</option>
                         <option value="Inativo">Inativo</option>
                         <option value="Suspenso">Suspenso</option>
@@ -46,7 +47,7 @@ const CadastroFlex2 = ({ opcao1, opcao2, infos, setInfos }: { opcao1: string, op
                 )
             case "turma":
                 return (
-                    <select value={infos[tipo2]} onChange={(e) => setInfos((prevDados: any) => ({ ...prevDados, [tipo2]: e.target.value }))} className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" id="turma" name="turma" required>
+                    <select value={infos[Escolhas]} onChange={(e) => setInfos((prevDados) => ({ ...prevDados, [Escolhas]: e.target.value }))} className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)" id="turma" name="turma" required>
                         <option value="Ativo">Ativo</option>
                         <option value="Inativo">Inativo</option>
                         <option value="Suspenso">Suspenso</option>
