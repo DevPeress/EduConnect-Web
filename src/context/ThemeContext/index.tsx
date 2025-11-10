@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { Toaster } from "react-hot-toast";
 import type { ReactNode } from "react";
 import type { ThemeType } from "../../types/types";
 
@@ -25,6 +26,10 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   return (
     <ThemeContext.Provider value={{ dark, toggleTheme }}>
       {children}
+
+      <Toaster toastOptions={{
+        
+      }} />
     </ThemeContext.Provider>
   );
 }
