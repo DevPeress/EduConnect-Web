@@ -1,6 +1,6 @@
-import type { CadastroAlunoType } from "../../../types/types";
+import type { CadastroAlunoType, CadastroProfessorType } from "../../../types/types";
 
-const CadastroFlex2 = ({ opcao1, opcao2, infos, setInfos }: { opcao1: string, opcao2: string, infos: CadastroAlunoType, setInfos: React.Dispatch<React.SetStateAction<CadastroAlunoType>> }) => {
+const CadastroFlex2 = ({ opcao1, opcao2, infos, setInfos }: { opcao1: string, opcao2: string, infos: CadastroAlunoType | CadastroProfessorType, setInfos: React.Dispatch<React.SetStateAction<CadastroAlunoType | CadastroProfessorType>> }) => {
     const Tipo = (dado: string) => {
         switch (dado) {
             case "Matrícula":
