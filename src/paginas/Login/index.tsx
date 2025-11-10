@@ -2,6 +2,7 @@ import { useState, type FormEvent } from "react";
 import type { LoginProps, LoginResponse, LoginType } from "../../types/types";
 import FundoBolhas from "../../components/FundoBolhas";
 import { http } from "../../utils/axios";
+import toast from "react-hot-toast";
 
 const Login = ({ TrocarInfos }: LoginProps) => {
   const [dados, setDados] = useState<LoginType>({ email: "", senha: "" });
@@ -20,7 +21,8 @@ const Login = ({ TrocarInfos }: LoginProps) => {
     const email = dados.email;
     const senha = dados.senha;
     const verificarEmail = email.includes("@") && email.includes(".com");
-    if (!verificarEmail) return alert("E-mail ou senha estão incorretos");
+    if (!verificarEmail)
+      return toast.error("E-mail ou senha estão incorretos");
 
     // FETCH
     await http
@@ -33,6 +35,7 @@ const Login = ({ TrocarInfos }: LoginProps) => {
       })
       .then(function (error) {
         console.log(error);
+        return toast.error("Erro ao realizar o login!")
       });
   };
 
