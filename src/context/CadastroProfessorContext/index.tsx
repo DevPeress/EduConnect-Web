@@ -9,7 +9,7 @@ const CadastroProfessorContext = createContext<CadastroProfessorContextType | un
 export function CadastroProfessorProvider({ children }: { children: ReactNode }) {
   const [menu, setMenu] = useState<boolean>(false);
   const [dados, setDados] = useState<CadastroProfessorType>({
-    codigo: 0, nascimento: "", status: "", nome: "", turma: "", email: "", telefone: "", endereco: ""
+    codigo: "", nascimento: "", status: "", nome: "", turma: "", email: "", telefone: "", endereco: ""
   })
   const [resolveCallback, setResolveCallback] = useState<((data: CadastroProfessorType | null) => void) | null>(null);
 
