@@ -1,4 +1,7 @@
-import type { CadastroAlunoType, CadastroProfessorType } from "../../../types/types";
+import type {
+  CadastroAlunoType,
+  CadastroProfessorType,
+} from "../../../types/types";
 
 type CadastroFlex2Props<T extends CadastroAlunoType | CadastroProfessorType> = {
   opcao1: string;
@@ -89,6 +92,25 @@ const CadastroFlex2 = <T extends CadastroAlunoType | CadastroProfessorType>({
           />
         );
       case "status":
+        return (
+          <select
+            value={infos[Escolhas] as string}
+            onChange={(e) =>
+              setInfos((prev) => ({
+                ...prev,
+                [Escolhas]: e.target.value as T[keyof T],
+              }))
+            }
+            className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)"
+            id={String(Escolhas)}
+            name={String(Escolhas)}
+            required
+          >
+            <option value="Ativo">Ativo</option>
+            <option value="Inativo">Inativo</option>
+            <option value="Suspenso">Suspenso</option>
+          </select>
+        );
       case "turma":
         return (
           <select
