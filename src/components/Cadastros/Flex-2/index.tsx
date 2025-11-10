@@ -73,7 +73,7 @@ const CadastroFlex2 = <T extends CadastroAlunoType | CadastroProfessorType>({
 
   const selectOptions: Record<string, string[]> = {
     status: ["Ativo", "Inativo", "Suspenso"],
-    turma: ["1A", "2B", "3C"],
+    turma: ["Selecionar Turma", "1A", "2B", "3C"],
   };
 
   const inputTypes: Record<string, string> = {
