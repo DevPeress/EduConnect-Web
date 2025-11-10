@@ -2,6 +2,7 @@ import type {
   CadastroAlunoType,
   CadastroProfessorType,
 } from "../../../types/types";
+import { formatCPF, formatTelefone } from "../../../utils/codigos";
 
 type CadastroFlex2Props<T extends CadastroAlunoType | CadastroProfessorType> = {
   opcao1: string;
@@ -56,9 +57,14 @@ const CadastroFlex2 = <T extends CadastroAlunoType | CadastroProfessorType>({
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
     Escolhas: keyof T
   ) => {
+    let texto = e.target.value;
+    if (Escolhas === "cpf") texto = formatCPF(texto);
+
+    if (Escolhas === "telefone") texto = formatTelefone(texto);
+
     setInfos((prev) => ({
       ...prev,
-      [Escolhas]: e.target.value as T[keyof T],
+      [Escolhas]: texto as T[keyof T],
     }));
   };
 
