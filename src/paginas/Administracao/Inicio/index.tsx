@@ -11,8 +11,10 @@ import GraficoAdmin from "../../../components/Administracao/GraficoAdmin";
 import AcoesAdmin from "../../../components/Administracao/AcoesAdmin";
 import Main from "../../../components/Main";
 import Aside from "../../../components/Aside";
+import Loader from "../../../components/Loader";
 
 const InicioAdm = () => {
+  const [loading] = useState<boolean>(false);
   const [dados] = useState<CardsAdminType[]>([
     { dado: "Alunos", total: 1245, aumento: 150, porcentagem: 12 },
     { dado: "Professores", total: 87, aumento: 3, porcentagem: 3.5 },
@@ -36,6 +38,8 @@ const InicioAdm = () => {
       horario: "19:00 - Auditório Principal",
     },
   ]);
+
+  if (loading) return (<Loader> Carregando dados da Página </Loader>)
 
   return (
     <>
