@@ -30,7 +30,7 @@ export function CadastroProfessorProvider({
     telefone: "",
     emergencia: "",
     endereco: "",
-    nasc: ""
+    nasc: "",
   });
   const [resolveCallback, setResolveCallback] = useState<
     ((data: CadastroProfessorType | null) => void) | null
@@ -80,7 +80,7 @@ export function CadastroProfessorProvider({
       telefone: "",
       emergencia: "",
       endereco: "",
-      nasc: ""
+      nasc: "",
     });
     setMenu(false);
   };
@@ -103,7 +103,7 @@ export function CadastroProfessorProvider({
       telefone: "",
       emergencia: "",
       endereco: "",
-      nasc: ""
+      nasc: "",
     });
     setMenu(false);
   };
@@ -134,11 +134,11 @@ export function CadastroProfessorProvider({
                   setInfos={setDados}
                 />
 
-                <CadastroFlex1
-                  titulo="Nome completo"
+                <CadastroFlex2
+                  opcao1="Nome completo"
+                  opcao2="Data de Nascimento"
                   infos={dados}
                   setInfos={setDados}
-                  place="Digite o nome completo do professor"
                 />
 
                 <CadastroFlex2
