@@ -81,6 +81,7 @@ export interface ProfessorType {
   email: string;
   telefone: string;
   status: string;
+  nasc: string;
 };
 
 export type CadastroAlunoContextType = {
@@ -117,4 +118,5 @@ export interface CadastroProfessorType {
   telefone: string;
   emergencia: string;
   endereco: string;
+  nasc: string;
 };

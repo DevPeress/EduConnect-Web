@@ -51,7 +51,7 @@ const ProfessoresAdmin = () => {
   const [professores, setProfessores] = useState<ProfessorType[]>([
     {
       nome: "Fabrício Peres",
-      turma: "9º A",
+      turmas: ["9º A"],
       email: "fabricio.santos@gmail.com",
       telefone: "(11) 95599-2605",
       status: "Ativo",
@@ -60,7 +60,7 @@ const ProfessoresAdmin = () => {
     },
     {
       nome: "Fabrício Peres",
-      turma: "9º A",
+      turmas: ["9º A"],
       email: "fabricio.santos@gmail.com",
       telefone: "(11) 95599-2605",
       status: "Ativo",
@@ -75,16 +75,16 @@ const ProfessoresAdmin = () => {
       const conteudo = `
         ${itens.codigo.toLowerCase()}
         ${itens.nome.toLowerCase()}
-        ${itens.turma.toLowerCase()}
+        ${itens.nasc.toLowerCase()}
+        ${itens.turmas}
         ${itens.email.toLowerCase()}
         ${itens.telefone.toLowerCase()}
         ${itens.status.toLowerCase()}
-        ${itens.nasc.toLowerCase()}
         `;
 
       const correspondeTurma =
         selecionada === "Todas as Salas" ||
-        itens.turma.toLowerCase() === selecionada.toLowerCase();
+        itens.turmas.includes(selecionada);
       const correspondeStatus =
         status === "Todos os Status" ||
         itens.status.toLowerCase() === status.toLowerCase();
@@ -112,12 +112,12 @@ const ProfessoresAdmin = () => {
       ...prevDados,
       {
         nome: dados.nome,
-        turma: dados.turma,
+        turmas: dados.turmas,
         email: dados.email,
         telefone: dados.telefone,
         status: dados.status,
         codigo: dados.codigo,
-        nasc: dados.nascimento,
+        nasc: dados.nasc
       }
     ])
   };
@@ -190,7 +190,7 @@ const ProfessoresAdmin = () => {
                     </div>
                   </td>
                   <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
-                    {item.turma}
+                    {item.turmas}
                   </td>
                   <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
                     {item.email}
