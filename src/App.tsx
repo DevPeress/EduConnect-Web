@@ -7,6 +7,7 @@ import { useAuth } from "./context/AuthContext";
 import InicioAdm from "./paginas/Administracao/Inicio";
 import AlunosAdmin from "./paginas/Administracao/Alunos";
 import ProfessoresAdmin from "./paginas/Administracao/Professores";
+import CalendarioAdm from "./paginas/Administracao/Calendario";
 
 function App() {
   const auth = useAuth();
@@ -30,6 +31,7 @@ function App() {
         <Route path="/admin/dashboard" element={<InicioAdm />} />
         <Route path="/admin/alunos" element={<AlunosAdmin />} />
         <Route path="/admin/professores" element={<ProfessoresAdmin />} />
+        <Route path="/admin/calendario" element={<CalendarioAdm />} />
         {/* Página de sem acesso */}
         <Route path="/not-authorized" element={<SemAcesso Logado={user} Cargo={cargo} />} />
         {/* Página não encontrada */}
