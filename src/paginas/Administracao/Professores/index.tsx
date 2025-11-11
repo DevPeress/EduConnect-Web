@@ -8,6 +8,7 @@ import { useCadastroProfessor } from "../../../context/CadastroProfessorContext"
 
 const ProfessoresAdmin = () => {
   const { openMenu } = useCadastroProfessor();
+  const [loading, setLoading] = useState<boolean>(true);
   const [modo, setModo] = useState<boolean>(false);
   const [salas] = useState<string[]>(["Todas as Salas", "9º A", "9º B"]);
   const [selecionada, setSelecionada] = useState<string>("Todas as Salas");
@@ -45,7 +46,7 @@ const ProfessoresAdmin = () => {
     "E-mail",
     "Telefone",
     "Status",
-    "Ação"
+    "Ação",
   ];
 
   const [professores, setProfessores] = useState<ProfessorType[]>([
@@ -83,8 +84,7 @@ const ProfessoresAdmin = () => {
         `;
 
       const correspondeTurma =
-        selecionada === "Todas as Salas" ||
-        itens.turmas.includes(selecionada);
+        selecionada === "Todas as Salas" || itens.turmas.includes(selecionada);
       const correspondeStatus =
         status === "Todos os Status" ||
         itens.status.toLowerCase() === status.toLowerCase();
@@ -102,12 +102,12 @@ const ProfessoresAdmin = () => {
           ? ProfessoresFiltrados.length / 6
           : Math.floor(ProfessoresFiltrados.length / 6) + 1,
     }));
+    setLoading(false);
   }, [ProfessoresFiltrados]);
 
   const AdicionarProfessor = async () => {
     const dados = await openMenu();
-    if (!dados)
-      return
+    if (!dados) return;
     return setProfessores((prevDados) => [
       ...prevDados,
       {
@@ -117,9 +117,9 @@ const ProfessoresAdmin = () => {
         telefone: dados.telefone,
         status: dados.status,
         codigo: dados.codigo,
-        nasc: dados.nasc
-      }
-    ])
+        nasc: dados.nasc,
+      },
+    ]);
   };
 
   return (
@@ -134,6 +134,7 @@ const ProfessoresAdmin = () => {
           mensagem: "Novo Professor",
           adicionar: AdicionarProfessor,
         }}
+        load={loading}
       >
         <div className="flex justify-between items-center gap-5 mb-6 flex-wrap">
           <div className="flex gap-3 flex-wrap">
@@ -206,14 +207,14 @@ const ProfessoresAdmin = () => {
                           item.status === "Ativo"
                             ? "rgba(16, 185, 129, 0.15)"
                             : item.status === "Inativo"
-                              ? "rgba(156, 163, 175, 0.15)"
-                              : "rgba(239, 68, 68, 0.15)",
+                            ? "rgba(156, 163, 175, 0.15)"
+                            : "rgba(239, 68, 68, 0.15)",
                         color:
                           item.status === "Ativo"
                             ? "var(--green)"
                             : item.status === "Inativo"
-                              ? "var(--text-secondary)"
-                              : "var(--red)",
+                            ? "var(--text-secondary)"
+                            : "var(--red)",
                       }}
                     >
                       {item.status}
