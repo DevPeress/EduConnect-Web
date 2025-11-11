@@ -8,6 +8,7 @@ import { useCadastroAluno } from "../../../context/CadastroAlunoContext";
 
 const AlunosAdmin = () => {
   const { openMenu } = useCadastroAluno();
+  const [loading, setLoading] = useState<boolean>(true);
   const [modo, setModo] = useState<boolean>(false);
   const [salas] = useState<string[]>(["Todas as Salas", "9º A", "9º B"]);
   const [selecionada, setSelecionada] = useState<string>("Todas as Salas");
@@ -206,12 +207,14 @@ const AlunosAdmin = () => {
           ? AlunosFiltrados.length / 6
           : Math.floor(AlunosFiltrados.length / 6) + 1,
     }));
+    setTimeout(() => {
+      setLoading(false);
+    }, 5000);
   }, [AlunosFiltrados]);
 
   const AdicionarAluno = async () => {
     const dados = await openMenu();
-    if (!dados)
-      return;
+    if (!dados) return;
     return setAlunos((prevDados) => [
       ...prevDados,
       {
@@ -223,8 +226,8 @@ const AlunosAdmin = () => {
         telefone: dados.telefone,
         status: dados.status,
         media: 0,
-      }
-    ])
+      },
+    ]);
   };
 
   return (
@@ -239,6 +242,7 @@ const AlunosAdmin = () => {
           mensagem: "Novo Aluno",
           adicionar: AdicionarAluno,
         }}
+        load={loading}
       >
         <div className="flex justify-between items-center gap-5 mb-6 flex-wrap">
           <div className="flex gap-3 flex-wrap">
@@ -311,14 +315,14 @@ const AlunosAdmin = () => {
                           item.status === "Ativo"
                             ? "rgba(16, 185, 129, 0.15)"
                             : item.status === "Inativo"
-                              ? "rgba(156, 163, 175, 0.15)"
-                              : "rgba(239, 68, 68, 0.15)",
+                            ? "rgba(156, 163, 175, 0.15)"
+                            : "rgba(239, 68, 68, 0.15)",
                         color:
                           item.status === "Ativo"
                             ? "var(--green)"
                             : item.status === "Inativo"
-                              ? "var(--text-secondary)"
-                              : "var(--red)",
+                            ? "var(--text-secondary)"
+                            : "var(--red)",
                       }}
                     >
                       {item.status}
