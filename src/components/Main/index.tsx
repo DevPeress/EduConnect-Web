@@ -23,8 +23,8 @@ const Main = ({
     <main className="flex-1 ml-72 flex flex-col bg-(--bg-body)">
       <Header />
       {!load ? (
-        <div className="py-2 px-8 max-w-[1600px] m-0 mx-auto w-full">
-          <div className="flex justify-between mb-8">
+        <div className="py-8 px-8 max-w-[1600px] m-0 mx-auto w-full">
+          <div className="flex justify-between mb-5">
             <div className="flex-1">
               <h1 className="text-[20px] font-bold text-(--text-primary)">
                 {titulo}
