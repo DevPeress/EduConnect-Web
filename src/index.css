@@ -44,6 +44,21 @@ html, body, #root {
 
   --cabecalho: #D6D6D6;
   --atividades-recentes: #E2ECFE;
+
+  /* Calendario */
+  --calendario-bg-offrange: #f3f4f6;
+  --calendario-texto-offrange: #9ca3af; 
+
+  --calendario-bg-geral: #ffffff;
+  --calendario-texto-titulo: #1a1a1a;
+
+  --calendario-bg-botao: #f3f4f6;
+  --calendario-bg-botao-hover: #e5e7eb;
+  --calendario-texto-botao: #111827;
+
+  --calendario-bg-evento: #3b82f6;
+  --calendario-bg-evento-hover: #2563eb;
+  --calendario-texto-evento: #ffffff;
 }
 
 [data-theme="dark"] {
@@ -78,6 +93,21 @@ html, body, #root {
 
   --cabecalho: #00000033;
   --atividades-recentes: #3B82F626;
+
+  /* Calendario */
+  --calendario-bg-offrange: #2a2a2a;
+  --calendario-texto-offrange: #6b7280;
+
+ --calendario-bg-geral: #1f1f1f;
+  --calendario-texto-titulo: #f9fafb;
+
+  --calendario-bg-botao: #2d2d2d;
+  --calendario-bg-botao-hover: #3a3a3a;
+  --calendario-texto-botao: #e5e7eb;
+
+  --calendario-bg-evento: #2563eb;
+  --calendario-bg-evento-hover: #1d4ed8;
+  --calendario-texto-evento: #ffffff;
 }
 
 textarea {
@@ -215,4 +245,12 @@ textarea {
 ::-webkit-scrollbar-thumb {
   background: var(--border-color);
   border-radius: 3px;
+}
+
+.rbc-off-range-bg {
+  background-color: var(--calendario-bg-offrange) !important;
+}
+
+.rbc-off-range {
+  color: var(--calendario-texto-offrange) !important;
 }
