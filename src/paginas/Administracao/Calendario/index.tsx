@@ -36,7 +36,7 @@ const CalendarioAdm = () => {
       <Aside />
 
       <Main
-        titulo="Bem-Vindo"
+        titulo="Calendário"
         desc="Visão geral do Calendário"
         botao={{
           ativo: false,
