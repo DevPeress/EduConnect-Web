@@ -4,7 +4,7 @@ import { ptBR } from "date-fns/locale";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import type { View } from "react-big-calendar";
 import { useState } from "react";
-import type { CalendarioEvento } from "../../types/types";
+import type { CalendarioEvento, SlotInfo } from "../../types/types";
 
 const locales = {
   "pt-BR": ptBR,
@@ -69,7 +69,7 @@ const CustomToolbar = ({
   </div>
 );
 
-const Calendario = ({ eventos }: { eventos: CalendarioEvento[] }) => {
+const Calendario = ({ eventos, adicionarEvento }: { eventos: CalendarioEvento[], adicionarEvento: (slotInfo: SlotInfo) => void }) => {
   const [view, setView] = useState<View>("month");
   const [date, setDate] = useState<Date>(new Date());
 
@@ -85,6 +85,7 @@ const Calendario = ({ eventos }: { eventos: CalendarioEvento[] }) => {
         date={date}
         onNavigate={(newDate) => setDate(newDate)}
         selectable
+        onSelectSlot={adicionarEvento}
         defaultView={Views.MONTH}
         popup
         className="rounded-xl bg-white shadow-lg p-4"
