@@ -126,3 +126,10 @@ export interface CalendarioEvento {
   start: Date;
   end: Date;
 };
+
+export interface SlotInfo {
+  start: Date;
+  end: Date;
+  slots: Date[];
+  action: "select" | "click" | "doubleClick";
+}
