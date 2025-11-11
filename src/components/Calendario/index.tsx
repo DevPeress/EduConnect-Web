@@ -19,7 +19,7 @@ const localizer = dateFnsLocalizer({
 });
 
 const CustomEvent = ({ event }: { event: CalendarioEvento }) => (
-  <div className="bg-blue-500 text-white px-2 py-1 rounded-md text-xs font-medium hover:bg-blue-600 transition-colors">
+  <div className="bg-(--calendario-bg-evento) text-(--calendario-texto-evento) px-2 py-1 rounded-md text-xs font-medium hover:bg-(--calendario-bg-evento-hover) transition-colors">
     {event.title}
   </div>
 );
@@ -36,31 +36,31 @@ const CustomToolbar = ({
   <div className="flex justify-between items-center mb-4">
     <div className="flex items-center gap-2">
       <button
-        onClick={() => onNavigate("TODAY")}
-        className="px-3 py-1 text-sm bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-      >
-        Hoje
-      </button>
-      <button
         onClick={() => onNavigate("PREV")}
-        className="px-2 py-1 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200"
+        className="px-2 py-1 text-(--calendario-texto-botao) bg-(--calendario-bg-botao) rounded-lg hover:bg-(--calendario-bg-botao-hover)"
       >
         ←
       </button>
       <button
+        onClick={() => onNavigate("TODAY")}
+        className="px-3 py-1 text-sm bg-(--calendario-bg-botao) text-(--calendario-texto-botao) rounded-lg hover:bg-(--calendario-bg-botao-hover)"
+      >
+        Hoje
+      </button>
+      <button
         onClick={() => onNavigate("NEXT")}
-        className="px-2 py-1 text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200"
+        className="px-2 py-1 text-(--calendario-texto-botao) bg-(--calendario-bg-botao) rounded-lg hover:bg-(--calendario-bg-botao-hover)"
       >
         →
       </button>
     </div>
-    <h2 className="text-lg font-semibold text-gray-800">{label}</h2>
+    <h2 className="text-lg font-semibold text-(--calendario-texto-titulo)">{label}</h2>
     <div className="flex gap-2">
       {(["month", "week", "day"] as View[]).map((v) => (
         <button
           key={v}
           onClick={() => onView(v)}
-          className="px-3 py-1 text-sm bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200"
+          className="px-3 py-1 text-sm bg-(--calendario-bg-botao) text-(--calendario-texto-botao) rounded-lg hover:bg-(--calendario-bg-botao-hover)"
         >
           {v === "month" ? "Mês" : v === "week" ? "Semana" : "Dia"}
         </button>
@@ -69,12 +69,18 @@ const CustomToolbar = ({
   </div>
 );
 
-const Calendario = ({ eventos, adicionarEvento }: { eventos: CalendarioEvento[], adicionarEvento: (slotInfo: SlotInfo) => void }) => {
+const Calendario = ({
+  eventos,
+  adicionarEvento,
+}: {
+  eventos: CalendarioEvento[];
+  adicionarEvento: (slotInfo: SlotInfo) => void;
+}) => {
   const [view, setView] = useState<View>("month");
   const [date, setDate] = useState<Date>(new Date());
 
   return (
-    <div className="h-[85vh] p-6 bg-gray-50 rounded-xl shadow-inner">
+    <div className="h-[76vh]">
       <Calendar
         localizer={localizer}
         events={eventos}
@@ -88,7 +94,7 @@ const Calendario = ({ eventos, adicionarEvento }: { eventos: CalendarioEvento[],
         onSelectSlot={adicionarEvento}
         defaultView={Views.MONTH}
         popup
-        className="rounded-xl bg-white shadow-lg p-4"
+        className="rounded-xl bg-(--calendario-bg-geral) shadow-lg p-4"
         components={{
           toolbar: CustomToolbar,
           event: CustomEvent,
