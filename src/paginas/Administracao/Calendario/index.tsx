@@ -7,7 +7,7 @@ import type { CalendarioEvento } from "../../../types/types";
 
 const CalendarioAdm = () => {
   const [loading, setLoading] = useState<boolean>(true);
-  const [events] = useState<CalendarioEvento[]>([
+  const [events, setEvents] = useState<CalendarioEvento[]>([
     {
       title: "Reunião de equipe",
       start: new Date(2025, 10, 12, 10, 0), // (ano, mês-1, dia, hora, minuto)
@@ -19,6 +19,11 @@ const CalendarioAdm = () => {
       end: new Date(2025, 10, 13, 16, 0),
     },
   ]);
+
+  const handleSelectSlot = ({ start, end }: { start: Date; end: Date }) => {
+    const title = window.prompt("Título do evento:");
+    if (title) setEvents([...events, { start, end, title }]);
+  };
 
   useEffect(() => {
     setTimeout(() => {
@@ -38,7 +43,7 @@ const CalendarioAdm = () => {
         }}
         load={loading}
       >
-        <Calendario eventos={events} />
+        <Calendario eventos={events} adicionarEvento={handleSelectSlot} />
       </Main>
     </>
   );
