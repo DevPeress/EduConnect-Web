@@ -120,3 +120,9 @@ export interface CadastroProfessorType {
   endereco: string;
   nasc: string;
 };
+
+export interface CalendarioEvento {
+  title: string;
+  start: Date;
+  end: Date;
+};
