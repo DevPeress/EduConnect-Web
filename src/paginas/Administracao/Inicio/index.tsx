@@ -11,7 +11,6 @@ import GraficoAdmin from "../../../components/Administracao/GraficoAdmin";
 import AcoesAdmin from "../../../components/Administracao/AcoesAdmin";
 import Main from "../../../components/Main";
 import Aside from "../../../components/Aside";
-import Loader from "../../../components/Loader";
 
 const InicioAdm = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -40,7 +39,9 @@ const InicioAdm = () => {
   ]);
 
   useEffect(() => {
-    setLoading(false);
+    setTimeout(() => {
+      setLoading(false);
+    }, 5000);
   }, []);
 
   return (
@@ -53,28 +54,23 @@ const InicioAdm = () => {
         botao={{
           ativo: false,
         }}
+        load={loading}
       >
-        {loading ? (
-          <Loader> Carregando dados da Página </Loader>
-        ) : (
-          <>
-            <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-6 mb-6">
-              {dados.map((item) => (
-                <CardsAdmin key={item.dado} dados={item} />
-              ))}
-            </div>
-            <div className="grid grid-cols-[repeat(auto-fit,minmax(450px,1fr))] gap-3 mb-6">
-              <AtividadesRecentesAdmin atividades={atividades} />
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-6 mb-6">
+          {dados.map((item) => (
+            <CardsAdmin key={item.dado} dados={item} />
+          ))}
+        </div>
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(450px,1fr))] gap-3 mb-6">
+          <AtividadesRecentesAdmin atividades={atividades} />
 
-              <CalendarioAdmin calendario={calendario} />
-            </div>
-            <div className="grid grid-cols-[1.5fr_1fr] gap-3 mb-6">
-              <GraficoAdmin />
+          <CalendarioAdmin calendario={calendario} />
+        </div>
+        <div className="grid grid-cols-[1.5fr_1fr] gap-3 mb-6">
+          <GraficoAdmin />
 
-              <AcoesAdmin />
-            </div>
-          </>
-        )}
+          <AcoesAdmin />
+        </div>
       </Main>
     </>
   );
