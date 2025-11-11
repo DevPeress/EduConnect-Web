@@ -32,8 +32,11 @@ O **Edu Connect** é o front-end de um sistema escolar moderno desenvolvido com 
 - [ESLint](https://eslint.org/)
 - [TypeScript ESLint](https://typescript-eslint.io/)
 
-## ✨ Funcionalidades
+### 📅 Calendário e Datas
+- [React Big Calendar](https://github.com/jquense/react-big-calendar)
+- [Date-fns](https://date-fns.org/)
 
+## ✨ Funcionalidades
 
 - **Páginas personalizadas**
   - Página 404: informa sobre rotas inexistentes com redirecionamento intuitivo.
@@ -46,7 +49,7 @@ O **Edu Connect** é o front-end de um sistema escolar moderno desenvolvido com 
   - Exibição de dados gerais (alunos, professores, turmas e presença).
   - Gráfico analítico dinâmico.
   - Painel de atividades recentes.
-  - Calendário informativo integrado.
+  - Aba com Calendário interativo com eventos, integrado via React Big Calendar e Date-fns.
 
 - **Gestão de Usuários**
   - Páginas específicas para **alunos** e **professores**.
