@@ -95,10 +95,10 @@ html, body, #root {
   --atividades-recentes: #3B82F626;
 
   /* Calendario */
-  --calendario-bg-offrange: #2a2a2a;
+  --calendario-bg-offrange: #353535;
   --calendario-texto-offrange: #6b7280;
 
-  --calendario-bg-geral: #1f1f1f;
+  --calendario-bg-geral: #272626;
   --calendario-texto-titulo: #f9fafb;
 
   --calendario-bg-botao: #2d2d2d;
