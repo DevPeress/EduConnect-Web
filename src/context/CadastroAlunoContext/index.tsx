@@ -3,11 +3,8 @@ import type { CadastroAlunoContextType } from "../../types/types";
 import CadastroTitulo from "../../components/Cadastros/Titulo";
 import CadastroFlex2 from "../../components/Cadastros/Flex-2";
 import CadastroFlex1 from "../../components/Cadastros/Flex-1";
-import {
-  cadastroAlunoSchema,
-  type CadastroAlunoInput,
-} from "../../schemas/cadastroAlunoSchema";
 import toast from "react-hot-toast";
+import { cadastroAlunoSchema, type CadastroAlunoInput } from "../../schemas/alunoSchema";
 //import { http } from "../../utils/axios";
 
 const CadastroAlunoContext = createContext<
@@ -39,9 +36,8 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
 
   const Confirm = async () => {
     const result = cadastroAlunoSchema.safeParse(dados);
-    if (!result.success) {
+    if (!result.success) 
       return toast.error(result.error.issues[0].message);
-    }
 
     if (resolveCallback) {
       //await http
