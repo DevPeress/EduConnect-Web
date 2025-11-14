@@ -85,8 +85,8 @@ export interface ProfessorType {
 };
 
 export type CadastroAlunoContextType = {
-  openMenu: () => Promise<AlunoInput | null>;
-  setDados: React.Dispatch<React.SetStateAction<AlunoInput>>;
+  openMenu: () => Promise<CadastroAlunoInput | null>;
+  setDados: React.Dispatch<React.SetStateAction<CadastroAlunoInput>>;
 };
 
 export type CadastroProfessorContextType = {

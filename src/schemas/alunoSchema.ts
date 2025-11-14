@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const alunoSchema = z.object({
+export const cadastroAlunoSchema = z.object({
     matricula: z.string(),
     status: z.string(),
     nome: z.string().min(3, "Nome deve ter no mínimo 3 caracteres"),
@@ -14,4 +14,4 @@ export const alunoSchema = z.object({
     nascimento: z.date("Data de Nascimento Inválida!")
 })
 
-export type AlunoInput = z.infer<typeof alunoSchema>;
+export type CadastroAlunoInput = z.infer<typeof cadastroAlunoSchema>;

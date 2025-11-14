@@ -1,17 +1,16 @@
-import type { AlunoInput } from "../../../schemas/alunoSchema";
-import type {
-  CadastroProfessorType,
-} from "../../../types/types";
+import type { CadastroAlunoInput } from "../../../schemas/cadastroAlunoSchema";
+import type { CadastroProfessorType } from "../../../types/types";
 import { formatCPF, formatTelefone } from "../../../utils/codigos";
 
-type CadastroFlex2Props<T extends AlunoInput | CadastroProfessorType> = {
-  opcao1: string;
-  opcao2: string;
-  infos: T;
-  setInfos: React.Dispatch<React.SetStateAction<T>>;
-};
+type CadastroFlex2Props<T extends CadastroAlunoInput | CadastroProfessorType> =
+  {
+    opcao1: string;
+    opcao2: string;
+    infos: T;
+    setInfos: React.Dispatch<React.SetStateAction<T>>;
+  };
 
-const CadastroFlex2 = <T extends AlunoInput | CadastroProfessorType>({
+const CadastroFlex2 = <T extends CadastroAlunoInput | CadastroProfessorType>({
   opcao1,
   opcao2,
   infos,
@@ -60,7 +59,8 @@ const CadastroFlex2 = <T extends AlunoInput | CadastroProfessorType>({
     let texto = e.target.value;
     if (Escolhas === "cpf") texto = formatCPF(texto);
 
-    if (Escolhas === "telefone" || Escolhas === "emergencia") texto = formatTelefone(texto);
+    if (Escolhas === "telefone" || Escolhas === "emergencia")
+      texto = formatTelefone(texto);
 
     setInfos((prev) => ({
       ...prev,
