@@ -9,8 +9,8 @@ const AuthContext = createContext<AuthContextType>({
 });
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [cargo, setCargo] = useState<string>("");
-  const [token, setToken] = useState<string>("");
+  const [cargo, setCargo] = useState<string>("Admin");
+  const [token, setToken] = useState<string>("sadsadsa");
 
   useEffect(() => {
     const savedCargo = localStorage.getItem("Role");

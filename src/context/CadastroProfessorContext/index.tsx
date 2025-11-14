@@ -1,12 +1,13 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
-import type {
-  CadastroProfessorContextType,
-  CadastroProfessorType,
-} from "../../types/types";
+import type { CadastroProfessorContextType } from "../../types/types";
 import CadastroTitulo from "../../components/Cadastros/Titulo";
 import CadastroFlex2 from "../../components/Cadastros/Flex-2";
 import CadastroFlex1 from "../../components/Cadastros/Flex-1";
-import ValidarProfessor from "./validao";
+import {
+  cadastroProfessorSchema,
+  type CadastroProfessorInput,
+} from "../../schemas/professorSchema";
+import toast from "react-hot-toast";
 //import { http } from "../../utils/axios";
 
 const CadastroProfessorContext = createContext<
@@ -18,12 +19,12 @@ export function CadastroProfessorProvider({
   children: ReactNode;
 }) {
   const [menu, setMenu] = useState<boolean>(false);
-  const [dados, setDados] = useState<CadastroProfessorType>({
+  const [dados, setDados] = useState<CadastroProfessorInput>({
     codigo: "",
     status: "Ativo",
     nome: "",
     cpf: "",
-    contratacao: "",
+    contratacao: new Date(),
     disciplina: "",
     formacao: "",
     turmas: [""],
@@ -31,13 +32,13 @@ export function CadastroProfessorProvider({
     telefone: "",
     emergencia: "",
     endereco: "",
-    nasc: "",
+    nasc: new Date(),
   });
   const [resolveCallback, setResolveCallback] = useState<
-    ((data: CadastroProfessorType | null) => void) | null
+    ((data: CadastroProfessorInput | null) => void) | null
   >(null);
 
-  const openMenu = (): Promise<CadastroProfessorType | null> => {
+  const openMenu = (): Promise<CadastroProfessorInput | null> => {
     setMenu(true);
     setDados((prevDados) => ({ ...prevDados, codigo: "PO123091" }));
     return new Promise((resolve) => {
@@ -46,12 +47,12 @@ export function CadastroProfessorProvider({
   };
 
   const Confirm = async () => {
-    const validar = ValidarProfessor(dados);
-    if (!validar) return;
+    const result = cadastroProfessorSchema.safeParse(dados);
+    if (!result.success) return toast.error(result.error.issues[0].message);
 
     if (resolveCallback) {
       //await http
-      //.post<CadastroProfessorType>("prfessor/cadastro", {
+      //.post<CadastroProfessorInput>("prfessor/cadastro", {
       //matricula: dados.matricula,
       //status: dados.status,
       //nome: dados.nome,
@@ -71,21 +72,7 @@ export function CadastroProfessorProvider({
       resolveCallback(dados);
       setResolveCallback(null);
     }
-    setDados({
-      codigo: "",
-      status: "",
-      nome: "",
-      cpf: "",
-      contratacao: "",
-      disciplina: "",
-      formacao: "",
-      turmas: [""],
-      email: "",
-      telefone: "",
-      emergencia: "",
-      endereco: "",
-      nasc: "",
-    });
+    ResetarDados();
     setMenu(false);
   };
 
@@ -94,12 +81,17 @@ export function CadastroProfessorProvider({
       resolveCallback(null);
       setResolveCallback(null);
     }
+    ResetarDados();
+    setMenu(false);
+  };
+
+  const ResetarDados = () => {
     setDados({
       codigo: "",
       status: "",
       nome: "",
       cpf: "",
-      contratacao: "",
+      contratacao: new Date(),
       disciplina: "",
       formacao: "",
       turmas: [""],
@@ -107,9 +99,8 @@ export function CadastroProfessorProvider({
       telefone: "",
       emergencia: "",
       endereco: "",
-      nasc: "",
+      nasc: new Date(),
     });
-    setMenu(false);
   };
 
   return (
