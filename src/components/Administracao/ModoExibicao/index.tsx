@@ -1,3 +1,5 @@
+// Botão responsável por alternar o layout da página entre tabela e cards.
+
 const ModoExibicao = ({
   modoExibir,
   trocarModo,
