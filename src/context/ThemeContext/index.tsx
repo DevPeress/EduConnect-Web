@@ -6,6 +6,7 @@ import type { ThemeType } from "../../types/types";
 const ThemeContext = createContext<ThemeType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
+  // Gerencia a temática selecionada, salvando-a no localStorage para uso posterior.
   const [dark, setDark] = useState<boolean>(() => {
     return localStorage.getItem("theme") === "dark";
   });
@@ -15,6 +16,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
   }
 
   useEffect(() => {
+    // Ao carregar o site, o contexto é inicializado e verifica se uma temática já está armazenada.
     if (dark) {
       document.documentElement.setAttribute("data-theme", "dark");
     } else {

@@ -1,3 +1,7 @@
+// A página recebe:
+// - Titulo do menu
+// - Botão para fechar o menu
+
 const CadastroTitulo = ({ titulo, cancelar }: { titulo: string, cancelar: () => void }) => {
     return (<div className="py-6 px-7 border border-(--border-color) flex justify-between bg-[#00000033]">
         <h2 className="text-[20px] font-bold text-(--text-primary) flex items-center gap-3">

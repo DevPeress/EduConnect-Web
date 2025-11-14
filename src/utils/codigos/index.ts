@@ -1,8 +1,10 @@
+// Converter o valor recebido para o formato monetário brasileiro (BRL).
 function formatBRL(value: number | string) {
-    const numero = Number(value);
-    return numero.toLocaleString("pt-BR");
+  const numero = Number(value);
+  return numero.toLocaleString("pt-BR");
 }
 
+// Formatando o valor para o formato válido de CPF.
 function formatCPF(value: string) {
   const v = value.replace(/\D/g, "").slice(0, 11); // só números, máximo 11 dígitos
 
@@ -12,6 +14,7 @@ function formatCPF(value: string) {
   return `${v.slice(0, 3)}.${v.slice(3, 6)}.${v.slice(6, 9)}-${v.slice(9, 11)}`;
 }
 
+// Formatando o valor para o formato válido de Telefone.
 function formatTelefone(value: string) {
   const v = value.replace(/\D/g, "").slice(0, 11); // só números, máximo 11 dígitos
 
