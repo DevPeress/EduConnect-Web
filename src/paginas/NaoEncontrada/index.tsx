@@ -2,13 +2,7 @@ import { useNavigate } from "react-router-dom";
 import FundoBolhas from "../../components/FundoBolhas";
 import { Options } from "../../utils/paginação";
 
-const NaoEncontrada = ({
-  Logado,
-  Cargo,
-}: {
-  Logado: boolean;
-  Cargo: string;
-}) => {
+const NaoEncontrada = ({ Logado, Cargo }: { Logado: boolean; Cargo: string }) => {
   const navegar = useNavigate();
 
   return (

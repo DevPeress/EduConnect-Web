@@ -39,9 +39,7 @@ const InicioAdm = () => {
   ]);
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 5000);
+    setLoading(false);
   }, []);
 
   return (

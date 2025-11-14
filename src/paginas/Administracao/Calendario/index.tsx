@@ -12,12 +12,7 @@ const CalendarioAdm = () => {
       title: "Reunião de equipe",
       start: new Date(2025, 10, 12, 10, 0), // (ano, mês-1, dia, hora, minuto)
       end: new Date(2025, 10, 12, 11, 0),
-    },
-    {
-      title: "Estudar React",
-      start: new Date(2025, 10, 13, 14, 0),
-      end: new Date(2025, 10, 13, 16, 0),
-    },
+    }
   ]);
 
   const handleSelectSlot = ({ start, end }: { start: Date; end: Date }) => {
@@ -26,9 +21,7 @@ const CalendarioAdm = () => {
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
+    setLoading(false);
   }, []);
 
   return (

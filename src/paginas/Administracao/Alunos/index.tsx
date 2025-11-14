@@ -60,122 +60,13 @@ const AlunosAdmin = () => {
       telefone: "(11) 95599-2605",
       status: "Ativo",
       media: 8.5,
-    },
-    {
-      ra: "2024002",
-      nome: "Fabrício Peres",
-      nasc: "3 de Abr, 2024",
-      turma: "9º B",
-      email: "fabricio.santos@gmail.com",
-      telefone: "(11) 95599-2605",
-      status: "Ativo",
-      media: 8.5,
-    },
-    {
-      ra: "2024003",
-      nome: "Fabrício Peres",
-      nasc: "3 de Abr, 2024",
-      turma: "9º B",
-      email: "fabricio.santos@gmail.com",
-      telefone: "(11) 95599-2605",
-      status: "Inativo",
-      media: 8.5,
-    },
-    {
-      ra: "2024004",
-      nome: "Fabrício Peres",
-      nasc: "3 de Abr, 2024",
-      turma: "9º A",
-      email: "fabricio.santos@gmail.com",
-      telefone: "(11) 95599-2605",
-      status: "Inativo",
-      media: 8.5,
-    },
-    {
-      ra: "2024005",
-      nome: "Fabrício Peres",
-      nasc: "3 de Abr, 2024",
-      turma: "9º B",
-      email: "fabricio.santos@gmail.com",
-      telefone: "(11) 95599-2605",
-      status: "Ativo",
-      media: 8.5,
-    },
-    {
-      ra: "2024006",
-      nome: "Fabrício Peres",
-      nasc: "3 de Abr, 2024",
-      turma: "9º A",
-      email: "fabricio.santos@gmail.com",
-      telefone: "(11) 95599-2605",
-      status: "Suspenso",
-      media: 8.5,
-    },
-    {
-      ra: "2024007",
-      nome: "Fabrício Peres",
-      nasc: "3 de Abr, 2024",
-      turma: "9º B",
-      email: "fabricio.santos@gmail.com",
-      telefone: "(11) 95599-2605",
-      status: "Suspenso",
-      media: 8.5,
-    },
-    {
-      ra: "2024008",
-      nome: "Fabrício Peres",
-      nasc: "3 de Abr, 2024",
-      turma: "9º A",
-      email: "fabricio.santos@gmail.com",
-      telefone: "(11) 95599-2605",
-      status: "Ativo",
-      media: 8.5,
-    },
-    {
-      ra: "2024009",
-      nome: "Fabrício Peres",
-      nasc: "3 de Abr, 2024",
-      turma: "9º A",
-      email: "fabricio.santos@gmail.com",
-      telefone: "(11) 95599-2605",
-      status: "Ativo",
-      media: 8.5,
-    },
-    {
-      ra: "20240010",
-      nome: "Fabrício Peres",
-      nasc: "3 de Abr, 2024",
-      turma: "9º A",
-      email: "fabricio.santos@gmail.com",
-      telefone: "(11) 95599-2605",
-      status: "Ativo",
-      media: 8.5,
-    },
-    {
-      ra: "20240011",
-      nome: "Fabrício Peres",
-      nasc: "3 de Abr, 2024",
-      turma: "9º A",
-      email: "fabricio.santos@gmail.com",
-      telefone: "(11) 95599-2605",
-      status: "Ativo",
-      media: 8.5,
-    },
-    {
-      ra: "20240012",
-      nome: "Fabrício Peres",
-      nasc: "3 de Abr, 2024",
-      turma: "9º A",
-      email: "fabricio.santos@gmail.com",
-      telefone: "(11) 95599-2605",
-      status: "Ativo",
-      media: 8.5,
-    },
+    }
   ]);
 
   const AlunosFiltrados = useMemo(() => {
     const termo = pesquisa.toLowerCase();
     return alunos.filter((itens) => {
+      // Agrupa todas as variáveis referentes aos alunos em uma única variável.
       const conteudo = `
         ${itens.ra.toLowerCase()}
         ${itens.nome.toLowerCase()}
@@ -187,12 +78,17 @@ const AlunosAdmin = () => {
         ${itens.media}
         `;
 
+      // Avalia a variável de Turma selecionada para determinar o filtro a ser aplicado.
       const correspondeTurma =
         selecionada === "Todas as Salas" ||
         itens.turma.toLowerCase() === selecionada.toLowerCase();
+
+      // Avalia a variável de Status selecionada para determinar o filtro a ser aplicado.
       const correspondeStatus =
         status === "Todos os Status" ||
         itens.status.toLowerCase() === status.toLowerCase();
+
+      // Valida se o termo pesquisado está contido nas informações do aluno para exibição combinada com a turma e o status.
       const correspondetes =
         conteudo.includes(termo) && correspondeTurma && correspondeStatus;
       return correspondetes;
@@ -207,9 +103,7 @@ const AlunosAdmin = () => {
           ? AlunosFiltrados.length / 6
           : Math.floor(AlunosFiltrados.length / 6) + 1,
     }));
-    setTimeout(() => {
-      setLoading(false);
-    }, 5000);
+    setLoading(false);
   }, [AlunosFiltrados]);
 
   const AdicionarAluno = async () => {
@@ -315,14 +209,14 @@ const AlunosAdmin = () => {
                           item.status === "Ativo"
                             ? "rgba(16, 185, 129, 0.15)"
                             : item.status === "Inativo"
-                            ? "rgba(156, 163, 175, 0.15)"
-                            : "rgba(239, 68, 68, 0.15)",
+                              ? "rgba(156, 163, 175, 0.15)"
+                              : "rgba(239, 68, 68, 0.15)",
                         color:
                           item.status === "Ativo"
                             ? "var(--green)"
                             : item.status === "Inativo"
-                            ? "var(--text-secondary)"
-                            : "var(--red)",
+                              ? "var(--text-secondary)"
+                              : "var(--red)",
                       }}
                     >
                       {item.status}

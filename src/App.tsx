@@ -8,6 +8,7 @@ import InicioAdm from "./paginas/Administracao/Inicio";
 import AlunosAdmin from "./paginas/Administracao/Alunos";
 import ProfessoresAdmin from "./paginas/Administracao/Professores";
 import CalendarioAdm from "./paginas/Administracao/Calendario";
+import PrivateRoute from "./middleware";
 
 function App() {
   const auth = useAuth();
@@ -24,14 +25,12 @@ function App() {
         <Route path="/" element={<Inicial Logado={user} Cargo={cargo} />} />
         <Route path="/login" element={<Login TrocarInfos={setAuth} />} />
 
-        {/*
-          <Route element={<PrivateRoute isAuthenticated={user} userRole={cargo} allowedRoles={['Admin']} />}>
-          </Route>
-          */}
-        <Route path="/admin/dashboard" element={<InicioAdm />} />
-        <Route path="/admin/alunos" element={<AlunosAdmin />} />
-        <Route path="/admin/professores" element={<ProfessoresAdmin />} />
-        <Route path="/admin/calendario" element={<CalendarioAdm />} />
+        <Route element={<PrivateRoute isAuthenticated={user} userRole={cargo} allowedRoles={['Admin']} />}>
+          <Route path="/admin/dashboard" element={<InicioAdm />} />
+          <Route path="/admin/alunos" element={<AlunosAdmin />} />
+          <Route path="/admin/professores" element={<ProfessoresAdmin />} />
+          <Route path="/admin/calendario" element={<CalendarioAdm />} />
+        </Route>
         {/* Página de sem acesso */}
         <Route path="/not-authorized" element={<SemAcesso Logado={user} Cargo={cargo} />} />
         {/* Página não encontrada */}
