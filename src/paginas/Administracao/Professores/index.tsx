@@ -64,6 +64,7 @@ const ProfessoresAdmin = () => {
   const ProfessoresFiltrados = useMemo(() => {
     const termo = pesquisa.toLowerCase();
     return professores.filter((itens) => {
+      // Agrupa todas as variáveis referentes aos professores em uma única variável.
       const conteudo = `
         ${itens.codigo.toLowerCase()}
         ${itens.nome.toLowerCase()}
@@ -74,11 +75,16 @@ const ProfessoresAdmin = () => {
         ${itens.status.toLowerCase()}
         `;
 
+      // Avalia a variável de Turma selecionada para determinar o filtro a ser aplicado.
       const correspondeTurma =
         selecionada === "Todas as Salas" || itens.turmas.includes(selecionada);
+
+      // Avalia a variável de Status selecionada para determinar o filtro a ser aplicado.
       const correspondeStatus =
         status === "Todos os Status" ||
         itens.status.toLowerCase() === status.toLowerCase();
+
+       // Valida se o termo pesquisado está contido nas informações do aluno para exibição combinada com a turma e o status.
       const correspondetes =
         conteudo.includes(termo) && correspondeTurma && correspondeStatus;
       return correspondetes;
