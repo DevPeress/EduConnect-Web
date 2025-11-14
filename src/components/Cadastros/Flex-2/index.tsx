@@ -1,17 +1,17 @@
+import type { AlunoInput } from "../../../schemas/alunoSchema";
 import type {
-  CadastroAlunoType,
   CadastroProfessorType,
 } from "../../../types/types";
 import { formatCPF, formatTelefone } from "../../../utils/codigos";
 
-type CadastroFlex2Props<T extends CadastroAlunoType | CadastroProfessorType> = {
+type CadastroFlex2Props<T extends AlunoInput | CadastroProfessorType> = {
   opcao1: string;
   opcao2: string;
   infos: T;
   setInfos: React.Dispatch<React.SetStateAction<T>>;
 };
 
-const CadastroFlex2 = <T extends CadastroAlunoType | CadastroProfessorType>({
+const CadastroFlex2 = <T extends AlunoInput | CadastroProfessorType>({
   opcao1,
   opcao2,
   infos,
