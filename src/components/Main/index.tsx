@@ -2,21 +2,17 @@ import type { ReactNode } from "react";
 import Header from "../Header";
 import Loader from "../Loader";
 
-const Main = ({
-  titulo,
-  desc,
-  botao,
-  load,
-  children,
-}: {
+// A página recebe:
+// - Um título para exibição;
+// - Uma descrição para ser apresentada;
+// - As configurações do botão: se estará ativo, qual função será executada e o texto exibido;
+// - A função de loading, utilizada para controlar a exibição do loader.
+
+const Main = ({ titulo, desc, botao, load, children }: {
   titulo: string;
   desc: string;
   children: ReactNode;
-  botao: {
-    ativo: boolean;
-    adicionar?: () => void;
-    mensagem?: string;
-  };
+  botao: { ativo: boolean; adicionar?: () => void; mensagem?: string; };
   load: boolean;
 }) => {
   return (
