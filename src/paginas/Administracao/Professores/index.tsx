@@ -58,16 +58,7 @@ const ProfessoresAdmin = () => {
       status: "Ativo",
       codigo: "01",
       nasc: "3 de Abr, 2024",
-    },
-    {
-      nome: "Fabrício Peres",
-      turmas: ["9º A"],
-      email: "fabricio.santos@gmail.com",
-      telefone: "(11) 95599-2605",
-      status: "Ativo",
-      codigo: "02",
-      nasc: "3 de Abr, 2024",
-    },
+    }
   ]);
 
   const ProfessoresFiltrados = useMemo(() => {
