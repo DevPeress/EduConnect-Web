@@ -4,7 +4,10 @@ import CadastroTitulo from "../../components/Cadastros/Titulo";
 import CadastroFlex2 from "../../components/Cadastros/Flex-2";
 import CadastroFlex1 from "../../components/Cadastros/Flex-1";
 import toast from "react-hot-toast";
-import { cadastroAlunoSchema, type CadastroAlunoInput } from "../../schemas/alunoSchema";
+import {
+  cadastroAlunoSchema,
+  type CadastroAlunoInput,
+} from "../../schemas/alunoSchema";
 //import { http } from "../../utils/axios";
 
 const CadastroAlunoContext = createContext<
@@ -36,8 +39,7 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
 
   const Confirm = async () => {
     const result = cadastroAlunoSchema.safeParse(dados);
-    if (!result.success) 
-      return toast.error(result.error.issues[0].message);
+    if (!result.success) return toast.error(result.error.issues[0].message);
 
     if (resolveCallback) {
       //await http
@@ -61,16 +63,7 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
       resolveCallback(dados);
       setResolveCallback(null);
     }
-    setDados({
-      matricula: "",
-      status: "",
-      nome: "",
-      turma: "",
-      email: "",
-      telefone: "",
-      endereco: "",
-      nascimento: new Date(),
-    });
+    ResetarDados();
     setMenu(false);
   };
 
@@ -79,6 +72,11 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
       resolveCallback(null);
       setResolveCallback(null);
     }
+    ResetarDados();
+    setMenu(false);
+  };
+
+  const ResetarDados = () => {
     setDados({
       matricula: "",
       status: "",
@@ -89,7 +87,6 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
       endereco: "",
       nascimento: new Date(),
     });
-    setMenu(false);
   };
 
   return (
