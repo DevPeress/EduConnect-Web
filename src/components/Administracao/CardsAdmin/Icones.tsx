@@ -1,3 +1,4 @@
+// SVG do Card do Aluno
 const AlunosCard = () => {
   return (
     <div className="w-12 h-12 rounded-[10px] flex items-center justify-center shrink-0 bg-(--aluno-card) text-(--blue)">
@@ -20,6 +21,7 @@ const AlunosCard = () => {
   );
 };
 
+// SVG do Card de Presença
 const PresencaCard = () => {
   return (
     <div className="w-12 h-12 rounded-[10px] flex items-center justify-center shrink-0 bg-(--presenca-card) text-(--purple)">
@@ -39,6 +41,7 @@ const PresencaCard = () => {
   );
 };
 
+// SVG do Card de Professores
 const ProfessoresCard = () => {
   return (
     <div className="w-12 h-12 rounded-[10px] flex items-center justify-center shrink-0 bg-(--professor-card) text-(--green)">
@@ -59,6 +62,7 @@ const ProfessoresCard = () => {
   );
 };
 
+// SVG do Card das Turmas
 const TurmasCard = () => {
   return (
     <div className="w-12 h-12 rounded-[10px] flex items-center justify-center shrink-0 bg-(--turma-card) text-(--orange)">
