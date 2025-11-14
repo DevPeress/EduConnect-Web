@@ -66,6 +66,7 @@ const AlunosAdmin = () => {
   const AlunosFiltrados = useMemo(() => {
     const termo = pesquisa.toLowerCase();
     return alunos.filter((itens) => {
+      // Agrupa todas as variáveis referentes aos alunos em uma única variável.
       const conteudo = `
         ${itens.ra.toLowerCase()}
         ${itens.nome.toLowerCase()}
@@ -77,12 +78,17 @@ const AlunosAdmin = () => {
         ${itens.media}
         `;
 
+      // Avalia a variável de Turma selecionada para determinar o filtro a ser aplicado.
       const correspondeTurma =
         selecionada === "Todas as Salas" ||
         itens.turma.toLowerCase() === selecionada.toLowerCase();
+
+      // Avalia a variável de Status selecionada para determinar o filtro a ser aplicado.
       const correspondeStatus =
         status === "Todos os Status" ||
         itens.status.toLowerCase() === status.toLowerCase();
+
+      // Valida se o termo pesquisado está contido nas informações do aluno para exibição combinada com a turma e o status.
       const correspondetes =
         conteudo.includes(termo) && correspondeTurma && correspondeStatus;
       return correspondetes;
@@ -205,14 +211,14 @@ const AlunosAdmin = () => {
                           item.status === "Ativo"
                             ? "rgba(16, 185, 129, 0.15)"
                             : item.status === "Inativo"
-                            ? "rgba(156, 163, 175, 0.15)"
-                            : "rgba(239, 68, 68, 0.15)",
+                              ? "rgba(156, 163, 175, 0.15)"
+                              : "rgba(239, 68, 68, 0.15)",
                         color:
                           item.status === "Ativo"
                             ? "var(--green)"
                             : item.status === "Inativo"
-                            ? "var(--text-secondary)"
-                            : "var(--red)",
+                              ? "var(--text-secondary)"
+                              : "var(--red)",
                       }}
                     >
                       {item.status}
