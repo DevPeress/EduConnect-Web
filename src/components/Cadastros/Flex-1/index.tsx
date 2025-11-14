@@ -1,7 +1,7 @@
-import type { CadastroAlunoInput } from "../../../schemas/cadastroAlunoSchema";
-import type { CadastroProfessorType } from "../../../types/types";
+import type { CadastroAlunoInput } from "../../../schemas/alunoSchema";
+import type { CadastroProfessorInput } from "../../../schemas/professorSchema";
 
-type CadastroFlex1Props<T extends CadastroAlunoInput | CadastroProfessorType> =
+type CadastroFlex1Props<T extends CadastroAlunoInput | CadastroProfessorInput> =
   {
     titulo: string;
     infos: T;
@@ -9,7 +9,7 @@ type CadastroFlex1Props<T extends CadastroAlunoInput | CadastroProfessorType> =
     place: string;
   };
 
-const CadastroFlex1 = <T extends CadastroAlunoInput | CadastroProfessorType>({
+const CadastroFlex1 = <T extends CadastroAlunoInput | CadastroProfessorInput>({
   titulo,
   infos,
   setInfos,

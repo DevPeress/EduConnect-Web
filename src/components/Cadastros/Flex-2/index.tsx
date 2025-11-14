@@ -1,8 +1,8 @@
-import type { CadastroAlunoInput } from "../../../schemas/cadastroAlunoSchema";
-import type { CadastroProfessorType } from "../../../types/types";
+import type { CadastroAlunoInput } from "../../../schemas/alunoSchema";
+import type { CadastroProfessorInput } from "../../../schemas/professorSchema";
 import { formatCPF, formatTelefone } from "../../../utils/codigos";
 
-type CadastroFlex2Props<T extends CadastroAlunoInput | CadastroProfessorType> =
+type CadastroFlex2Props<T extends CadastroAlunoInput | CadastroProfessorInput> =
   {
     opcao1: string;
     opcao2: string;
@@ -10,7 +10,7 @@ type CadastroFlex2Props<T extends CadastroAlunoInput | CadastroProfessorType> =
     setInfos: React.Dispatch<React.SetStateAction<T>>;
   };
 
-const CadastroFlex2 = <T extends CadastroAlunoInput | CadastroProfessorType>({
+const CadastroFlex2 = <T extends CadastroAlunoInput | CadastroProfessorInput>({
   opcao1,
   opcao2,
   infos,
