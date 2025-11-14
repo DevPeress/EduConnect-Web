@@ -1,14 +1,8 @@
 import type {
   CadastroAlunoType,
+  CadastroFlex1Props,
   CadastroProfessorType,
 } from "../../../types/types";
-
-type CadastroFlex1Props<T extends CadastroAlunoType | CadastroProfessorType> = {
-  titulo: string;
-  infos: T;
-  setInfos: React.Dispatch<React.SetStateAction<T>>;
-  place: string;
-};
 
 const CadastroFlex1 = <T extends CadastroAlunoType | CadastroProfessorType>({
   titulo,
@@ -16,6 +10,7 @@ const CadastroFlex1 = <T extends CadastroAlunoType | CadastroProfessorType>({
   setInfos,
   place,
 }: CadastroFlex1Props<T>) => {
+  // Processa a opção recebida e retorna o resultado conforme o contexto de criação de alunos ou professores.
   const Tipo = (dado: string) => {
     switch (dado) {
       case "Nome completo":
@@ -29,6 +24,7 @@ const CadastroFlex1 = <T extends CadastroAlunoType | CadastroProfessorType>({
 
   const tipo = Tipo(titulo) as keyof T;
 
+  // Cria o Select ou Input para ser demonstrado
   const TipoDiv = () => {
     switch (tipo) {
       case "nome":
