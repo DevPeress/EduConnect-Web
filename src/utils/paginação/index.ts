@@ -6,5 +6,5 @@ import type { Acessos } from "../../types/types";
 export const Options: Acessos[] = [
     { logado: false, pagina: "/login", mensagem: "Ir para o Login" },
     { logado: true, pagina: "/admin/dashboard", mensagem: "Ir para Área Administrativa", cargos: ["Admin"] },
-    { logado: true, pagina: "/professor/dashboard", mensagem: "Ir para Área do Professor" },
+    { logado: true, pagina: "/professor/dashboard", mensagem: "Ir para Área do Professor", cargos: ["Professor"] },
 ]
