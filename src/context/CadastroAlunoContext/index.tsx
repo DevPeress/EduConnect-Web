@@ -1,12 +1,12 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
 import type {
   CadastroAlunoContextType,
-  CadastroAlunoType,
 } from "../../types/types";
 import CadastroTitulo from "../../components/Cadastros/Titulo";
 import CadastroFlex2 from "../../components/Cadastros/Flex-2";
 import CadastroFlex1 from "../../components/Cadastros/Flex-1";
-import ValidarAluno from "./validacao";
+import { alunoSchema, type AlunoInput } from "../../schemas/alunoSchema";
+import toast from "react-hot-toast";
 //import { http } from "../../utils/axios";
 
 const CadastroAlunoContext = createContext<
@@ -14,7 +14,7 @@ const CadastroAlunoContext = createContext<
 >(undefined);
 export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
   const [menu, setMenu] = useState<boolean>(false);
-  const [dados, setDados] = useState<CadastroAlunoType>({
+  const [dados, setDados] = useState<AlunoInput>({
     matricula: "",
     status: "Ativo",
     nome: "",
@@ -22,13 +22,13 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
     email: "",
     telefone: "",
     endereco: "",
-    nascimento: "",
+    nascimento: new Date(),
   });
   const [resolveCallback, setResolveCallback] = useState<
-    ((data: CadastroAlunoType | null) => void) | null
+    ((data: AlunoInput | null) => void) | null
   >(null);
 
-  const openMenu = (): Promise<CadastroAlunoType | null> => {
+  const openMenu = (): Promise<AlunoInput | null> => {
     setMenu(true);
     setDados((prevDados) => ({ ...prevDados, matricula: "MA123091" }));
     return new Promise((resolve) => {
@@ -37,12 +37,14 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
   };
 
   const Confirm = async () => {
-    const validar = ValidarAluno(dados);
-    if (!validar) return;
+    const result = alunoSchema.safeParse(dados);
+    if (!result.success) {
+      return toast.error(result.error.issues[0].message)
+    }
 
     if (resolveCallback) {
       //await http
-      //.post<CadastroAlunoType>("aluno/cadastro", {
+      //.post<AlunoInput>("aluno/cadastro", {
       //matricula: dados.matricula,
       //status: dados.status,
       //nome: dados.nome,
@@ -70,7 +72,7 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
       email: "",
       telefone: "",
       endereco: "",
-      nascimento: "",
+      nascimento: new Date(),
     });
     setMenu(false);
   };
@@ -88,7 +90,7 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
       email: "",
       telefone: "",
       endereco: "",
-      nascimento: "",
+      nascimento: new Date(),
     });
     setMenu(false);
   };

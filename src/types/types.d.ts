@@ -85,24 +85,13 @@ export interface ProfessorType {
 };
 
 export type CadastroAlunoContextType = {
-  openMenu: () => Promise<CadastroAlunoType | null>;
-  setDados: React.Dispatch<React.SetStateAction<CadastroAlunoType>>;
+  openMenu: () => Promise<AlunoInput | null>;
+  setDados: React.Dispatch<React.SetStateAction<AlunoInput>>;
 };
 
 export type CadastroProfessorContextType = {
   openMenu: () => Promise<CadastroProfessorType | null>;
   setDados: React.Dispatch<React.SetStateAction<CadastroProfessorType>>;
-};
-
-export interface CadastroAlunoType {
-  matricula: string;
-  nascimento: string;
-  status: string;
-  nome: string;
-  turma: string;
-  email: string;
-  telefone: string;
-  endereco: string;
 };
 
 export interface CadastroProfessorType {
