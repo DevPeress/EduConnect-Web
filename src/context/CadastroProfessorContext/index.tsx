@@ -1,11 +1,12 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
-import type {
-  CadastroProfessorContextType,
-} from "../../types/types";
+import type { CadastroProfessorContextType } from "../../types/types";
 import CadastroTitulo from "../../components/Cadastros/Titulo";
 import CadastroFlex2 from "../../components/Cadastros/Flex-2";
 import CadastroFlex1 from "../../components/Cadastros/Flex-1";
-import { cadastroProfessorSchema, type CadastroProfessorInput } from "../../schemas/professorSchema";
+import {
+  cadastroProfessorSchema,
+  type CadastroProfessorInput,
+} from "../../schemas/professorSchema";
 import toast from "react-hot-toast";
 //import { http } from "../../utils/axios";
 
@@ -31,7 +32,7 @@ export function CadastroProfessorProvider({
     telefone: "",
     emergencia: "",
     endereco: "",
-    nasc: new Date,
+    nasc: new Date(),
   });
   const [resolveCallback, setResolveCallback] = useState<
     ((data: CadastroProfessorInput | null) => void) | null
@@ -46,9 +47,8 @@ export function CadastroProfessorProvider({
   };
 
   const Confirm = async () => {
-    const result = cadastroProfessorSchema.safeParse(dados)
-    if (!result.success) 
-      return toast.error(result.error.issues[0].message);
+    const result = cadastroProfessorSchema.safeParse(dados);
+    if (!result.success) return toast.error(result.error.issues[0].message);
 
     if (resolveCallback) {
       //await http
@@ -72,21 +72,7 @@ export function CadastroProfessorProvider({
       resolveCallback(dados);
       setResolveCallback(null);
     }
-    setDados({
-      codigo: "",
-      status: "",
-      nome: "",
-      cpf: "",
-      contratacao: new Date(),
-      disciplina: "",
-      formacao: "",
-      turmas: [""],
-      email: "",
-      telefone: "",
-      emergencia: "",
-      endereco: "",
-      nasc: new Date(),
-    });
+    ResetarDados();
     setMenu(false);
   };
 
@@ -95,6 +81,11 @@ export function CadastroProfessorProvider({
       resolveCallback(null);
       setResolveCallback(null);
     }
+    ResetarDados();
+    setMenu(false);
+  };
+
+  const ResetarDados = () => {
     setDados({
       codigo: "",
       status: "",
@@ -110,7 +101,6 @@ export function CadastroProfessorProvider({
       endereco: "",
       nasc: new Date(),
     });
-    setMenu(false);
   };
 
   return (
