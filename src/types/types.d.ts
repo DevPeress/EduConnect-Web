@@ -133,3 +133,10 @@ export interface SlotInfo {
   slots: Date[];
   action: "select" | "click" | "doubleClick";
 }
+
+export interface CadastroFlex2Props<T extends CadastroAlunoType | CadastroProfessorType> {
+  opcao1: string;
+  opcao2: string;
+  infos: T;
+  setInfos: React.Dispatch<React.SetStateAction<T>>;
+};
