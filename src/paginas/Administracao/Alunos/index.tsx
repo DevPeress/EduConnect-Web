@@ -103,9 +103,7 @@ const AlunosAdmin = () => {
           ? AlunosFiltrados.length / 6
           : Math.floor(AlunosFiltrados.length / 6) + 1,
     }));
-    setTimeout(() => {
-      setLoading(false);
-    }, 5000);
+    setLoading(false);
   }, [AlunosFiltrados]);
 
   const AdicionarAluno = async () => {
