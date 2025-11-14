@@ -134,6 +134,13 @@ export interface SlotInfo {
   action: "select" | "click" | "doubleClick";
 }
 
+export interface CadastroFlex1Props<T extends CadastroAlunoType | CadastroProfessorType> {
+  titulo: string;
+  infos: T;
+  setInfos: React.Dispatch<React.SetStateAction<T>>;
+  place: string;
+};
+
 export interface CadastroFlex2Props<T extends CadastroAlunoType | CadastroProfessorType> {
   opcao1: string;
   opcao2: string;
