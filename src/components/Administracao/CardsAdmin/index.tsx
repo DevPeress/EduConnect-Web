@@ -11,6 +11,7 @@ const CardsAdmin = ({ dados }: { dados: CardsAdminType }) => {
   const tipo: string = dados.dado;
   const porcentagem: boolean = dados.porcentagem > 0;
 
+  // Processa a opção recebida e retorna o título e o ícone SVG de acordo com o tipo informado.
   const Card = (tipo: string) => {
     switch (tipo) {
       case "Alunos":
@@ -24,6 +25,7 @@ const CardsAdmin = ({ dados }: { dados: CardsAdminType }) => {
     }
   };
 
+  // Processa a opção recebida e retorna o valor da mensagem para ser exibida
   const Info = (tipo: string, valor: number) => {
     const analise: boolean = valor >= 0;
     switch (tipo) {

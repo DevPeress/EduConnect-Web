@@ -1,3 +1,4 @@
+// SGV Aluno
 const Aluno = () => {
   return (
     <svg
@@ -16,6 +17,7 @@ const Aluno = () => {
   );
 };
 
+// SVG Nota
 const Nota = () => {
   return (
     <svg
@@ -34,6 +36,7 @@ const Nota = () => {
   );
 };
 
+// SVG Presença
 const Presenca = () => {
   return (
     <svg
@@ -52,6 +55,7 @@ const Presenca = () => {
   );
 };
 
+// SVG Relatorio
 const Relatorio = () => {
   return (
     <svg

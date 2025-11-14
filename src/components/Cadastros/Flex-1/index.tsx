@@ -15,6 +15,7 @@ const CadastroFlex1 = <T extends CadastroAlunoInput | CadastroProfessorInput>({
   setInfos,
   place,
 }: CadastroFlex1Props<T>) => {
+  // Processa a opção recebida e retorna o resultado conforme o contexto de criação de alunos ou professores.
   const Tipo = (dado: string) => {
     switch (dado) {
       case "Nome completo":
@@ -28,6 +29,7 @@ const CadastroFlex1 = <T extends CadastroAlunoInput | CadastroProfessorInput>({
 
   const tipo = Tipo(titulo) as keyof T;
 
+  // Cria o Select ou Input para ser demonstrado
   const TipoDiv = () => {
     switch (tipo) {
       case "nome":

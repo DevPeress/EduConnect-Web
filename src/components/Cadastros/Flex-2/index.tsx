@@ -16,6 +16,7 @@ const CadastroFlex2 = <T extends CadastroAlunoInput | CadastroProfessorInput>({
   infos,
   setInfos,
 }: CadastroFlex2Props<T>) => {
+  // Processa a opção recebida e retorna o resultado conforme o contexto de criação de alunos ou professores.
   const Tipo = (dado: string) => {
     switch (dado) {
       case "Matrícula":
@@ -68,14 +69,17 @@ const CadastroFlex2 = <T extends CadastroAlunoInput | CadastroProfessorInput>({
     }));
   };
 
+  // Classes utilitárias do Tailwind utilizadas para estilização dos campos de entrada.
   const baseClass =
     "w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)";
 
+  // Define os tipos de informações exibidas no select com base no tipo fornecido.
   const selectOptions: Record<string, string[]> = {
     status: ["Ativo", "Inativo", "Suspenso"],
     turma: ["Selecionar Turma", "1A", "2B", "3C"],
   };
 
+  // Define os tipos de informações exibidas no select com base no tipo fornecido.
   const inputTypes: Record<string, string> = {
     nascimento: "date",
     contratacao: "date",
@@ -84,6 +88,7 @@ const CadastroFlex2 = <T extends CadastroAlunoInput | CadastroProfessorInput>({
     telefone: "text",
   };
 
+  // Cria o Select ou Input para ser demonstrado
   const TipoDiv = (Escolhas: keyof T) => {
     const valor: string = infos[Escolhas] as string;
 

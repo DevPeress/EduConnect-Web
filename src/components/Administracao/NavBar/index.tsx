@@ -12,6 +12,7 @@ import LinkPaginas from "../../LinkPaginas";
 
 const NavBarAdmin = () => {
   const location = useLocation();
+  // Configuração das rotas da NavBar, contendo nome, caminho de redirecionamento e ícone SVG associado.
   const Principal: NavAdmin[] = [
     { nome: "DashBoard", pagina: "/admin/dashboard", svg: DashBoard },
     { nome: "Alunos", pagina: "/admin/alunos", svg: Alunos },
