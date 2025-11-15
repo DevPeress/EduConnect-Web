@@ -28,6 +28,9 @@ O **Edu Connect** é o front-end de um sistema escolar moderno desenvolvido com 
 ### 🚦 Gerenciamento de Rotas
 - [React Router DOM](https://reactrouter.com/)
 
+ ### 🛡️ Validação de Dados
+- [Zod](https://zod.dev)
+
 ### 🧹 Qualidade de Código
 - [ESLint](https://eslint.org/)
 - [TypeScript ESLint](https://typescript-eslint.io/)
