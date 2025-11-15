@@ -11,17 +11,19 @@ import GraficoAdmin from "../../../components/Administracao/GraficoAdmin";
 import AcoesAdmin from "../../../components/Administracao/AcoesAdmin";
 import Main from "../../../components/Main";
 import Aside from "../../../components/Aside";
+import { http } from "../../../utils/axios";
+import toast from "react-hot-toast";
 
 const InicioAdm = () => {
   const [loading, setLoading] = useState<boolean>(true);
-  const [dados] = useState<CardsAdminType[]>([
+  const [dados, setDados] = useState<CardsAdminType[]>([
     { dado: "Alunos", total: 1245, aumento: 150, porcentagem: 12 },
     { dado: "Professores", total: 87, aumento: 3, porcentagem: 3.5 },
     { dado: "Turmas", total: 42, aumento: 0, porcentagem: 0 },
     { dado: "Presença", total: 94.5, aumento: 94.5, porcentagem: 2.3 },
   ]);
 
-  const [atividades] = useState<AtividadeType[]>([
+  const [atividades, setAtividades] = useState<AtividadeType[]>([
     { tipo: "Nota", dado: "Matemática 9º A", horario: 15 },
     { tipo: "Presença", dado: "Turma 8º A", horario: 60 },
     { tipo: "Novo Aluno", dado: "João Silva", horario: 120 },
@@ -29,7 +31,7 @@ const InicioAdm = () => {
     { tipo: "Material", dado: "Português", horario: 300 },
   ]);
 
-  const [calendario] = useState<CalendarioType[]>([
+  const [calendario, setCalendario] = useState<CalendarioType[]>([
     {
       dia: "24",
       mes: "Out",
@@ -39,7 +41,17 @@ const InicioAdm = () => {
   ]);
 
   useEffect(() => {
-    setLoading(false);
+    http.get("Administracao/PegarInicio")
+      .then(function (dados) {
+        setDados(dados.data.cards)
+        setAtividades(dados.data.atividades)
+        setCalendario(dados.data.calendario)
+        setLoading(false);
+      })
+      .catch(function (error) {
+        console.log(error)
+        toast.error(error.message == "Network Error" ? "Não foi possível pegar os Dados!" : "Erro inesperado")
+      })
   }, []);
 
   return (

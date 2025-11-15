@@ -25,7 +25,7 @@ function App() {
         <Route path="/" element={<Inicial Logado={user} Cargo={cargo} />} />
         <Route path="/login" element={<Login TrocarInfos={setAuth} />} />
 
-        <Route element={<PrivateRoute isAuthenticated={user} userRole={cargo} allowedRoles={['Admin']} />}>
+        <Route element={<PrivateRoute isAuthenticated={user} userRole={cargo} allowedRoles={['Administrador', 'Funcionário']} />}>
           <Route path="/admin/dashboard" element={<InicioAdm />} />
           <Route path="/admin/alunos" element={<AlunosAdmin />} />
           <Route path="/admin/professores" element={<ProfessoresAdmin />} />
