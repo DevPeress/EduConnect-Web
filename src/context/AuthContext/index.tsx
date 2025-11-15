@@ -9,7 +9,7 @@ const AuthContext = createContext<AuthContextType>({
 });
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [cargo, setCargo] = useState<string>("Admininstrador");
+  const [cargo, setCargo] = useState<string>("Administrador");
   const [token, setToken] = useState<string>("sadsadsa");
 
   useEffect(() => {
