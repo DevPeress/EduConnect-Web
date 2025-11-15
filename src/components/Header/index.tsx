@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Dia from "../../assets/Dia.svg";
 import Noite from "../../assets/Noite.svg";
 import { useAuth } from "../../context/AuthContext";
@@ -8,6 +9,21 @@ const Header = () => {
   const dark = tema.dark;
   const auth = useAuth();
   const cargo = auth.cargo;
+
+  const dados = useState(() => {
+    const saved = localStorage.getItem("usuario");
+    return saved ? JSON.parse(saved) : PegarUsuario();
+  });
+
+  function PegarUsuario() {
+    const usuario = {
+      nome: "Fabrício Peres",
+      foto: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100"
+    };
+
+    localStorage.setItem("usuario", JSON.stringify(usuario));
+    return usuario;
+  };
 
   return (
     <header className="bg-(--bg-sidebar) border-b-2 border-(--border-color) px-9.5 h-19.25 flex justify-between items-center sticky top-0 z-10">
@@ -49,13 +65,13 @@ const Header = () => {
 
         <div className="flex items-center gap-3 cursor-pointer rounded-[10px] pt-1.5 pr-3 pb-1.5 pl-1.5 hover:bg-(--bg-hover)">
           <img
-            src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100"
+            src={dados[0].foto}
             alt="User"
             className="w-10 h-10 rounded-[50%] object-cover border-2 border-(--border-color)"
           />
           <div className="flex flex-col leading-3.5">
             <span className="text-[14px] font-semibold text-(--text-primary)">
-              Maria Gonçalves
+              {dados[0].nome}
             </span>
             <span className="text-[12px] text-(--text-muted)">
               {cargo}
