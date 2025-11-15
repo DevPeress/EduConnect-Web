@@ -28,6 +28,7 @@ export interface AuthContextType {
   cargo: string;
   token: string;
   setAuth: (cargo: string, token: string) => void;
+  removeAuth: () => void;
 };
 
 export interface Acessos {
