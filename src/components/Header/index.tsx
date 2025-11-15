@@ -1,10 +1,13 @@
 import Dia from "../../assets/Dia.svg";
 import Noite from "../../assets/Noite.svg";
+import { useAuth } from "../../context/AuthContext";
 import { useTheme } from "../../context/ThemeContext";
 
 const Header = () => {
   const tema = useTheme();
   const dark = tema.dark;
+  const auth = useAuth();
+  const cargo = auth.cargo;
 
   return (
     <header className="bg-(--bg-sidebar) border-b-2 border-(--border-color) px-9.5 h-19.25 flex justify-between items-center sticky top-0 z-10">
@@ -55,7 +58,7 @@ const Header = () => {
               Maria Gonçalves
             </span>
             <span className="text-[12px] text-(--text-muted)">
-              Administrador
+              {cargo}
             </span>
           </div>
           <svg
