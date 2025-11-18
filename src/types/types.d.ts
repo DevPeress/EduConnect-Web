@@ -39,6 +39,14 @@ export interface Nav {
   svg: () => JSX.Element;
 };
 
+export interface Main {
+  titulo: string;
+  desc: string;
+  children: ReactNode;
+  botao: { ativo: boolean; adicionar?: () => void; mensagem?: string };
+  load?: boolean;
+}
+
 export interface CardsAdminType {
   dado: string;
   total: number;
