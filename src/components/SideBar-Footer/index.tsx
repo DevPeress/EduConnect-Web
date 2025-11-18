@@ -7,7 +7,7 @@ const SidebarFooter = () => {
   const auth = useAuth();
 
   return (
-    <div className="p-3.5 border-t-2 border-(--border-color)">
+    <div className="fixed w-72 bottom-0 p-3.5 border-t-2 border-(--border-color)">
       <Link
         to={"/config"}
         className="flex items-center gap-3 px-[11px] py-2 rounded-[10px] text-[14px] font-medium relative hover:bg-(--bg-hover) hover:text-(--text-primary)"
