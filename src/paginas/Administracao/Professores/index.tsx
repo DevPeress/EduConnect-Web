@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import ModoExibicao from "../../../components/Administracao/ModoExibicao";
+import ModoExibicao from "../../../components/ModoExibicao";
 import type { ProfessorType } from "../../../types/types";
 import SelectProfessores from "../../../components/Administracao/SelectProfessores";
 import { useCadastroProfessor } from "../../../context/CadastroProfessorContext";

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import SelectAlunos from "../../../components/Administracao/SelectAlunos";
-import ModoExibicao from "../../../components/Administracao/ModoExibicao";
+import ModoExibicao from "../../../components/ModoExibicao";
 import type { AlunosType } from "../../../types/types";
 import { useCadastroAluno } from "../../../context/CadastroAlunoContext";
 import LayoutLogado from "../../LayoutLogado";
