@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import Main from "../../../components/Main";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import Calendario from "../../../components/Calendario";
 import type { CalendarioEvento } from "../../../types/types";
@@ -12,7 +11,7 @@ const CalendarioAdm = () => {
       title: "Reunião de equipe",
       start: new Date(2025, 10, 12, 10, 0), // (ano, mês-1, dia, hora, minuto)
       end: new Date(2025, 10, 12, 11, 0),
-    }
+    },
   ]);
 
   const handleSelectSlot = ({ start, end }: { start: Date; end: Date }) => {
@@ -25,17 +24,15 @@ const CalendarioAdm = () => {
   }, []);
 
   return (
-    <LayoutLogado>
-      <Main
-        titulo="Calendário"
-        desc="Visão geral do Calendário"
-        botao={{
-          ativo: false,
-        }}
-        load={loading}
-      >
-        <Calendario eventos={events} adicionarEvento={handleSelectSlot} />
-      </Main>
+    <LayoutLogado
+      titulo="Calendário"
+      desc="Visão geral do Calendário"
+      botao={{
+        ativo: false,
+      }}
+      load={loading}
+    >
+      <Calendario eventos={events} adicionarEvento={handleSelectSlot} />
     </LayoutLogado>
   );
 };
