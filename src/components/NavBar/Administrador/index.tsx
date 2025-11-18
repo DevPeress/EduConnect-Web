@@ -1,6 +1,15 @@
-import { NavDashBoard, NavAlunos, NavProfessores, NavTurmas, NavNotas, NavCalendario, NavFinanceiro, NavRelatorios } from "../../../assets/HTML";
+import {
+  NavDashBoard,
+  NavAlunos,
+  NavProfessores,
+  NavTurmas,
+  NavNotas,
+  NavCalendario,
+  NavFinanceiro,
+  NavRelatorios,
+} from "../../../assets/HTML";
 import type { Nav } from "../../../types/types";
-import LinkPaginas from "../../LinkPaginas";
+import LinkPaginas from "../LinkPaginas/LinkPaginas";
 
 const Admin: Nav[] = [
   { nome: "DashBoard", pagina: "/admin/dashboard", svg: NavDashBoard },

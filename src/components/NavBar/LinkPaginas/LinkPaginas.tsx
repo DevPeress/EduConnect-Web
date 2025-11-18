@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import type { Nav } from "../../types/types";
+import type { Nav } from "../../../types/types";
 
 const LinkPaginas = ({
   item,
