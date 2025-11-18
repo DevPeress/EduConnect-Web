@@ -1,4 +1,4 @@
-import { Aluno, Nota, Presenca, Relatorio } from "./Icones";
+import { Aluno, Nota, Receita, Relatorio } from "../../../assets/HTML";
 
 const AcoesAdmin = () => {
   const tipos = [
@@ -28,7 +28,7 @@ const AcoesAdmin = () => {
       case "Registrar Presença":
         return {
           msg: "Marcar frequência",
-          svg: <Presenca />,
+          svg: <Receita />,
           bg: "rgba(245, 158, 11, 0.15)",
           color: "var(--orange)",
         };
