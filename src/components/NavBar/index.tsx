@@ -8,9 +8,9 @@ import Notas from "./Icons/Notas";
 import Calendario from "./Icons/Calendario";
 import Financeiro from "./Icons/Financeiro";
 import Relatorios from "./Icons/Relatorios";
-import LinkPaginas from "../../LinkPaginas";
+import LinkPaginas from "../LinkPaginas";
 
-const NavBarAdmin = () => {
+const NavBar = () => {
   const location = useLocation();
   // Configuração das rotas da NavBar, contendo nome, caminho de redirecionamento e ícone SVG associado.
   const Principal: NavAdmin[] = [
@@ -80,4 +80,4 @@ const NavBarAdmin = () => {
   );
 };
 
-export default NavBarAdmin;
+export default NavBar;

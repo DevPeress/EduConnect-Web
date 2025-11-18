@@ -1,5 +1,5 @@
 import Logo from "/Logo.svg";
-import NavBarAdmin from "../Administracao/NavBar";
+import NavBar from "../NavBar";
 import SidebarFooter from "../SideBar-Footer";
 
 const Aside = () => {
@@ -12,7 +12,7 @@ const Aside = () => {
         </div>
       </div>
 
-      <NavBarAdmin />
+      <NavBar />
       <SidebarFooter />
     </aside>
   );
