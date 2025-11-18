@@ -3,11 +3,6 @@ export interface ThemeType {
   dark: boolean;
 };
 
-export interface LoginType {
-  email: string;
-  senha: string;
-};
-
 export interface PrivateRouteProps {
   isAuthenticated: boolean;
   userRole: string;
