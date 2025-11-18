@@ -5,8 +5,8 @@ import type {
   CalendarioType,
   CardsAdminType,
 } from "../../../types/types";
-import AtividadesRecentesAdmin from "../../../components/Administracao/TabelasAdmin/AtividadesAdmin";
-import CalendarioAdmin from "../../../components/Administracao/TabelasAdmin/CalendarioAdmin";
+import AtividadesRecentesAdmin from "../../../components/Administracao/AtividadesAdmin";
+import CalendarioAdmin from "../../../components/Administracao/CalendarioAdmin";
 import GraficoAdmin from "../../../components/Administracao/GraficoAdmin";
 import AcoesAdmin from "../../../components/Administracao/AcoesAdmin";
 import { http } from "../../../utils/axios";
