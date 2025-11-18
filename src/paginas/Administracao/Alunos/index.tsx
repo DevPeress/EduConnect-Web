@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
-import Aside from "../../../components/Aside";
 import Main from "../../../components/Main";
 import SelectAlunos from "../../../components/Administracao/SelectAlunos";
 import ModoExibicao from "../../../components/Administracao/ModoExibicao";
 import type { AlunosType } from "../../../types/types";
 import { useCadastroAluno } from "../../../context/CadastroAlunoContext";
+import LayoutLogado from "../../LayoutLogado";
 
 const AlunosAdmin = () => {
   const { openMenu } = useCadastroAluno();
@@ -60,7 +60,7 @@ const AlunosAdmin = () => {
       telefone: "(11) 95599-2605",
       status: "Ativo",
       media: 8.5,
-    }
+    },
   ]);
 
   const AlunosFiltrados = useMemo(() => {
@@ -125,9 +125,7 @@ const AlunosAdmin = () => {
   };
 
   return (
-    <>
-      <Aside />
-
+    <LayoutLogado>
       <Main
         titulo="Gerenciamento de Alunos"
         desc="Visualize e Gerencie as informações dos estudantes"
@@ -209,14 +207,14 @@ const AlunosAdmin = () => {
                           item.status === "Ativo"
                             ? "rgba(16, 185, 129, 0.15)"
                             : item.status === "Inativo"
-                              ? "rgba(156, 163, 175, 0.15)"
-                              : "rgba(239, 68, 68, 0.15)",
+                            ? "rgba(156, 163, 175, 0.15)"
+                            : "rgba(239, 68, 68, 0.15)",
                         color:
                           item.status === "Ativo"
                             ? "var(--green)"
                             : item.status === "Inativo"
-                              ? "var(--text-secondary)"
-                              : "var(--red)",
+                            ? "var(--text-secondary)"
+                            : "var(--red)",
                       }}
                     >
                       {item.status}
@@ -288,7 +286,7 @@ const AlunosAdmin = () => {
           </button>
         </div>
       </Main>
-    </>
+    </LayoutLogado>
   );
 };
 

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import Main from "../../../components/Main";
-import Aside from "../../../components/Aside";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import Calendario from "../../../components/Calendario";
 import type { CalendarioEvento } from "../../../types/types";
+import LayoutLogado from "../../LayoutLogado";
 
 const CalendarioAdm = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -25,9 +25,7 @@ const CalendarioAdm = () => {
   }, []);
 
   return (
-    <>
-      <Aside />
-
+    <LayoutLogado>
       <Main
         titulo="Calendário"
         desc="Visão geral do Calendário"
@@ -38,7 +36,7 @@ const CalendarioAdm = () => {
       >
         <Calendario eventos={events} adicionarEvento={handleSelectSlot} />
       </Main>
-    </>
+    </LayoutLogado>
   );
 };
 

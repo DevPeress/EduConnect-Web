@@ -1,10 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
-import Aside from "../../../components/Aside";
 import Main from "../../../components/Main";
 import ModoExibicao from "../../../components/Administracao/ModoExibicao";
 import type { ProfessorType } from "../../../types/types";
 import SelectProfessores from "../../../components/Administracao/SelectProfessores";
 import { useCadastroProfessor } from "../../../context/CadastroProfessorContext";
+import LayoutLogado from "../../LayoutLogado";
 
 const ProfessoresAdmin = () => {
   const { openMenu } = useCadastroProfessor();
@@ -120,9 +120,7 @@ const ProfessoresAdmin = () => {
   };
 
   return (
-    <>
-      <Aside />
-
+    <LayoutLogado>
       <Main
         titulo="Gerenciamento de Professores"
         desc="Visualize e Gerencie as informações dos professores"
@@ -278,7 +276,7 @@ const ProfessoresAdmin = () => {
           </button>
         </div>
       </Main>
-    </>
+    </LayoutLogado>
   );
 };
 

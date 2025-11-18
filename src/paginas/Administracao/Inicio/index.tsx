@@ -10,9 +10,9 @@ import CalendarioAdmin from "../../../components/Administracao/TabelasAdmin/Cale
 import GraficoAdmin from "../../../components/Administracao/GraficoAdmin";
 import AcoesAdmin from "../../../components/Administracao/AcoesAdmin";
 import Main from "../../../components/Main";
-import Aside from "../../../components/Aside";
 import { http } from "../../../utils/axios";
 import toast from "react-hot-toast";
+import LayoutLogado from "../../LayoutLogado";
 
 const InicioAdm = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -55,9 +55,7 @@ const InicioAdm = () => {
   }, []);
 
   return (
-    <>
-      <Aside />
-
+    <LayoutLogado>
       <Main
         titulo="Bem-Vindo"
         desc="Visão geral da Escola e Estatísticas"
@@ -82,7 +80,7 @@ const InicioAdm = () => {
           <AcoesAdmin />
         </div>
       </Main>
-    </>
+    </LayoutLogado>
   );
 };
 
