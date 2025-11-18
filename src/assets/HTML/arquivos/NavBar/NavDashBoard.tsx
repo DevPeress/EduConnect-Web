@@ -1,4 +1,4 @@
-const DashBoard = () => {
+export const NavDashBoard = () => {
   return (
     <svg
       width="20"
@@ -17,5 +17,3 @@ const DashBoard = () => {
     </svg>
   );
 };
-
-export default DashBoard;

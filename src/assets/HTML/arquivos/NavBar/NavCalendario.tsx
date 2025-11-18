@@ -1,4 +1,4 @@
-const Calendario = () => {
+export const NavCalendario = () => {
   return (
     <svg
       width="20"
@@ -17,5 +17,3 @@ const Calendario = () => {
     </svg>
   );
 };
-
-export default Calendario;

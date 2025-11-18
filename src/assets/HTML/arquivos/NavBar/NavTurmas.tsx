@@ -1,4 +1,4 @@
-const Sair = () => {
+export const NavTurmas = () => {
   return (
     <svg
       width="20"
@@ -10,11 +10,8 @@ const Sair = () => {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-      <polyline points="16 17 21 12 16 7"></polyline>
-      <line x1="21" y1="12" x2="9" y2="12"></line>
+      <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
     </svg>
   );
 };
-
-export default Sair;

@@ -1,4 +1,4 @@
-const Configuracao = () => {
+export const NavConfig = () => {
   return (
     <svg
       width="20"
@@ -15,5 +15,3 @@ const Configuracao = () => {
     </svg>
   );
 };
-
-export default Configuracao;

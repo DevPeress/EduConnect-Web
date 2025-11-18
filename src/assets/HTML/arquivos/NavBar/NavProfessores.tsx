@@ -1,4 +1,4 @@
-const Professores = () => {
+export const NavProfessores = () => {
   return (
     <svg
       width="20"
@@ -17,5 +17,3 @@ const Professores = () => {
     </svg>
   );
 };
-
-export default Professores;

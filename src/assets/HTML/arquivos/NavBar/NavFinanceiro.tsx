@@ -1,4 +1,4 @@
-const Financeiro = () => {
+export const NavFinanceiro = () => {
   return (
     <svg
       width="20"
@@ -15,5 +15,3 @@ const Financeiro = () => {
     </svg>
   );
 };
-
-export default Financeiro;
