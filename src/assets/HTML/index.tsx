@@ -16,6 +16,8 @@ import { NavProfessores } from "./arquivos/NavBar/NavProfessores";
 import { NavRelatorios } from "./arquivos/NavBar/NavRelatorios";
 import { NavSair } from "./arquivos/NavBar/NavSair";
 import { NavTurmas } from "./arquivos/NavBar/NavTurmas";
+import { ExibirTabela } from "./arquivos/ModoExibicao/Tabela";
+import { ExibirCards } from "./arquivos/ModoExibicao/Cards";
 
 export {
   CadastrarAluno,
@@ -35,5 +37,7 @@ export {
   NavProfessores,
   NavRelatorios,
   NavSair,
-  NavTurmas
+  NavTurmas,
+  ExibirTabela,
+  ExibirCards,
 };
