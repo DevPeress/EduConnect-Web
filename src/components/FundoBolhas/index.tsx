@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { useTheme } from "../../context/ThemeContext";
-import Dia from "../../assets/Dia.svg";
-import Noite from "../../assets/Noite.svg";
+import Dia from "../../assets/SVG/Dia.svg";
+import Noite from "../../assets/SVG/Noite.svg";
 
 const FundoBolhas = ({ children }: { children: ReactNode }) => {
   const tema = useTheme();
