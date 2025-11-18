@@ -1,6 +1,6 @@
 import Logo from "/Logo.svg";
 import NavBar from "../NavBar";
-import SidebarFooter from "../SideBar-Footer";
+import SidebarFooter from "./footer";
 
 const Aside = () => {
   return (
