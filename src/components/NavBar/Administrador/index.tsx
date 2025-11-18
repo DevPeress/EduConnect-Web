@@ -1,39 +1,32 @@
+import { NavDashBoard, NavAlunos, NavProfessores, NavTurmas, NavNotas, NavCalendario, NavFinanceiro, NavRelatorios } from "../../../assets/HTML";
 import type { Nav } from "../../../types/types";
-import Calendario from "../Icons/Calendario";
 import LinkPaginas from "../../LinkPaginas";
-import Alunos from "../Icons/Alunos";
-import DashBoard from "../Icons/DashBoard";
-import Financeiro from "../Icons/Financeiro";
-import Notas from "../Icons/Notas";
-import Professores from "../Icons/Professores";
-import Relatorios from "../Icons/Relatorios";
-import Turmas from "../Icons/Turmas";
 
 const Admin: Nav[] = [
-  { nome: "DashBoard", pagina: "/admin/dashboard", svg: DashBoard },
-  { nome: "Alunos", pagina: "/admin/alunos", svg: Alunos },
+  { nome: "DashBoard", pagina: "/admin/dashboard", svg: NavDashBoard },
+  { nome: "Alunos", pagina: "/admin/alunos", svg: NavAlunos },
   {
     nome: "Professores",
     pagina: "/admin/professores",
-    svg: Professores,
+    svg: NavProfessores,
   },
-  { nome: "Turmas", pagina: "/admin/turmos", svg: Turmas },
+  { nome: "Turmas", pagina: "/admin/turmos", svg: NavTurmas },
 
-  { nome: "Notas", pagina: "/admin/notas", svg: Notas },
+  { nome: "Notas", pagina: "/admin/notas", svg: NavNotas },
   {
     nome: "Calendário",
     pagina: "/admin/calendario",
-    svg: Calendario,
+    svg: NavCalendario,
   },
   {
     nome: "Financeiro",
     pagina: "/admin/financeiro",
-    svg: Financeiro,
+    svg: NavFinanceiro,
   },
   {
     nome: "Relatórios",
     pagina: "/admin/relatorio",
-    svg: Relatorios,
+    svg: NavRelatorios,
   },
 ];
 
