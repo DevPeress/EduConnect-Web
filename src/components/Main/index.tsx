@@ -1,6 +1,6 @@
 import Header from "../Header";
 import Loader from "./Loader";
-import { PaginaMain } from "./Pagina";
+import PaginaMain from "./Pagina";
 import type { Main } from "../../types/types";
 
 // A página recebe:

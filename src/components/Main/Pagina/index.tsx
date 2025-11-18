@@ -1,6 +1,6 @@
 import type { Main } from "../../../types/types";
 
-export const PaginaMain = ({ titulo, desc, botao, children }: Main) => {
+const PaginaMain = ({ titulo, desc, botao, children }: Main) => {
   return (
     <div className="py-8 px-8 max-w-[1600px] m-0 mx-auto w-full">
       <div className="flex justify-between mb-5">
@@ -41,3 +41,5 @@ export const PaginaMain = ({ titulo, desc, botao, children }: Main) => {
     </div>
   );
 };
+
+export default PaginaMain
