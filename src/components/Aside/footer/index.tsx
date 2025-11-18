@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { useAuth } from "../../../context/AuthContext";
 
-const SidebarFooter = () => {
+const SideBarFooter = () => {
   const location = useLocation();
   const paginaAtual: boolean = location.pathname === "/config";
   const auth = useAuth();
@@ -58,4 +58,4 @@ const SidebarFooter = () => {
   );
 };
 
-export default SidebarFooter;
+export default SideBarFooter;

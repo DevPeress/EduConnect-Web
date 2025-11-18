@@ -1,6 +1,6 @@
 import Logo from "/Logo.svg";
 import NavBar from "../NavBar";
-import SidebarFooter from "./footer";
+import SideBarFooter from "./footer";
 
 const Aside = () => {
   return (
@@ -13,7 +13,7 @@ const Aside = () => {
       </div>
 
       <NavBar />
-      <SidebarFooter />
+      <SideBarFooter />
     </aside>
   );
 };
