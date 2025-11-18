@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
-import type { NavAdmin } from "../../types/types";
+import type { Nav } from "../../types/types";
 
 const LinkPaginas = ({
   item,
   paginaAtual,
 }: {
-  item: NavAdmin;
+  item: Nav;
   paginaAtual: boolean;
 }) => {
   return (
