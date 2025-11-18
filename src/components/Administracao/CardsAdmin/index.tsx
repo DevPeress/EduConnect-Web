@@ -1,12 +1,6 @@
+import { TotalAlunos, TotalProfessores, TotalReceita, TotalTurmas } from "../../../assets/HTML";
 import type { CardsAdminType } from "../../../types/types";
 import { formatBRL } from "../../../utils/codigos";
-import {
-  AlunosCard,
-  PresencaCard,
-  ProfessoresCard,
-  TurmasCard,
-} from "./Icones";
-
 const CardsAdmin = ({ dados }: { dados: CardsAdminType }) => {
   const tipo: string = dados.dado;
   const porcentagem: boolean = dados.porcentagem > 0;
@@ -15,13 +9,13 @@ const CardsAdmin = ({ dados }: { dados: CardsAdminType }) => {
   const Card = (tipo: string) => {
     switch (tipo) {
       case "Alunos":
-        return { card: <AlunosCard />, mensagem: "Total de Alunos" };
+        return { card: <TotalAlunos />, mensagem: "Total de Alunos" };
       case "Professores":
-        return { card: <ProfessoresCard />, mensagem: "Professores Ativos" };
+        return { card: <TotalProfessores />, mensagem: "Professores Ativos" };
       case "Turmas":
-        return { card: <TurmasCard />, mensagem: "Turmas Ativas" };
+        return { card: <TotalTurmas />, mensagem: "Turmas Ativas" };
       case "Presença":
-        return { card: <PresencaCard />, mensagem: "Taxa de Presença" };
+        return { card: <TotalReceita />, mensagem: "Taxa de Presença" };
     }
   };
 
