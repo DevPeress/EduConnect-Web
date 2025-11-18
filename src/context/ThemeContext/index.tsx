@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import type { ReactNode } from "react";
 import type { ThemeType } from "../../types/types";
+import { AuthProvider } from "../AuthContext";
 
 const ThemeContext = createContext<ThemeType | undefined>(undefined);
 
@@ -27,11 +28,8 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   return (
     <ThemeContext.Provider value={{ dark, toggleTheme }}>
-      {children}
-
-      <Toaster toastOptions={{
-        
-      }} />
+      <AuthProvider>{children}</AuthProvider>
+      <Toaster toastOptions={{}} />
     </ThemeContext.Provider>
   );
 }
