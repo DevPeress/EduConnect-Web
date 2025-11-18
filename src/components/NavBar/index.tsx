@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import type { NavAdmin } from "../../../types/types";
+import type { Nav } from "../../types/types";
 import DashBoard from "./Icons/DashBoard";
 import Alunos from "./Icons/Alunos";
 import Professores from "./Icons/Professores";
@@ -13,7 +13,7 @@ import LinkPaginas from "../LinkPaginas";
 const NavBar = () => {
   const location = useLocation();
   // Configuração das rotas da NavBar, contendo nome, caminho de redirecionamento e ícone SVG associado.
-  const Principal: NavAdmin[] = [
+  const Principal: Nav[] = [
     { nome: "DashBoard", pagina: "/admin/dashboard", svg: DashBoard },
     { nome: "Alunos", pagina: "/admin/alunos", svg: Alunos },
     {

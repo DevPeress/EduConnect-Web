@@ -38,7 +38,7 @@ export interface Acessos {
   cargos?: string[];
 };
 
-export interface NavAdmin {
+export interface Nav {
   nome: string;
   pagina: string;
   svg: () => JSX.Element;
