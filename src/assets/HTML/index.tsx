@@ -1,6 +1,6 @@
-import { Aluno } from "./arquivos/Aluno";
-import { Nota } from "./arquivos/Nota";
-import { Receita } from "./arquivos/Receita";
-import { Relatorio } from "./arquivos/Relatorio";
+import { CadastrarAluno } from "./arquivos/CadastrarAluno";
+import { LancarNota } from "./arquivos/LancarNota";
+import { RegistrarPresenca } from "./arquivos/RegistrarPresenca";
+import { GerarRelatorio } from "./arquivos/GerarRelatorio";
 
-export { Aluno, Nota, Receita, Relatorio };
+export { CadastrarAluno, LancarNota, RegistrarPresenca, GerarRelatorio };

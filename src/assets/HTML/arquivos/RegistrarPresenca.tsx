@@ -1,4 +1,4 @@
-export const Receita = () => {
+export const RegistrarPresenca = () => {
   return (
     <svg
       width="20"

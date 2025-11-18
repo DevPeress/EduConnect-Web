@@ -1,4 +1,4 @@
-export const Aluno = () => {
+export const CadastrarAluno = () => {
   return (
     <svg
       width="20"

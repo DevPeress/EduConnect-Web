@@ -14,7 +14,7 @@ import toast from "react-hot-toast";
 import LayoutLogado from "../../LayoutLogado";
 
 const InicioAdm = () => {
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const [dados, setDados] = useState<CardsAdminType[]>([
     { dado: "Alunos", total: 1245, aumento: 150, porcentagem: 12 },
     { dado: "Professores", total: 87, aumento: 3, porcentagem: 3.5 },

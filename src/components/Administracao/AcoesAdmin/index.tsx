@@ -1,4 +1,9 @@
-import { Aluno, Nota, Receita, Relatorio } from "../../../assets/HTML";
+import {
+  CadastrarAluno,
+  LancarNota,
+  RegistrarPresenca,
+  GerarRelatorio,
+} from "../../../assets/HTML";
 
 const AcoesAdmin = () => {
   const tipos = [
@@ -14,28 +19,28 @@ const AcoesAdmin = () => {
       case "Novo Aluno":
         return {
           msg: "Cadastrar novo Estudante",
-          svg: <Aluno />,
+          svg: <CadastrarAluno />,
           bg: "rgba(59, 130, 246, 0.15)",
           color: "var(--blue)",
         };
       case "Lançar Nota":
         return {
           msg: "Registrar avaliações",
-          svg: <Nota />,
+          svg: <LancarNota />,
           bg: "rgba(16, 185, 129, 0.15)",
           color: "var(--green)",
         };
       case "Registrar Presença":
         return {
           msg: "Marcar frequência",
-          svg: <Receita />,
+          svg: <RegistrarPresenca />,
           bg: "rgba(245, 158, 11, 0.15)",
           color: "var(--orange)",
         };
       case "Gerar Relatório":
         return {
           msg: "Visualizar Dados",
-          svg: <Relatorio />,
+          svg: <GerarRelatorio />,
           bg: "rgba(139, 92, 246, 0.15)",
           color: "var(--purple)",
         };

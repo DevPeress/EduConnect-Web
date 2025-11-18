@@ -1,4 +1,4 @@
-export const Nota = () => {
+export const GerarRelatorio = () => {
   return (
     <svg
       width="20"
@@ -10,8 +10,8 @@ export const Nota = () => {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
-      <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+      <polyline points="14 2 14 8 20 8"></polyline>
     </svg>
   );
 };
