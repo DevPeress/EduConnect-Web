@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
-import type { CadastroProfessorContextType } from "../../types/types";
+import type { CadastroContextType } from "../../types/types";
 import CadastroTitulo from "../../components/Cadastros/Titulo";
 import CadastroFlex2 from "../../components/Cadastros/Flex-2";
 import CadastroFlex1 from "../../components/Cadastros/Flex-1";
@@ -11,7 +11,7 @@ import toast from "react-hot-toast";
 //import { http } from "../../utils/axios";
 
 const CadastroProfessorContext = createContext<
-  CadastroProfessorContextType | undefined
+  CadastroContextType<CadastroProfessorInput> | undefined
 >(undefined);
 export function CadastroProfessorProvider({
   children,
