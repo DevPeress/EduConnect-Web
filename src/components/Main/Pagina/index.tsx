@@ -1,6 +1,6 @@
-import type { Main } from "../../../types/types";
+import type { MainProps } from "../../../types/types";
 
-const PaginaMain = ({ titulo, desc, botao, children }: Main) => {
+const PaginaMain = ({ titulo, desc, botao, children }: MainProps) => {
   return (
     <div className="py-8 px-8 max-w-[1600px] m-0 mx-auto w-full">
       <div className="flex justify-between mb-5">
