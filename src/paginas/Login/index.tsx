@@ -1,14 +1,15 @@
 import { useState, type FormEvent } from "react";
-import type { LoginProps, LoginResponse, LoginType } from "../../types/types";
+import type { LoginProps, LoginResponse } from "../../types/types";
 import FundoBolhas from "../../components/FundoBolhas";
 import { http } from "../../utils/axios";
 import toast from "react-hot-toast";
+import { loginSchema, type LoginInput } from "../../schemas/loginSchema";
 
 const Login = ({ TrocarInfos }: LoginProps) => {
-  const [dados, setDados] = useState<LoginType>({ email: "", senha: "" });
+  const [dados, setDados] = useState<LoginInput>({ email: "", senha: "" });
   const [menu, setMenu] = useState<boolean>(false);
 
-  const AlterarDados = (texto: string, tipo: keyof LoginType) => {
+  const AlterarDados = (texto: string, tipo: keyof LoginInput) => {
     setDados((prevDados) => ({
       ...prevDados,
       [tipo]: texto,
@@ -20,9 +21,8 @@ const Login = ({ TrocarInfos }: LoginProps) => {
 
     const email = dados.email;
     const senha = dados.senha;
-    const verificarEmail = email.includes("@") && email.includes(".com");
-    if (!verificarEmail)
-      return toast.error("E-mail ou senha estão incorretos");
+    const result = loginSchema.safeParse(dados);
+    if (!result.success) return toast.error(result.error.issues[0].message);
 
     const loginPromise = http.post<LoginResponse>("/login", { email, senha });
     await toast.promise(

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Dia from "../../assets/Dia.svg";
-import Noite from "../../assets/Noite.svg";
+import Dia from "../../assets/SVG/Dia.svg";
+import Noite from "../../assets/SVG/Noite.svg";
 import { useAuth } from "../../context/AuthContext";
 import { useTheme } from "../../context/ThemeContext";
 

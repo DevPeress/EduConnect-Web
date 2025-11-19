@@ -3,11 +3,6 @@ export interface ThemeType {
   dark: boolean;
 };
 
-export interface LoginType {
-  email: string;
-  senha: string;
-};
-
 export interface PrivateRouteProps {
   isAuthenticated: boolean;
   userRole: string;
@@ -38,11 +33,19 @@ export interface Acessos {
   cargos?: string[];
 };
 
-export interface NavAdmin {
+export interface Nav {
   nome: string;
   pagina: string;
   svg: () => JSX.Element;
 };
+
+export interface MainProps {
+  titulo: string;
+  desc: string;
+  children: ReactNode;
+  botao: { ativo: boolean; adicionar?: () => void; mensagem?: string };
+  load?: boolean;
+}
 
 export interface CardsAdminType {
   dado: string;

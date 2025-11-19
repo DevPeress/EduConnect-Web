@@ -1,6 +1,6 @@
 import Logo from "/Logo.svg";
-import NavBarAdmin from "../Administracao/NavBar";
-import SidebarFooter from "../SideBar-Footer";
+import NavBar from "../NavBar";
+import SideBarFooter from "./footer";
 
 const Aside = () => {
   return (
@@ -12,8 +12,8 @@ const Aside = () => {
         </div>
       </div>
 
-      <NavBarAdmin />
-      <SidebarFooter />
+      <NavBar />
+      <SideBarFooter />
     </aside>
   );
 };
