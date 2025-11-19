@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
-import type { CadastroAlunoContextType } from "../../types/types";
+import type { CadastroContextType } from "../../types/types";
 import CadastroTitulo from "../../components/Cadastros/Titulo";
 import CadastroFlex2 from "../../components/Cadastros/Flex-2";
 import CadastroFlex1 from "../../components/Cadastros/Flex-1";
@@ -11,7 +11,7 @@ import {
 //import { http } from "../../utils/axios";
 
 const CadastroAlunoContext = createContext<
-  CadastroAlunoContextType | undefined
+  CadastroContextType<CadastroAlunoInput> | undefined
 >(undefined);
 export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
   const [menu, setMenu] = useState<boolean>(false);
