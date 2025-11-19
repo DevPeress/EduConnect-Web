@@ -111,3 +111,9 @@ export interface CadastroFlexProps<T extends CadastroAlunoInput | CadastroProfes
   infos: T;
   setInfos: React.Dispatch<React.SetStateAction<T>>;
 }
+
+export interface SelectProps {
+  salas: string[];
+  selecionada: (valor: string) => void;
+  status: (valor: string) => void;
+}
