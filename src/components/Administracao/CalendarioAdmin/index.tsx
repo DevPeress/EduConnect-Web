@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import type { CalendarioType } from "../../../../types/types";
+import type { CalendarioType } from "../../../types/types";
 
 const CalendarioAdmin = ({ calendario }: { calendario: CalendarioType[] }) => {
   return (

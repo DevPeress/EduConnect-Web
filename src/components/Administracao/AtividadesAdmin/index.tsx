@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import type { AtividadeType } from "../../../../types/types";
+import type { AtividadeType } from "../../../types/types";
 
 const AtividadesRecentesAdmin = ({
   atividades,
