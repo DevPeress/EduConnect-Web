@@ -2,12 +2,7 @@ import { createContext, useState, useContext } from "react";
 import type { ReactNode } from "react";
 import type { AuthContextType } from "../../types/types";
 
-const AuthContext = createContext<AuthContextType>({
-  cargo: "",
-  token: "",
-  setAuth: () => { },
-  removeAuth: () => { },
-});
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [cargo, setCargo] = useState<string>(() => {
@@ -29,7 +24,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const removeAuth = () => {
     localStorage.removeItem("Cargo");
     localStorage.removeItem("Token");
-  }
+  };
 
   return (
     <AuthContext.Provider value={{ cargo, token, setAuth, removeAuth }}>

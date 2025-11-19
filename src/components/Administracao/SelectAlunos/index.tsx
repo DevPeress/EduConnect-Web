@@ -1,4 +1,6 @@
-const SelectAlunos = ({ salas, selecionada, status }: { salas: string[], selecionada: (valor: string) => void, status: (valor: string) => void }) => {
+import type { SelectProps } from "../../../types/types";
+
+const SelectAlunos = ({ salas, selecionada, status }: SelectProps) => {
   return (
     <>
       <select

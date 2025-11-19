@@ -1,3 +1,6 @@
+import type { CadastroAlunoInput } from "../schemas/alunoSchema";
+import type { CadastroProfessorInput } from "../schemas/professorSchema";
+
 export interface ThemeType {
   toggleTheme: () => void;
   dark: boolean;
@@ -25,6 +28,11 @@ export interface AuthContextType {
   setAuth: (cargo: string, token: string) => void;
   removeAuth: () => void;
 };
+
+export interface AuthPaginas {
+  logado: boolean;
+  cargo: string
+}
 
 export interface Acessos {
   logado: boolean;
@@ -67,36 +75,29 @@ export interface CalendarioType {
   horario: string;
 };
 
-export interface AlunosType {
-  ra: string;
+export interface Pessoa {
   nome: string;
-  nasc: string;
-  turma: string;
-  email: string;
-  telefone: string;
-  status: string
-  media: number;
-};
-
-export interface ProfessorType {
-  codigo: string;
-  nome: string;
-  turmas: string[];
   email: string;
   telefone: string;
   status: string;
-  nasc: string;
-};
+  nasc: Date;
+}
 
-export type CadastroAlunoContextType = {
-  openMenu: () => Promise<CadastroAlunoInput | null>;
-  setDados: React.Dispatch<React.SetStateAction<CadastroAlunoInput>>;
-};
+export interface AlunosType extends Pessoa {
+  ra: string;
+  turma: string;
+  media: number;
+}
 
-export type CadastroProfessorContextType = {
-  openMenu: () => Promise<CadastroProfessorInput | null>;
-  setDados: React.Dispatch<React.SetStateAction<CadastroProfessorInput>>;
-};
+export interface ProfessorType extends Pessoa {
+  codigo: string;
+  turmas: string[],
+}
+
+export interface CadastroContextType<T extends CadastroProfessorInput | CadastroAlunoInput> {
+  openMenu: () => Promise<T | null>;
+  setDados: React.Dispatch<React.SetStateAction<T>>
+}
 
 export interface CalendarioEvento {
   title: string;
@@ -111,16 +112,13 @@ export interface SlotInfo {
   action: "select" | "click" | "doubleClick";
 }
 
-export interface CadastroFlex1Props<T extends CadastroAlunoType | CadastroProfessorType> {
-  titulo: string;
+export interface CadastroFlexProps<T extends CadastroAlunoInput | CadastroProfessorInput> {
   infos: T;
   setInfos: React.Dispatch<React.SetStateAction<T>>;
-  place: string;
-};
+}
 
-export interface CadastroFlex2Props<T extends CadastroAlunoType | CadastroProfessorType> {
-  opcao1: string;
-  opcao2: string;
-  infos: T;
-  setInfos: React.Dispatch<React.SetStateAction<T>>;
-};
+export interface SelectProps {
+  salas: string[];
+  selecionada: (valor: string) => void;
+  status: (valor: string) => void;
+}

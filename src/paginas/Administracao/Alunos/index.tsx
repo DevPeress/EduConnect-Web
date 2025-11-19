@@ -53,7 +53,7 @@ const AlunosAdmin = () => {
     {
       ra: "2024001",
       nome: "Fabrício Peres",
-      nasc: "3 de Abr, 2024",
+      nasc: new Date(),
       turma: "9º A",
       email: "fabricio.santos@gmail.com",
       telefone: "(11) 95599-2605",
@@ -69,7 +69,7 @@ const AlunosAdmin = () => {
       const conteudo = `
         ${itens.ra.toLowerCase()}
         ${itens.nome.toLowerCase()}
-        ${itens.nasc.toLowerCase()}
+        ${itens.nasc}
         ${itens.turma.toLowerCase()}
         ${itens.email.toLowerCase()}
         ${itens.telefone.toLowerCase()}
@@ -183,7 +183,7 @@ const AlunosAdmin = () => {
                     <div>
                       <p className="font-semibold">{item.nome}</p>
                       <p className="text-[12px] text-(--text-muted)">
-                        {item.nasc}
+                        {item.nasc.toLocaleDateString()}
                       </p>
                     </div>
                   </div>
