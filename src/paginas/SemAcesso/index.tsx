@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import FundoBolhas from "../../components/FundoBolhas";
 import { Options } from "../../utils/paginação";
+import type { AuthPaginas } from "../../types/types";
 
-const SemAcesso = ({ Logado, Cargo }: { Logado: boolean; Cargo: string }) => {
+const SemAcesso = ({ logado, cargo }: AuthPaginas) => {
   const navegar = useNavigate();
 
   return (
@@ -43,9 +44,9 @@ const SemAcesso = ({ Logado, Cargo }: { Logado: boolean; Cargo: string }) => {
           Voltar para Página Anterior
         </button>
         {Options.map((item) => {
-          const verify = !item.cargos || item.cargos.includes(Cargo);
+          const verify = !item.cargos || item.cargos.includes(cargo);
 
-          if (Logado === item.logado && verify) {
+          if (logado === item.logado && verify) {
             return (
               <button
                 key={item.pagina}
