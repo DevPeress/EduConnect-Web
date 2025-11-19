@@ -1,8 +1,10 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
 import type { CadastroContextType } from "../../types/types";
-import CadastroTitulo from "../../components/Cadastros/Titulo";
-import CadastroFlex2 from "../../components/Cadastros/Flex-2";
-import CadastroFlex1 from "../../components/Cadastros/Flex-1";
+import {
+  CadastroFlex1,
+  CadastroFlex2,
+  CadastroTitulo,
+} from "../../components/Cadastros";
 import {
   cadastroProfessorSchema,
   type CadastroProfessorInput,
