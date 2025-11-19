@@ -1,20 +1,20 @@
 import type { CadastroAlunoInput } from "../../../schemas/alunoSchema";
 import type { CadastroProfessorInput } from "../../../schemas/professorSchema";
+import type { CadastroFlexProps } from "../../../types/types";
 
-type CadastroFlex1Props<T extends CadastroAlunoInput | CadastroProfessorInput> =
-  {
-    titulo: string;
-    infos: T;
-    setInfos: React.Dispatch<React.SetStateAction<T>>;
-    place: string;
-  };
+interface CadastroFlex1Prop<
+  T extends CadastroAlunoInput | CadastroProfessorInput
+> extends CadastroFlexProps<T> {
+  titulo: string;
+  place: string;
+}
 
 const CadastroFlex1 = <T extends CadastroAlunoInput | CadastroProfessorInput>({
   titulo,
   infos,
   setInfos,
   place,
-}: CadastroFlex1Props<T>) => {
+}: CadastroFlex1Prop<T>) => {
   // Processa a opção recebida e retorna o resultado conforme o contexto de criação de alunos ou professores.
   const Tipo = (dado: string) => {
     switch (dado) {
