@@ -17,7 +17,7 @@ function App() {
 
   const setAuth = (cargo: string, token: string) => {
     auth.setAuth(cargo, token);
-  }
+  };
 
   return (
     <BrowserRouter>
@@ -25,20 +25,33 @@ function App() {
         <Route path="/" element={<Inicial Logado={user} Cargo={cargo} />} />
         <Route path="/login" element={<Login TrocarInfos={setAuth} />} />
 
-        <Route element={<PrivateRoute isAuthenticated={user} userRole={cargo} allowedRoles={['Administrador', 'Funcionário']} />}>
+        <Route
+          element={
+            <PrivateRoute
+              isAuthenticated={user}
+              userRole={cargo}
+              allowedRoles={["Administrador", "Funcionário"]}
+            />
+          }
+        >
           <Route path="/admin/dashboard" element={<InicioAdm />} />
           <Route path="/admin/alunos" element={<AlunosAdmin />} />
           <Route path="/admin/professores" element={<ProfessoresAdmin />} />
           <Route path="/admin/calendario" element={<CalendarioAdm />} />
         </Route>
         {/* Página de sem acesso */}
-        <Route path="/not-authorized" element={<SemAcesso Logado={user} Cargo={cargo} />} />
+        <Route
+          path="/not-authorized"
+          element={<SemAcesso logado={user} cargo={cargo} />}
+        />
         {/* Página não encontrada */}
-        <Route path="*" element={<NaoEncontrada Logado={user} Cargo={cargo} />} />
+        <Route
+          path="*"
+          element={<NaoEncontrada logado={user} cargo={cargo} />}
+        />
       </Routes>
     </BrowserRouter>
-
-  )
+  );
 }
 
-export default App
+export default App;
