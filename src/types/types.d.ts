@@ -39,7 +39,7 @@ export interface Nav {
   svg: () => JSX.Element;
 };
 
-export interface Main {
+export interface MainProps {
   titulo: string;
   desc: string;
   children: ReactNode;
