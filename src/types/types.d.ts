@@ -70,26 +70,24 @@ export interface CalendarioType {
   horario: string;
 };
 
-export interface AlunosType {
-  ra: string;
+export interface Pessoa {
   nome: string;
-  nasc: string;
-  turma: string;
-  email: string;
-  telefone: string;
-  status: string
-  media: number;
-};
-
-export interface ProfessorType {
-  codigo: string;
-  nome: string;
-  turmas: string[];
   email: string;
   telefone: string;
   status: string;
-  nasc: string;
-};
+  nasc: Date;
+}
+
+export interface AlunosType extends Pessoa {
+  ra: string;
+  turma: string;
+  media: number;
+}
+
+export interface ProfessorType extends Pessoa {
+  codigo: string;
+  turmas: string[],
+}
 
 export interface CadastroContextType<T extends CadastroProfessorInput | CadastroAlunoInput> {
   openMenu: () => Promise<T | null>;
