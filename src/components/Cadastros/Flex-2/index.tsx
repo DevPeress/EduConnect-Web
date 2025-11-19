@@ -45,6 +45,10 @@ const CadastroFlex2 = <T extends CadastroAlunoInput | CadastroProfessorInput>({
         return "emergencia";
       case "CPF/Documento":
         return "cpf";
+      case "Nome do Contato de Emergência":
+        return "nomeEmergencia";
+      case "Telefone do Contato de Emergência":
+        return "telefoneEmergencia";
       default:
         return "";
     }
@@ -60,7 +64,7 @@ const CadastroFlex2 = <T extends CadastroAlunoInput | CadastroProfessorInput>({
     let texto = e.target.value;
     if (Escolhas === "cpf") texto = formatCPF(texto);
 
-    if (Escolhas === "telefone" || Escolhas === "emergencia")
+    if (Escolhas === "telefone" || Escolhas === "telefoneEmergencia")
       texto = formatTelefone(texto);
 
     setInfos((prev) => ({
