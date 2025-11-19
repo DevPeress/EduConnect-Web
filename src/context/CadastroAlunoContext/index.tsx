@@ -8,7 +8,6 @@ import {
   cadastroAlunoSchema,
   type CadastroAlunoInput,
 } from "../../schemas/alunoSchema";
-//import { http } from "../../utils/axios";
 
 const CadastroAlunoContext = createContext<
   CadastroContextType<CadastroAlunoInput> | undefined
@@ -24,6 +23,8 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
     telefone: "",
     endereco: "",
     nascimento: new Date(),
+    nomeEmergencia: "",
+    telefoneEmergencia: "",
   });
   const [resolveCallback, setResolveCallback] = useState<
     ((data: CadastroAlunoInput | null) => void) | null
@@ -42,24 +43,6 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
     if (!result.success) return toast.error(result.error.issues[0].message);
 
     if (resolveCallback) {
-      //await http
-      //.post<CadastroAlunoInput>("aluno/cadastro", {
-      //matricula: dados.matricula,
-      //status: dados.status,
-      //nome: dados.nome,
-      //turma: dados.turma,
-      //email: dados.email,
-      //telefone: dados.telefone,
-      //endereco: dados.endereco
-      //})
-      //.then(function () {
-      //  resolveCallback(dados);
-      //  setResolveCallback(null);
-      //})
-      //.then(function (error) {
-      //  console.log(error);
-      //});
-
       resolveCallback(dados);
       setResolveCallback(null);
     }
@@ -86,6 +69,8 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
       telefone: "",
       endereco: "",
       nascimento: new Date(),
+      nomeEmergencia: "",
+      telefoneEmergencia: "",
     });
   };
 
@@ -143,6 +128,18 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
                   infos={dados}
                   setInfos={setDados}
                   place="Rua, número, bairro, cidade - Estado"
+                />
+              </div>
+
+              <div className="mb-7">
+                <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
+                  Contato de Emergência
+                </h3>
+                <CadastroFlex2
+                  opcao1="Nome do Contato de Emergência"
+                  opcao2="Telefone do Contato de Emergência"
+                  infos={dados}
+                  setInfos={setDados}
                 />
               </div>
             </form>
