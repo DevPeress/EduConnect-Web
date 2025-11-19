@@ -56,7 +56,7 @@ const ProfessoresAdmin = () => {
       telefone: "(11) 95599-2605",
       status: "Ativo",
       codigo: "01",
-      nasc: "3 de Abr, 2024",
+      nasc: new Date(),
     },
   ]);
 
@@ -67,7 +67,7 @@ const ProfessoresAdmin = () => {
       const conteudo = `
         ${itens.codigo.toLowerCase()}
         ${itens.nome.toLowerCase()}
-        ${itens.nasc.toLowerCase()}
+        ${itens.nasc}
         ${itens.turmas}
         ${itens.email.toLowerCase()}
         ${itens.telefone.toLowerCase()}
@@ -178,7 +178,7 @@ const ProfessoresAdmin = () => {
                     <div>
                       <p className="font-semibold">{item.nome}</p>
                       <p className="text-[12px] text-(--text-muted)">
-                        {item.nasc}
+                        {item.nasc.toLocaleDateString()}
                       </p>
                     </div>
                   </div>
