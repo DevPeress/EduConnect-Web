@@ -29,6 +29,11 @@ export interface AuthContextType {
   removeAuth: () => void;
 };
 
+export interface AuthPaginas {
+  logado: boolean;
+  cargo: string
+}
+
 export interface Acessos {
   logado: boolean;
   pagina: string;
