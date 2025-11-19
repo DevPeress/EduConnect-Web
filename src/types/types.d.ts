@@ -1,3 +1,6 @@
+import type { CadastroAlunoInput } from "../schemas/alunoSchema";
+import type { CadastroProfessorInput } from "../schemas/professorSchema";
+
 export interface ThemeType {
   toggleTheme: () => void;
   dark: boolean;
@@ -111,16 +114,7 @@ export interface SlotInfo {
   action: "select" | "click" | "doubleClick";
 }
 
-export interface CadastroFlex1Props<T extends CadastroAlunoType | CadastroProfessorType> {
-  titulo: string;
+export interface CadastroFlexProps<T extends CadastroAlunoInput | CadastroProfessorInput> {
   infos: T;
   setInfos: React.Dispatch<React.SetStateAction<T>>;
-  place: string;
-};
-
-export interface CadastroFlex2Props<T extends CadastroAlunoType | CadastroProfessorType> {
-  opcao1: string;
-  opcao2: string;
-  infos: T;
-  setInfos: React.Dispatch<React.SetStateAction<T>>;
-};
+}
