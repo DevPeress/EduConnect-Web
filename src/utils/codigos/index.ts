@@ -25,6 +25,7 @@ function formatTelefone(value: string) {
   return `(${v.slice(0, 2)}) ${v.slice(2, 7)}-${v.slice(7, 11)}`;
 }
 
+// Código para verificar dado enviado e retornar para alterar o dado do SetDados da criação
 function IdentificarTipo(dado: string) {
   switch (dado) {
     case "Nome completo":
