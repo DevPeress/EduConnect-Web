@@ -4,6 +4,7 @@ export const cadastroAlunoSchema = z.object({
     matricula: z.string(),
     status: z.string(),
     nome: z.string().min(3, "Nome deve ter no mínimo 3 caracteres!"),
+    cpf: z.string().min(14, "CPF inválido!"),
     turma: z.string().refine(
         (value) => value !== "Selecionar Turma",
         "Selecione uma turma válida!"

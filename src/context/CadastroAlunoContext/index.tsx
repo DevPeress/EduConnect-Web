@@ -18,6 +18,7 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
     matricula: "",
     status: "Ativo",
     nome: "",
+    cpf: "",
     turma: "Selecionar Turma",
     email: "",
     telefone: "",
@@ -64,6 +65,7 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
       matricula: "",
       status: "",
       nome: "",
+      cpf: "",
       turma: "",
       email: "",
       telefone: "",
@@ -97,11 +99,11 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
                   setInfos={setDados}
                 />
 
-                <CadastroFlex1
-                  titulo="Nome completo"
+                <CadastroFlex2
+                  opcao1="Nome completo"
+                  opcao2="CPF/Documento"
                   infos={dados}
                   setInfos={setDados}
-                  place="Digite o nome completo do aluno"
                 />
 
                 <CadastroFlex2
