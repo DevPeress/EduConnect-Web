@@ -4,6 +4,7 @@ import ModoExibicao from "../../../components/ModoExibicao";
 import type { AlunosType } from "../../../types/types";
 import { useCadastroAluno } from "../../../context/CadastroAlunoContext";
 import LayoutLogado from "../../LayoutLogado";
+import Table from "../../../components/Table";
 
 const ITENS_POR_PAGINA = 6;
 
@@ -25,20 +26,18 @@ const AlunosAdmin = () => {
     "E-mail",
     "Telefone",
     "Status",
-    "Média",
     "Ação",
   ];
 
   const [alunos, setAlunos] = useState<AlunosType[]>([
     {
-      ra: "2024001",
+      registro: "2024001",
       nome: "Fabrício Peres",
       nasc: new Date(),
       turma: "9º A",
       email: "fabricio.santos@gmail.com",
       telefone: "(11) 95599-2605",
-      status: "Ativo",
-      media: 8.5,
+      status: "Ativo"
     },
   ]);
 
@@ -47,14 +46,13 @@ const AlunosAdmin = () => {
     return alunos.filter((itens) => {
       // Agrupa todas as variáveis referentes aos alunos em uma única variável.
       const conteudo = `
-        ${itens.ra.toLowerCase()}
+        ${itens.registro.toLowerCase()}
         ${itens.nome.toLowerCase()}
         ${itens.nasc}
         ${itens.turma.toLowerCase()}
         ${itens.email.toLowerCase()}
         ${itens.telefone.toLowerCase()}
         ${itens.status.toLowerCase()}
-        ${itens.media}
         `;
 
       // Avalia a variável de Turma selecionada para determinar o filtro a ser aplicado.
@@ -84,14 +82,13 @@ const AlunosAdmin = () => {
     return setAlunos((prevDados) => [
       ...prevDados,
       {
-        ra: dados.matricula.toString(),
+        registro: dados.matricula.toString(),
         nome: dados.nome,
         nasc: dados.nascimento,
         turma: dados.turma,
         email: dados.email,
         telefone: dados.telefone,
-        status: dados.status,
-        media: 0,
+        status: dados.status
       },
     ]);
   };
@@ -134,7 +131,7 @@ const AlunosAdmin = () => {
         <div className="grid grid-cols-3 overflow-hidden gap-x-6 gap-y-5 w-full">
           {exibicao.map((item) => (
             <div
-              key={item.ra}
+              key={item.registro}
               className="grid grid-cols-2 w-125 h-63 bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden hover:bg-(--bg-input) text-(--text-primary) items-center"
             >
               <div className="flex flex-col items-center gap-3">
@@ -145,7 +142,7 @@ const AlunosAdmin = () => {
                 />
                 <div className="px-5 border-b-2 border-(--border-color) text-[14px]">
                   <span className="font-semibold text-(--primary-color) text-[13px]">
-                    {item.ra}
+                    {item.registro}
                   </span>
                 </div>
                 <div className="text-center">
@@ -165,12 +162,6 @@ const AlunosAdmin = () => {
                   </div>
                   <p className="text-[14px] text-(--text-muted)">
                     Turma: <span className="text-[12px]">{item.turma}</span>
-                  </p>
-                  <p className="text-[14px] text-(--text-muted)">
-                    Média:{" "}
-                    <span className="text-[12px] text-(--primary-color)">
-                      {item.media}
-                    </span>
                   </p>
                   <p className="text-[14px] text-(--text-muted)">
                     Status:{" "}
@@ -225,109 +216,7 @@ const AlunosAdmin = () => {
         </div>
       ) : (
         <div className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden mb-6">
-          <table className="w-full border-collapse">
-            <thead className="bg-(--cabecalho)">
-              <tr>
-                {head.map((item) => (
-                  <th
-                    key={item}
-                    className="py-4 px-5 text-left text-[13px] font-semibold text-(--text-muted) uppercase leading-4 border-b-2 border-(--border-color)"
-                  >
-                    {item}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {exibicao.map((item) => (
-                <tr
-                  key={item.ra}
-                  className="hover:bg-(--bg-input) text-(--text-primary)"
-                >
-                  <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
-                    <span className="font-semibold text-(--primary-color) text-[13px]">
-                      {item.ra}
-                    </span>
-                  </td>
-                  <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
-                    <div className="flex items-center gap-3">
-                      <img
-                        className="w-10 h-10 rounded-[50%] object-cover border-2 border-(--border-color)"
-                        src="https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg?auto=compress&cs=tinysrgb&w=60"
-                        alt="Imagem do Aluno"
-                      />
-                      <div>
-                        <p className="font-semibold">{item.nome}</p>
-                        <p className="text-[12px] text-(--text-muted)">
-                          {item.nasc.toLocaleDateString()}
-                        </p>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
-                    {item.turma}
-                  </td>
-                  <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
-                    {item.email}
-                  </td>
-                  <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
-                    {item.telefone}
-                  </td>
-                  <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
-                    <span
-                      className="inline-block py-1.5 px-3 rounded-[20px] text-[12px] font-semibold"
-                      style={{
-                        background:
-                          item.status === "Ativo"
-                            ? "rgba(16, 185, 129, 0.15)"
-                            : item.status === "Inativo"
-                            ? "rgba(156, 163, 175, 0.15)"
-                            : "rgba(239, 68, 68, 0.15)",
-                        color:
-                          item.status === "Ativo"
-                            ? "var(--green)"
-                            : item.status === "Inativo"
-                            ? "var(--text-secondary)"
-                            : "var(--red)",
-                      }}
-                    >
-                      {item.status}
-                    </span>
-                  </td>
-                  <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
-                    <span className="inline-block py-1.5 px-3 text-(--primary-color) rounded-md font-semibold text-[13px] bg-(--aluno-card)">
-                      {item.media}
-                    </span>
-                  </td>
-                  <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
-                    <button className="relative bg-transparent border-none text-(--text-secondary) cursor-pointer py-1 px-2 rounded-sm flex items-center justify-center">
-                      <svg
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                      >
-                        <circle cx="12" cy="5" r="2"></circle>
-                        <circle cx="12" cy="12" r="2"></circle>
-                        <circle cx="12" cy="19" r="2"></circle>
-                      </svg>
-                    </button>
-                    <div className="absolute top-full r-0 bg-(--bg-card) border-2 border-(--border-color) rounded-[10px] min-w-40 z-10 opacity-0 hidden -translate-y-2.5 mt-1">
-                      <div className="block py-2.5 px-4 text-(--text-primary) text-[13px] hover:text-(--primary-color) pl-5">
-                        Visualizar
-                      </div>
-                      <div className="block py-2.5 px-4 text-(--text-primary) text-[13px] hover:text-(--primary-color) pl-5">
-                        Editar
-                      </div>
-                      <div className="block py-2.5 px-4 text-(--text-primary) text-[13px] hover:text-(--red) pl-5">
-                        Deletar
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <Table head={head} exibicao={exibicao} />
         </div>
       )}
 
