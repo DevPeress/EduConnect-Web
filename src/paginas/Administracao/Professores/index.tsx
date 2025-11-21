@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import ModoExibicao from "../../../components/ModoExibicao";
-import type { ProfessorType } from "../../../types/types";
+import type { Pessoa } from "../../../types/types";
 import SelectProfessores from "../../../components/Administracao/SelectProfessores";
 import { useCadastroProfessor } from "../../../context/CadastroProfessorContext";
 import LayoutLogado from "../../LayoutLogado";
@@ -29,10 +29,10 @@ const ProfessoresAdmin = () => {
     "Ação",
   ];
 
-  const [professores, setProfessores] = useState<ProfessorType[]>([
+  const [professores, setProfessores] = useState<Pessoa[]>([
     {
       nome: "Fabrício Peres",
-      turmas: ["9º A"],
+      turma: ["9º A"],
       email: "fabricio.santos@gmail.com",
       telefone: "(11) 95599-2605",
       status: "Ativo",
@@ -49,7 +49,7 @@ const ProfessoresAdmin = () => {
         ${itens.registro.toLowerCase()}
         ${itens.nome.toLowerCase()}
         ${itens.nasc}
-        ${itens.turmas}
+        ${itens.turma}
         ${itens.email.toLowerCase()}
         ${itens.telefone.toLowerCase()}
         ${itens.status.toLowerCase()}
@@ -57,7 +57,7 @@ const ProfessoresAdmin = () => {
 
       // Avalia a variável de Turma selecionada para determinar o filtro a ser aplicado.
       const correspondeTurma =
-        selecionada === "Todas as Salas" || itens.turmas.includes(selecionada);
+        selecionada === "Todas as Salas" || itens.turma.includes(selecionada);
 
       // Avalia a variável de Status selecionada para determinar o filtro a ser aplicado.
       const correspondeStatus =
@@ -82,7 +82,7 @@ const ProfessoresAdmin = () => {
       ...prevDados,
       {
         nome: dados.nome,
-        turmas: dados.turmas,
+        turma: dados.turmas,
         email: dados.email,
         telefone: dados.telefone,
         status: dados.status,
