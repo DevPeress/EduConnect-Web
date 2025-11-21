@@ -81,15 +81,8 @@ export interface Pessoa {
   email: string;
   telefone: string;
   status: string;
+  turma: string | string[];
   nasc: Date;
-}
-
-export interface AlunosType extends Pessoa {
-  turma: string;
-}
-
-export interface ProfessorType extends Pessoa {
-  turmas: string[],
 }
 
 export interface CadastroContextType<T extends CadastroProfessorInput | CadastroAlunoInput> {
