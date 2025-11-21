@@ -9,6 +9,12 @@ const ModoExibicao = ({
   modoExibir: boolean;
   trocarModo: () => void;
 }) => {
+  const EfetuarTroca = () => {
+    trocarModo()
+    const exibir = localStorage.getItem("Exibir");
+    return exibir ? localStorage.removeItem("Exibir") : localStorage.setItem("Exibir", "Cards");
+  };
+
   return (
     <>
       <button
@@ -18,7 +24,7 @@ const ModoExibicao = ({
           background: !modoExibir ? "var(--primary-color)" : "transparent",
           color: !modoExibir ? "white" : "var(--text-secondary)",
         }}
-        onClick={trocarModo}
+        onClick={EfetuarTroca}
       >
         <ExibirTabela />
       </button>
@@ -29,7 +35,7 @@ const ModoExibicao = ({
           background: modoExibir ? "var(--primary-color)" : "transparent",
           color: modoExibir ? "white" : "var(--text-secondary)",
         }}
-        onClick={trocarModo}
+        onClick={EfetuarTroca}
       >
         <ExibirCards />
       </button>
