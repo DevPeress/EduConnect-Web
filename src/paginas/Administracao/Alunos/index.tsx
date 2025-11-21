@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import SelectAlunos from "../../../components/Administracao/SelectAlunos";
 import ModoExibicao from "../../../components/ModoExibicao";
-import type { AlunosType } from "../../../types/types";
+import type { Pessoa } from "../../../types/types";
 import { useCadastroAluno } from "../../../context/CadastroAlunoContext";
 import LayoutLogado from "../../LayoutLogado";
 import Table from "../../../components/Table";
@@ -29,7 +29,7 @@ const AlunosAdmin = () => {
     "Ação",
   ];
 
-  const [alunos, setAlunos] = useState<AlunosType[]>([
+  const [alunos, setAlunos] = useState<Pessoa[]>([
     {
       registro: "2024001",
       nome: "Fabrício Peres",
@@ -37,7 +37,7 @@ const AlunosAdmin = () => {
       turma: "9º A",
       email: "fabricio.santos@gmail.com",
       telefone: "(11) 95599-2605",
-      status: "Ativo"
+      status: "Ativo",
     },
   ]);
 
@@ -49,7 +49,7 @@ const AlunosAdmin = () => {
         ${itens.registro.toLowerCase()}
         ${itens.nome.toLowerCase()}
         ${itens.nasc}
-        ${itens.turma.toLowerCase()}
+        ${itens.turma}
         ${itens.email.toLowerCase()}
         ${itens.telefone.toLowerCase()}
         ${itens.status.toLowerCase()}
@@ -57,8 +57,7 @@ const AlunosAdmin = () => {
 
       // Avalia a variável de Turma selecionada para determinar o filtro a ser aplicado.
       const correspondeTurma =
-        selecionada === "Todas as Salas" ||
-        itens.turma.toLowerCase() === selecionada.toLowerCase();
+        selecionada === "Todas as Salas" || itens.turma.includes(selecionada);
 
       // Avalia a variável de Status selecionada para determinar o filtro a ser aplicado.
       const correspondeStatus =
@@ -88,7 +87,7 @@ const AlunosAdmin = () => {
         turma: dados.turma,
         email: dados.email,
         telefone: dados.telefone,
-        status: dados.status
+        status: dados.status,
       },
     ]);
   };
@@ -123,7 +122,10 @@ const AlunosAdmin = () => {
         </div>
 
         <div className="flex gap-2 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] p-1.5">
-          <ModoExibicao modoExibir={modo} trocarModo={() => setModo((m) => !m)} />
+          <ModoExibicao
+            modoExibir={modo}
+            trocarModo={() => setModo((m) => !m)}
+          />
         </div>
       </div>
 
