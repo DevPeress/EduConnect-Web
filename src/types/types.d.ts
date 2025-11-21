@@ -86,7 +86,6 @@ export interface Pessoa {
 export interface AlunosType extends Pessoa {
   ra: string;
   turma: string;
-  media: number;
 }
 
 export interface ProfessorType extends Pessoa {
