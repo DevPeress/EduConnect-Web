@@ -1,12 +1,6 @@
-import type { AlunosType } from "../../types/types";
+import type { TableProps } from "../../types/types";
 
-const Table = ({
-  head,
-  exibicao,
-}: {
-  head: string[];
-  exibicao: AlunosType[];
-}) => {
+const Table = ({ head, exibicao }: TableProps) => {
   return (
     <table className="w-full border-collapse">
       <thead className="bg-(--cabecalho)">
