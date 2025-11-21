@@ -19,11 +19,6 @@ const Paginas: Nav[] = [
     pagina: "/admin/professores",
     svg: NavProfessores,
   },
-  {
-    nome: "Funcionários",
-    pagina: "/admin/funcionarios",
-    svg: NavProfessores,
-  },
   { nome: "Turmas", pagina: "/admin/turmos", svg: NavTurmas },
 
   { nome: "Notas", pagina: "/admin/notas", svg: NavNotas },
@@ -44,14 +39,14 @@ const Paginas: Nav[] = [
   },
 ];
 
-const NavAdministrador = ({ pagina }: { pagina: string }) => {
+const NavFuncionario = ({ pagina }: { pagina: string }) => {
   return (
     <nav className="flex-1 px-3.5 py-3.5">
       <div className="mb-4">
         <span className="block text-[11px] font-semibold text-(--text-muted) uppercase leading-[0.5px] px-2 py-1 mb-5">
           Principal
         </span>
-        {Paginas.slice(0, 5).map((item) => {
+        {Paginas.slice(0, 4).map((item) => {
           const paginaAtual: boolean = pagina === item.pagina;
 
           return (
@@ -68,7 +63,7 @@ const NavAdministrador = ({ pagina }: { pagina: string }) => {
         <span className="block text-[11px] font-semibold text-(--text-muted) uppercase leading-[0.5px] px-2 py-1 mb-1">
           Acadêmico
         </span>
-        {Paginas.slice(6, 9).map((item) => {
+        {Paginas.slice(5, 8).map((item) => {
           const paginaAtual: boolean = pagina === item.pagina;
 
           return (
@@ -84,4 +79,4 @@ const NavAdministrador = ({ pagina }: { pagina: string }) => {
   );
 };
 
-export default NavAdministrador;
+export default NavFuncionario;

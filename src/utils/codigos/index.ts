@@ -20,8 +20,49 @@ function formatTelefone(value: string) {
 
   if (v.length <= 2) return `(${v}`;
   if (v.length <= 6) return `(${v.slice(0, 2)}) ${v.slice(2)}`;
-  if (v.length <= 10) return `(${v.slice(0, 2)}) ${v.slice(2, 6)}-${v.slice(6)}`;
+  if (v.length <= 10)
+    return `(${v.slice(0, 2)}) ${v.slice(2, 6)}-${v.slice(6)}`;
   return `(${v.slice(0, 2)}) ${v.slice(2, 7)}-${v.slice(7, 11)}`;
 }
 
-export { formatBRL, formatCPF, formatTelefone }
+// Código para verificar dado enviado e retornar para alterar o dado do SetDados da criação
+function IdentificarTipo(dado: string) {
+  switch (dado) {
+    case "Nome completo":
+      return "nome";
+    case "Endereço":
+      return "endereco";
+    case "Matrícula":
+      return "matricula";
+    case "Código":
+      return "codigo";
+    case "Status":
+      return "status";
+    case "Data de Nascimento":
+      return "nascimento";
+    case "Data de Contratação":
+      return "contratacao";
+    case "Turma":
+      return "turma";
+    case "E-mail":
+      return "email";
+    case "Telefone":
+      return "telefone";
+    case "Disciplina Principal":
+      return "disciplina";
+    case "Formação Academica":
+      return "formacao";
+    case "Telefone de Emergência":
+      return "emergencia";
+    case "CPF/Documento":
+      return "cpf";
+    case "Nome do Contato de Emergência":
+      return "nomeEmergencia";
+    case "Telefone do Contato de Emergência":
+      return "telefoneEmergencia";
+    default:
+      return "";
+  }
+}
+
+export { formatBRL, formatCPF, formatTelefone, IdentificarTipo };

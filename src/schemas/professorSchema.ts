@@ -11,9 +11,10 @@ export const cadastroProfessorSchema = z.object({
     turmas: z.array(z.string()),
     email: z.string().email("E-mail inválido!"),
     telefone: z.string().min(14, "Número de Telefone inválido!"),
-    emergencia: z.string().min(14, "Número de Emergência inválido!"),
     endereco: z.string().min(5, "Endereço inválido!"),
-    nasc: z.date()
+    nasc: z.date(),
+    nomeEmergencia: z.string().min(3, "Nome do Contato de Emergência deve ter no mínimo 3 caracteres!"),
+    telefoneEmergencia: z.string().min(14, "Número do Contato de Emergência inválido!")
 })
 
 export type CadastroProfessorInput = z.infer<typeof cadastroProfessorSchema>;

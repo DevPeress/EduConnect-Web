@@ -1,14 +1,15 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
 import type { CadastroContextType } from "../../types/types";
-import CadastroTitulo from "../../components/Cadastros/Titulo";
-import CadastroFlex2 from "../../components/Cadastros/Flex-2";
-import CadastroFlex1 from "../../components/Cadastros/Flex-1";
+import {
+  CadastroFlex1,
+  CadastroFlex2,
+  CadastroTitulo,
+} from "../../components/Cadastros";
 import toast from "react-hot-toast";
 import {
   cadastroAlunoSchema,
   type CadastroAlunoInput,
 } from "../../schemas/alunoSchema";
-//import { http } from "../../utils/axios";
 
 const CadastroAlunoContext = createContext<
   CadastroContextType<CadastroAlunoInput> | undefined
@@ -19,11 +20,14 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
     matricula: "",
     status: "Ativo",
     nome: "",
+    cpf: "",
     turma: "Selecionar Turma",
     email: "",
     telefone: "",
     endereco: "",
     nascimento: new Date(),
+    nomeEmergencia: "",
+    telefoneEmergencia: "",
   });
   const [resolveCallback, setResolveCallback] = useState<
     ((data: CadastroAlunoInput | null) => void) | null
@@ -42,24 +46,6 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
     if (!result.success) return toast.error(result.error.issues[0].message);
 
     if (resolveCallback) {
-      //await http
-      //.post<CadastroAlunoInput>("aluno/cadastro", {
-      //matricula: dados.matricula,
-      //status: dados.status,
-      //nome: dados.nome,
-      //turma: dados.turma,
-      //email: dados.email,
-      //telefone: dados.telefone,
-      //endereco: dados.endereco
-      //})
-      //.then(function () {
-      //  resolveCallback(dados);
-      //  setResolveCallback(null);
-      //})
-      //.then(function (error) {
-      //  console.log(error);
-      //});
-
       resolveCallback(dados);
       setResolveCallback(null);
     }
@@ -81,11 +67,14 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
       matricula: "",
       status: "",
       nome: "",
+      cpf: "",
       turma: "",
       email: "",
       telefone: "",
       endereco: "",
       nascimento: new Date(),
+      nomeEmergencia: "",
+      telefoneEmergencia: "",
     });
   };
 
@@ -112,11 +101,11 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
                   setInfos={setDados}
                 />
 
-                <CadastroFlex1
-                  titulo="Nome completo"
+                <CadastroFlex2
+                  opcao1="Nome completo"
+                  opcao2="CPF/Documento"
                   infos={dados}
                   setInfos={setDados}
-                  place="Digite o nome completo do aluno"
                 />
 
                 <CadastroFlex2
@@ -143,6 +132,18 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
                   infos={dados}
                   setInfos={setDados}
                   place="Rua, número, bairro, cidade - Estado"
+                />
+              </div>
+
+              <div className="mb-7">
+                <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
+                  Contato de Emergência
+                </h3>
+                <CadastroFlex2
+                  opcao1="Nome do Contato de Emergência"
+                  opcao2="Telefone do Contato de Emergência"
+                  infos={dados}
+                  setInfos={setDados}
                 />
               </div>
             </form>

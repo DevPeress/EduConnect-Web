@@ -1,7 +1,7 @@
-import type { CadastroAlunoInput } from "../../../schemas/alunoSchema";
-import type { CadastroProfessorInput } from "../../../schemas/professorSchema";
-import type { CadastroFlexProps } from "../../../types/types";
-import { formatCPF, formatTelefone } from "../../../utils/codigos";
+import type { CadastroAlunoInput } from "../../schemas/alunoSchema";
+import type { CadastroProfessorInput } from "../../schemas/professorSchema";
+import type { CadastroFlexProps } from "../../types/types";
+import { formatCPF, formatTelefone, IdentificarTipo } from "../../utils/codigos";
 
 interface CadastroFlex2Prop<
   T extends CadastroAlunoInput | CadastroProfessorInput
@@ -17,41 +17,8 @@ const CadastroFlex2 = <T extends CadastroAlunoInput | CadastroProfessorInput>({
   setInfos,
 }: CadastroFlex2Prop<T>) => {
   // Processa a opção recebida e retorna o resultado conforme o contexto de criação de alunos ou professores.
-  const Tipo = (dado: string) => {
-    switch (dado) {
-      case "Matrícula":
-        return "matricula";
-      case "Código":
-        return "codigo";
-      case "Status":
-        return "status";
-      case "Data de Nascimento":
-        return "nascimento";
-      case "Data de Contratação":
-        return "contratacao";
-      case "Turma":
-        return "turma";
-      case "E-mail":
-        return "email";
-      case "Telefone":
-        return "telefone";
-      case "Disciplina Principal":
-        return "disciplina";
-      case "Formação Academica":
-        return "formacao";
-      case "Endereço":
-        return "endereco";
-      case "Telefone de Emergência":
-        return "emergencia";
-      case "CPF/Documento":
-        return "cpf";
-      default:
-        return "";
-    }
-  };
-
-  const tipo1 = Tipo(opcao1) as keyof T;
-  const tipo2 = Tipo(opcao2) as keyof T;
+  const tipo1 = IdentificarTipo(opcao1) as keyof T;
+  const tipo2 = IdentificarTipo(opcao2) as keyof T;
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
@@ -60,7 +27,7 @@ const CadastroFlex2 = <T extends CadastroAlunoInput | CadastroProfessorInput>({
     let texto = e.target.value;
     if (Escolhas === "cpf") texto = formatCPF(texto);
 
-    if (Escolhas === "telefone" || Escolhas === "emergencia")
+    if (Escolhas === "telefone" || Escolhas === "telefoneEmergencia")
       texto = formatTelefone(texto);
 
     setInfos((prev) => ({

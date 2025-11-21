@@ -1,6 +1,7 @@
-import type { CadastroAlunoInput } from "../../../schemas/alunoSchema";
-import type { CadastroProfessorInput } from "../../../schemas/professorSchema";
-import type { CadastroFlexProps } from "../../../types/types";
+import type { CadastroAlunoInput } from "../../schemas/alunoSchema";
+import type { CadastroProfessorInput } from "../../schemas/professorSchema";
+import type { CadastroFlexProps } from "../../types/types";
+import { IdentificarTipo } from "../../utils/codigos";
 
 interface CadastroFlex1Prop<
   T extends CadastroAlunoInput | CadastroProfessorInput
@@ -16,18 +17,7 @@ const CadastroFlex1 = <T extends CadastroAlunoInput | CadastroProfessorInput>({
   place,
 }: CadastroFlex1Prop<T>) => {
   // Processa a opção recebida e retorna o resultado conforme o contexto de criação de alunos ou professores.
-  const Tipo = (dado: string) => {
-    switch (dado) {
-      case "Nome completo":
-        return "nome";
-      case "Endereço":
-        return "endereco";
-      default:
-        return "";
-    }
-  };
-
-  const tipo = Tipo(titulo) as keyof T;
+  const tipo = IdentificarTipo(titulo) as keyof T;
 
   // Cria o Select ou Input para ser demonstrado
   const TipoDiv = () => {

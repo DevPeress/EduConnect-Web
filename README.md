@@ -12,49 +12,62 @@ O **Edu Connect** é o front-end de um sistema escolar moderno desenvolvido com 
 ## 🧰 Tecnologias Utilizadas
 
 ### ⚛️ Framework e Linguagem
+
 - [React](https://react.dev/)
 - [TypeScript](https://www.typescriptlang.org/)
 
 ### 🎨 Estilização e Build
+
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Vite](https://vitejs.dev/)
 
 ### 💬 Notificações e Feedbacks
+
 - [React Hot Toast](https://react-hot-toast.com/)
 
 ### 🔗 Comunicação com API
+
 - [Axios](https://axios-http.com/)
 
 ### 🚦 Gerenciamento de Rotas
+
 - [React Router DOM](https://reactrouter.com/)
 
- ### 🛡️ Validação de Dados
+### 🛡️ Validação de Dados
+
 - [Zod](https://zod.dev)
 
 ### 🧹 Qualidade de Código
+
 - [ESLint](https://eslint.org/)
 - [TypeScript ESLint](https://typescript-eslint.io/)
+- [Prettier](https://prettier.io/)
 
 ### 📅 Calendário e Datas
+
 - [React Big Calendar](https://github.com/jquense/react-big-calendar)
 - [Date-fns](https://date-fns.org/)
 
 ## ✨ Funcionalidades
 
 - **Páginas personalizadas**
+
   - Página 404: informa sobre rotas inexistentes com redirecionamento intuitivo.
   - Página 403: informa sobre rotas sem permissão de acesso.
 
 - **Autenticação**
+
   - Página de login funcional com redirecionamento automático conforme o nível de acesso.
 
 - **Dashboard Administrativo**
+
   - Exibição de dados gerais (alunos, professores, turmas e presença).
   - Gráfico analítico dinâmico.
   - Painel de atividades recentes.
   - Aba com Calendário interativo com eventos, integrado via React Big Calendar e Date-fns.
 
 - **Gestão de Usuários**
+
   - Páginas específicas para **alunos** e **professores**.
   - Filtro por tipo.
   - Cadastro direto via interface.
@@ -81,7 +94,7 @@ npm run dev
 
 ```
 📁 EduConnect
- ┣ 📂 src 
+ ┣ 📂 src
     ┣ 📂 assets         # Imagens e ícones utilizados no site
     ┣ 📂 components     # Componentes reutilizáveis
     ┣ 📂 context        # Contextos globais

@@ -1,14 +1,15 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
 import type { CadastroContextType } from "../../types/types";
-import CadastroTitulo from "../../components/Cadastros/Titulo";
-import CadastroFlex2 from "../../components/Cadastros/Flex-2";
-import CadastroFlex1 from "../../components/Cadastros/Flex-1";
+import {
+  CadastroFlex1,
+  CadastroFlex2,
+  CadastroTitulo,
+} from "../../components/Cadastros";
 import {
   cadastroProfessorSchema,
   type CadastroProfessorInput,
 } from "../../schemas/professorSchema";
 import toast from "react-hot-toast";
-//import { http } from "../../utils/axios";
 
 const CadastroProfessorContext = createContext<
   CadastroContextType<CadastroProfessorInput> | undefined
@@ -30,9 +31,10 @@ export function CadastroProfessorProvider({
     turmas: [""],
     email: "",
     telefone: "",
-    emergencia: "",
     endereco: "",
     nasc: new Date(),
+    nomeEmergencia: "",
+    telefoneEmergencia: "",
   });
   const [resolveCallback, setResolveCallback] = useState<
     ((data: CadastroProfessorInput | null) => void) | null
@@ -51,24 +53,6 @@ export function CadastroProfessorProvider({
     if (!result.success) return toast.error(result.error.issues[0].message);
 
     if (resolveCallback) {
-      //await http
-      //.post<CadastroProfessorInput>("prfessor/cadastro", {
-      //matricula: dados.matricula,
-      //status: dados.status,
-      //nome: dados.nome,
-      //turma: dados.turma,
-      //email: dados.email,
-      //telefone: dados.telefone,
-      //endereco: dados.endereco
-      //})
-      //.then(function () {
-      //  resolveCallback(dados);
-      //  setResolveCallback(null);
-      //})
-      //.then(function (error) {
-      //  console.log(error);
-      //});
-
       resolveCallback(dados);
       setResolveCallback(null);
     }
@@ -97,9 +81,10 @@ export function CadastroProfessorProvider({
       turmas: [""],
       email: "",
       telefone: "",
-      emergencia: "",
       endereco: "",
       nasc: new Date(),
+      nomeEmergencia: "",
+      telefoneEmergencia: "",
     });
   };
 
@@ -174,9 +159,21 @@ export function CadastroProfessorProvider({
                   setInfos={setDados}
                 />
 
+                <CadastroFlex1
+                  titulo="Endereço"
+                  infos={dados}
+                  setInfos={setDados}
+                  place="Rua, número, bairro, cidade - Estado"
+                />
+              </div>
+
+              <div className="mb-7">
+                <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
+                  Contato de Emergência
+                </h3>
                 <CadastroFlex2
-                  opcao1="Telefone de Emergência"
-                  opcao2="Endereço"
+                  opcao1="Nome do Contato de Emergência"
+                  opcao2="Telefone do Contato de Emergência"
                   infos={dados}
                   setInfos={setDados}
                 />
