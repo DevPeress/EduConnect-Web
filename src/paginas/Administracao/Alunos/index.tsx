@@ -13,7 +13,10 @@ const AlunosAdmin = () => {
   const { openMenu } = useCadastroAluno();
 
   const [loading] = useState<boolean>(false);
-  const [modo, setModo] = useState<boolean>(false);
+  const [modo, setModo] = useState<boolean>(() => {
+    const cargo = localStorage.getItem("Exibir");
+    return cargo ? true : false;
+  });
   const [salas] = useState<string[]>(["Todas as Salas", "9º A", "9º B"]);
   const [selecionada, setSelecionada] = useState<string>("Todas as Salas");
   const [status, setStatus] = useState<string>("Todos os Status");
