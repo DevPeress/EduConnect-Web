@@ -5,38 +5,18 @@ import SelectProfessores from "../../../components/Administracao/SelectProfessor
 import { useCadastroProfessor } from "../../../context/CadastroProfessorContext";
 import LayoutLogado from "../../LayoutLogado";
 
+const ITENS_POR_PAGINA = 6;
+
 const ProfessoresAdmin = () => {
   const { openMenu } = useCadastroProfessor();
-  const [loading, setLoading] = useState<boolean>(true);
+
+  const [loading] = useState<boolean>(false);
   const [modo, setModo] = useState<boolean>(false);
   const [salas] = useState<string[]>(["Todas as Salas", "9º A", "9º B"]);
   const [selecionada, setSelecionada] = useState<string>("Todas as Salas");
   const [status, setStatus] = useState<string>("Todos os Status");
   const [pesquisa] = useState<string>("");
-  const [mostrar, setMostrar] = useState<number>(6);
-  const [pagina, setPagina] = useState<{ atual: number; maxima: number }>({
-    atual: 1,
-    maxima: 1,
-  });
-
-  const ProximaPagina = () => {
-    setMostrar((prevDados) => prevDados + 6);
-    setPagina((prevDados) => ({
-      ...prevDados,
-      atual:
-        prevDados.atual + 1 > prevDados.maxima
-          ? prevDados.maxima
-          : prevDados.atual + 1,
-    }));
-  };
-
-  const VoltarPagina = () => {
-    setMostrar((prevDados) => prevDados - 6);
-    setPagina((prevDados) => ({
-      ...prevDados,
-      atual: prevDados.atual - 1,
-    }));
-  };
+  const [pagina, setPagina] = useState(1);
 
   const head: string[] = [
     "Código",
@@ -91,15 +71,8 @@ const ProfessoresAdmin = () => {
   }, [professores, pesquisa, selecionada, status]);
 
   useEffect(() => {
-    setPagina((prevDados) => ({
-      ...prevDados,
-      maxima:
-        ProfessoresFiltrados.length % 6 === 0
-          ? ProfessoresFiltrados.length / 6
-          : Math.floor(ProfessoresFiltrados.length / 6) + 1,
-    }));
-    setLoading(false);
-  }, [ProfessoresFiltrados]);
+    setPagina(1);
+  }, [ProfessoresFiltrados.length]);
 
   const AdicionarProfessor = async () => {
     const dados = await openMenu();
@@ -117,6 +90,15 @@ const ProfessoresAdmin = () => {
       },
     ]);
   };
+
+  const maxPaginas = Math.max(
+    1,
+    Math.ceil(ProfessoresFiltrados.length / ITENS_POR_PAGINA)
+  );
+
+  const inicio = (pagina - 1) * ITENS_POR_PAGINA;
+  const fim = inicio + ITENS_POR_PAGINA;
+  const exibicao = ProfessoresFiltrados.slice(inicio, fim);
 
   return (
     <LayoutLogado
@@ -158,7 +140,7 @@ const ProfessoresAdmin = () => {
             </tr>
           </thead>
           <tbody>
-            {ProfessoresFiltrados.slice(mostrar - 6, mostrar).map((item) => (
+            {exibicao.map((item) => (
               <tr
                 key={item.codigo}
                 className="hover:bg-(--bg-input) text-(--text-primary)"
@@ -246,28 +228,20 @@ const ProfessoresAdmin = () => {
 
       <div className="flex justify-center items-center gap-5 mt-8 pt-5 border-t-2 border-(--border-color)">
         <button
-          onClick={() => (pagina.atual === 1 ? null : VoltarPagina())}
+          onClick={() => pagina > 1 && setPagina(pagina - 1)}
           className="py-2.5 px-4 bg-transparent border-2 border-(--border-color) text-(--text-primary) text-[14px] font-medium rounded-lg hover:bg-(--bg-input) hover:border-(--border-light)"
-          style={{
-            opacity: pagina.atual === 1 ? "0.5" : "1",
-            cursor: pagina.atual === 1 ? "not-allowed" : "pointer",
-          }}
+          disabled={pagina === 1}
         >
           Anterior
         </button>
         <div className="text-[14px] text-(--text-secondary)">
-          Página {pagina.atual} de {pagina.maxima} (
-          {ProfessoresFiltrados.length} professores)
+          Página {pagina} de {maxPaginas} ({ProfessoresFiltrados.length}{" "}
+          professores)
         </div>
         <button
-          onClick={() =>
-            pagina.atual === pagina.maxima ? null : ProximaPagina()
-          }
+          onClick={() => pagina < maxPaginas && setPagina(pagina + 1)}
           className="py-2.5 px-4 bg-transparent border-2 border-(--border-color) text-(--text-primary) text-[14px] font-medium rounded-lg hover:bg-(--bg-input) hover:border-(--border-light)"
-          style={{
-            opacity: pagina.maxima === pagina.atual ? "0.5" : "1",
-            cursor: pagina.maxima === pagina.atual ? "not-allowed" : "pointer",
-          }}
+          disabled={pagina === maxPaginas}
         >
           Próximo
         </button>
