@@ -76,6 +76,7 @@ export interface CalendarioType {
 };
 
 export interface Pessoa {
+  registro: string;
   nome: string;
   email: string;
   telefone: string;
@@ -84,12 +85,10 @@ export interface Pessoa {
 }
 
 export interface AlunosType extends Pessoa {
-  ra: string;
   turma: string;
 }
 
 export interface ProfessorType extends Pessoa {
-  codigo: string;
   turmas: string[],
 }
 
