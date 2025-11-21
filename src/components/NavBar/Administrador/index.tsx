@@ -11,12 +11,17 @@ import {
 import type { Nav } from "../../../types/types";
 import LinkPaginas from "../LinkPaginas/LinkPaginas";
 
-const Admin: Nav[] = [
+const Paginas: Nav[] = [
   { nome: "DashBoard", pagina: "/admin/dashboard", svg: NavDashBoard },
   { nome: "Alunos", pagina: "/admin/alunos", svg: NavAlunos },
   {
     nome: "Professores",
     pagina: "/admin/professores",
+    svg: NavProfessores,
+  },
+  {
+    nome: "Funcionários",
+    pagina: "/admin/funcionarios",
     svg: NavProfessores,
   },
   { nome: "Turmas", pagina: "/admin/turmos", svg: NavTurmas },
@@ -46,7 +51,7 @@ const NavAdministrador = ({ pagina }: { pagina: string }) => {
         <span className="block text-[11px] font-semibold text-(--text-muted) uppercase leading-[0.5px] px-2 py-1 mb-5">
           Principal
         </span>
-        {Admin.slice(0, 4).map((item) => {
+        {Paginas.slice(0, 5).map((item) => {
           const paginaAtual: boolean = pagina === item.pagina;
 
           return (
@@ -63,7 +68,7 @@ const NavAdministrador = ({ pagina }: { pagina: string }) => {
         <span className="block text-[11px] font-semibold text-(--text-muted) uppercase leading-[0.5px] px-2 py-1 mb-1">
           Acadêmico
         </span>
-        {Admin.slice(4, 8).map((item) => {
+        {Paginas.slice(6, 9).map((item) => {
           const paginaAtual: boolean = pagina === item.pagina;
 
           return (
