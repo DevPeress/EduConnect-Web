@@ -5,38 +5,18 @@ import type { AlunosType } from "../../../types/types";
 import { useCadastroAluno } from "../../../context/CadastroAlunoContext";
 import LayoutLogado from "../../LayoutLogado";
 
+const ITENS_POR_PAGINA = 6;
+
 const AlunosAdmin = () => {
   const { openMenu } = useCadastroAluno();
-  const [loading, setLoading] = useState<boolean>(true);
+
+  const [loading] = useState<boolean>(false);
   const [modo, setModo] = useState<boolean>(false);
   const [salas] = useState<string[]>(["Todas as Salas", "9º A", "9º B"]);
   const [selecionada, setSelecionada] = useState<string>("Todas as Salas");
   const [status, setStatus] = useState<string>("Todos os Status");
   const [pesquisa] = useState<string>("");
-  const [mostrar, setMostrar] = useState<number>(6);
-  const [pagina, setPagina] = useState<{ atual: number; maxima: number }>({
-    atual: 1,
-    maxima: 1,
-  });
-
-  const ProximaPagina = () => {
-    setMostrar((prevDados) => prevDados + 6);
-    setPagina((prevDados) => ({
-      ...prevDados,
-      atual:
-        prevDados.atual + 1 > prevDados.maxima
-          ? prevDados.maxima
-          : prevDados.atual + 1,
-    }));
-  };
-
-  const VoltarPagina = () => {
-    setMostrar((prevDados) => prevDados - 6);
-    setPagina((prevDados) => ({
-      ...prevDados,
-      atual: prevDados.atual - 1,
-    }));
-  };
+  const [pagina, setPagina] = useState(1);
 
   const head: string[] = [
     "Matrícula",
@@ -95,15 +75,8 @@ const AlunosAdmin = () => {
   }, [alunos, pesquisa, selecionada, status]);
 
   useEffect(() => {
-    setPagina((prevDados) => ({
-      ...prevDados,
-      maxima:
-        AlunosFiltrados.length % 6 === 0
-          ? AlunosFiltrados.length / 6
-          : Math.floor(AlunosFiltrados.length / 6) + 1,
-    }));
-    setLoading(false);
-  }, [AlunosFiltrados]);
+    setPagina(1);
+  }, [AlunosFiltrados.length]);
 
   const AdicionarAluno = async () => {
     const dados = await openMenu();
@@ -122,6 +95,15 @@ const AlunosAdmin = () => {
       },
     ]);
   };
+
+  const maxPaginas = Math.max(
+    1,
+    Math.ceil(AlunosFiltrados.length / ITENS_POR_PAGINA)
+  );
+
+  const inicio = (pagina - 1) * ITENS_POR_PAGINA;
+  const fim = inicio + ITENS_POR_PAGINA;
+  const exibicao = AlunosFiltrados.slice(inicio, fim);
 
   return (
     <LayoutLogado
@@ -144,13 +126,13 @@ const AlunosAdmin = () => {
         </div>
 
         <div className="flex gap-2 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] p-1.5">
-          <ModoExibicao modoExibir={modo} trocarModo={() => setModo(!modo)} />
+          <ModoExibicao modoExibir={modo} trocarModo={() => setModo((m) => !m)} />
         </div>
       </div>
 
       {modo ? (
         <div className="grid grid-cols-3 overflow-hidden gap-x-6 gap-y-5 w-full">
-          {AlunosFiltrados.slice(mostrar - 6, mostrar).map((item) => (
+          {exibicao.map((item) => (
             <div
               key={item.ra}
               className="grid grid-cols-2 w-125 h-63 bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden hover:bg-(--bg-input) text-(--text-primary) items-center"
@@ -257,7 +239,7 @@ const AlunosAdmin = () => {
               </tr>
             </thead>
             <tbody>
-              {AlunosFiltrados.slice(mostrar - 6, mostrar).map((item) => (
+              {exibicao.map((item) => (
                 <tr
                   key={item.ra}
                   className="hover:bg-(--bg-input) text-(--text-primary)"
@@ -351,28 +333,19 @@ const AlunosAdmin = () => {
 
       <div className="flex justify-center items-center gap-5 mt-8 pt-5 border-t-2 border-(--border-color)">
         <button
-          onClick={() => (pagina.atual === 1 ? null : VoltarPagina())}
+          onClick={() => pagina > 1 && setPagina(pagina - 1)}
           className="py-2.5 px-4 bg-transparent border-2 border-(--border-color) text-(--text-primary) text-[14px] font-medium rounded-lg hover:bg-(--bg-input) hover:border-(--border-light)"
-          style={{
-            opacity: pagina.atual === 1 ? "0.5" : "1",
-            cursor: pagina.atual === 1 ? "not-allowed" : "pointer",
-          }}
+          disabled={pagina === 1}
         >
           Anterior
         </button>
         <div className="text-[14px] text-(--text-secondary)">
-          Página {pagina.atual} de {pagina.maxima} ({AlunosFiltrados.length}{" "}
-          alunos)
+          Página {pagina} de {maxPaginas} ({AlunosFiltrados.length} alunos)
         </div>
         <button
-          onClick={() =>
-            pagina.atual === pagina.maxima ? null : ProximaPagina()
-          }
+          onClick={() => pagina < maxPaginas && setPagina(pagina + 1)}
+          disabled={pagina === maxPaginas}
           className="py-2.5 px-4 bg-transparent border-2 border-(--border-color) text-(--text-primary) text-[14px] font-medium rounded-lg hover:bg-(--bg-input) hover:border-(--border-light)"
-          style={{
-            opacity: pagina.maxima === pagina.atual ? "0.5" : "1",
-            cursor: pagina.maxima === pagina.atual ? "not-allowed" : "pointer",
-          }}
         >
           Próximo
         </button>
