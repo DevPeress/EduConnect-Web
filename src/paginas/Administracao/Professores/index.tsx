@@ -5,6 +5,7 @@ import SelectProfessores from "../../../components/Administracao/SelectProfessor
 import { useCadastroProfessor } from "../../../context/CadastroProfessorContext";
 import LayoutLogado from "../../LayoutLogado";
 import Table from "../../../components/Table";
+import Grid from "../../../components/Grid";
 
 const ITENS_POR_PAGINA = 6;
 
@@ -126,9 +127,15 @@ const ProfessoresAdmin = () => {
         </div>
       </div>
 
-      <div className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden mb-6">
-        <Table head={head} exibicao={exibicao} />
-      </div>
+      {modo ? (
+        <div className="grid grid-cols-3 overflow-hidden gap-x-6 gap-y-5 w-full">
+          <Grid exibicao={exibicao} head={[]} />
+        </div>
+      ) : (
+        <div className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden mb-6">
+          <Table head={head} exibicao={exibicao} />
+        </div>
+      )}
 
       <div className="flex justify-center items-center gap-5 mt-8 pt-5 border-t-2 border-(--border-color)">
         <button
