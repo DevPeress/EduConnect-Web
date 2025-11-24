@@ -37,7 +37,7 @@ const Table = ({ head, exibicao }: TableProps) => {
                 <div>
                   <p className="font-semibold">{item.nome}</p>
                   <p className="text-[12px] text-(--text-muted)">
-                    {item.nasc.toLocaleDateString()}
+                    {new Date(item.nasc + "T00:00:00").toLocaleDateString("pt-BR")}
                   </p>
                 </div>
               </div>
