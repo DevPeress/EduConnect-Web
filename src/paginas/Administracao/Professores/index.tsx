@@ -6,13 +6,14 @@ import { useCadastroProfessor } from "../../../context/CadastroProfessorContext"
 import LayoutLogado from "../../LayoutLogado";
 import Table from "../../../components/Table";
 import Grid from "../../../components/Grid";
+import { http } from "../../../utils/axios";
 
 const ITENS_POR_PAGINA = 6;
 
 const ProfessoresAdmin = () => {
   const { openMenu } = useCadastroProfessor();
 
-  const [loading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [modo, setModo] = useState<boolean>(() => {
     const cargo = localStorage.getItem("Exibir");
     return cargo ? true : false;
@@ -33,17 +34,7 @@ const ProfessoresAdmin = () => {
     "Ação",
   ];
 
-  const [professores, setProfessores] = useState<Pessoa[]>([
-    {
-      nome: "Fabrício Peres",
-      turma: ["9º A"],
-      email: "fabricio.santos@gmail.com",
-      telefone: "(11) 95599-2605",
-      status: "Ativo",
-      registro: "01",
-      nasc: new Date(),
-    },
-  ]);
+  const [professores, setProfessores] = useState<Pessoa[]>([]);
 
   const ProfessoresFiltrados = useMemo(() => {
     const termo = pesquisa.toLowerCase();
@@ -78,6 +69,20 @@ const ProfessoresAdmin = () => {
   useEffect(() => {
     setPagina(1);
   }, [ProfessoresFiltrados.length]);
+
+  useEffect(() => {
+    http
+      .get("api/professores")
+      .then(function (dados) {
+        setProfessores(dados.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+      .finally(function () {
+        setLoading(false);
+      });
+  }, []);
 
   const AdicionarProfessor = async () => {
     const dados = await openMenu();
