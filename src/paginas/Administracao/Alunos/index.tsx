@@ -6,13 +6,14 @@ import { useCadastroAluno } from "../../../context/CadastroAlunoContext";
 import LayoutLogado from "../../LayoutLogado";
 import Table from "../../../components/Table";
 import Grid from "../../../components/Grid";
+import { http } from "../../../utils/axios";
 
 const ITENS_POR_PAGINA = 6;
 
 const AlunosAdmin = () => {
   const { openMenu } = useCadastroAluno();
 
-  const [loading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [modo, setModo] = useState<boolean>(() => {
     const cargo = localStorage.getItem("Exibir");
     return cargo ? true : false;
@@ -33,17 +34,7 @@ const AlunosAdmin = () => {
     "Ação",
   ];
 
-  const [alunos, setAlunos] = useState<Pessoa[]>([
-    {
-      registro: "2024001",
-      nome: "Fabrício Peres",
-      nasc: new Date(),
-      turma: "9º A",
-      email: "fabricio.santos@gmail.com",
-      telefone: "(11) 95599-2605",
-      status: "Ativo",
-    },
-  ]);
+  const [alunos, setAlunos] = useState<Pessoa[]>([]);
 
   const AlunosFiltrados = useMemo(() => {
     const termo = pesquisa.toLowerCase();
@@ -78,6 +69,20 @@ const AlunosAdmin = () => {
   useEffect(() => {
     setPagina(1);
   }, [AlunosFiltrados.length]);
+
+  useEffect(() => {
+    http
+      .get("api/alunos")
+      .then(function (dados) {
+        setAlunos(dados.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+      .finally(function () {
+        setLoading(false);
+      });
+  }, []);
 
   const AdicionarAluno = async () => {
     const dados = await openMenu();
