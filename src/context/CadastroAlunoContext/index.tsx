@@ -10,6 +10,7 @@ import {
   cadastroAlunoSchema,
   type CadastroAlunoInput,
 } from "../../schemas/alunoSchema";
+import { http } from "../../utils/axios";
 
 const CadastroAlunoContext = createContext<
   CadastroContextType<CadastroAlunoInput> | undefined
@@ -25,7 +26,7 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
     email: "",
     telefone: "",
     endereco: "",
-    nascimento: new Date(),
+    nascimento: new Date().toISOString().split("T")[0],
     nomeEmergencia: "",
     telefoneEmergencia: "",
   });
@@ -33,9 +34,10 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
     ((data: CadastroAlunoInput | null) => void) | null
   >(null);
 
-  const openMenu = (): Promise<CadastroAlunoInput | null> => {
+  const openMenu = async (): Promise<CadastroAlunoInput | null> => {
+    const matriculaNova = await http.get("api/alunos/Cadastro");
     setMenu(true);
-    setDados((prevDados) => ({ ...prevDados, matricula: "MA123091" }));
+    setDados((prevDados) => ({ ...prevDados, matricula: matriculaNova.data }));
     return new Promise((resolve) => {
       setResolveCallback(() => resolve);
     });
@@ -46,8 +48,29 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
     if (!result.success) return toast.error(result.error.issues[0].message);
 
     if (resolveCallback) {
-      resolveCallback(dados);
-      setResolveCallback(null);
+      try {
+        await http.post("api/alunos", {
+          Registro: dados.matricula,
+          Nome: dados.nome,
+          Email: dados.email,
+          Telefone: dados.telefone,
+          Status: dados.status,
+          Nasc: dados.nascimento,
+          Endereco: dados.endereco,
+          Cpf: dados.cpf,
+          ContatoEmergencia: dados.telefoneEmergencia,
+          turma: dados.turma,
+          media: 0,
+          DataMatricula: new Date().toISOString().split("T")[0],
+        });
+        resolveCallback(dados);
+        setResolveCallback(null);
+        toast.success("Cadastro realizado com sucesso!");
+      } catch {
+        resolveCallback(null);
+        setResolveCallback(null);
+        toast.error("Não foi possível realizar o cadastro!");
+      }
     }
     ResetarDados();
     setMenu(false);
@@ -72,7 +95,7 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
       email: "",
       telefone: "",
       endereco: "",
-      nascimento: new Date(),
+      nascimento: new Date().toISOString().split("T")[0],
       nomeEmergencia: "",
       telefoneEmergencia: "",
     });
