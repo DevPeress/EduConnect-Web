@@ -90,7 +90,7 @@ const AlunosAdmin = () => {
     return setAlunos((prevDados) => [
       ...prevDados,
       {
-        registro: dados.matricula.toString(),
+        registro: dados.matricula,
         nome: dados.nome,
         nasc: dados.nascimento,
         turma: dados.turma,
