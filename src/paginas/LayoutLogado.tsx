@@ -1,6 +1,6 @@
-import type { ReactNode } from "react";
 import Aside from "../components/Aside";
 import Main from "../components/Main";
+import type { MainProps } from "../types/types";
 
 const LayoutLogado = ({
   children,
@@ -8,13 +8,7 @@ const LayoutLogado = ({
   desc,
   botao,
   load,
-}: {
-  children: ReactNode;
-  titulo: string;
-  desc: string;
-  botao: { ativo: boolean; adicionar?: () => void; mensagem?: string };
-  load: boolean;
-}) => {
+}: MainProps) => {
   const BotaoAtivo: boolean = botao.ativo;
   const BotaoMensagem: string = botao.mensagem || "";
   const BotaoAdicionar = botao.adicionar;

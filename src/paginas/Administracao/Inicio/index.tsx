@@ -14,7 +14,7 @@ import toast from "react-hot-toast";
 import LayoutLogado from "../../LayoutLogado";
 
 const InicioAdm = () => {
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading] = useState<boolean>(false);
   const [dados, setDados] = useState<CardsAdminType[]>([
     { dado: "Alunos", total: 1245, aumento: 150, porcentagem: 12 },
     { dado: "Professores", total: 87, aumento: 3, porcentagem: 3.5 },
@@ -22,7 +22,7 @@ const InicioAdm = () => {
     { dado: "Presença", total: 94.5, aumento: 94.5, porcentagem: 2.3 },
   ]);
 
-  const [atividades, setAtividades] = useState<AtividadeType[]>([
+  const [atividades] = useState<AtividadeType[]>([
     { tipo: "Nota", dado: "Matemática 9º A", horario: 15 },
     { tipo: "Presença", dado: "Turma 8º A", horario: 60 },
     { tipo: "Novo Aluno", dado: "João Silva", horario: 120 },
@@ -30,7 +30,7 @@ const InicioAdm = () => {
     { tipo: "Material", dado: "Português", horario: 300 },
   ]);
 
-  const [calendario, setCalendario] = useState<CalendarioType[]>([
+  const [calendario] = useState<CalendarioType[]>([
     {
       dia: "24",
       mes: "Out",
@@ -41,12 +41,9 @@ const InicioAdm = () => {
 
   useEffect(() => {
     http
-      .get("Administracao/PegarInicio")
+      .get("api/dashboardadmin/Cards")
       .then(function (dados) {
-        setDados(dados.data.cards);
-        setAtividades(dados.data.atividades);
-        setCalendario(dados.data.calendario);
-        setLoading(false);
+        setDados(dados.data);
       })
       .catch(function (error) {
         console.log(error);

@@ -1,4 +1,5 @@
 import type { TableProps } from "../../types/types";
+import { formatTelefone } from "../../utils/codigos";
 
 const Table = ({ head, exibicao }: TableProps) => {
   return (
@@ -37,7 +38,7 @@ const Table = ({ head, exibicao }: TableProps) => {
                 <div>
                   <p className="font-semibold">{item.nome}</p>
                   <p className="text-[12px] text-(--text-muted)">
-                    {item.nasc.toLocaleDateString()}
+                    {new Date(item.nasc + "T00:00:00").toLocaleDateString("pt-BR")}
                   </p>
                 </div>
               </div>
@@ -49,7 +50,7 @@ const Table = ({ head, exibicao }: TableProps) => {
               {item.email}
             </td>
             <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
-              {item.telefone}
+              {formatTelefone(item.telefone)}
             </td>
             <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
               <span

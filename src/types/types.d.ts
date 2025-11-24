@@ -82,7 +82,7 @@ export interface Pessoa {
   telefone: string;
   status: string;
   turma: string | string[];
-  nasc: Date;
+  nasc: string;
 }
 
 export interface CadastroContextType<

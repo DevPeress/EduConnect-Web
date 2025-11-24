@@ -10,6 +10,7 @@ import {
   type CadastroProfessorInput,
 } from "../../schemas/professorSchema";
 import toast from "react-hot-toast";
+import { http } from "../../utils/axios";
 
 const CadastroProfessorContext = createContext<
   CadastroContextType<CadastroProfessorInput> | undefined
@@ -25,14 +26,14 @@ export function CadastroProfessorProvider({
     status: "Ativo",
     nome: "",
     cpf: "",
-    contratacao: new Date(),
+    contratacao: new Date().toISOString().split("T")[0],
     disciplina: "",
     formacao: "",
     turmas: [""],
     email: "",
     telefone: "",
     endereco: "",
-    nasc: new Date(),
+    nasc: new Date().toISOString().split("T")[0],
     nomeEmergencia: "",
     telefoneEmergencia: "",
   });
@@ -40,9 +41,10 @@ export function CadastroProfessorProvider({
     ((data: CadastroProfessorInput | null) => void) | null
   >(null);
 
-  const openMenu = (): Promise<CadastroProfessorInput | null> => {
+  const openMenu = async (): Promise<CadastroProfessorInput | null> => {
+    const matriculaNova = await http.get("api/professores/Cadastro");
     setMenu(true);
-    setDados((prevDados) => ({ ...prevDados, codigo: "PO123091" }));
+    setDados((prevDados) => ({ ...prevDados, codigo: matriculaNova.data }));
     return new Promise((resolve) => {
       setResolveCallback(() => resolve);
     });
@@ -53,8 +55,30 @@ export function CadastroProfessorProvider({
     if (!result.success) return toast.error(result.error.issues[0].message);
 
     if (resolveCallback) {
-      resolveCallback(dados);
-      setResolveCallback(null);
+      try {
+        await http.post("api/professores", {
+          Registro: dados.codigo,
+          Nome: dados.nome,
+          Email: dados.email,
+          Telefone: dados.telefone,
+          Status: dados.status,
+          Nasc: dados.nasc,
+          Endereco: dados.endereco,
+          Cpf: dados.cpf,
+          ContatoEmergencia: dados.telefoneEmergencia,
+          turma: dados.turmas,
+          Disciplina: dados.disciplina,
+          Contratacao: new Date().toISOString().split("T")[0],
+          Formacao: dados.formacao
+        });
+        resolveCallback(dados);
+        setResolveCallback(null);
+        toast.success("Cadastro realizado com sucesso!");
+      } catch {
+        resolveCallback(null);
+        setResolveCallback(null);
+        toast.error("Não foi possível realizar o cadastro!");
+      }
     }
     ResetarDados();
     setMenu(false);
@@ -75,14 +99,14 @@ export function CadastroProfessorProvider({
       status: "",
       nome: "",
       cpf: "",
-      contratacao: new Date(),
+      contratacao: new Date().toISOString().split("T")[0],
       disciplina: "",
       formacao: "",
       turmas: [""],
       email: "",
       telefone: "",
       endereco: "",
-      nasc: new Date(),
+      nasc: new Date().toISOString().split("T")[0],
       nomeEmergencia: "",
       telefoneEmergencia: "",
     });

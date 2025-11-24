@@ -1,4 +1,5 @@
 import type { TableProps } from "../../types/types";
+import { formatTelefone } from "../../utils/codigos";
 
 const Grid = ({ exibicao }: TableProps) => {
   return (
@@ -22,7 +23,7 @@ const Grid = ({ exibicao }: TableProps) => {
             <div className="text-center">
               <p className="font-semibold">{item.nome}</p>
               <p className="text-[12px] text-(--text-muted)">
-                {item.nasc.toLocaleDateString()}
+                {new Date(item.nasc + "T00:00:00").toLocaleDateString("pt-BR")}
               </p>
             </div>
           </div>
@@ -65,7 +66,10 @@ const Grid = ({ exibicao }: TableProps) => {
                 E-mail: <span className="text-[12px]">{item.email}</span>
               </p>
               <p className="text-[14px] text-(--text-muted)">
-                Telefone: <span className="text-[12px]">{item.telefone}</span>
+                Telefone:{" "}
+                <span className="text-[12px]">
+                  {formatTelefone(item.telefone)}
+                </span>
               </p>
             </div>
 
