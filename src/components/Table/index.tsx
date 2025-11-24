@@ -1,4 +1,5 @@
 import type { TableProps } from "../../types/types";
+import { formatTelefone } from "../../utils/codigos";
 
 const Table = ({ head, exibicao }: TableProps) => {
   return (
@@ -49,7 +50,7 @@ const Table = ({ head, exibicao }: TableProps) => {
               {item.email}
             </td>
             <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
-              {item.telefone}
+              {formatTelefone(item.telefone)}
             </td>
             <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
               <span
