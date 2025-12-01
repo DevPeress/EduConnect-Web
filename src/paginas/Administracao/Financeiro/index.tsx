@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import SelectFinanceiro from "../../../components/Administracao/SelectFinanceiro";
 import ModoExibicao from "../../../components/ModoExibicao";
-import type { CardsFinanceiroType, Pessoa } from "../../../types/types";
+import type { CardsFinanceiroType, Financeiro } from "../../../types/types";
 import { useCadastroAluno } from "../../../context/CadastroAlunoContext";
 import LayoutLogado from "../../LayoutLogado";
 import Table from "../../../components/Table";
@@ -40,30 +40,41 @@ const FinanceiroAdmin = () => {
     { dado: "Atrasado", total: 0 },
     { dado: "Total", total: 0 },
   ]);
-  const [alunos, setAlunos] = useState<Pessoa[]>([]);
+  const [pagamentos] = useState<Financeiro[]>([
+    {
+      registro: "1",
+      aluno: "Fabrício Peres",
+      nasc: "01/12/2025",
+      categoria: "Mensalidade",
+      valor: 1000,
+      vencimento: "02/12/2025",
+      pagamento: 1000,
+      status: "Liberado",
+      mes: "Dezembro",
+    },
+  ]);
 
-  const AlunosFiltrados = useMemo(() => {
+  const PagamentosFiltrados = useMemo(() => {
     const termo = pesquisa.toLowerCase();
-    return alunos.filter((itens) => {
-      // Agrupa todas as variáveis referentes aos alunos em uma única variável.
+    return pagamentos.filter((itens) => {
+      // Agrupa todas as variáveis referentes aos pagamentos em uma única variável.
       const conteudo = `
-        ${itens.registro.toLowerCase()}
-        ${itens.nome.toLowerCase()}
-        ${itens.nasc}
-        ${itens.turma}
-        ${itens.email.toLowerCase()}
-        ${itens.telefone.toLowerCase()}
+        ${itens.aluno.toLowerCase()}
+        ${itens.categoria.toLowerCase()}
+        ${itens.valor}
+        ${itens.vencimento.toLowerCase()}
+        ${itens.pagamento}
         ${itens.status.toLowerCase()}
         `;
 
       // Avalia a variável de Meses selecionada para determinar o filtro a ser aplicado.
       const correspondeTurma =
-        meses === "Todos os Meses" || itens.turma.includes(meses);
+        meses === "Todos os Meses" || itens.mes.includes(meses);
 
       // Avalia a variável de Categorias selecionada para determinar o filtro a ser aplicado.
       const correspondeCategoria =
         categorias === "Todos os Categorias" ||
-        itens.turma.includes(categorias);
+        itens.categoria.includes(categorias);
 
       // Avalia a variável de Status selecionada para determinar o filtro a ser aplicado.
       const correspondeStatus =
@@ -78,37 +89,25 @@ const FinanceiroAdmin = () => {
         correspondeCategoria;
       return correspondetes;
     });
-  }, [alunos, categorias, meses, pesquisa, status]);
+  }, [pagamentos, categorias, meses, pesquisa, status]);
 
   useEffect(() => {
     setPagina(1);
-  }, [AlunosFiltrados.length]);
+  }, [PagamentosFiltrados.length]);
 
   const AdicionarAluno = async () => {
     const dados = await openMenu();
     if (!dados) return;
-    return setAlunos((prevDados) => [
-      ...prevDados,
-      {
-        registro: dados.matricula,
-        nome: dados.nome,
-        nasc: dados.nascimento,
-        turma: dados.turma,
-        email: dados.email,
-        telefone: dados.telefone,
-        status: dados.status,
-      },
-    ]);
   };
 
   const maxPaginas = Math.max(
     1,
-    Math.ceil(AlunosFiltrados.length / ITENS_POR_PAGINA)
+    Math.ceil(PagamentosFiltrados.length / ITENS_POR_PAGINA)
   );
 
   const inicio = (pagina - 1) * ITENS_POR_PAGINA;
   const fim = inicio + ITENS_POR_PAGINA;
-  const exibicao = AlunosFiltrados.slice(inicio, fim);
+  const exibicao = PagamentosFiltrados.slice(inicio, fim);
 
   return (
     <LayoutLogado
@@ -122,8 +121,8 @@ const FinanceiroAdmin = () => {
       load={loading}
     >
       <div className="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-5 mb-8">
-        {tipo.map((item) => (
-          <CardsFinanceiro dados={item} />
+        {tipo.map((item, index) => (
+          <CardsFinanceiro key={index} dados={item} />
         ))}
       </div>
       <div className="flex justify-between items-center gap-5 mb-6 flex-wrap">
@@ -162,7 +161,8 @@ const FinanceiroAdmin = () => {
           Anterior
         </button>
         <div className="text-[14px] text-(--text-secondary)">
-          Página {pagina} de {maxPaginas} ({AlunosFiltrados.length} alunos)
+          Página {pagina} de {maxPaginas} ({PagamentosFiltrados.length}{" "}
+          pagamentos)
         </div>
         <button
           onClick={() => pagina < maxPaginas && setPagina(pagina + 1)}
