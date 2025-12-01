@@ -46,7 +46,7 @@ const CardsFinanceiro = ({ dados }: { dados: CardsFinanceiroType }) => {
           {dados.dado}
         </h3>
         <div className="text-2xl font-bold text-(--text-primary)">
-          R$ {formatBRL(dados.total)}
+          R$ {formatBRL(Number(dados.total ?? 0))}
         </div>
       </div>
     </div>
