@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import SelectAlunos from "../../../components/Administracao/SelectAlunos";
+import SelectFinanceiro from "../../../components/Administracao/SelectFinanceiro";
 import ModoExibicao from "../../../components/ModoExibicao";
 import type { CardsFinanceiroType, Pessoa } from "../../../types/types";
 import { useCadastroAluno } from "../../../context/CadastroAlunoContext";
@@ -18,9 +18,9 @@ const FinanceiroAdmin = () => {
     const cargo = localStorage.getItem("Exibir");
     return cargo ? true : false;
   });
-  const [salas] = useState<string[]>(["Todas as Salas", "9º A", "9º B"]);
-  const [selecionada, setSelecionada] = useState<string>("Todas as Salas");
   const [status, setStatus] = useState<string>("Todos os Status");
+  const [categorias, setCategorias] = useState<string>("Todos os Categorias");
+  const [meses, setMeses] = useState<string>("Todos os Meses");
   const [pesquisa] = useState<string>("");
   const [pagina, setPagina] = useState(1);
 
@@ -38,8 +38,8 @@ const FinanceiroAdmin = () => {
     { dado: "Recebido", total: 0 },
     { dado: "Pendente", total: 0 },
     { dado: "Atrasado", total: 0 },
-    { dado: "Total", total: 0 }
-  ])
+    { dado: "Total", total: 0 },
+  ]);
   const [alunos, setAlunos] = useState<Pessoa[]>([]);
 
   const AlunosFiltrados = useMemo(() => {
@@ -56,9 +56,14 @@ const FinanceiroAdmin = () => {
         ${itens.status.toLowerCase()}
         `;
 
-      // Avalia a variável de Turma selecionada para determinar o filtro a ser aplicado.
+      // Avalia a variável de Meses selecionada para determinar o filtro a ser aplicado.
       const correspondeTurma =
-        selecionada === "Todas as Salas" || itens.turma.includes(selecionada);
+        meses === "Todos os Meses" || itens.turma.includes(meses);
+
+      // Avalia a variável de Categorias selecionada para determinar o filtro a ser aplicado.
+      const correspondeCategoria =
+        categorias === "Todos os Categorias" ||
+        itens.turma.includes(categorias);
 
       // Avalia a variável de Status selecionada para determinar o filtro a ser aplicado.
       const correspondeStatus =
@@ -67,10 +72,13 @@ const FinanceiroAdmin = () => {
 
       // Valida se o termo pesquisado está contido nas informações do aluno para exibição combinada com a turma e o status.
       const correspondetes =
-        conteudo.includes(termo) && correspondeTurma && correspondeStatus;
+        conteudo.includes(termo) &&
+        correspondeTurma &&
+        correspondeStatus &&
+        correspondeCategoria;
       return correspondetes;
     });
-  }, [alunos, pesquisa, selecionada, status]);
+  }, [alunos, categorias, meses, pesquisa, status]);
 
   useEffect(() => {
     setPagina(1);
@@ -114,14 +122,16 @@ const FinanceiroAdmin = () => {
       load={loading}
     >
       <div className="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-5 mb-8">
-        {tipo.map((item) => <CardsFinanceiro dados={item} />)}
+        {tipo.map((item) => (
+          <CardsFinanceiro dados={item} />
+        ))}
       </div>
       <div className="flex justify-between items-center gap-5 mb-6 flex-wrap">
         <div className="flex gap-3 flex-wrap">
-          <SelectAlunos
-            salas={salas}
-            selecionada={setSelecionada}
-            status={setStatus}
+          <SelectFinanceiro
+            Categoria={setCategorias}
+            Meses={setMeses}
+            Status={setStatus}
           />
         </div>
 
