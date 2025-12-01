@@ -48,7 +48,7 @@ const FinanceiroAdmin = () => {
       categoria: "Mensalidade",
       valor: 1000,
       vencimento: "02/12/2025",
-      pagamento: 1000,
+      pagamento: "01/12/2025",
       status: "Liberado",
       mes: "Dezembro",
     },
