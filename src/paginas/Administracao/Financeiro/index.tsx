@@ -19,7 +19,7 @@ const FinanceiroAdmin = () => {
     return cargo ? true : false;
   });
   const [status, setStatus] = useState<string>("Todos os Status");
-  const [categorias, setCategorias] = useState<string>("Todos os Categorias");
+  const [categorias, setCategorias] = useState<string>("Todas as Categorias");
   const [meses, setMeses] = useState<string>("Todos os Meses");
   const [pesquisa] = useState<string>("");
   const [pagina, setPagina] = useState(1);
@@ -68,12 +68,12 @@ const FinanceiroAdmin = () => {
         `;
 
       // Avalia a variável de Meses selecionada para determinar o filtro a ser aplicado.
-      const correspondeTurma =
+      const correspondeMeses =
         meses === "Todos os Meses" || itens.mes.includes(meses);
 
       // Avalia a variável de Categorias selecionada para determinar o filtro a ser aplicado.
       const correspondeCategoria =
-        categorias === "Todos os Categorias" ||
+        categorias === "Todas as Categorias" ||
         itens.categoria.includes(categorias);
 
       // Avalia a variável de Status selecionada para determinar o filtro a ser aplicado.
@@ -84,7 +84,7 @@ const FinanceiroAdmin = () => {
       // Valida se o termo pesquisado está contido nas informações do aluno para exibição combinada com a turma e o status.
       const correspondetes =
         conteudo.includes(termo) &&
-        correspondeTurma &&
+        correspondeMeses &&
         correspondeStatus &&
         correspondeCategoria;
       return correspondetes;
