@@ -6,11 +6,12 @@ import LayoutLogado from "../../LayoutLogado";
 import Table from "../../../components/Table";
 import Grid from "../../../components/Grid";
 import CardsFinanceiro from "../../../components/Administracao/CardsFinanceiro";
+import { http } from "../../../utils/axios";
 
 const ITENS_POR_PAGINA = 6;
 
 const FinanceiroAdmin = () => {
-  const [loading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [modo, setModo] = useState<boolean>(() => {
     const cargo = localStorage.getItem("Exibir");
     return cargo ? true : false;
@@ -31,13 +32,8 @@ const FinanceiroAdmin = () => {
     "Ação",
   ];
 
-  const [tipo] = useState<CardsFinanceiroType[]>([
-    { dado: "Recebido", total: 0 },
-    { dado: "Pendente", total: 0 },
-    { dado: "Atrasado", total: 0 },
-    { dado: "Total", total: 0 },
-  ]);
-  const [pagamentos] = useState<Financeiro[]>([
+  const [tipo, setTipo] = useState<CardsFinanceiroType[]>([]);
+  const [pagamentos, setPagamentos] = useState<Financeiro[]>([
     {
       registro: "1",
       aluno: "Fabrício Peres",
@@ -90,6 +86,17 @@ const FinanceiroAdmin = () => {
 
   useEffect(() => {
     setPagina(1);
+    http
+      .get("api/financeiro")
+      .then(function (dados) {
+        setPagamentos(dados.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+      .finally(function () {
+        setLoading(false);
+      });
   }, [PagamentosFiltrados.length]);
 
   const maxPaginas = Math.max(
@@ -100,6 +107,20 @@ const FinanceiroAdmin = () => {
   const inicio = (pagina - 1) * ITENS_POR_PAGINA;
   const fim = inicio + ITENS_POR_PAGINA;
   const exibicao = PagamentosFiltrados.slice(inicio, fim);
+
+  useEffect(() => {
+    http
+      .get("api/financeiro/dashboard")
+      .then(function (dados) {
+        setTipo(dados.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+      .finally(function () {
+        setLoading(false);
+      });
+  }, []);
 
   return (
     <LayoutLogado
