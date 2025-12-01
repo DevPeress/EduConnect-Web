@@ -91,7 +91,9 @@ export interface Pessoa {
 }
 
 export interface Financeiro {
+  registro: string;
   aluno: string;
+  nasc: string;
   categoria: string;
   valor: number;
   vencimento: string;
