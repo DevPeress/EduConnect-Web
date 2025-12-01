@@ -97,7 +97,7 @@ export interface Financeiro {
   categoria: string;
   valor: number;
   vencimento: string;
-  pagamento: number;
+  pagamento: string;
   status: string;
   mes: string;
 }
