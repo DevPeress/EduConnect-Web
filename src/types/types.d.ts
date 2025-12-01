@@ -62,6 +62,11 @@ export interface CardsAdminType {
   porcentagem: number;
 }
 
+export interface CardsFinanceiroType {
+  dado: string;
+  total: number;
+}
+
 export interface AtividadeType {
   tipo: string;
   dado: string;
