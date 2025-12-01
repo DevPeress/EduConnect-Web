@@ -90,6 +90,16 @@ export interface Pessoa {
   nasc: string;
 }
 
+export interface Financeiro {
+  aluno: string;
+  categoria: string;
+  valor: number;
+  vencimento: string;
+  pagamento: number;
+  status: string;
+  mes: string;
+}
+
 export interface CadastroContextType<
   T extends CadastroProfessorInput | CadastroAlunoInput
 > {
@@ -125,5 +135,5 @@ export interface SelectProps {
 
 export interface TableProps {
   head: string[];
-  exibicao: Pessoa[];
+  exibicao: Pessoa[] | Financeiro[];
 }
