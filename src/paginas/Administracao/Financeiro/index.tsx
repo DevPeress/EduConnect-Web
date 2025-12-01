@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from "react";
 import SelectFinanceiro from "../../../components/Administracao/SelectFinanceiro";
 import ModoExibicao from "../../../components/ModoExibicao";
 import type { CardsFinanceiroType, Financeiro } from "../../../types/types";
-import { useCadastroAluno } from "../../../context/CadastroAlunoContext";
 import LayoutLogado from "../../LayoutLogado";
 import Table from "../../../components/Table";
 import Grid from "../../../components/Grid";
@@ -11,8 +10,6 @@ import CardsFinanceiro from "../../../components/Administracao/CardsFinanceiro";
 const ITENS_POR_PAGINA = 6;
 
 const FinanceiroAdmin = () => {
-  const { openMenu } = useCadastroAluno();
-
   const [loading] = useState<boolean>(false);
   const [modo, setModo] = useState<boolean>(() => {
     const cargo = localStorage.getItem("Exibir");
@@ -95,11 +92,6 @@ const FinanceiroAdmin = () => {
     setPagina(1);
   }, [PagamentosFiltrados.length]);
 
-  const AdicionarAluno = async () => {
-    const dados = await openMenu();
-    if (!dados) return;
-  };
-
   const maxPaginas = Math.max(
     1,
     Math.ceil(PagamentosFiltrados.length / ITENS_POR_PAGINA)
@@ -115,8 +107,6 @@ const FinanceiroAdmin = () => {
       desc="Controle de pagamentos e mensalidades"
       botao={{
         ativo: false,
-        mensagem: "Novo Pagamento",
-        adicionar: AdicionarAluno,
       }}
       load={loading}
     >
