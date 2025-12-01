@@ -18,8 +18,8 @@ import { NavSair } from "./arquivos/NavBar/NavSair";
 import { NavTurmas } from "./arquivos/NavBar/NavTurmas";
 import { ExibirTabela } from "./arquivos/ModoExibicao/Tabela";
 import { ExibirCards } from "./arquivos/ModoExibicao/Cards";
-import { Recebido } from "./arquivos/Financeiro/recebido";
-import { Pendente } from "./arquivos/Financeiro/pendente";
+import { Recebido } from "./arquivos/Financeiro/Recebido";
+import { Pendente } from "./arquivos/Financeiro/Pendente";
 import { Atrasado } from "./arquivos/Financeiro/Atrasado";
 import { Total } from "./arquivos/Financeiro/Total";
 
