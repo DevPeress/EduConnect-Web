@@ -48,13 +48,13 @@ const Table = ({ head, exibicao }: TableProps) => {
           const registro: string = "aluno" in item ? item.aluno : item.registro;
           const dado1: string = "aluno" in item ? item.categoria : item.nome;
           const dado2: string[] | string =
-            "turma" in item ? item.turma : item.categoria;
+            "turma" in item ? item.turma : "R$ " + formatBRL(item.valor);
           const dado3: string =
-            "email" in item ? item.email : formatBRL(item.valor);
+            "email" in item ? item.email : item.vencimento;
           const dado4: string =
             "telefone" in item
               ? formatTelefone(item.telefone)
-              : item.vencimento;
+              : item.pagamento;
 
           return (
             <tr
