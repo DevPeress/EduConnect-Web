@@ -1,24 +1,28 @@
-import type { SelectProps } from "../../../types/types";
+interface SelectProps {
+  Turno: (valor: string) => void;
+  Status: (valor: string) => void;
+}
 
-const SelectAlunos = ({ salas, selecionada, status }: SelectProps) => {
+const SelectAlunos = ({ Turno, Status }: SelectProps) => {
   return (
     <>
       <select
-        onChange={(e) => selecionada(e.target.value)}
+        onChange={(e) => Turno(e.target.value)}
         className="bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] py-2.5 px-3.5 text-(--text-primary) text-[14px] cursor-pointer min-w-[180px] hover:border-(--border-light)"
       >
-        {salas.map((item) => (
-          <option key={item}>{item}</option>
-        ))}
+        <option>Todos os Turnos</option>
+        <option>Matinal</option>
+        <option>Vespertino</option>
+        <option>Noturno</option>
       </select>
       <select
-        onChange={(e) => status(e.target.value)}
+        onChange={(e) => Status(e.target.value)}
         className="bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] py-2.5 px-3.5 text-(--text-primary) text-[14px] cursor-pointer min-w-[180px] hover:border-(--border-light)"
       >
         <option>Todos os Status</option>
-        <option>Ativo</option>
-        <option>Inativo</option>
-        <option>Suspenso</option>
+        <option>Ativa</option>
+        <option>Inativa</option>
+        <option>Concluída</option>
       </select>
     </>
   );
