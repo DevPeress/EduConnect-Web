@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from "react";
-import SelectAlunos from "../../../components/Administracao/SelectAlunos";
+import { useEffect, useState } from "react";
+import SelectTurmas from "../../../components/Administracao/SelectTurmas";
 import ModoExibicao from "../../../components/ModoExibicao";
 import type { Pessoa } from "../../../types/types";
 import { useCadastroAluno } from "../../../context/CadastroAlunoContext";
@@ -13,68 +13,32 @@ const ITENS_POR_PAGINA = 6;
 const TurmasAdmin = () => {
   const { openMenu } = useCadastroAluno();
 
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const [modo, setModo] = useState<boolean>(() => {
     const cargo = localStorage.getItem("Exibir");
     return cargo ? true : false;
   });
-  const [salas] = useState<string[]>(["Todas as Salas", "9º A", "9º B"]);
-  const [selecionada, setSelecionada] = useState<string>("Todas as Salas");
+  const [turno, setTurno] = useState<string>("Todos os Turnos");
   const [status, setStatus] = useState<string>("Todos os Status");
-  const [pesquisa] = useState<string>("");
   const [pagina, setPagina] = useState(1);
 
   const head: string[] = [
-    "Matrícula",
+    "Código",
     "Nome",
-    "Turma",
-    "E-mail",
-    "Telefone",
-    "Status",
+    "Turno",
+    "Professor",
+    "Horário",
+    "Capacidade",
     "Ação",
   ];
 
-  const [alunos, setAlunos] = useState<Pessoa[]>([]);
-
-  const AlunosFiltrados = useMemo(() => {
-    const termo = pesquisa.toLowerCase();
-    return alunos.filter((itens) => {
-      // Agrupa todas as variáveis referentes aos alunos em uma única variável.
-      const conteudo = `
-        ${itens.registro.toLowerCase()}
-        ${itens.nome.toLowerCase()}
-        ${itens.nasc}
-        ${itens.turma}
-        ${itens.email.toLowerCase()}
-        ${itens.telefone.toLowerCase()}
-        ${itens.status.toLowerCase()}
-        `;
-
-      // Avalia a variável de Turma selecionada para determinar o filtro a ser aplicado.
-      const correspondeTurma =
-        selecionada === "Todas as Salas" || itens.turma.includes(selecionada);
-
-      // Avalia a variável de Status selecionada para determinar o filtro a ser aplicado.
-      const correspondeStatus =
-        status === "Todos os Status" ||
-        itens.status.toLowerCase() === status.toLowerCase();
-
-      // Valida se o termo pesquisado está contido nas informações do aluno para exibição combinada com a turma e o status.
-      const correspondetes =
-        conteudo.includes(termo) && correspondeTurma && correspondeStatus;
-      return correspondetes;
-    });
-  }, [alunos, pesquisa, selecionada, status]);
-
-  useEffect(() => {
-    setPagina(1);
-  }, [AlunosFiltrados.length]);
+  const [turmas, setTurmas] = useState<Pessoa[]>([]);
 
   useEffect(() => {
     http
-      .get("api/alunos")
+      .get(`filtro/turno=${turno}&status=${status}`)
       .then(function (dados) {
-        setAlunos(dados.data);
+        setTurmas(dados.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -82,52 +46,37 @@ const TurmasAdmin = () => {
       .finally(function () {
         setLoading(false);
       });
-  }, []);
+  }, [status, turno]);
+
+  useEffect(() => {
+    setPagina(1);
+  }, [turmas.length]);
 
   const AdicionarAluno = async () => {
     const dados = await openMenu();
     if (!dados) return;
-    return setAlunos((prevDados) => [
-      ...prevDados,
-      {
-        registro: dados.matricula,
-        nome: dados.nome,
-        nasc: dados.nascimento,
-        turma: dados.turma,
-        email: dados.email,
-        telefone: dados.telefone,
-        status: dados.status,
-      },
-    ]);
   };
 
-  const maxPaginas = Math.max(
-    1,
-    Math.ceil(AlunosFiltrados.length / ITENS_POR_PAGINA)
-  );
+  const maxPaginas = Math.max(1, Math.ceil(turmas.length / ITENS_POR_PAGINA));
 
   const inicio = (pagina - 1) * ITENS_POR_PAGINA;
   const fim = inicio + ITENS_POR_PAGINA;
-  const exibicao = AlunosFiltrados.slice(inicio, fim);
+  const exibicao = turmas.slice(inicio, fim);
 
   return (
     <LayoutLogado
-      titulo="Gerenciamento de Alunos"
-      desc="Visualize e Gerencie as informações dos estudantes"
+      titulo="Gerenciamento de Turmas"
+      desc="Visualize e Gerencie as turmas da Escola"
       botao={{
         ativo: true,
-        mensagem: "Novo Aluno",
+        mensagem: "Novo Turma",
         adicionar: AdicionarAluno,
       }}
       load={loading}
     >
       <div className="flex justify-between items-center gap-5 mb-6 flex-wrap">
         <div className="flex gap-3 flex-wrap">
-          <SelectAlunos
-            salas={salas}
-            selecionada={setSelecionada}
-            status={setStatus}
-          />
+          <SelectTurmas Turno={setTurno} Status={setStatus} />
         </div>
 
         <div className="flex gap-2 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] p-1.5">
@@ -157,7 +106,7 @@ const TurmasAdmin = () => {
           Anterior
         </button>
         <div className="text-[14px] text-(--text-secondary)">
-          Página {pagina} de {maxPaginas} ({AlunosFiltrados.length} alunos)
+          Página {pagina} de {maxPaginas} ({turmas.length} turmas)
         </div>
         <button
           onClick={() => pagina < maxPaginas && setPagina(pagina + 1)}
