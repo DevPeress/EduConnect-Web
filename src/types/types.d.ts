@@ -62,6 +62,11 @@ export interface CardsAdminType {
   porcentagem: number;
 }
 
+export interface CardsFinanceiroType {
+  dado: string;
+  total: number;
+}
+
 export interface AtividadeType {
   tipo: string;
   dado: string;
@@ -83,6 +88,27 @@ export interface Pessoa {
   status: string;
   turma: string | string[];
   nasc: string;
+}
+
+export interface Financeiro {
+  registro: string;
+  aluno: string;
+  nasc: string;
+  categoria: string;
+  valor: number;
+  vencimento: string;
+  pagamento: string;
+  status: string;
+  mes: string;
+}
+
+export interface Turmas {
+  registro: string;
+  nome: string;
+  turno: string;
+  professor: string;
+  horario: string;
+  capacidade: number;
 }
 
 export interface CadastroContextType<
@@ -118,7 +144,12 @@ export interface SelectProps {
   status: (valor: string) => void;
 }
 
-export interface TableProps {
+export interface TablePropsTable {
   head: string[];
-  exibicao: Pessoa[];
+  exibicao: Pessoa[] | Financeiro[] | Turmas[];
+}
+
+export interface TablePropsGrid {
+  head: string[];
+  exibicao: Pessoa[] | Financeiro[];
 }

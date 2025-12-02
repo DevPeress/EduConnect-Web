@@ -9,6 +9,8 @@ import AlunosAdmin from "./paginas/Administracao/Alunos";
 import ProfessoresAdmin from "./paginas/Administracao/Professores";
 import CalendarioAdm from "./paginas/Administracao/Calendario";
 import PrivateRoute from "./middleware";
+import FinanceiroAdmin from "./paginas/Administracao/Financeiro";
+import TurmasAdmin from "./paginas/Administracao/Turmas";
 
 function App() {
   const auth = useAuth();
@@ -37,7 +39,9 @@ function App() {
           <Route path="/admin/dashboard" element={<InicioAdm />} />
           <Route path="/admin/alunos" element={<AlunosAdmin />} />
           <Route path="/admin/professores" element={<ProfessoresAdmin />} />
+          <Route path="/admin/turmas" element={<TurmasAdmin />} />
           <Route path="/admin/calendario" element={<CalendarioAdm />} />
+          <Route path="/admin/financeiro" element={<FinanceiroAdmin />} />
         </Route>
         {/* Página de sem acesso */}
         <Route

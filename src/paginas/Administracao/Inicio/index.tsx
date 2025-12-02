@@ -16,19 +16,11 @@ import LayoutLogado from "../../LayoutLogado";
 const InicioAdm = () => {
   const [loading] = useState<boolean>(false);
   const [dados, setDados] = useState<CardsAdminType[]>([
-    { dado: "Alunos", total: 1245, aumento: 150, porcentagem: 12 },
-    { dado: "Professores", total: 87, aumento: 3, porcentagem: 3.5 },
     { dado: "Turmas", total: 42, aumento: 0, porcentagem: 0 },
     { dado: "Presença", total: 94.5, aumento: 94.5, porcentagem: 2.3 },
   ]);
 
-  const [atividades] = useState<AtividadeType[]>([
-    { tipo: "Nota", dado: "Matemática 9º A", horario: 15 },
-    { tipo: "Presença", dado: "Turma 8º A", horario: 60 },
-    { tipo: "Novo Aluno", dado: "João Silva", horario: 120 },
-    { tipo: "Reunião", dado: "Conselho de Classe", horario: 180 },
-    { tipo: "Material", dado: "Português", horario: 300 },
-  ]);
+  const [atividades, setAtividades] = useState<AtividadeType[]>([]);
 
   const [calendario] = useState<CalendarioType[]>([
     {
@@ -44,6 +36,19 @@ const InicioAdm = () => {
       .get("api/dashboardadmin/Cards")
       .then(function (dados) {
         setDados(dados.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+        toast.error(
+          error.message == "Network Error"
+            ? "Não foi possível pegar os Dados!"
+            : "Erro inesperado"
+        );
+      });
+    http
+      .get("api/registros/DashBoard")
+      .then(function (dados) {
+        setAtividades(dados.data);
       })
       .catch(function (error) {
         console.log(error);
