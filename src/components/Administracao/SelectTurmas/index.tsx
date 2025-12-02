@@ -3,7 +3,7 @@ interface SelectProps {
   Status: (valor: string) => void;
 }
 
-const SelectAlunos = ({ Turno, Status }: SelectProps) => {
+const SelectTurmas = ({ Turno, Status }: SelectProps) => {
   return (
     <>
       <select
@@ -28,4 +28,4 @@ const SelectAlunos = ({ Turno, Status }: SelectProps) => {
   );
 };
 
-export default SelectAlunos;
+export default SelectTurmas;
