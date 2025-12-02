@@ -145,7 +145,12 @@ export interface SelectProps {
   status: (valor: string) => void;
 }
 
-export interface TableProps {
+export interface TablePropsTable {
   head: string[];
   exibicao: Pessoa[] | Financeiro[] | Turmas[];
+}
+
+export interface TablePropsGrid {
+  head: string[];
+  exibicao: Pessoa[] | Financeiro[];
 }
