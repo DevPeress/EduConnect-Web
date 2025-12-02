@@ -1,7 +1,7 @@
-import type { TableProps } from "../../types/types";
+import type { TablePropsTable } from "../../types/types";
 import { formatBRL, formatTelefone } from "../../utils/codigos";
 
-const Table = ({ head, exibicao }: TableProps) => {
+const Table = ({ head, exibicao }: TablePropsTable) => {
   const Img = ({
     foto,
     nome,
