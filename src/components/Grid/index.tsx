@@ -34,15 +34,46 @@ const Grid = ({ exibicao }: TableProps) => {
       </div>
     );
   };
+
+  const VerificarCor = (tipo: string) => {
+    if (tipo === "Ativo" || tipo === "Pago" || tipo === "Liberado") {
+      return { bg: "rgba(16, 185, 129, 0.15)", color: "var(--green)" };
+    } else if (tipo === "Pendente") {
+      return { bg: "rgba(245, 158, 11, 0.15)", color: "var(--orange)" };
+    } else if (tipo === "Inativo" || tipo === "Cancelado") {
+      return {
+        bg: "rgba(156, 163, 175, 0.15)",
+        color: "var(--text-secondary)",
+      };
+    } else {
+      return { bg: "rgba(239, 68, 68, 0.15)", color: "var(--red)" };
+    }
+  };
+
   return (
     <>
       {exibicao.map((item) => {
         const registro: string = "aluno" in item ? item.aluno : item.registro;
         const dado2: string[] | string =
-          "turma" in item ? item.turma : "R$ " + formatBRL(item.valor);
-        const dado3: string = "email" in item ? item.email : item.vencimento;
+          "turma" in item
+            ? item.turma
+            : "turno" in item
+            ? item.turno
+            : "R$ " + formatBRL(item.valor);
+        const dado3: string =
+          "email" in item
+            ? item.email
+            : "professor" in item
+            ? item.professor
+            : item.vencimento;
         const dado4: string =
-          "telefone" in item ? formatTelefone(item.telefone) : item.pagamento;
+          "telefone" in item
+            ? formatTelefone(item.telefone)
+            : "horario" in item
+            ? item.horario
+            : item.pagamento;
+        const dado5: string | number =
+          "horario" in item ? item.horario : item.status;
 
         return (
           <div
@@ -81,20 +112,10 @@ const Grid = ({ exibicao }: TableProps) => {
                   <span
                     className="text-[12px]"
                     style={{
-                      color:
-                        item.status === "Ativo" ||
-                        item.status === "Pago" ||
-                        item.status === "Liberado"
-                          ? "var(--green)"
-                          : item.status === "Pendente"
-                          ? "var(--orange)"
-                          : item.status === "Inativo" ||
-                            item.status === "Cancelado"
-                          ? "var(--text-secondary)"
-                          : "var(--red)",
+                      color: VerificarCor(dado5).color,
                     }}
                   >
-                    {item.status}
+                    {dado5}
                   </span>
                 </p>
               </div>
