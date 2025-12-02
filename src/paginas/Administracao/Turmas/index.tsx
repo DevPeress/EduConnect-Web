@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import SelectTurmas from "../../../components/Administracao/SelectTurmas";
-import ModoExibicao from "../../../components/ModoExibicao";
 import type { Turmas } from "../../../types/types";
 import { useCadastroAluno } from "../../../context/CadastroAlunoContext";
 import LayoutLogado from "../../LayoutLogado";
@@ -13,10 +12,6 @@ const TurmasAdmin = () => {
   const { openMenu } = useCadastroAluno();
 
   const [loading, setLoading] = useState<boolean>(false);
-  const [modo, setModo] = useState<boolean>(() => {
-    const cargo = localStorage.getItem("Exibir");
-    return cargo ? true : false;
-  });
   const [turno, setTurno] = useState<string>("Todos os Turnos");
   const [status, setStatus] = useState<string>("Todos os Status");
   const [pagina, setPagina] = useState(1);
@@ -86,13 +81,6 @@ const TurmasAdmin = () => {
       <div className="flex justify-between items-center gap-5 mb-6 flex-wrap">
         <div className="flex gap-3 flex-wrap">
           <SelectTurmas Turno={setTurno} Status={setStatus} />
-        </div>
-
-        <div className="flex gap-2 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] p-1.5">
-          <ModoExibicao
-            modoExibir={modo}
-            trocarModo={() => setModo((m) => !m)}
-          />
         </div>
       </div>
 
