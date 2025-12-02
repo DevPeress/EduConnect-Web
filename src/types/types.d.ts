@@ -102,6 +102,15 @@ export interface Financeiro {
   mes: string;
 }
 
+export interface Turmas {
+  codigo: string;
+  nome: string;
+  turno: string;
+  professor: string;
+  horario: string;
+  capacidade: number;
+}
+
 export interface CadastroContextType<
   T extends CadastroProfessorInput | CadastroAlunoInput
 > {
@@ -137,5 +146,5 @@ export interface SelectProps {
 
 export interface TableProps {
   head: string[];
-  exibicao: Pessoa[] | Financeiro[];
+  exibicao: Pessoa[] | Financeiro[] | Turmas[];
 }

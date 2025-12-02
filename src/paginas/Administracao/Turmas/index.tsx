@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import SelectTurmas from "../../../components/Administracao/SelectTurmas";
 import ModoExibicao from "../../../components/ModoExibicao";
-import type { Pessoa } from "../../../types/types";
+import type { Turmas } from "../../../types/types";
 import { useCadastroAluno } from "../../../context/CadastroAlunoContext";
 import LayoutLogado from "../../LayoutLogado";
 import Table from "../../../components/Table";
@@ -32,7 +32,7 @@ const TurmasAdmin = () => {
     "Ação",
   ];
 
-  const [turmas, setTurmas] = useState<Pessoa[]>([]);
+  const [turmas, setTurmas] = useState<Turmas[]>([]);
 
   useEffect(() => {
     http
