@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import SelectFinanceiro from "../../../components/Administracao/SelectFinanceiro";
 import ModoExibicao from "../../../components/ModoExibicao";
 import type { CardsFinanceiroType, Financeiro } from "../../../types/types";
@@ -19,7 +19,6 @@ const FinanceiroAdmin = () => {
   const [status, setStatus] = useState<string>("Todos os Status");
   const [categorias, setCategorias] = useState<string>("Todas as Categorias");
   const [meses, setMeses] = useState<string>("Todos os Meses");
-  const [pesquisa] = useState<string>("");
   const [pagina, setPagina] = useState(1);
 
   const head: string[] = [
@@ -47,45 +46,28 @@ const FinanceiroAdmin = () => {
     },
   ]);
 
-  const PagamentosFiltrados = useMemo(() => {
-    const termo = pesquisa.toLowerCase();
-    return pagamentos.filter((itens) => {
-      // Agrupa todas as variáveis referentes aos pagamentos em uma única variável.
-      const conteudo = `
-        ${itens.aluno.toLowerCase()}
-        ${itens.categoria.toLowerCase()}
-        ${itens.valor}
-        ${itens.vencimento.toLowerCase()}
-        ${itens.pagamento}
-        ${itens.status.toLowerCase()}
-        `;
+  // Requisita os dados novos toda vez que status, categoria ou meses mudar
+  useEffect(() => {
+    http
+      .get(`filtro/categoria=${categorias}&status=${status}&data=${meses}`)
+      .then(function (dados) {
+        setPagamentos(dados.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+      .finally(function () {
+        setLoading(false);
+      });
+  }, [categorias, meses, status]);
 
-      // Avalia a variável de Meses selecionada para determinar o filtro a ser aplicado.
-      const correspondeMeses =
-        meses === "Todos os Meses" || itens.mes.includes(meses);
-
-      // Avalia a variável de Categorias selecionada para determinar o filtro a ser aplicado.
-      const correspondeCategoria =
-        categorias === "Todas as Categorias" ||
-        itens.categoria.includes(categorias);
-
-      // Avalia a variável de Status selecionada para determinar o filtro a ser aplicado.
-      const correspondeStatus =
-        status === "Todos os Status" ||
-        itens.status.toLowerCase() === status.toLowerCase();
-
-      // Valida se o termo pesquisado está contido nas informações do aluno para exibição combinada com a turma e o status.
-      const correspondetes =
-        conteudo.includes(termo) &&
-        correspondeMeses &&
-        correspondeStatus &&
-        correspondeCategoria;
-      return correspondetes;
-    });
-  }, [pagamentos, categorias, meses, pesquisa, status]);
-
+  // Atualiza sempre que os pagamentos mudar para página 1
   useEffect(() => {
     setPagina(1);
+  }, [pagamentos.length]);
+
+  // Começa requisitando a primeira vez essa API
+  useEffect(() => {
     http
       .get("api/financeiro")
       .then(function (dados) {
@@ -97,16 +79,16 @@ const FinanceiroAdmin = () => {
       .finally(function () {
         setLoading(false);
       });
-  }, [PagamentosFiltrados.length]);
+  }, []);
 
   const maxPaginas = Math.max(
     1,
-    Math.ceil(PagamentosFiltrados.length / ITENS_POR_PAGINA)
+    Math.ceil(pagamentos.length / ITENS_POR_PAGINA)
   );
 
   const inicio = (pagina - 1) * ITENS_POR_PAGINA;
   const fim = inicio + ITENS_POR_PAGINA;
-  const exibicao = PagamentosFiltrados.slice(inicio, fim);
+  const exibicao = pagamentos.slice(inicio, fim);
 
   useEffect(() => {
     http
@@ -172,8 +154,7 @@ const FinanceiroAdmin = () => {
           Anterior
         </button>
         <div className="text-[14px] text-(--text-secondary)">
-          Página {pagina} de {maxPaginas} ({PagamentosFiltrados.length}{" "}
-          pagamentos)
+          Página {pagina} de {maxPaginas} ({pagamentos.length} pagamentos)
         </div>
         <button
           onClick={() => pagina < maxPaginas && setPagina(pagina + 1)}
