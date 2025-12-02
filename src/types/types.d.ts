@@ -104,7 +104,6 @@ export interface Financeiro {
 
 export interface Turmas {
   registro: string;
-  codigo: string;
   nome: string;
   turno: string;
   professor: string;
