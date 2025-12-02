@@ -1,7 +1,7 @@
-import type { TableProps } from "../../types/types";
+import type { TablePropsGrid } from "../../types/types";
 import { formatBRL, formatTelefone } from "../../utils/codigos";
 
-const Grid = ({ exibicao }: TableProps) => {
+const Grid = ({ exibicao }: TablePropsGrid) => {
   const Img = ({
     foto,
     nome,
@@ -55,25 +55,11 @@ const Grid = ({ exibicao }: TableProps) => {
       {exibicao.map((item) => {
         const registro: string = "aluno" in item ? item.aluno : item.registro;
         const dado2: string[] | string =
-          "turma" in item
-            ? item.turma
-            : "turno" in item
-            ? item.turno
-            : "R$ " + formatBRL(item.valor);
-        const dado3: string =
-          "email" in item
-            ? item.email
-            : "professor" in item
-            ? item.professor
-            : item.vencimento;
+          "turma" in item ? item.turma : "R$ " + formatBRL(item.valor);
+        const dado3: string = "email" in item ? item.email : item.vencimento;
         const dado4: string =
-          "telefone" in item
-            ? formatTelefone(item.telefone)
-            : "horario" in item
-            ? item.horario
-            : item.pagamento;
-        const dado5: string | number =
-          "horario" in item ? item.horario : item.status;
+          "telefone" in item ? formatTelefone(item.telefone) : item.pagamento;
+        const dado5: string = item.status;
 
         return (
           <div
