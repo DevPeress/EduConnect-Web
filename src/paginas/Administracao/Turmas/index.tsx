@@ -29,7 +29,6 @@ const TurmasAdmin = () => {
   const [turmas, setTurmas] = useState<Turmas[]>([
     {
       registro: "1",
-      codigo: "1",
       nome: "Sala",
       turno: "Noite",
       professor: "1",
