@@ -5,7 +5,6 @@ import type { Turmas } from "../../../types/types";
 import { useCadastroAluno } from "../../../context/CadastroAlunoContext";
 import LayoutLogado from "../../LayoutLogado";
 import Table from "../../../components/Table";
-import Grid from "../../../components/Grid";
 import { http } from "../../../utils/axios";
 
 const ITENS_POR_PAGINA = 6;
@@ -32,7 +31,17 @@ const TurmasAdmin = () => {
     "Ação",
   ];
 
-  const [turmas, setTurmas] = useState<Turmas[]>([]);
+  const [turmas, setTurmas] = useState<Turmas[]>([
+    {
+      registro: "1",
+      codigo: "1",
+      nome: "Sala",
+      turno: "Noite",
+      professor: "1",
+      horario: "1",
+      capacidade: 50,
+    },
+  ]);
 
   useEffect(() => {
     http
@@ -87,15 +96,9 @@ const TurmasAdmin = () => {
         </div>
       </div>
 
-      {modo ? (
-        <div className="grid grid-cols-3 overflow-hidden gap-x-6 gap-y-5 w-full">
-          <Grid exibicao={exibicao} head={[]} />
-        </div>
-      ) : (
-        <div className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden mb-6">
-          <Table head={head} exibicao={exibicao} />
-        </div>
-      )}
+      <div className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden mb-6">
+        <Table head={head} exibicao={exibicao} />
+      </div>
 
       <div className="flex justify-center items-center gap-5 mt-8 pt-5 border-t-2 border-(--border-color)">
         <button
