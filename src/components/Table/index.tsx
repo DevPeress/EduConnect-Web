@@ -28,6 +28,21 @@ const Table = ({ head, exibicao }: TableProps) => {
     );
   };
 
+  const VerificarCor = (tipo: string) => {
+    if (tipo === "Ativo" || tipo === "Pago" || tipo === "Liberado") {
+      return { bg: "rgba(16, 185, 129, 0.15)", color: "var(--green)" };
+    } else if (tipo === "Pendente") {
+      return { bg: "rgba(245, 158, 11, 0.15)", color: "var(--orange)" };
+    } else if (tipo === "Inativo" || tipo === "Cancelado") {
+      return {
+        bg: "rgba(156, 163, 175, 0.15)",
+        color: "var(--text-secondary)",
+      };
+    } else {
+      return { bg: "rgba(239, 68, 68, 0.15)", color: "var(--red)" };
+    }
+  };
+
   return (
     <table className="w-full border-collapse">
       <thead className="bg-(--cabecalho)">
@@ -48,13 +63,25 @@ const Table = ({ head, exibicao }: TableProps) => {
           const registro: string = "aluno" in item ? item.aluno : item.registro;
           const dado1: string = "aluno" in item ? item.categoria : item.nome;
           const dado2: string[] | string =
-            "turma" in item ? item.turma : "R$ " + formatBRL(item.valor);
+            "turma" in item
+              ? item.turma
+              : "turno" in item
+              ? item.turno
+              : "R$ " + formatBRL(item.valor);
           const dado3: string =
-            "email" in item ? item.email : item.vencimento;
+            "email" in item
+              ? item.email
+              : "professor" in item
+              ? item.professor
+              : item.vencimento;
           const dado4: string =
             "telefone" in item
               ? formatTelefone(item.telefone)
+              : "horario" in item
+              ? item.horario
               : item.pagamento;
+          const dado5: string | number =
+            "horario" in item ? item.horario : item.status;
 
           return (
             <tr
@@ -75,14 +102,14 @@ const Table = ({ head, exibicao }: TableProps) => {
                 </span>
               </td>
               <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
-                {"aluno" in item ? (
-                  <>{dado1}</>
-                ) : (
+                {"nasc" in item ? (
                   <Img
                     foto="https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg?auto=compress&cs=tinysrgb&w=60"
                     nome={dado1}
                     data={item.nasc}
                   />
+                ) : (
+                  <>{dado1}</>
                 )}
               </td>
               <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
@@ -98,31 +125,11 @@ const Table = ({ head, exibicao }: TableProps) => {
                 <span
                   className="inline-block py-1.5 px-3 rounded-[20px] text-[12px] font-semibold"
                   style={{
-                    background:
-                      item.status === "Ativo" ||
-                      item.status === "Pago" ||
-                      item.status === "Liberado"
-                        ? "rgba(16, 185, 129, 0.15)"
-                        : item.status === "Pendente"
-                        ? "rgba(245, 158, 11, 0.15)"
-                        : item.status === "Inativo" ||
-                          item.status === "Cancelado"
-                        ? "rgba(156, 163, 175, 0.15)"
-                        : "rgba(239, 68, 68, 0.15)",
-                    color:
-                      item.status === "Ativo" ||
-                      item.status === "Pago" ||
-                      item.status === "Liberado"
-                        ? "var(--green)"
-                        : item.status === "Pendente"
-                        ? "var(--orange)"
-                        : item.status === "Inativo" ||
-                          item.status === "Cancelado"
-                        ? "var(--text-secondary)"
-                        : "var(--red)",
+                    background: VerificarCor(dado5).bg,
+                    color: VerificarCor(dado5).color,
                   }}
                 >
-                  {item.status}
+                  {dado5}
                 </span>
               </td>
               <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
