@@ -48,8 +48,8 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
     if (!result.success) return toast.error(result.error.issues[0].message);
 
     if (resolveCallback) {
-      try {
-        await http.post("/api/alunos", {
+      await http
+        .post("/api/alunos", {
           Registro: dados.matricula,
           Nome: dados.nome,
           Email: dados.email,
@@ -62,18 +62,21 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
           Turma: dados.turma,
           Media: 0,
           DataMatricula: dados.nascimento,
+        })
+        .then(function () {
+          resolveCallback(dados);
+          toast.success("Cadastro realizado com sucesso!");
+        })
+        .catch(function (error) {
+          console.log(error);
+          resolveCallback(null);
+          toast.error("Não foi possível realizar o cadastro!");
+        })
+        .finally(function () {
+          setResolveCallback(null);
+          ResetarDados();
         });
-        resolveCallback(dados);
-        setResolveCallback(null);
-        toast.success("Cadastro realizado com sucesso!");
-      } catch {
-        resolveCallback(null);
-        setResolveCallback(null);
-        toast.error("Não foi possível realizar o cadastro!");
-      }
     }
-    ResetarDados();
-    setMenu(false);
   };
 
   const Cancel = () => {
@@ -82,7 +85,6 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
       setResolveCallback(null);
     }
     ResetarDados();
-    setMenu(false);
   };
 
   const ResetarDados = () => {
@@ -99,6 +101,7 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
       nomeEmergencia: "",
       telefoneEmergencia: "",
     });
+    setMenu(false);
   };
 
   return (
