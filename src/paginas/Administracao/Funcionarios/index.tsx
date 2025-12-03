@@ -1,11 +1,11 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import ModoExibicao from "../../../components/ModoExibicao";
 import type { Pessoa } from "../../../types/types";
-import SelectProfessores from "../../../components/Administracao/SelectProfessores";
 import { useCadastroProfessor } from "../../../context/CadastroProfessorContext";
 import LayoutLogado from "../../LayoutLogado";
 import Table from "../../../components/Table";
 import Grid from "../../../components/Grid";
+import SelectFuncionarios from "../../../components/Administracao/SelectFuncionarios";
 import { http } from "../../../utils/axios";
 
 const ITENS_POR_PAGINA = 6;
@@ -18,10 +18,7 @@ const FuncionariosAdmin = () => {
     const cargo = localStorage.getItem("Exibir");
     return cargo ? true : false;
   });
-  const [salas] = useState<string[]>(["Todas as Salas", "9º A", "9º B"]);
-  const [selecionada, setSelecionada] = useState<string>("Todas as Salas");
   const [status, setStatus] = useState<string>("Todos os Status");
-  const [pesquisa] = useState<string>("");
   const [pagina, setPagina] = useState(1);
 
   const head: string[] = [
@@ -34,47 +31,13 @@ const FuncionariosAdmin = () => {
     "Ação",
   ];
 
-  const [professores, setProfessores] = useState<Pessoa[]>([]);
-
-  const ProfessoresFiltrados = useMemo(() => {
-    const termo = pesquisa.toLowerCase();
-    return professores.filter((itens) => {
-      // Agrupa todas as variáveis referentes aos professores em uma única variável.
-      const conteudo = `
-        ${itens.registro.toLowerCase()}
-        ${itens.nome.toLowerCase()}
-        ${itens.nasc}
-        ${itens.turma}
-        ${itens.email.toLowerCase()}
-        ${itens.telefone.toLowerCase()}
-        ${itens.status.toLowerCase()}
-        `;
-
-      // Avalia a variável de Turma selecionada para determinar o filtro a ser aplicado.
-      const correspondeTurma =
-        selecionada === "Todas as Salas" || itens.turma.includes(selecionada);
-
-      // Avalia a variável de Status selecionada para determinar o filtro a ser aplicado.
-      const correspondeStatus =
-        status === "Todos os Status" ||
-        itens.status.toLowerCase() === status.toLowerCase();
-
-      // Valida se o termo pesquisado está contido nas informações do aluno para exibição combinada com a turma e o status.
-      const correspondetes =
-        conteudo.includes(termo) && correspondeTurma && correspondeStatus;
-      return correspondetes;
-    });
-  }, [professores, pesquisa, selecionada, status]);
-
-  useEffect(() => {
-    setPagina(1);
-  }, [ProfessoresFiltrados.length]);
+  const [funcionarios, setFuncionarios] = useState<Pessoa[]>([]);
 
   useEffect(() => {
     http
-      .get("api/professores")
+      .get(`filtro/status=${status}`)
       .then(function (dados) {
-        setProfessores(dados.data);
+        setFuncionarios(dados.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -82,12 +45,16 @@ const FuncionariosAdmin = () => {
       .finally(function () {
         setLoading(false);
       });
-  }, []);
+  }, [status]);
+
+  useEffect(() => {
+    setPagina(1);
+  }, [funcionarios.length]);
 
   const AdicionarProfessor = async () => {
     const dados = await openMenu();
     if (!dados) return;
-    return setProfessores((prevDados) => [
+    return setFuncionarios((prevDados) => [
       ...prevDados,
       {
         nome: dados.nome,
@@ -103,17 +70,17 @@ const FuncionariosAdmin = () => {
 
   const maxPaginas = Math.max(
     1,
-    Math.ceil(ProfessoresFiltrados.length / ITENS_POR_PAGINA)
+    Math.ceil(funcionarios.length / ITENS_POR_PAGINA)
   );
 
   const inicio = (pagina - 1) * ITENS_POR_PAGINA;
   const fim = inicio + ITENS_POR_PAGINA;
-  const exibicao = ProfessoresFiltrados.slice(inicio, fim);
+  const exibicao = funcionarios.slice(inicio, fim);
 
   return (
     <LayoutLogado
-      titulo="Gerenciamento de Professores"
-      desc="Visualize e Gerencie as informações dos professores"
+      titulo="Gerenciamento de Funcionários"
+      desc="Visualize e Gerencie as informações dos funcionários"
       botao={{
         ativo: true,
         mensagem: "Novo Professor",
@@ -123,11 +90,7 @@ const FuncionariosAdmin = () => {
     >
       <div className="flex justify-between items-center gap-5 mb-6 flex-wrap">
         <div className="flex gap-3 flex-wrap">
-          <SelectProfessores
-            salas={salas}
-            selecionada={setSelecionada}
-            status={setStatus}
-          />
+          <SelectFuncionarios Selecionada={setStatus} />
         </div>
 
         <div className="flex gap-2 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] p-1.5">
@@ -154,8 +117,7 @@ const FuncionariosAdmin = () => {
           Anterior
         </button>
         <div className="text-[14px] text-(--text-secondary)">
-          Página {pagina} de {maxPaginas} ({ProfessoresFiltrados.length}{" "}
-          professores)
+          Página {pagina} de {maxPaginas} ({funcionarios.length} funcionários)
         </div>
         <button
           onClick={() => pagina < maxPaginas && setPagina(pagina + 1)}
