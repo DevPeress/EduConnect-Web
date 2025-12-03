@@ -49,7 +49,7 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
 
     if (resolveCallback) {
       try {
-        await http.post("api/alunos", {
+        await http.post("/api/alunos", {
           Registro: dados.matricula,
           Nome: dados.nome,
           Email: dados.email,
@@ -59,9 +59,9 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
           Endereco: dados.endereco,
           Cpf: dados.cpf,
           ContatoEmergencia: dados.telefoneEmergencia,
-          turma: dados.turma,
-          media: 0,
-          DataMatricula: new Date().toISOString().split("T")[0],
+          Turma: dados.turma,
+          Media: 0,
+          DataMatricula: dados.nascimento,
         });
         resolveCallback(dados);
         setResolveCallback(null);

@@ -90,14 +90,24 @@ export interface Pessoa {
   nasc: string;
 }
 
+export interface Funcionario {
+  registro: string;
+  nome: string;
+  cargo: string;
+  data: string;
+  departamento: string;
+  status: string;
+  nasc: string;
+}
+
 export interface Financeiro {
   registro: string;
   aluno: string;
   nasc: string;
   categoria: string;
   valor: number;
-  vencimento: string;
-  pagamento: string;
+  dataVencimento: string;
+  dataPagamento: string;
   status: string;
   mes: string;
 }
@@ -146,10 +156,10 @@ export interface SelectProps {
 
 export interface TablePropsTable {
   head: string[];
-  exibicao: Pessoa[] | Financeiro[] | Turmas[];
+  exibicao: Pessoa[] | Financeiro[] | Turmas[] | Funcionario[];
 }
 
 export interface TablePropsGrid {
   head: string[];
-  exibicao: Pessoa[] | Financeiro[];
+  exibicao: Pessoa[] | Financeiro[] | Funcionario[];
 }

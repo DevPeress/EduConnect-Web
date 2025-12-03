@@ -55,10 +55,23 @@ const Grid = ({ exibicao }: TablePropsGrid) => {
       {exibicao.map((item) => {
         const registro: string = "aluno" in item ? item.aluno : item.registro;
         const dado2: string[] | string =
-          "turma" in item ? item.turma : "R$ " + formatBRL(item.valor);
-        const dado3: string = "email" in item ? item.email : item.vencimento;
+          "turma" in item
+            ? item.turma
+            : "cargo" in item
+            ? item.cargo
+            : "R$ " + formatBRL(item.valor);
+        const dado3: string =
+          "email" in item
+            ? item.email
+            : "departamento" in item
+            ? item.departamento
+            : new Date(item.dataVencimento).toLocaleDateString("pt-BR");
         const dado4: string =
-          "telefone" in item ? formatTelefone(item.telefone) : item.pagamento;
+          "telefone" in item
+            ? formatTelefone(item.telefone)
+            : "data" in item
+            ? item.data
+            : new Date(item.dataPagamento).toLocaleDateString("pt-BR");
         const dado5: string = item.status;
 
         return (

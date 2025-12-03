@@ -1,49 +1,43 @@
 import { useEffect, useState } from "react";
-import SelectFinanceiro from "../../../components/Administracao/SelectFinanceiro";
 import ModoExibicao from "../../../components/ModoExibicao";
-import type { CardsFinanceiroType, Financeiro } from "../../../types/types";
+import type { Funcionario } from "../../../types/types";
+import { useCadastroProfessor } from "../../../context/CadastroProfessorContext";
 import LayoutLogado from "../../LayoutLogado";
 import Table from "../../../components/Table";
 import Grid from "../../../components/Grid";
-import CardsFinanceiro from "../../../components/Administracao/CardsFinanceiro";
+import SelectFuncionarios from "../../../components/Administracao/SelectFuncionarios";
 import { http } from "../../../utils/axios";
 
 const ITENS_POR_PAGINA = 6;
 
-const FinanceiroAdmin = () => {
-  const [loading, setLoading] = useState<boolean>(false);
+const FuncionariosAdmin = () => {
+  const { openMenu } = useCadastroProfessor();
+
+  const [loading, setLoading] = useState<boolean>(true);
   const [modo, setModo] = useState<boolean>(() => {
     const cargo = localStorage.getItem("Exibir");
     return cargo ? true : false;
   });
   const [status, setStatus] = useState<string>("Todos os Status");
-  const [categorias, setCategorias] = useState<string>("Todas as Categorias");
-  const [meses, setMeses] = useState<string>("Todos os Meses");
   const [pagina, setPagina] = useState(1);
 
   const head: string[] = [
-    "Aluno",
-    "Categoria",
-    "Valor",
-    "Vencimento",
-    "Pagamento",
+    "Código",
+    "Nome",
+    "Cargo",
+    "Departamento",
+    "Data de Admissão",
     "Status",
     "Ação",
   ];
 
-  const [tipo, setTipo] = useState<CardsFinanceiroType[]>([]);
-  const [pagamentos, setPagamentos] = useState<Financeiro[]>([]);
-  const [total, setTotal] = useState<number>(0);
+  const [funcionarios, setFuncionarios] = useState<Funcionario[]>([]);
 
-  // Requisita os dados novos toda vez que status, categoria ou meses mudar
   useEffect(() => {
     http
-      .get(
-        `api/financeiro/filtro/categoria/${categorias}/status/${status}/data/${meses}/page/${pagina}`
-      )
+      .get(`filtro/status=${status}`)
       .then(function (dados) {
-        setTotal(dados.data.total);
-        setPagamentos(dados.data.dados);
+        setFuncionarios(dados.data);
       })
       .catch(function (error) {
         console.log(error);
@@ -51,62 +45,44 @@ const FinanceiroAdmin = () => {
       .finally(function () {
         setLoading(false);
       });
-  }, [categorias, meses, pagina, status]);
+  }, [status]);
 
-  // Atualiza sempre que os pagamentos mudar para página 1
   useEffect(() => {
     setPagina(1);
-  }, [pagamentos]);
+  }, [funcionarios.length]);
 
-  const maxPaginas = Math.max(1, Math.ceil(total / ITENS_POR_PAGINA));
+  const AdicionarProfessor = async () => {
+    const dados = await openMenu();
+    if (!dados) return;
+  };
+
+  const maxPaginas = Math.max(
+    1,
+    Math.ceil(funcionarios.length / ITENS_POR_PAGINA)
+  );
 
   const inicio = (pagina - 1) * ITENS_POR_PAGINA;
   const fim = inicio + ITENS_POR_PAGINA;
-  const exibicao = pagamentos.slice(inicio, fim);
-
-  // Dados do DashBoard
-  useEffect(() => {
-    http
-      .get("api/financeiro/dashboard")
-      .then(function (dados) {
-        setTipo(dados.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
-      .finally(function () {
-        setLoading(false);
-      });
-  }, []);
+  const exibicao = funcionarios.slice(inicio, fim);
 
   return (
     <LayoutLogado
-      titulo="Gestão Financeira"
-      desc="Controle de pagamentos e mensalidades"
+      titulo="Gerenciamento de Funcionários"
+      desc="Visualize e Gerencie as informações dos funcionários"
       botao={{
-        ativo: false,
+        ativo: true,
+        mensagem: "Novo Professor",
+        adicionar: AdicionarProfessor,
       }}
       load={loading}
     >
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-5 mb-8">
-        {tipo.map((item, index) => (
-          <CardsFinanceiro key={index} dados={item} />
-        ))}
-      </div>
       <div className="flex justify-between items-center gap-5 mb-6 flex-wrap">
         <div className="flex gap-3 flex-wrap">
-          <SelectFinanceiro
-            Categoria={setCategorias}
-            Meses={setMeses}
-            Status={setStatus}
-          />
+          <SelectFuncionarios Selecionada={setStatus} />
         </div>
 
         <div className="flex gap-2 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] p-1.5">
-          <ModoExibicao
-            modoExibir={modo}
-            trocarModo={() => setModo((m) => !m)}
-          />
+          <ModoExibicao modoExibir={modo} trocarModo={() => setModo(!modo)} />
         </div>
       </div>
 
@@ -129,12 +105,12 @@ const FinanceiroAdmin = () => {
           Anterior
         </button>
         <div className="text-[14px] text-(--text-secondary)">
-          Página {pagina} de {maxPaginas} ({total} pagamentos)
+          Página {pagina} de {maxPaginas} ({funcionarios.length} funcionários)
         </div>
         <button
           onClick={() => pagina < maxPaginas && setPagina(pagina + 1)}
-          disabled={pagina === maxPaginas}
           className="py-2.5 px-4 bg-transparent border-2 border-(--border-color) text-(--text-primary) text-[14px] font-medium rounded-lg hover:bg-(--bg-input) hover:border-(--border-light)"
+          disabled={pagina === maxPaginas}
         >
           Próximo
         </button>
@@ -143,4 +119,4 @@ const FinanceiroAdmin = () => {
   );
 };
 
-export default FinanceiroAdmin;
+export default FuncionariosAdmin;
