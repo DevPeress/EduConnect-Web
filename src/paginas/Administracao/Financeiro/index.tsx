@@ -42,7 +42,6 @@ const FinanceiroAdmin = () => {
         `api/financeiro/filtro/categoria/${categorias}/status/${status}/data/${meses}/page/${pagina}`
       )
       .then(function (dados) {
-        console.log(dados.data.dados);
         setTotal(dados.data.total);
         setPagamentos(dados.data.dados);
       })
