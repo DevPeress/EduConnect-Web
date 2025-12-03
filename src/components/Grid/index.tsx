@@ -71,7 +71,7 @@ const Grid = ({ exibicao }: TablePropsGrid) => {
             ? formatTelefone(item.telefone)
             : "data" in item
             ? item.data
-            : item.pagamento;
+            : item.dataPagamento;
         const dado5: string = item.status;
 
         return (

@@ -85,7 +85,7 @@ const Table = ({ head, exibicao }: TablePropsTable) => {
               ? item.horario
               : "data" in item
               ? item.data
-              : item.pagamento;
+              : item.dataPagamento;
           const dado5: string | number =
             "horario" in item ? item.horario : item.status;
 
