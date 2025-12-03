@@ -26,22 +26,17 @@ const TurmasAdmin = () => {
     "Ação",
   ];
 
-  const [turmas, setTurmas] = useState<Turmas[]>([
-    {
-      registro: "1",
-      nome: "Sala",
-      turno: "Noite",
-      professor: "1",
-      horario: "1",
-      capacidade: 50,
-    },
-  ]);
+  const [turmas, setTurmas] = useState<Turmas[]>([]);
 
+  const [total, setTotal] = useState<number>(0);
+
+  // Requisita os dados novos toda vez que status, categoria ou meses mudar
   useEffect(() => {
     http
-      .get(`filtro/turno=${turno}&status=${status}`)
+      .get(`api/alunos/filtro/turno/${turno}/status/${status}`)
       .then(function (dados) {
-        setTurmas(dados.data);
+        setTotal(dados.data.total);
+        setTurmas(dados.data.dados);
       })
       .catch(function (error) {
         console.log(error);
@@ -49,18 +44,19 @@ const TurmasAdmin = () => {
       .finally(function () {
         setLoading(false);
       });
-  }, [status, turno]);
+  }, [turno, status]);
 
+  // Atualiza sempre que os pagamentos mudar para página 1
   useEffect(() => {
     setPagina(1);
-  }, [turmas.length]);
+  }, [total]);
 
   const AdicionarAluno = async () => {
     const dados = await openMenu();
     if (!dados) return;
   };
 
-  const maxPaginas = Math.max(1, Math.ceil(turmas.length / ITENS_POR_PAGINA));
+  const maxPaginas = Math.max(1, Math.ceil(total / ITENS_POR_PAGINA));
 
   const inicio = (pagina - 1) * ITENS_POR_PAGINA;
   const fim = inicio + ITENS_POR_PAGINA;
@@ -96,7 +92,7 @@ const TurmasAdmin = () => {
           Anterior
         </button>
         <div className="text-[14px] text-(--text-secondary)">
-          Página {pagina} de {maxPaginas} ({turmas.length} turmas)
+          Página {pagina} de {maxPaginas} ({total} turmas)
         </div>
         <button
           onClick={() => pagina < maxPaginas && setPagina(pagina + 1)}
