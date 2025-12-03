@@ -32,12 +32,15 @@ const FuncionariosAdmin = () => {
   ];
 
   const [funcionarios, setFuncionarios] = useState<Funcionario[]>([]);
+  const [total, setTotal] = useState<number>(0);
 
+  // Requisita os dados novos toda vez que status, categoria ou meses mudar
   useEffect(() => {
     http
-      .get(`filtro/status=${status}`)
+      .get(`api/alunos/filtro/status/${status}`)
       .then(function (dados) {
-        setFuncionarios(dados.data);
+        setTotal(dados.data.total);
+        setFuncionarios(dados.data.dados);
       })
       .catch(function (error) {
         console.log(error);
@@ -47,19 +50,17 @@ const FuncionariosAdmin = () => {
       });
   }, [status]);
 
+  // Atualiza sempre que os pagamentos mudar para página 1
   useEffect(() => {
     setPagina(1);
-  }, [funcionarios.length]);
+  }, [total]);
 
   const AdicionarProfessor = async () => {
     const dados = await openMenu();
     if (!dados) return;
   };
 
-  const maxPaginas = Math.max(
-    1,
-    Math.ceil(funcionarios.length / ITENS_POR_PAGINA)
-  );
+  const maxPaginas = Math.max(1, Math.ceil(total / ITENS_POR_PAGINA));
 
   const inicio = (pagina - 1) * ITENS_POR_PAGINA;
   const fim = inicio + ITENS_POR_PAGINA;
@@ -105,7 +106,7 @@ const FuncionariosAdmin = () => {
           Anterior
         </button>
         <div className="text-[14px] text-(--text-secondary)">
-          Página {pagina} de {maxPaginas} ({funcionarios.length} funcionários)
+          Página {pagina} de {maxPaginas} ({total} funcionários)
         </div>
         <button
           onClick={() => pagina < maxPaginas && setPagina(pagina + 1)}
