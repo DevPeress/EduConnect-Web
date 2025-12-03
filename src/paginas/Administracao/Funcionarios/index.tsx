@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ModoExibicao from "../../../components/ModoExibicao";
-import type { Pessoa } from "../../../types/types";
+import type { Funcionario } from "../../../types/types";
 import { useCadastroProfessor } from "../../../context/CadastroProfessorContext";
 import LayoutLogado from "../../LayoutLogado";
 import Table from "../../../components/Table";
@@ -24,14 +24,14 @@ const FuncionariosAdmin = () => {
   const head: string[] = [
     "Código",
     "Nome",
-    "Turmas",
-    "E-mail",
-    "Telefone",
+    "Cargo",
+    "Departamento",
     "Status",
+    "Data de Admissão",
     "Ação",
   ];
 
-  const [funcionarios, setFuncionarios] = useState<Pessoa[]>([]);
+  const [funcionarios, setFuncionarios] = useState<Funcionario[]>([]);
 
   useEffect(() => {
     http
@@ -54,18 +54,6 @@ const FuncionariosAdmin = () => {
   const AdicionarProfessor = async () => {
     const dados = await openMenu();
     if (!dados) return;
-    return setFuncionarios((prevDados) => [
-      ...prevDados,
-      {
-        nome: dados.nome,
-        turma: dados.turmas,
-        email: dados.email,
-        telefone: dados.telefone,
-        status: dados.status,
-        registro: dados.codigo,
-        nasc: dados.nasc,
-      },
-    ]);
   };
 
   const maxPaginas = Math.max(
