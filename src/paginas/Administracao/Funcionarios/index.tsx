@@ -19,7 +19,9 @@ const FuncionariosAdmin = () => {
     return cargo ? true : false;
   });
   const [status, setStatus] = useState<string>("Todos os Status");
-  const [pagina, setPagina] = useState(1);
+  const [funcionarios, setFuncionarios] = useState<Funcionario[]>([]);
+  const [total, setTotal] = useState<number>(0);
+  const [pagina, setPagina] = useState<number>(1);
 
   const head: string[] = [
     "Código",
@@ -30,9 +32,6 @@ const FuncionariosAdmin = () => {
     "Status",
     "Ação",
   ];
-
-  const [funcionarios, setFuncionarios] = useState<Funcionario[]>([]);
-  const [total, setTotal] = useState<number>(0);
 
   // Requisita os dados novos toda vez que status, categoria ou meses mudar
   useEffect(() => {
@@ -62,10 +61,6 @@ const FuncionariosAdmin = () => {
 
   const maxPaginas = Math.max(1, Math.ceil(total / ITENS_POR_PAGINA));
 
-  const inicio = (pagina - 1) * ITENS_POR_PAGINA;
-  const fim = inicio + ITENS_POR_PAGINA;
-  const exibicao = funcionarios.slice(inicio, fim);
-
   return (
     <LayoutLogado
       titulo="Gerenciamento de Funcionários"
@@ -89,11 +84,11 @@ const FuncionariosAdmin = () => {
 
       {modo ? (
         <div className="grid grid-cols-3 overflow-hidden gap-x-6 gap-y-5 w-full">
-          <Grid exibicao={exibicao} head={[]} />
+          <Grid exibicao={funcionarios} head={[]} />
         </div>
       ) : (
         <div className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden mb-6">
-          <Table head={head} exibicao={exibicao} />
+          <Table head={head} exibicao={funcionarios} />
         </div>
       )}
 
