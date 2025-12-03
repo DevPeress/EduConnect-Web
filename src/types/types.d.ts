@@ -106,7 +106,7 @@ export interface Financeiro {
   nasc: string;
   categoria: string;
   valor: number;
-  vencimento: string;
+  dataVencimento: string;
   pagamento: string;
   status: string;
   mes: string;

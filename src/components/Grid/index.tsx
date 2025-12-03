@@ -65,7 +65,7 @@ const Grid = ({ exibicao }: TablePropsGrid) => {
             ? item.email
             : "departamento" in item
             ? item.departamento
-            : item.vencimento;
+            : item.dataVencimento;
         const dado4: string =
           "telefone" in item
             ? formatTelefone(item.telefone)

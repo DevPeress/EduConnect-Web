@@ -77,7 +77,7 @@ const Table = ({ head, exibicao }: TablePropsTable) => {
               ? item.professor
               : "departamento" in item
               ? item.departamento
-              : item.vencimento;
+              : item.dataVencimento;
           const dado4: string =
             "telefone" in item
               ? formatTelefone(item.telefone)
@@ -108,7 +108,7 @@ const Table = ({ head, exibicao }: TablePropsTable) => {
                 </span>
               </td>
               <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
-                {"nasc" in item ? (
+                {"nasc" in item && "telefone" in item ? (
                   <Img
                     foto="https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg?auto=compress&cs=tinysrgb&w=60"
                     nome={dado1}
