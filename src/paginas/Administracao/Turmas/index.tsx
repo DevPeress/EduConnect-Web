@@ -14,7 +14,9 @@ const TurmasAdmin = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [turno, setTurno] = useState<string>("Todos os Turnos");
   const [status, setStatus] = useState<string>("Todos os Status");
-  const [pagina, setPagina] = useState(1);
+  const [turmas, setTurmas] = useState<Turmas[]>([]);
+  const [total, setTotal] = useState<number>(0);
+  const [pagina, setPagina] = useState<number>(1);
 
   const head: string[] = [
     "Código",
@@ -25,10 +27,6 @@ const TurmasAdmin = () => {
     "Capacidade",
     "Ação",
   ];
-
-  const [turmas, setTurmas] = useState<Turmas[]>([]);
-
-  const [total, setTotal] = useState<number>(0);
 
   // Requisita os dados novos toda vez que status, categoria ou meses mudar
   useEffect(() => {
@@ -58,10 +56,6 @@ const TurmasAdmin = () => {
 
   const maxPaginas = Math.max(1, Math.ceil(total / ITENS_POR_PAGINA));
 
-  const inicio = (pagina - 1) * ITENS_POR_PAGINA;
-  const fim = inicio + ITENS_POR_PAGINA;
-  const exibicao = turmas.slice(inicio, fim);
-
   return (
     <LayoutLogado
       titulo="Gerenciamento de Turmas"
@@ -80,7 +74,7 @@ const TurmasAdmin = () => {
       </div>
 
       <div className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden mb-6">
-        <Table head={head} exibicao={exibicao} />
+        <Table head={head} exibicao={turmas} />
       </div>
 
       <div className="flex justify-center items-center gap-5 mt-8 pt-5 border-t-2 border-(--border-color)">
