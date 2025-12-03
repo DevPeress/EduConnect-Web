@@ -71,7 +71,7 @@ export function CadastroProfessorProvider({
           Contratacao: dados.contratacao,
           Formacao: dados.formacao,
         })
-        .then(() => {
+        .then(function () {
           resolveCallback(dados);
           setResolveCallback(null);
           toast.success("Cadastro realizado com sucesso!");
@@ -81,7 +81,7 @@ export function CadastroProfessorProvider({
           resolveCallback(null);
           toast.error("Não foi possível realizar o cadastro!");
         })
-        .finally(() => {
+        .finally(function () {
           setResolveCallback(null);
           ResetarDados();
         });
