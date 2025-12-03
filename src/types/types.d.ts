@@ -90,6 +90,15 @@ export interface Pessoa {
   nasc: string;
 }
 
+export interface Funcionario {
+  registro: string;
+  nome: string;
+  cargo: string;
+  data: string;
+  departamento: string;
+  status: string;
+}
+
 export interface Financeiro {
   registro: string;
   aluno: string;
@@ -146,10 +155,10 @@ export interface SelectProps {
 
 export interface TablePropsTable {
   head: string[];
-  exibicao: Pessoa[] | Financeiro[] | Turmas[];
+  exibicao: Pessoa[] | Financeiro[] | Turmas[] | Funcionario[];
 }
 
 export interface TablePropsGrid {
   head: string[];
-  exibicao: Pessoa[] | Financeiro[];
+  exibicao: Pessoa[] | Financeiro[] | Funcionario[];
 }
