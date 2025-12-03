@@ -67,18 +67,24 @@ const Table = ({ head, exibicao }: TablePropsTable) => {
               ? item.turma
               : "turno" in item
               ? item.turno
+              : "cargo" in item
+              ? item.cargo
               : "R$ " + formatBRL(item.valor);
           const dado3: string =
             "email" in item
               ? item.email
               : "professor" in item
               ? item.professor
+              : "departamento" in item
+              ? item.departamento
               : item.vencimento;
           const dado4: string =
             "telefone" in item
               ? formatTelefone(item.telefone)
               : "horario" in item
               ? item.horario
+              : "data" in item
+              ? item.data
               : item.pagamento;
           const dado5: string | number =
             "horario" in item ? item.horario : item.status;
