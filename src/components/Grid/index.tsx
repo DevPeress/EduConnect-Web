@@ -65,13 +65,13 @@ const Grid = ({ exibicao }: TablePropsGrid) => {
             ? item.email
             : "departamento" in item
             ? item.departamento
-            : item.dataVencimento;
+            : new Date(item.dataVencimento).toLocaleDateString("pt-BR");
         const dado4: string =
           "telefone" in item
             ? formatTelefone(item.telefone)
             : "data" in item
             ? item.data
-            : item.dataPagamento;
+            : new Date(item.dataPagamento).toLocaleDateString("pt-BR");
         const dado5: string = item.status;
 
         return (
