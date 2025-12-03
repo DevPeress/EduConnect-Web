@@ -32,26 +32,19 @@ const FinanceiroAdmin = () => {
   ];
 
   const [tipo, setTipo] = useState<CardsFinanceiroType[]>([]);
-  const [pagamentos, setPagamentos] = useState<Financeiro[]>([
-    {
-      registro: "1",
-      aluno: "Fabrício Peres",
-      nasc: "01/12/2025",
-      categoria: "Mensalidade",
-      valor: 1000,
-      vencimento: "02/12/2025",
-      pagamento: "01/12/2025",
-      status: "Liberado",
-      mes: "Dezembro",
-    },
-  ]);
+  const [pagamentos, setPagamentos] = useState<Financeiro[]>([]);
+  const [total, setTotal] = useState<number>(0);
 
   // Requisita os dados novos toda vez que status, categoria ou meses mudar
   useEffect(() => {
     http
-      .get(`filtro/categoria=${categorias}&status=${status}&data=${meses}`)
+      .get(
+        `api/financeiro/filtro/categoria/${categorias}/status/${status}/data/${meses}/page/${pagina}`
+      )
       .then(function (dados) {
-        setPagamentos(dados.data);
+        console.log(dados.data.dados);
+        setTotal(dados.data.total);
+        setPagamentos(dados.data.dados);
       })
       .catch(function (error) {
         console.log(error);
@@ -59,37 +52,20 @@ const FinanceiroAdmin = () => {
       .finally(function () {
         setLoading(false);
       });
-  }, [categorias, meses, status]);
+  }, [categorias, meses, pagina, status]);
 
   // Atualiza sempre que os pagamentos mudar para página 1
   useEffect(() => {
     setPagina(1);
-  }, [pagamentos.length]);
+  }, [pagamentos]);
 
-  // Começa requisitando a primeira vez essa API
-  useEffect(() => {
-    http
-      .get("api/financeiro")
-      .then(function (dados) {
-        setPagamentos(dados.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
-      .finally(function () {
-        setLoading(false);
-      });
-  }, []);
-
-  const maxPaginas = Math.max(
-    1,
-    Math.ceil(pagamentos.length / ITENS_POR_PAGINA)
-  );
+  const maxPaginas = Math.max(1, Math.ceil(total / ITENS_POR_PAGINA));
 
   const inicio = (pagina - 1) * ITENS_POR_PAGINA;
   const fim = inicio + ITENS_POR_PAGINA;
   const exibicao = pagamentos.slice(inicio, fim);
 
+  // Dados do DashBoard
   useEffect(() => {
     http
       .get("api/financeiro/dashboard")
@@ -154,7 +130,7 @@ const FinanceiroAdmin = () => {
           Anterior
         </button>
         <div className="text-[14px] text-(--text-secondary)">
-          Página {pagina} de {maxPaginas} ({pagamentos.length} pagamentos)
+          Página {pagina} de {maxPaginas} ({total} pagamentos)
         </div>
         <button
           onClick={() => pagina < maxPaginas && setPagina(pagina + 1)}
