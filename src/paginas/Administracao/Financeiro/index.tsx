@@ -19,7 +19,10 @@ const FinanceiroAdmin = () => {
   const [status, setStatus] = useState<string>("Todos os Status");
   const [categorias, setCategorias] = useState<string>("Todas as Categorias");
   const [meses, setMeses] = useState<string>("Todos os Meses");
-  const [pagina, setPagina] = useState(1);
+  const [tipo, setTipo] = useState<CardsFinanceiroType[]>([]);
+  const [pagamentos, setPagamentos] = useState<Financeiro[]>([]);
+  const [total, setTotal] = useState<number>(0);
+  const [pagina, setPagina] = useState<number>(1);
 
   const head: string[] = [
     "Aluno",
@@ -30,10 +33,6 @@ const FinanceiroAdmin = () => {
     "Status",
     "Ação",
   ];
-
-  const [tipo, setTipo] = useState<CardsFinanceiroType[]>([]);
-  const [pagamentos, setPagamentos] = useState<Financeiro[]>([]);
-  const [total, setTotal] = useState<number>(0);
 
   // Requisita os dados novos toda vez que status, categoria ou meses mudar
   useEffect(() => {
@@ -59,10 +58,6 @@ const FinanceiroAdmin = () => {
   }, [pagamentos]);
 
   const maxPaginas = Math.max(1, Math.ceil(total / ITENS_POR_PAGINA));
-
-  const inicio = (pagina - 1) * ITENS_POR_PAGINA;
-  const fim = inicio + ITENS_POR_PAGINA;
-  const exibicao = pagamentos.slice(inicio, fim);
 
   // Dados do DashBoard
   useEffect(() => {
@@ -112,11 +107,11 @@ const FinanceiroAdmin = () => {
 
       {modo ? (
         <div className="grid grid-cols-3 overflow-hidden gap-x-6 gap-y-5 w-full">
-          <Grid exibicao={exibicao} head={[]} />
+          <Grid exibicao={pagamentos} head={[]} />
         </div>
       ) : (
         <div className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden mb-6">
-          <Table head={head} exibicao={exibicao} />
+          <Table head={head} exibicao={pagamentos} />
         </div>
       )}
 
