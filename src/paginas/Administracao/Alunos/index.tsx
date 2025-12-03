@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import SelectAlunos from "../../../components/Administracao/SelectAlunos";
 import ModoExibicao from "../../../components/ModoExibicao";
 import type { Pessoa } from "../../../types/types";
@@ -21,7 +21,6 @@ const AlunosAdmin = () => {
   const [salas] = useState<string[]>(["Todas as Salas", "9º A", "9º B"]);
   const [selecionada, setSelecionada] = useState<string>("Todas as Salas");
   const [status, setStatus] = useState<string>("Todos os Status");
-  const [pesquisa] = useState<string>("");
   const [pagina, setPagina] = useState(1);
 
   const head: string[] = [
@@ -35,46 +34,15 @@ const AlunosAdmin = () => {
   ];
 
   const [alunos, setAlunos] = useState<Pessoa[]>([]);
+  const [total, setTotal] = useState<number>(0);
 
-  const AlunosFiltrados = useMemo(() => {
-    const termo = pesquisa.toLowerCase();
-    return alunos.filter((itens) => {
-      // Agrupa todas as variáveis referentes aos alunos em uma única variável.
-      const conteudo = `
-        ${itens.registro.toLowerCase()}
-        ${itens.nome.toLowerCase()}
-        ${itens.nasc}
-        ${itens.turma}
-        ${itens.email.toLowerCase()}
-        ${itens.telefone.toLowerCase()}
-        ${itens.status.toLowerCase()}
-        `;
-
-      // Avalia a variável de Turma selecionada para determinar o filtro a ser aplicado.
-      const correspondeTurma =
-        selecionada === "Todas as Salas" || itens.turma.includes(selecionada);
-
-      // Avalia a variável de Status selecionada para determinar o filtro a ser aplicado.
-      const correspondeStatus =
-        status === "Todos os Status" ||
-        itens.status.toLowerCase() === status.toLowerCase();
-
-      // Valida se o termo pesquisado está contido nas informações do aluno para exibição combinada com a turma e o status.
-      const correspondetes =
-        conteudo.includes(termo) && correspondeTurma && correspondeStatus;
-      return correspondetes;
-    });
-  }, [alunos, pesquisa, selecionada, status]);
-
-  useEffect(() => {
-    setPagina(1);
-  }, [AlunosFiltrados.length]);
-
+  // Requisita os dados novos toda vez que status, categoria ou meses mudar
   useEffect(() => {
     http
-      .get("api/alunos")
+      .get(`api/alunos/filtro/selecionada/${selecionada}/status/${status}`)
       .then(function (dados) {
-        setAlunos(dados.data);
+        setTotal(dados.data.total);
+        setAlunos(dados.data.dados);
       })
       .catch(function (error) {
         console.log(error);
@@ -82,7 +50,12 @@ const AlunosAdmin = () => {
       .finally(function () {
         setLoading(false);
       });
-  }, []);
+  }, [selecionada, status]);
+
+  // Atualiza sempre que os pagamentos mudar para página 1
+  useEffect(() => {
+    setPagina(1);
+  }, [total]);
 
   const AdicionarAluno = async () => {
     const dados = await openMenu();
@@ -101,14 +74,11 @@ const AlunosAdmin = () => {
     ]);
   };
 
-  const maxPaginas = Math.max(
-    1,
-    Math.ceil(AlunosFiltrados.length / ITENS_POR_PAGINA)
-  );
+  const maxPaginas = Math.max(1, Math.ceil(total / ITENS_POR_PAGINA));
 
   const inicio = (pagina - 1) * ITENS_POR_PAGINA;
   const fim = inicio + ITENS_POR_PAGINA;
-  const exibicao = AlunosFiltrados.slice(inicio, fim);
+  const exibicao = alunos.slice(inicio, fim);
 
   return (
     <LayoutLogado
@@ -157,7 +127,7 @@ const AlunosAdmin = () => {
           Anterior
         </button>
         <div className="text-[14px] text-(--text-secondary)">
-          Página {pagina} de {maxPaginas} ({AlunosFiltrados.length} alunos)
+          Página {pagina} de {maxPaginas} ({total} alunos)
         </div>
         <button
           onClick={() => pagina < maxPaginas && setPagina(pagina + 1)}
