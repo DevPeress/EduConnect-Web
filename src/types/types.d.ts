@@ -97,6 +97,7 @@ export interface Funcionario {
   data: string;
   departamento: string;
   status: string;
+  nasc: string;
 }
 
 export interface Financeiro {
