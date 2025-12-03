@@ -26,8 +26,8 @@ const FuncionariosAdmin = () => {
     "Nome",
     "Cargo",
     "Departamento",
-    "Status",
     "Data de Admissão",
+    "Status",
     "Ação",
   ];
 
