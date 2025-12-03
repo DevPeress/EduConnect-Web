@@ -10,7 +10,7 @@ import { http } from "../../../utils/axios";
 
 const ITENS_POR_PAGINA = 6;
 
-const ProfessoresAdmin = () => {
+const FuncionariosAdmin = () => {
   const { openMenu } = useCadastroProfessor();
 
   const [loading, setLoading] = useState<boolean>(true);
@@ -169,4 +169,4 @@ const ProfessoresAdmin = () => {
   );
 };
 
-export default ProfessoresAdmin;
+export default FuncionariosAdmin;
