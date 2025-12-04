@@ -11,7 +11,7 @@ import { http } from "../../../utils/axios";
 const ITENS_POR_PAGINA = 6;
 
 const FinanceiroAdmin = () => {
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [modo, setModo] = useState<boolean>(() => {
     const cargo = localStorage.getItem("Exibir");
     return cargo ? true : false;
@@ -62,16 +62,13 @@ const FinanceiroAdmin = () => {
   // Dados do DashBoard
   useEffect(() => {
     http
-      .get("api/financeiro/dashboard")
+      .get("api/financeiro/Dashboard")
       .then(function (dados) {
         setTipo(dados.data);
       })
       .catch(function (error) {
         console.log(error);
       })
-      .finally(function () {
-        setLoading(false);
-      });
   }, []);
 
   return (
