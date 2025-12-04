@@ -38,7 +38,9 @@ const AlunosAdmin = () => {
   // Requisita os dados novos toda vez que status, categoria ou meses mudar
   useEffect(() => {
     http
-      .get(`api/alunos/filtro/selecionada/${selecionada}/status/${status}`)
+      .get(
+        `api/alunos/filtro/selecionada/${selecionada}/status/${status}/page/${pagina}`
+      )
       .then(function (dados) {
         setTotal(dados.data.total);
         setAlunos(dados.data.dados);
@@ -49,7 +51,7 @@ const AlunosAdmin = () => {
       .finally(function () {
         setLoading(false);
       });
-  }, [selecionada, status]);
+  }, [pagina, selecionada, status]);
 
   // Atualiza sempre que os pagamentos mudar para página 1
   useEffect(() => {
