@@ -6,62 +6,60 @@ import {
   CadastroTitulo,
 } from "../../components/Cadastros";
 import toast from "react-hot-toast";
-import {
-  cadastroAlunoSchema,
-  type CadastroAlunoInput,
-} from "../../schemas/alunoSchema";
 import { http } from "../../utils/axios";
+import {
+  cadastroPagamentoSchema,
+  type CadastroPagamentoInput,
+} from "../../schemas/pagementoSchema";
 
-const CadastroAlunoContext = createContext<
-  CadastroContextType<CadastroAlunoInput> | undefined
+const CadastroPagamentoContext = createContext<
+  CadastroContextType<CadastroPagamentoInput> | undefined
 >(undefined);
-export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
+export function CadastroPagamentoProvider({
+  children,
+}: {
+  children: ReactNode;
+}) {
   const [menu, setMenu] = useState<boolean>(false);
-  const [dados, setDados] = useState<CadastroAlunoInput>({
-    matricula: "",
-    status: "Ativo",
-    nome: "",
-    cpf: "",
-    turma: "Selecionar Turma",
-    email: "",
-    telefone: "",
-    endereco: "",
-    nascimento: new Date().toISOString().split("T")[0],
-    nomeEmergencia: "",
-    telefoneEmergencia: "",
+  const [dados, setDados] = useState<CadastroPagamentoInput>({
+    aluno: "",
+    descricao: "",
+    valor: 0,
+    observacoes: "",
+    categoria: "",
+    statuspagamento: "",
+    metodo: "",
+    dataVencimento: new Date().toISOString().split("T")[0],
+    dataPagamento: "",
   });
   const [resolveCallback, setResolveCallback] = useState<
-    ((data: CadastroAlunoInput | null) => void) | null
+    ((data: CadastroPagamentoInput | null) => void) | null
   >(null);
 
-  const openMenu = async (): Promise<CadastroAlunoInput | null> => {
-    const matriculaNova = await http.get("api/alunos/Cadastro");
+  const openMenu = async (): Promise<CadastroPagamentoInput | null> => {
     setMenu(true);
-    setDados((prevDados) => ({ ...prevDados, matricula: matriculaNova.data }));
     return new Promise((resolve) => {
       setResolveCallback(() => resolve);
     });
   };
 
   const Confirm = async () => {
-    const result = cadastroAlunoSchema.safeParse(dados);
+    const result = cadastroPagamentoSchema.safeParse(dados);
     if (!result.success) return toast.error(result.error.issues[0].message);
 
     if (resolveCallback) {
       await http
-        .post("/api/alunos", {
-          Registro: dados.matricula,
-          Nome: dados.nome,
-          Email: dados.email,
-          Telefone: dados.telefone,
-          Status: dados.status,
-          Nasc: dados.nascimento,
-          Endereco: dados.endereco,
-          Cpf: dados.cpf,
-          ContatoEmergencia: dados.telefoneEmergencia,
-          Turma: dados.turma,
-          Media: 0,
-          DataMatricula: dados.nascimento,
+        .post("/api/financeiro", {
+          AlunoId: 4,
+          Categoria: dados.categoria,
+          Valor: dados.valor,
+          DataVencimento: dados.dataVencimento,
+          dataPagamento: dados.dataPagamento,
+          Pago: dados.statuspagamento === "Pago" ? true : false,
+          Cancelado: dados.statuspagamento === "Cancelado" ? true : false,
+          Metodo: dados.metodo,
+          Observacoes: dados.observacoes,
+          Descricao: dados.descricao,
         })
         .then(function () {
           resolveCallback(dados);
@@ -89,23 +87,21 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
 
   const ResetarDados = () => {
     setDados({
-      matricula: "",
-      status: "",
-      nome: "",
-      cpf: "",
-      turma: "",
-      email: "",
-      telefone: "",
-      endereco: "",
-      nascimento: new Date().toISOString().split("T")[0],
-      nomeEmergencia: "",
-      telefoneEmergencia: "",
+      aluno: "",
+      descricao: "",
+      valor: 0,
+      observacoes: "",
+      categoria: "",
+      statuspagamento: "",
+      metodo: "",
+      dataVencimento: new Date().toISOString().split("T")[0],
+      dataPagamento: "",
     });
     setMenu(false);
   };
 
   return (
-    <CadastroAlunoContext.Provider value={{ openMenu, setDados }}>
+    <CadastroPagamentoContext.Provider value={{ openMenu, setDados }}>
       {children}
       {menu && (
         <div className="flex fixed top-0 bottom-0 right-0 left-0 bg-[#000000B3] backdrop-blur-sm z-10 animate-fadeIn items-center justify-center p-5">
@@ -113,61 +109,44 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
             className="bg-(--bg-card) border border-(--border-color) rounded-2xl w-full max-w-[700px] max-h-[90vh] overflow-hidden amimate-slideUp flex flex-col"
             style={{ boxShadow: "0 20px 60px rgba(0, 0, 0, 0.5)" }}
           >
-            <CadastroTitulo titulo="Cadastrar Novo Aluno" cancelar={Cancel} />
+            <CadastroTitulo titulo="Registrar Pagamento" cancelar={Cancel} />
 
             <form className="p-7 overflow-y-auto flex-1">
               <div className="mb-7">
                 <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
-                  Informações Pessoais
+                  Informações do Pagamento
                 </h3>
                 <CadastroFlex2
-                  opcao1="Matrícula"
-                  opcao2="Status"
-                  infos={dados}
-                  setInfos={setDados}
-                />
-
-                <CadastroFlex2
-                  opcao1="Nome completo"
-                  opcao2="CPF/Documento"
-                  infos={dados}
-                  setInfos={setDados}
-                />
-
-                <CadastroFlex2
-                  opcao1="Data de Nascimento"
-                  opcao2="Turma"
-                  infos={dados}
-                  setInfos={setDados}
-                />
-              </div>
-
-              <div className="mb-7">
-                <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
-                  Contato
-                </h3>
-                <CadastroFlex2
-                  opcao1="E-mail"
-                  opcao2="Telefone"
+                  opcao1="Aluno"
+                  opcao2="Categoria"
                   infos={dados}
                   setInfos={setDados}
                 />
 
                 <CadastroFlex1
-                  titulo="Endereço"
+                  titulo="Descrição"
                   infos={dados}
                   setInfos={setDados}
-                  place="Rua, número, bairro, cidade - Estado"
+                  place="ex: Mensalidade Dezembro 2025"
                 />
-              </div>
 
-              <div className="mb-7">
-                <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
-                  Contato de Emergência
-                </h3>
                 <CadastroFlex2
-                  opcao1="Nome do Contato de Emergência"
-                  opcao2="Telefone do Contato de Emergência"
+                  opcao1="Valor"
+                  opcao2="Vencimento"
+                  infos={dados}
+                  setInfos={setDados}
+                />
+
+                <CadastroFlex2
+                  opcao1="Status do Pagamento"
+                  opcao2="Data do Pagamento"
+                  infos={dados}
+                  setInfos={setDados}
+                />
+
+                <CadastroFlex2
+                  opcao1="Método do Pagameto"
+                  opcao2="Observações"
                   infos={dados}
                   setInfos={setDados}
                 />
@@ -204,16 +183,16 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
           </div>
         </div>
       )}
-    </CadastroAlunoContext.Provider>
+    </CadastroPagamentoContext.Provider>
   );
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
-export function useCadastroAluno() {
-  const context = useContext(CadastroAlunoContext);
+export function useCadastroPagamento() {
+  const context = useContext(CadastroPagamentoContext);
   if (!context) {
     throw new Error(
-      "useCadastroAluno deve ser usado dentro do CadastroAlunoProvider"
+      "useCadastroPagamento deve ser usado dentro do CadastroPagamentoProvider"
     );
   }
   return context;
