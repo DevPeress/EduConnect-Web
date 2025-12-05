@@ -5,6 +5,7 @@ import type { ThemeType } from "../../types/types";
 import { AuthProvider } from "../AuthContext";
 import { CadastroAlunoProvider } from "../CadastroAlunoContext";
 import { CadastroProfessorProvider } from "../CadastroProfessorContext";
+import { CadastroPagamentoProvider } from "../CadastroPagamentoContext";
 
 const ThemeContext = createContext<ThemeType | undefined>(undefined);
 
@@ -32,7 +33,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     <ThemeContext.Provider value={{ dark, toggleTheme }}>
       <AuthProvider>
         <CadastroAlunoProvider>
-          <CadastroProfessorProvider>{children}</CadastroProfessorProvider>
+          <CadastroProfessorProvider>
+            <CadastroPagamentoProvider>{children}</CadastroPagamentoProvider>
+          </CadastroProfessorProvider>
         </CadastroAlunoProvider>
       </AuthProvider>
       <Toaster toastOptions={{}} />
