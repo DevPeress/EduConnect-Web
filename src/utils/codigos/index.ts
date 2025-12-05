@@ -60,6 +60,24 @@ function IdentificarTipo(dado: string) {
       return "nomeEmergencia";
     case "Telefone do Contato de Emergência":
       return "telefoneEmergencia";
+    case "Descrição":
+      return "descricao";
+    case "Data do Pagamento":
+      return "dataPagamento";
+    case "Valor":
+      return "valor";
+    case "Vencimento":
+      return "dataVencimento";
+    case "Aluno":
+      return "aluno";
+    case "Categoria":
+      return "categoria";
+    case "Status do Pagamento":
+      return "statuspagamento";
+    case "Método do Pagameto":
+      return "metodo";
+    case "Observações":
+      return "observacoes";
     default:
       return "";
   }

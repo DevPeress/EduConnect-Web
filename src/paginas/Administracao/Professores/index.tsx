@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import ModoExibicao from "../../../components/ModoExibicao";
 import type { Pessoa } from "../../../types/types";
 import SelectProfessores from "../../../components/Administracao/SelectProfessores";
@@ -21,8 +21,9 @@ const ProfessoresAdmin = () => {
   const [salas] = useState<string[]>(["Todas as Salas", "9º A", "9º B"]);
   const [selecionada, setSelecionada] = useState<string>("Todas as Salas");
   const [status, setStatus] = useState<string>("Todos os Status");
-  const [pesquisa] = useState<string>("");
-  const [pagina, setPagina] = useState(1);
+  const [professores, setProfessores] = useState<Pessoa[]>([]);
+  const [total, setTotal] = useState<number>(0);
+  const [pagina, setPagina] = useState<number>(1);
 
   const head: string[] = [
     "Código",
@@ -34,47 +35,15 @@ const ProfessoresAdmin = () => {
     "Ação",
   ];
 
-  const [professores, setProfessores] = useState<Pessoa[]>([]);
-
-  const ProfessoresFiltrados = useMemo(() => {
-    const termo = pesquisa.toLowerCase();
-    return professores.filter((itens) => {
-      // Agrupa todas as variáveis referentes aos professores em uma única variável.
-      const conteudo = `
-        ${itens.registro.toLowerCase()}
-        ${itens.nome.toLowerCase()}
-        ${itens.nasc}
-        ${itens.turma}
-        ${itens.email.toLowerCase()}
-        ${itens.telefone.toLowerCase()}
-        ${itens.status.toLowerCase()}
-        `;
-
-      // Avalia a variável de Turma selecionada para determinar o filtro a ser aplicado.
-      const correspondeTurma =
-        selecionada === "Todas as Salas" || itens.turma.includes(selecionada);
-
-      // Avalia a variável de Status selecionada para determinar o filtro a ser aplicado.
-      const correspondeStatus =
-        status === "Todos os Status" ||
-        itens.status.toLowerCase() === status.toLowerCase();
-
-      // Valida se o termo pesquisado está contido nas informações do aluno para exibição combinada com a turma e o status.
-      const correspondetes =
-        conteudo.includes(termo) && correspondeTurma && correspondeStatus;
-      return correspondetes;
-    });
-  }, [professores, pesquisa, selecionada, status]);
-
-  useEffect(() => {
-    setPagina(1);
-  }, [ProfessoresFiltrados.length]);
-
+  // Requisita os dados novos toda vez que status, categoria ou meses mudar
   useEffect(() => {
     http
-      .get("api/professores")
+      .get(
+        `api/professores/filtro/selecionada/${selecionada}/status/${status}/page/${pagina}`
+      )
       .then(function (dados) {
-        setProfessores(dados.data);
+        setTotal(dados.data.total);
+        setProfessores(dados.data.dados);
       })
       .catch(function (error) {
         console.log(error);
@@ -82,7 +51,12 @@ const ProfessoresAdmin = () => {
       .finally(function () {
         setLoading(false);
       });
-  }, []);
+  }, [pagina, selecionada, status]);
+
+  // Atualiza sempre que os pagamentos mudar para página 1
+  useEffect(() => {
+    setPagina(1);
+  }, [total]);
 
   const AdicionarProfessor = async () => {
     const dados = await openMenu();
@@ -101,14 +75,7 @@ const ProfessoresAdmin = () => {
     ]);
   };
 
-  const maxPaginas = Math.max(
-    1,
-    Math.ceil(ProfessoresFiltrados.length / ITENS_POR_PAGINA)
-  );
-
-  const inicio = (pagina - 1) * ITENS_POR_PAGINA;
-  const fim = inicio + ITENS_POR_PAGINA;
-  const exibicao = ProfessoresFiltrados.slice(inicio, fim);
+  const maxPaginas = Math.max(1, Math.ceil(total / ITENS_POR_PAGINA));
 
   return (
     <LayoutLogado
@@ -137,11 +104,11 @@ const ProfessoresAdmin = () => {
 
       {modo ? (
         <div className="grid grid-cols-3 overflow-hidden gap-x-6 gap-y-5 w-full">
-          <Grid exibicao={exibicao} head={[]} />
+          <Grid exibicao={professores} head={[]} />
         </div>
       ) : (
         <div className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden mb-6">
-          <Table head={head} exibicao={exibicao} />
+          <Table head={head} exibicao={professores} />
         </div>
       )}
 
@@ -154,8 +121,7 @@ const ProfessoresAdmin = () => {
           Anterior
         </button>
         <div className="text-[14px] text-(--text-secondary)">
-          Página {pagina} de {maxPaginas} ({ProfessoresFiltrados.length}{" "}
-          professores)
+          Página {pagina} de {maxPaginas} ({total} professores)
         </div>
         <button
           onClick={() => pagina < maxPaginas && setPagina(pagina + 1)}

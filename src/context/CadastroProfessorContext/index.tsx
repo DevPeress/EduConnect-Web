@@ -55,8 +55,8 @@ export function CadastroProfessorProvider({
     if (!result.success) return toast.error(result.error.issues[0].message);
 
     if (resolveCallback) {
-      try {
-        await http.post("api/professores", {
+      await http
+        .post("api/professores", {
           Registro: dados.codigo,
           Nome: dados.nome,
           Email: dados.email,
@@ -66,22 +66,26 @@ export function CadastroProfessorProvider({
           Endereco: dados.endereco,
           Cpf: dados.cpf,
           ContatoEmergencia: dados.telefoneEmergencia,
-          turma: dados.turmas,
+          Turma: dados.turmas,
           Disciplina: dados.disciplina,
-          Contratacao: new Date().toISOString().split("T")[0],
-          Formacao: dados.formacao
+          Contratacao: dados.contratacao,
+          Formacao: dados.formacao,
+        })
+        .then(function () {
+          resolveCallback(dados);
+          setResolveCallback(null);
+          toast.success("Cadastro realizado com sucesso!");
+        })
+        .catch(function (error) {
+          console.log(error);
+          resolveCallback(null);
+          toast.error("Não foi possível realizar o cadastro!");
+        })
+        .finally(function () {
+          setResolveCallback(null);
+          ResetarDados();
         });
-        resolveCallback(dados);
-        setResolveCallback(null);
-        toast.success("Cadastro realizado com sucesso!");
-      } catch {
-        resolveCallback(null);
-        setResolveCallback(null);
-        toast.error("Não foi possível realizar o cadastro!");
-      }
     }
-    ResetarDados();
-    setMenu(false);
   };
 
   const Cancel = () => {
@@ -90,7 +94,6 @@ export function CadastroProfessorProvider({
       setResolveCallback(null);
     }
     ResetarDados();
-    setMenu(false);
   };
 
   const ResetarDados = () => {
@@ -110,6 +113,7 @@ export function CadastroProfessorProvider({
       nomeEmergencia: "",
       telefoneEmergencia: "",
     });
+    setMenu(false);
   };
 
   return (

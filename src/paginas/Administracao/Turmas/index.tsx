@@ -14,7 +14,9 @@ const TurmasAdmin = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [turno, setTurno] = useState<string>("Todos os Turnos");
   const [status, setStatus] = useState<string>("Todos os Status");
-  const [pagina, setPagina] = useState(1);
+  const [turmas, setTurmas] = useState<Turmas[]>([]);
+  const [total, setTotal] = useState<number>(0);
+  const [pagina, setPagina] = useState<number>(1);
 
   const head: string[] = [
     "Código",
@@ -26,22 +28,13 @@ const TurmasAdmin = () => {
     "Ação",
   ];
 
-  const [turmas, setTurmas] = useState<Turmas[]>([
-    {
-      registro: "1",
-      nome: "Sala",
-      turno: "Noite",
-      professor: "1",
-      horario: "1",
-      capacidade: 50,
-    },
-  ]);
-
+  // Requisita os dados novos toda vez que status, categoria ou meses mudar
   useEffect(() => {
     http
-      .get(`filtro/turno=${turno}&status=${status}`)
+      .get(`api/alunos/filtro/turno/${turno}/status/${status}`)
       .then(function (dados) {
-        setTurmas(dados.data);
+        setTotal(dados.data.total);
+        setTurmas(dados.data.dados);
       })
       .catch(function (error) {
         console.log(error);
@@ -49,22 +42,19 @@ const TurmasAdmin = () => {
       .finally(function () {
         setLoading(false);
       });
-  }, [status, turno]);
+  }, [turno, status]);
 
+  // Atualiza sempre que os pagamentos mudar para página 1
   useEffect(() => {
     setPagina(1);
-  }, [turmas.length]);
+  }, [total]);
 
   const AdicionarAluno = async () => {
     const dados = await openMenu();
     if (!dados) return;
   };
 
-  const maxPaginas = Math.max(1, Math.ceil(turmas.length / ITENS_POR_PAGINA));
-
-  const inicio = (pagina - 1) * ITENS_POR_PAGINA;
-  const fim = inicio + ITENS_POR_PAGINA;
-  const exibicao = turmas.slice(inicio, fim);
+  const maxPaginas = Math.max(1, Math.ceil(total / ITENS_POR_PAGINA));
 
   return (
     <LayoutLogado
@@ -84,7 +74,7 @@ const TurmasAdmin = () => {
       </div>
 
       <div className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden mb-6">
-        <Table head={head} exibicao={exibicao} />
+        <Table head={head} exibicao={turmas} />
       </div>
 
       <div className="flex justify-center items-center gap-5 mt-8 pt-5 border-t-2 border-(--border-color)">
@@ -96,7 +86,7 @@ const TurmasAdmin = () => {
           Anterior
         </button>
         <div className="text-[14px] text-(--text-secondary)">
-          Página {pagina} de {maxPaginas} ({turmas.length} turmas)
+          Página {pagina} de {maxPaginas} ({total} turmas)
         </div>
         <button
           onClick={() => pagina < maxPaginas && setPagina(pagina + 1)}

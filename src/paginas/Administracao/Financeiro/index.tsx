@@ -7,11 +7,14 @@ import Table from "../../../components/Table";
 import Grid from "../../../components/Grid";
 import CardsFinanceiro from "../../../components/Administracao/CardsFinanceiro";
 import { http } from "../../../utils/axios";
+import { useCadastroPagamento } from "../../../context/CadastroPagamentoContext";
 
 const ITENS_POR_PAGINA = 6;
 
 const FinanceiroAdmin = () => {
-  const [loading, setLoading] = useState<boolean>(false);
+  const { openMenu } = useCadastroPagamento();
+
+  const [loading, setLoading] = useState<boolean>(true);
   const [modo, setModo] = useState<boolean>(() => {
     const cargo = localStorage.getItem("Exibir");
     return cargo ? true : false;
@@ -19,7 +22,10 @@ const FinanceiroAdmin = () => {
   const [status, setStatus] = useState<string>("Todos os Status");
   const [categorias, setCategorias] = useState<string>("Todas as Categorias");
   const [meses, setMeses] = useState<string>("Todos os Meses");
-  const [pagina, setPagina] = useState(1);
+  const [tipo, setTipo] = useState<CardsFinanceiroType[]>([]);
+  const [pagamentos, setPagamentos] = useState<Financeiro[]>([]);
+  const [total, setTotal] = useState<number>(0);
+  const [pagina, setPagina] = useState<number>(1);
 
   const head: string[] = [
     "Aluno",
@@ -31,12 +37,8 @@ const FinanceiroAdmin = () => {
     "Ação",
   ];
 
-  const [tipo, setTipo] = useState<CardsFinanceiroType[]>([]);
-  const [pagamentos, setPagamentos] = useState<Financeiro[]>([]);
-  const [total, setTotal] = useState<number>(0);
-
-  // Requisita os dados novos toda vez que status, categoria ou meses mudar
-  useEffect(() => {
+  // API para requisitar os Dados
+  const Pesquisa = () => {
     http
       .get(
         `api/financeiro/filtro/categoria/${categorias}/status/${status}/data/${meses}/page/${pagina}`
@@ -51,6 +53,24 @@ const FinanceiroAdmin = () => {
       .finally(function () {
         setLoading(false);
       });
+  };
+
+  //API para requisitar os dados
+  const Dados = () => {
+    http
+      .get("api/financeiro/Dashboard")
+      .then(function (dados) {
+        setTipo(dados.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  // Requisita os dados novos toda vez que status, categoria ou meses mudar
+  useEffect(() => {
+    Pesquisa();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categorias, meses, pagina, status]);
 
   // Atualiza sempre que os pagamentos mudar para página 1
@@ -60,31 +80,29 @@ const FinanceiroAdmin = () => {
 
   const maxPaginas = Math.max(1, Math.ceil(total / ITENS_POR_PAGINA));
 
-  const inicio = (pagina - 1) * ITENS_POR_PAGINA;
-  const fim = inicio + ITENS_POR_PAGINA;
-  const exibicao = pagamentos.slice(inicio, fim);
-
   // Dados do DashBoard
   useEffect(() => {
-    http
-      .get("api/financeiro/dashboard")
-      .then(function (dados) {
-        setTipo(dados.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
-      .finally(function () {
-        setLoading(false);
-      });
+    Dados();
   }, []);
+
+  // Adiciona um pagamento novo
+  const AdicionarPagamento = async () => {
+    const dados = await openMenu();
+    if (!dados) return;
+    Dados();
+    if (pagamentos.length < 5) {
+      Pesquisa();
+    }
+  };
 
   return (
     <LayoutLogado
       titulo="Gestão Financeira"
       desc="Controle de pagamentos e mensalidades"
       botao={{
-        ativo: false,
+        ativo: true,
+        mensagem: "Novo Pagamento",
+        adicionar: AdicionarPagamento,
       }}
       load={loading}
     >
@@ -112,15 +130,15 @@ const FinanceiroAdmin = () => {
 
       {modo ? (
         <div className="grid grid-cols-3 overflow-hidden gap-x-6 gap-y-5 w-full">
-          <Grid exibicao={exibicao} head={[]} />
+          <Grid exibicao={pagamentos} head={[]} />
         </div>
       ) : (
         <div className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden mb-6">
-          <Table head={head} exibicao={exibicao} />
+          <Table head={head} exibicao={pagamentos} />
         </div>
       )}
 
-      <div className="flex justify-center items-center gap-5 mt-8 pt-5 border-t-2 border-(--border-color)">
+      <div className="flex justify-center items-center gap-5 mt-6 pt-5 border-t-2 border-(--border-color)">
         <button
           onClick={() => pagina > 1 && setPagina(pagina - 1)}
           className="py-2.5 px-4 bg-transparent border-2 border-(--border-color) text-(--text-primary) text-[14px] font-medium rounded-lg hover:bg-(--bg-input) hover:border-(--border-light)"

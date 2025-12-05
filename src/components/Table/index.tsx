@@ -77,7 +77,9 @@ const Table = ({ head, exibicao }: TablePropsTable) => {
               ? item.professor
               : "departamento" in item
               ? item.departamento
-              : new Date(item.dataVencimento).toLocaleDateString("pt-BR");
+              : new Date(item.dataVencimento + "T00:00:00").toLocaleDateString(
+                  "pt-BR"
+                );
           const dado4: string =
             "telefone" in item
               ? formatTelefone(item.telefone)
@@ -85,7 +87,13 @@ const Table = ({ head, exibicao }: TablePropsTable) => {
               ? item.horario
               : "data" in item
               ? item.data
-              : new Date(item.dataPagamento).toLocaleDateString("pt-BR");
+              : new Date(item.dataPagamento + "T00:00:00").toLocaleDateString(
+                  "pt-BR"
+                ) != "Invalid Date"
+              ? new Date(item.dataPagamento + "T00:00:00").toLocaleDateString(
+                  "pt-BR"
+                )
+              : "Aguardando";
           const dado5: string | number =
             "horario" in item ? item.horario : item.status;
 

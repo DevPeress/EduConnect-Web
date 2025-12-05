@@ -1,16 +1,23 @@
 import type { CadastroAlunoInput } from "../../schemas/alunoSchema";
+import type { CadastroPagamentoInput } from "../../schemas/pagementoSchema";
 import type { CadastroProfessorInput } from "../../schemas/professorSchema";
 import type { CadastroFlexProps } from "../../types/types";
-import { formatCPF, formatTelefone, IdentificarTipo } from "../../utils/codigos";
+import {
+  formatCPF,
+  formatTelefone,
+  IdentificarTipo,
+} from "../../utils/codigos";
 
 interface CadastroFlex2Prop<
-  T extends CadastroAlunoInput | CadastroProfessorInput
+  T extends CadastroAlunoInput | CadastroProfessorInput | CadastroPagamentoInput
 > extends CadastroFlexProps<T> {
   opcao1: string;
   opcao2: string;
 }
 
-const CadastroFlex2 = <T extends CadastroAlunoInput | CadastroProfessorInput>({
+const CadastroFlex2 = <
+  T extends CadastroAlunoInput | CadastroProfessorInput | CadastroPagamentoInput
+>({
   opcao1,
   opcao2,
   infos,
@@ -24,11 +31,13 @@ const CadastroFlex2 = <T extends CadastroAlunoInput | CadastroProfessorInput>({
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
     Escolhas: keyof T
   ) => {
-    let texto = e.target.value;
+    let texto: string | number = e.target.value;
     if (Escolhas === "cpf") texto = formatCPF(texto);
 
     if (Escolhas === "telefone" || Escolhas === "telefoneEmergencia")
       texto = formatTelefone(texto);
+
+    if (Escolhas === "valor") texto = parseInt(texto);
 
     setInfos((prev) => ({
       ...prev,
@@ -44,12 +53,24 @@ const CadastroFlex2 = <T extends CadastroAlunoInput | CadastroProfessorInput>({
   const selectOptions: Record<string, string[]> = {
     status: ["Ativo", "Inativo", "Suspenso"],
     turma: ["Selecionar Turma", "1A", "2B", "3C"],
+    categoria: ["Selecionar categoria", "Mensalidade", "Material"],
+    statuspagamento: ["Selecionar status", "Pendente", "Pago", "Cancelado"],
+    metodo: [
+      "Selecione um método válido!",
+      "Dinheiro",
+      "Cartão de Débito",
+      "Cartão de Crédito",
+      "PIX",
+      "Boleto",
+    ],
   };
 
   // Define os tipos de informações exibidas no select com base no tipo fornecido.
   const inputTypes: Record<string, string> = {
     nascimento: "date",
     contratacao: "date",
+    dataPagamento: "date",
+    dataVencimento: "date",
     email: "email",
     cpf: "text",
     telefone: "text",
