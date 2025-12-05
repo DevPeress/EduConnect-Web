@@ -37,8 +37,8 @@ const FinanceiroAdmin = () => {
     "Ação",
   ];
 
-  // Requisita os dados novos toda vez que status, categoria ou meses mudar
-  useEffect(() => {
+  // API para requisitar os Dados
+  const Pesquisa = () => {
     http
       .get(
         `api/financeiro/filtro/categoria/${categorias}/status/${status}/data/${meses}/page/${pagina}`
@@ -53,6 +53,24 @@ const FinanceiroAdmin = () => {
       .finally(function () {
         setLoading(false);
       });
+  };
+
+  //API para requisitar os dados
+  const Dados = () => {
+    http
+      .get("api/financeiro/Dashboard")
+      .then(function (dados) {
+        setTipo(dados.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  // Requisita os dados novos toda vez que status, categoria ou meses mudar
+  useEffect(() => {
+    Pesquisa();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categorias, meses, pagina, status]);
 
   // Atualiza sempre que os pagamentos mudar para página 1
@@ -64,20 +82,17 @@ const FinanceiroAdmin = () => {
 
   // Dados do DashBoard
   useEffect(() => {
-    http
-      .get("api/financeiro/Dashboard")
-      .then(function (dados) {
-        setTipo(dados.data);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    Dados();
   }, []);
 
   // Adiciona um pagamento novo
   const AdicionarPagamento = async () => {
     const dados = await openMenu();
     if (!dados) return;
+    Dados();
+    if (pagamentos.length < 5) {
+      Pesquisa();
+    }
   };
 
   return (
@@ -123,7 +138,7 @@ const FinanceiroAdmin = () => {
         </div>
       )}
 
-      <div className="flex justify-center items-center gap-5 mt-8 pt-5 border-t-2 border-(--border-color)">
+      <div className="flex justify-center items-center gap-5 mt-6 pt-5 border-t-2 border-(--border-color)">
         <button
           onClick={() => pagina > 1 && setPagina(pagina - 1)}
           className="py-2.5 px-4 bg-transparent border-2 border-(--border-color) text-(--text-primary) text-[14px] font-medium rounded-lg hover:bg-(--bg-input) hover:border-(--border-light)"
