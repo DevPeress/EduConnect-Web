@@ -54,7 +54,8 @@ export function CadastroPagamentoProvider({
           Categoria: dados.categoria,
           Valor: dados.valor,
           DataVencimento: dados.dataVencimento,
-          dataPagamento: dados.dataPagamento,
+          dataPagamento:
+            dados.dataPagamento !== "" ? dados.dataPagamento : null,
           Pago: dados.statuspagamento === "Pago" ? true : false,
           Cancelado: dados.statuspagamento === "Cancelado" ? true : false,
           Metodo: dados.metodo,
