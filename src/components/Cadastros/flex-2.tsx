@@ -48,6 +48,7 @@ const CadastroFlex2 = <T extends CadastroAlunoInput | CadastroProfessorInput>({
   const selectOptions: Record<string, string[]> = {
     status: ["Ativo", "Inativo", "Suspenso"],
     turma: ["Selecionar Turma", "1A", "2B", "3C"],
+    categoria: ["Mensalidade", "Material"],
     statuspagamento: ["Pendente", "Pago", "Atrasado", "Cancelado"],
     metodo: [
       "Dinheiro",
