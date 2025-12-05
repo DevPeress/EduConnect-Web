@@ -31,11 +31,13 @@ const CadastroFlex2 = <
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
     Escolhas: keyof T
   ) => {
-    let texto = e.target.value;
+    let texto: string | number = e.target.value;
     if (Escolhas === "cpf") texto = formatCPF(texto);
 
     if (Escolhas === "telefone" || Escolhas === "telefoneEmergencia")
       texto = formatTelefone(texto);
+
+    if (Escolhas === "valor") texto = parseInt(texto);
 
     setInfos((prev) => ({
       ...prev,
@@ -51,9 +53,10 @@ const CadastroFlex2 = <
   const selectOptions: Record<string, string[]> = {
     status: ["Ativo", "Inativo", "Suspenso"],
     turma: ["Selecionar Turma", "1A", "2B", "3C"],
-    categoria: ["Mensalidade", "Material"],
-    statuspagamento: ["Pendente", "Pago", "Atrasado", "Cancelado"],
+    categoria: ["Selecionar categoria", "Mensalidade", "Material"],
+    statuspagamento: ["Selecionar status", "Pendente", "Pago", "Cancelado"],
     metodo: [
+      "Selecione um método válido!",
       "Dinheiro",
       "Cartão de Débito",
       "Cartão de Crédito",
