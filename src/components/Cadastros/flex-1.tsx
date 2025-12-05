@@ -23,6 +23,7 @@ const CadastroFlex1 = <T extends CadastroAlunoInput | CadastroProfessorInput>({
   const TipoDiv = () => {
     switch (tipo) {
       case "nome":
+      case "descricao":
       case "endereco":
         return (
           <input
