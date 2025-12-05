@@ -1,4 +1,5 @@
 import type { CadastroAlunoInput } from "../schemas/alunoSchema";
+import type { CadastroPagamentoInput } from "../schemas/pagementoSchema";
 import type { CadastroProfessorInput } from "../schemas/professorSchema";
 
 export interface ThemeType {
@@ -122,7 +123,7 @@ export interface Turmas {
 }
 
 export interface CadastroContextType<
-  T extends CadastroProfessorInput | CadastroAlunoInput
+  T extends CadastroProfessorInput | CadastroAlunoInput | CadastroPagamentoInput
 > {
   openMenu: () => Promise<T | null>;
   setDados: React.Dispatch<React.SetStateAction<T>>;
@@ -142,7 +143,7 @@ export interface SlotInfo {
 }
 
 export interface CadastroFlexProps<
-  T extends CadastroAlunoInput | CadastroProfessorInput
+  T extends CadastroAlunoInput | CadastroProfessorInput | CadastroPagamentoInput
 > {
   infos: T;
   setInfos: React.Dispatch<React.SetStateAction<T>>;

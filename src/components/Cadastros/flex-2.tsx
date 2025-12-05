@@ -1,4 +1,5 @@
 import type { CadastroAlunoInput } from "../../schemas/alunoSchema";
+import type { CadastroPagamentoInput } from "../../schemas/pagementoSchema";
 import type { CadastroProfessorInput } from "../../schemas/professorSchema";
 import type { CadastroFlexProps } from "../../types/types";
 import {
@@ -8,13 +9,15 @@ import {
 } from "../../utils/codigos";
 
 interface CadastroFlex2Prop<
-  T extends CadastroAlunoInput | CadastroProfessorInput
+  T extends CadastroAlunoInput | CadastroProfessorInput | CadastroPagamentoInput
 > extends CadastroFlexProps<T> {
   opcao1: string;
   opcao2: string;
 }
 
-const CadastroFlex2 = <T extends CadastroAlunoInput | CadastroProfessorInput>({
+const CadastroFlex2 = <
+  T extends CadastroAlunoInput | CadastroProfessorInput | CadastroPagamentoInput
+>({
   opcao1,
   opcao2,
   infos,
