@@ -178,7 +178,7 @@ export function CadastroPagamentoProvider({
                 >
                   <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
-                Salvar Aluno
+                Salvar Pagamento
               </button>
             </div>
           </div>
