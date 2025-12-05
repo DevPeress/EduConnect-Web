@@ -69,8 +69,8 @@ const CadastroFlex2 = <
   const inputTypes: Record<string, string> = {
     nascimento: "date",
     contratacao: "date",
-    datapagamento: "date",
-    vencimento: "date",
+    dataPagamento: "date",
+    dataVencimento: "date",
     email: "email",
     cpf: "text",
     telefone: "text",
