@@ -23,8 +23,8 @@ export const cadastroPagamentoSchema = z.object({
       (value) => value !== "Selecionar método",
       "Selecione um método válido!"
     ),
-  vencimento: z.string(),
-  datapagamento: z.string(),
+  dataVencimento: z.string(),
+  dataPagamento: z.string(),
 });
 
 export type CadastroPagamentoInput = z.infer<typeof cadastroPagamentoSchema>;
