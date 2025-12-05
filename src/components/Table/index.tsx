@@ -89,7 +89,6 @@ const Table = ({ head, exibicao }: TablePropsTable) => {
           const dado5: string | number =
             "horario" in item ? item.horario : item.status;
 
-          console.log(dado3)
           return (
             <tr
               key={item.registro}
