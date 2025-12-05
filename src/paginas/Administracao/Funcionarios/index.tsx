@@ -36,7 +36,7 @@ const FuncionariosAdmin = () => {
   // Requisita os dados novos toda vez que status, categoria ou meses mudar
   useEffect(() => {
     http
-      .get(`api/alunos/filtro/status/${status}`)
+      .get(`api/funcionarios/filtro/status/${status}/page/${pagina}`)
       .then(function (dados) {
         setTotal(dados.data.total);
         setFuncionarios(dados.data.dados);
@@ -47,7 +47,7 @@ const FuncionariosAdmin = () => {
       .finally(function () {
         setLoading(false);
       });
-  }, [status]);
+  }, [pagina, status]);
 
   // Atualiza sempre que os pagamentos mudar para página 1
   useEffect(() => {
