@@ -14,9 +14,8 @@ import toast from "react-hot-toast";
 import LayoutLogado from "../../LayoutLogado";
 
 const InicioAdm = () => {
-  const [loading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [dados, setDados] = useState<CardsAdminType[]>([
-    { dado: "Turmas", total: 42, aumento: 0, porcentagem: 0 },
     { dado: "Presença", total: 94.5, aumento: 94.5, porcentagem: 2.3 },
   ]);
 
@@ -31,8 +30,8 @@ const InicioAdm = () => {
     },
   ]);
 
-  useEffect(() => {
-    http
+  const PegarDados = async () => {
+    await http
       .get("api/dashboardadmin/Cards")
       .then(function (dados) {
         setDados(dados.data);
@@ -45,10 +44,12 @@ const InicioAdm = () => {
             : "Erro inesperado"
         );
       });
-    http
+
+    await http
       .get("api/registros/DashBoard")
       .then(function (dados) {
         setAtividades(dados.data);
+        setLoading(false);
       })
       .catch(function (error) {
         console.log(error);
@@ -58,6 +59,10 @@ const InicioAdm = () => {
             : "Erro inesperado"
         );
       });
+  };
+
+  useEffect(() => {
+    PegarDados();
   }, []);
 
   return (
