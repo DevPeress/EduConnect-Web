@@ -1,7 +1,11 @@
 import type { CadastroAlunoInput } from "../../schemas/alunoSchema";
 import type { CadastroProfessorInput } from "../../schemas/professorSchema";
 import type { CadastroFlexProps } from "../../types/types";
-import { formatCPF, formatTelefone, IdentificarTipo } from "../../utils/codigos";
+import {
+  formatCPF,
+  formatTelefone,
+  IdentificarTipo,
+} from "../../utils/codigos";
 
 interface CadastroFlex2Prop<
   T extends CadastroAlunoInput | CadastroProfessorInput
@@ -44,12 +48,22 @@ const CadastroFlex2 = <T extends CadastroAlunoInput | CadastroProfessorInput>({
   const selectOptions: Record<string, string[]> = {
     status: ["Ativo", "Inativo", "Suspenso"],
     turma: ["Selecionar Turma", "1A", "2B", "3C"],
+    statuspagamento: ["Pendente", "Pago", "Atrasado", "Cancelado"],
+    metodo: [
+      "Dinheiro",
+      "Cartão de Débito",
+      "Cartão de Crédito",
+      "PIX",
+      "Boleto",
+    ],
   };
 
   // Define os tipos de informações exibidas no select com base no tipo fornecido.
   const inputTypes: Record<string, string> = {
     nascimento: "date",
     contratacao: "date",
+    datapagamento: "date",
+    vencimento: "date",
     email: "email",
     cpf: "text",
     telefone: "text",
