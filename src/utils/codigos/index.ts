@@ -63,11 +63,11 @@ function IdentificarTipo(dado: string) {
     case "Descrição":
       return "descricao";
     case "Data do Pagamento":
-      return "datapagamento";
+      return "dataPagamento";
     case "Valor":
       return "valor";
     case "Vencimento":
-      return "vencimento";
+      return "dataVencimento";
     case "Aluno":
       return "aluno";
     case "Categoria":
