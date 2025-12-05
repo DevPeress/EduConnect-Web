@@ -7,10 +7,13 @@ import Table from "../../../components/Table";
 import Grid from "../../../components/Grid";
 import CardsFinanceiro from "../../../components/Administracao/CardsFinanceiro";
 import { http } from "../../../utils/axios";
+import { useCadastroPagamento } from "../../../context/CadastroPagamentoContext";
 
 const ITENS_POR_PAGINA = 6;
 
 const FinanceiroAdmin = () => {
+  const { openMenu } = useCadastroPagamento();
+
   const [loading, setLoading] = useState<boolean>(true);
   const [modo, setModo] = useState<boolean>(() => {
     const cargo = localStorage.getItem("Exibir");
@@ -68,15 +71,23 @@ const FinanceiroAdmin = () => {
       })
       .catch(function (error) {
         console.log(error);
-      })
+      });
   }, []);
+
+  // Adiciona um pagamento novo
+  const AdicionarPagamento = async () => {
+    const dados = await openMenu();
+    if (!dados) return;
+  };
 
   return (
     <LayoutLogado
       titulo="Gestão Financeira"
       desc="Controle de pagamentos e mensalidades"
       botao={{
-        ativo: false,
+        ativo: true,
+        mensagem: "Novo Pagamento",
+        adicionar: AdicionarPagamento,
       }}
       load={loading}
     >
