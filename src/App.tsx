@@ -15,18 +15,14 @@ import FuncionariosAdmin from "./paginas/Administracao/Funcionarios";
 
 function App() {
   const auth = useAuth();
-  const user: boolean = auth.token.length > 2;
-  const cargo = auth.cargo;
-
-  const setAuth = (cargo: string, token: string) => {
-    auth.setAuth(cargo, token);
-  };
+  const user: boolean = auth.token;
+  const cargo: string = auth.cargo;
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Inicial Logado={user} Cargo={cargo} />} />
-        <Route path="/login" element={<Login TrocarInfos={setAuth} />} />
+        <Route path="/login" element={<Login />} />
 
         <Route
           element={
