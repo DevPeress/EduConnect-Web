@@ -2,7 +2,6 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import type { ReactNode } from "react";
 import type { ThemeType } from "../../types/types";
-import { AuthProvider } from "../AuthContext";
 import { CadastroAlunoProvider } from "../CadastroAlunoContext";
 import { CadastroProfessorProvider } from "../CadastroProfessorContext";
 import { CadastroPagamentoProvider } from "../CadastroPagamentoContext";
@@ -31,13 +30,12 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 
   return (
     <ThemeContext.Provider value={{ dark, toggleTheme }}>
-      <AuthProvider>
-        <CadastroAlunoProvider>
-          <CadastroProfessorProvider>
-            <CadastroPagamentoProvider>{children}</CadastroPagamentoProvider>
-          </CadastroProfessorProvider>
-        </CadastroAlunoProvider>
-      </AuthProvider>
+      <CadastroAlunoProvider>
+        <CadastroProfessorProvider>
+          <CadastroPagamentoProvider>{children}</CadastroPagamentoProvider>
+        </CadastroProfessorProvider>
+      </CadastroAlunoProvider>
+
       <Toaster toastOptions={{}} />
     </ThemeContext.Provider>
   );
