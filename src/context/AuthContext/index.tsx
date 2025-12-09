@@ -1,33 +1,42 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 import type { ReactNode } from "react";
 import type { AuthContextType } from "../../types/types";
+import { http } from "../../utils/axios";
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-  const [cargo, setCargo] = useState<string>(() => {
-    const cargo = localStorage.getItem("Cargo");
-    return cargo ? cargo : "";
-  });
-  const [token, setToken] = useState<string>(() => {
-    const id = localStorage.getItem("Token");
-    return id ? cargo : "";
-  });
+  const [cargo, setCargo] = useState<string>("");
+  const [token, setToken] = useState<boolean>(false);
+  const [loading, setLoading] = useState(true);
 
-  const setAuth = (cargo: string, token: string) => {
-    setCargo(cargo);
-    setToken(token);
-    localStorage.setItem("Role", cargo);
-    localStorage.setItem("Token", token);
-  };
+  useEffect(() => {
+    async function checkAuth() {
+      try {
+        const { data } = await http.get("/api/auth/usuario");
 
-  const removeAuth = () => {
-    localStorage.removeItem("Cargo");
-    localStorage.removeItem("Token");
+        setCargo(data.role);
+        setToken(true);
+      } catch {
+        setCargo("");
+        setToken(false);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    checkAuth();
+  }, []);
+
+  const removeAuth = async () => {
+    setCargo("");
+    setToken(false);
+
+    await http.delete("/api/auth/usuario");
   };
 
   return (
-    <AuthContext.Provider value={{ cargo, token, setAuth, removeAuth }}>
+    <AuthContext.Provider value={{ cargo, token, loading, removeAuth }}>
       {children}
     </AuthContext.Provider>
   );

@@ -1,12 +1,12 @@
 import { useState, type FormEvent } from "react";
-import type { LoginProps, LoginResponse } from "../../types/types";
+import type { LoginResponse } from "../../types/types";
 import FundoBolhas from "../../components/FundoBolhas";
 import { http } from "../../utils/axios";
 import toast from "react-hot-toast";
 import { loginSchema, type LoginInput } from "../../schemas/loginSchema";
 
-const Login = ({ TrocarInfos }: LoginProps) => {
-  const [dados, setDados] = useState<LoginInput>({ email: "", senha: "" });
+const Login = () => {
+  const [dados, setDados] = useState<LoginInput>({ registro: "", senha: "" });
   const [menu, setMenu] = useState<boolean>(false);
 
   const AlterarDados = (texto: string, tipo: keyof LoginInput) => {
@@ -19,18 +19,21 @@ const Login = ({ TrocarInfos }: LoginProps) => {
   const Login = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const email = dados.email;
+    const registro = dados.registro;
     const senha = dados.senha;
     const result = loginSchema.safeParse(dados);
     if (!result.success) return toast.error(result.error.issues[0].message);
 
-    const loginPromise = http.post<LoginResponse>("/login", { email, senha });
+    const loginPromise = http.post<LoginResponse>("/api/auth/login", {
+      Registro: registro,
+      Senha: senha,
+      Lembrar: true,
+    });
     await toast.promise(
       loginPromise,
       {
         loading: "Entrando...",
-        success: (response) => {
-          TrocarInfos(response.data.cargo, response.data.token);
+        success: () => {
           return "Login realizado com sucesso!";
         },
         error: (err) => {
@@ -64,18 +67,18 @@ const Login = ({ TrocarInfos }: LoginProps) => {
         <div className="flex flex-col gap-2 text-left">
           <label
             className="text-(--text-primary) text-[14px] font-medium"
-            htmlFor="email"
+            htmlFor="text"
           >
-            E-mail
+            Registro
           </label>
           <input
             className="w-full px-3 py-4 border-2 border-(--border-color) rounded-lg text-[15px] text-(--text-primary) bg-(--bg-input) focus:outline-none focus:border-(--primary-color)"
-            value={dados.email}
-            onChange={(e) => AlterarDados(e.target.value, "email")}
-            type="email"
-            name="email"
-            id="email"
-            placeholder="seu@gmail.com"
+            value={dados.registro}
+            onChange={(e) => AlterarDados(e.target.value, "registro")}
+            type="text"
+            name="text"
+            id="text"
+            placeholder="Seu Registro"
             required
           />
         </div>
