@@ -15,6 +15,11 @@ import FuncionariosAdmin from "./paginas/Administracao/Funcionarios";
 
 function App() {
   const auth = useAuth();
+
+  if (auth.loading) {
+    return <div />;
+  }
+
   const user: boolean = auth.token;
   const cargo: string = auth.cargo;
 
