@@ -22,6 +22,7 @@ export interface LoginResponse {
 export interface AuthContextType {
   cargo: string;
   token: boolean;
+  loading: boolean;
 }
 
 export interface AuthPaginas {
