@@ -8,26 +8,28 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [cargo, setCargo] = useState<string>("");
   const [token, setToken] = useState<boolean>(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function checkAuth() {
-      await http
-        .get("/api/auth/usuario")
-        .then(function (dados) {
-          setCargo(dados.data.role);
-          setToken(dados.data.id != null ? true : false);
-        })
-        .catch(() => {
-          setCargo("");
-          setToken(false);
-        });
+      try {
+        const { data } = await http.get("/api/auth/usuario");
+
+        setCargo(data.role);
+        setToken(true);
+      } catch {
+        setCargo("");
+        setToken(false);
+      } finally {
+        setLoading(false);
+      }
     }
 
-    checkAuth(); 
+    checkAuth();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ cargo, token }}>
+    <AuthContext.Provider value={{ cargo, token, loading }}>
       {children}
     </AuthContext.Provider>
   );
