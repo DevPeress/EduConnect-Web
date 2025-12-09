@@ -23,6 +23,7 @@ export interface AuthContextType {
   cargo: string;
   token: boolean;
   loading: boolean;
+  removeAuth: () => void;
 }
 
 export interface AuthPaginas {
