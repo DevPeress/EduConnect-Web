@@ -28,8 +28,15 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     checkAuth();
   }, []);
 
+  const removeAuth = async () => {
+    setCargo("");
+    setToken(false);
+
+    await http.delete("/api/auth/usuario");
+  };
+
   return (
-    <AuthContext.Provider value={{ cargo, token, loading }}>
+    <AuthContext.Provider value={{ cargo, token, loading, removeAuth }}>
       {children}
     </AuthContext.Provider>
   );
