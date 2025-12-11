@@ -5,11 +5,11 @@
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?logo=tailwind-css&logoColor=fff)
 ![Vite](https://img.shields.io/badge/Vite-B73BFE?logo=vite&logoColor=FFD62E)
 
-## Descrição
+## 📘 Descrição
 
 O **Edu Connect** é o front-end de um sistema escolar moderno desenvolvido com **React e TypeScript**, projetado para oferecer uma **gestão educacional prática, intuitiva e visualmente atraente**.
 
-## 🧰 Tecnologias Utilizadas
+## 🖥️ Tecnologias Utilizadas
 
 ### ⚛️ Framework e Linguagem
 
