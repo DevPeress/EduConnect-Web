@@ -1,11 +1,15 @@
-import { useState, type FormEvent } from "react";
-import type { LoginResponse } from "../../types/types";
+import { useEffect, useState, type FormEvent } from "react";
+import type { AuthPaginas, LoginResponse } from "../../types/types";
 import FundoBolhas from "../../components/FundoBolhas";
 import { http } from "../../utils/axios";
 import toast from "react-hot-toast";
 import { loginSchema, type LoginInput } from "../../schemas/loginSchema";
+import { useNavigate } from "react-router-dom";
+import { Options } from "../../utils/paginação";
 
-const Login = () => {
+const Login = ({ logado, cargo }: AuthPaginas) => {
+  const navegar = useNavigate();
+
   const [dados, setDados] = useState<LoginInput>({ registro: "", senha: "" });
   const [menu, setMenu] = useState<boolean>(false);
 
@@ -51,6 +55,17 @@ const Login = () => {
       }
     );
   };
+
+  useEffect(() => {
+    const executar = async () => {
+      if (logado) {
+        const pagina = Options.find((item) => item.cargos?.includes(cargo));
+        if (pagina) navegar(pagina.pagina);
+      }
+    };
+
+    executar();
+  }, [cargo, logado, navegar]);
 
   return (
     <FundoBolhas>
