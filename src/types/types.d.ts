@@ -146,9 +146,9 @@ export interface CadastroFlexProps<
 }
 
 export interface SelectProps {
-  salas: string[];
-  selecionada: (valor: string) => void;
-  status: (valor: string) => void;
+  salas?: string[];
+  selecionadaSala?: (valor: string) => void;
+  selecionadoStatus?: (valor: staring) => void;
   tipo: string;
 }
 
