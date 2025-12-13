@@ -92,8 +92,8 @@ const ProfessoresAdmin = () => {
         <div className="flex gap-3 flex-wrap">
           <Selects
             salas={salas}
-            selecionada={setSelecionada}
-            status={setStatus}
+            selecionadaSala={setSelecionada}
+            selecionadoStatus={setStatus}
             tipo="Professor"
           />
         </div>
