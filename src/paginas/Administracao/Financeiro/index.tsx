@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import SelectFinanceiro from "../../../components/Administracao/SelectFinanceiro";
 import ModoExibicao from "../../../components/ModoExibicao";
 import type { CardsFinanceiroType, Financeiro } from "../../../types/types";
 import LayoutLogado from "../../LayoutLogado";
@@ -8,6 +7,7 @@ import Grid from "../../../components/Grid";
 import CardsFinanceiro from "../../../components/Administracao/CardsFinanceiro";
 import { http } from "../../../utils/axios";
 import { useCadastroPagamento } from "../../../context/CadastroPagamentoContext";
+import Selects from "../../../components/Administracao/Selects";
 
 const ITENS_POR_PAGINA = 6;
 
@@ -113,10 +113,11 @@ const FinanceiroAdmin = () => {
       </div>
       <div className="flex justify-between items-center gap-5 mb-6 flex-wrap">
         <div className="flex gap-3 flex-wrap">
-          <SelectFinanceiro
-            Categoria={setCategorias}
-            Meses={setMeses}
-            Status={setStatus}
+          <Selects
+            selecionadoCategorias={setCategorias}
+            selecionadoMeses={setMeses}
+            selecionadoPagamento={setStatus}
+            tipo="Financeiro"
           />
         </div>
 
