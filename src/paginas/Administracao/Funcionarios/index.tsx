@@ -5,8 +5,8 @@ import { useCadastroProfessor } from "../../../context/CadastroProfessorContext"
 import LayoutLogado from "../../LayoutLogado";
 import Table from "../../../components/Table";
 import Grid from "../../../components/Grid";
-import SelectFuncionarios from "../../../components/Administracao/SelectFuncionarios";
 import { http } from "../../../utils/axios";
+import Selects from "../../../components/Administracao/Selects";
 
 const ITENS_POR_PAGINA = 6;
 
@@ -74,7 +74,7 @@ const FuncionariosAdmin = () => {
     >
       <div className="flex justify-between items-center gap-5 mb-6 flex-wrap">
         <div className="flex gap-3 flex-wrap">
-          <SelectFuncionarios Selecionada={setStatus} />
+          <Selects selecionadoStatus={setStatus} tipo="Funcionarios" />
         </div>
 
         <div className="flex gap-2 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] p-1.5">
