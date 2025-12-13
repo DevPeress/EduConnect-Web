@@ -149,6 +149,7 @@ export interface SelectProps {
   salas: string[];
   selecionada: (valor: string) => void;
   status: (valor: string) => void;
+  tipo: string;
 }
 
 export interface TablePropsTable {
