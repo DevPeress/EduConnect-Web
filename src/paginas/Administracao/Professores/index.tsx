@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import ModoExibicao from "../../../components/ModoExibicao";
 import type { Pessoa } from "../../../types/types";
-import SelectProfessores from "../../../components/Administracao/SelectProfessores";
 import { useCadastroProfessor } from "../../../context/CadastroProfessorContext";
 import LayoutLogado from "../../LayoutLogado";
 import Table from "../../../components/Table";
 import Grid from "../../../components/Grid";
 import { http } from "../../../utils/axios";
+import Selects from "../../../components/Administracao/Selects";
 
 const ITENS_POR_PAGINA = 6;
 
@@ -90,10 +90,11 @@ const ProfessoresAdmin = () => {
     >
       <div className="flex justify-between items-center gap-5 mb-6 flex-wrap">
         <div className="flex gap-3 flex-wrap">
-          <SelectProfessores
+          <Selects
             salas={salas}
             selecionada={setSelecionada}
             status={setStatus}
+            tipo="Professor"
           />
         </div>
 
