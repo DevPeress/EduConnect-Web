@@ -31,7 +31,7 @@ const TurmasAdmin = () => {
   // Requisita os dados novos toda vez que status, categoria ou meses mudar
   useEffect(() => {
     http
-      .get(`api/alunos/filtro/turno/${turno}/status/${status}`)
+      .get(`api/turma/filtro/selecionada/${turno}/status/${status}/page/${pagina}`)
       .then(function (dados) {
         setTotal(dados.data.total);
         setTurmas(dados.data.dados);
@@ -42,7 +42,7 @@ const TurmasAdmin = () => {
       .finally(function () {
         setLoading(false);
       });
-  }, [turno, status]);
+  }, [turno, status, pagina]);
 
   // Atualiza sempre que os pagamentos mudar para página 1
   useEffect(() => {
