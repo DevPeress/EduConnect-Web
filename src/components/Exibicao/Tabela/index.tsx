@@ -1,5 +1,5 @@
-import type { TablePropsTable } from "../../types/types";
-import { formatBRL, formatTelefone } from "../../utils/codigos";
+import type { TablePropsTable } from "../../../types/types";
+import { formatBRL, formatTelefone } from "../../../utils/codigos";
 
 const Table = ({ head, exibicao }: TablePropsTable) => {
   const Img = ({
@@ -29,17 +29,23 @@ const Table = ({ head, exibicao }: TablePropsTable) => {
   };
 
   const VerificarCor = (tipo: string) => {
-    if (tipo === "Ativo" || tipo === "Pago" || tipo === "Liberado") {
-      return { bg: "rgba(16, 185, 129, 0.15)", color: "var(--green)" };
-    } else if (tipo === "Pendente") {
-      return { bg: "rgba(245, 158, 11, 0.15)", color: "var(--orange)" };
-    } else if (tipo === "Inativo" || tipo === "Cancelado") {
-      return {
-        bg: "rgba(156, 163, 175, 0.15)",
-        color: "var(--text-secondary)",
-      };
-    } else {
-      return { bg: "rgba(239, 68, 68, 0.15)", color: "var(--red)" };
+    switch (tipo) {
+      case "Ativo":
+      case "Pago":
+      case "Liberado":
+        return { bg: "rgba(16, 185, 129, 0.15)", color: "var(--green)" };
+
+      case "Pendente":
+        return { bg: "rgba(245, 158, 11, 0.15)", color: "var(--orange)" };
+      case "Inativo":
+      case "Cancelado":
+        return {
+          bg: "rgba(156, 163, 175, 0.15)",
+          color: "var(--text-secondary)",
+        };
+
+      default:
+        return { bg: "rgba(239, 68, 68, 0.15)", color: "var(--red)" };
     }
   };
 

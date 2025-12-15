@@ -1,6 +1,6 @@
 // Botão responsável por alternar o layout da página entre tabela e cards.
 
-import { ExibirTabela, ExibirCards } from "../../assets/HTML";
+import { ExibirTabela, ExibirCards } from "../../../assets/HTML";
 
 const ModoExibicao = ({
   modoExibir,
@@ -10,9 +10,11 @@ const ModoExibicao = ({
   trocarModo: () => void;
 }) => {
   const EfetuarTroca = () => {
-    trocarModo()
+    trocarModo();
     const exibir = localStorage.getItem("Exibir");
-    return exibir ? localStorage.removeItem("Exibir") : localStorage.setItem("Exibir", "Cards");
+    return exibir
+      ? localStorage.removeItem("Exibir")
+      : localStorage.setItem("Exibir", "Cards");
   };
 
   return (
