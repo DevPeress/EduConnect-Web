@@ -1,29 +1,45 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Dia from "../../assets/SVG/Dia.svg";
 import Noite from "../../assets/SVG/Noite.svg";
 import { useAuth } from "../../context/AuthContext";
 import { useTheme } from "../../context/ThemeContext";
+import { http } from "../../utils/axios";
 
 const Header = () => {
   const tema = useTheme();
   const dark = tema.dark;
   const auth = useAuth();
   const cargo = auth.cargo;
+  const [loading, setLoading] = useState<boolean>(true);
 
-  const dados = useState(() => {
-    const saved = localStorage.getItem("usuario");
-    return saved ? JSON.parse(saved) : PegarUsuario();
-  });
+  const [dados, setDados] = useState({ nome: "", foto: "" });
 
-  function PegarUsuario() {
-    const usuario = {
-      nome: "Fabrício Peres",
-      foto: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100"
-    };
+  useEffect(() => {
+    async function PegarUsuario() {
+      const saved = localStorage.getItem("usuario");
+      if (saved) {
+        const dados = JSON.parse(saved);
+        setDados({ nome: dados.nome, foto: dados.foto });
+        return setLoading(false);
+      }
 
-    localStorage.setItem("usuario", JSON.stringify(usuario));
-    return usuario;
-  };
+      const { data } = await http.get("/api/auth/usuario");
+
+      if (!data) return setLoading(false);
+      const usuario = {
+        nome: data.nome,
+        foto: data.foto,
+      };
+
+      localStorage.setItem("usuario", JSON.stringify(usuario));
+      setLoading(false);
+      return usuario;
+    }
+
+    PegarUsuario();
+  }, []);
+
+  if (loading) return <></>;
 
   return (
     <header className="bg-(--bg-sidebar) border-b-2 border-(--border-color) px-9.5 h-19.25 flex justify-between items-center sticky top-0 z-10">
@@ -65,17 +81,15 @@ const Header = () => {
 
         <div className="flex items-center gap-3 cursor-pointer rounded-[10px] pt-1.5 pr-3 pb-1.5 pl-1.5 hover:bg-(--bg-hover)">
           <img
-            src={dados[0].foto}
+            src={dados.foto}
             alt="User"
             className="w-10 h-10 rounded-[50%] object-cover border-2 border-(--border-color)"
           />
           <div className="flex flex-col leading-3.5">
             <span className="text-[14px] font-semibold text-(--text-primary)">
-              {dados[0].nome}
+              {dados.nome}
             </span>
-            <span className="text-[12px] text-(--text-muted)">
-              {cargo}
-            </span>
+            <span className="text-[12px] text-(--text-muted)">{cargo}</span>
           </div>
           <svg
             width="16"
