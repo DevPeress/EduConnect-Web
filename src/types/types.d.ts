@@ -85,6 +85,7 @@ export interface Pessoa {
   status: string;
   turma: string | string[];
   nasc: string;
+  foto: string;
 }
 
 export interface Funcionario {
@@ -95,6 +96,7 @@ export interface Funcionario {
   departamento: string;
   status: string;
   nasc: string;
+  foto: string;
 }
 
 export interface Financeiro {
@@ -107,6 +109,7 @@ export interface Financeiro {
   dataPagamento: string;
   status: string;
   mes: string;
+  foto: string;
 }
 
 export interface Turmas {
