@@ -97,7 +97,7 @@ const Grid = ({ exibicao }: TablePropsGrid) => {
               registro={item.registro}
               nome={registro}
               data={item.nasc}
-              foto="https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg?auto=compress&cs=tinysrgb&w=1000"
+              foto={item.foto}
             />
 
             <div className="flex flex-col items-center gap-3">

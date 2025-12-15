@@ -112,7 +112,7 @@ const Table = ({ head, exibicao }: TablePropsTable) => {
                 <span className="font-semibold text-(--primary-color) text-[13px]">
                   {"aluno" in item ? (
                     <Img
-                      foto="https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg?auto=compress&cs=tinysrgb&w=60"
+                      foto={item.foto}
                       nome={registro}
                       data={item.nasc}
                     />
@@ -124,7 +124,7 @@ const Table = ({ head, exibicao }: TablePropsTable) => {
               <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
                 {"nasc" in item && "telefone" in item ? (
                   <Img
-                    foto="https://images.pexels.com/photos/1181690/pexels-photo-1181690.jpeg?auto=compress&cs=tinysrgb&w=60"
+                    foto={item.foto}
                     nome={dado1}
                     data={item.nasc}
                   />
