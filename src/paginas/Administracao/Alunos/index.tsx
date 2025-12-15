@@ -69,6 +69,7 @@ const AlunosAdmin = () => {
         email: dados.email,
         telefone: dados.telefone,
         status: dados.status,
+        foto: "",
       },
     ]);
   };

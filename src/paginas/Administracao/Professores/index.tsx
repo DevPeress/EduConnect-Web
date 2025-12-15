@@ -69,6 +69,7 @@ const ProfessoresAdmin = () => {
         status: dados.status,
         registro: dados.codigo,
         nasc: dados.nasc,
+        foto: "",
       },
     ]);
   };
