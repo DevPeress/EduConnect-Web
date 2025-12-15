@@ -20,6 +20,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       } catch {
         setCargo("");
         setToken(false);
+        localStorage.removeItem("usuario");
       } finally {
         setLoading(false);
       }
