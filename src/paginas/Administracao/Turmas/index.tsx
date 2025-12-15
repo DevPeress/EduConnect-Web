@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import type { Turmas } from "../../../types/types";
 import { useCadastroAluno } from "../../../context/CadastroAlunoContext";
 import LayoutLogado from "../../LayoutLogado";
-import Table from "../../../components/Table";
+import { Table } from "../../../components/Exibicao";
 import { http } from "../../../utils/axios";
 import Selects from "../../../components/Administracao/Selects";
 

@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
-import ModoExibicao from "../../../components/ModoExibicao";
 import type { CardsFinanceiroType, Financeiro } from "../../../types/types";
 import LayoutLogado from "../../LayoutLogado";
-import Table from "../../../components/Table";
-import Grid from "../../../components/Grid";
+import { Grid, Table, ModoExibicao } from "../../../components/Exibicao";
 import CardsFinanceiro from "../../../components/Administracao/CardsFinanceiro";
 import { http } from "../../../utils/axios";
 import { useCadastroPagamento } from "../../../context/CadastroPagamentoContext";

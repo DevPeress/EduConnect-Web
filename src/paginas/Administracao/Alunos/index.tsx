@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import ModoExibicao from "../../../components/ModoExibicao";
 import type { Pessoa } from "../../../types/types";
 import { useCadastroAluno } from "../../../context/CadastroAlunoContext";
 import LayoutLogado from "../../LayoutLogado";
-import Table from "../../../components/Table";
-import Grid from "../../../components/Grid";
+import { Grid, Table, ModoExibicao } from "../../../components/Exibicao";
 import { http } from "../../../utils/axios";
 import Selects from "../../../components/Administracao/Selects";
 
