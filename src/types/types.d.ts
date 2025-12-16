@@ -160,13 +160,11 @@ export interface SelectProps {
 }
 
 export interface TablePropsTable {
-  head: string[];
   exibicao: Pessoa[] | Financeiro[] | Turmas[] | Funcionario[];
 }
 
 export interface TablePropsGrid {
   exibicao: Pessoa[] | Financeiro[] | Funcionario[];
-  head?: string[];
 }
 
 export interface TrocaPaginas {
