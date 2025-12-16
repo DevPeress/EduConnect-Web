@@ -33,7 +33,7 @@ const FuncionariosAdmin = () => {
   ];
 
   // Requisita os dados novos toda vez que status, categoria ou meses mudar
-  useEffect(() => {
+  const Pesquisa = () => {
     http
       .get(`api/funcionarios/filtro/status/${status}/page/${pagina}`)
       .then(function (dados) {
@@ -46,6 +46,10 @@ const FuncionariosAdmin = () => {
       .finally(function () {
         setLoading(false);
       });
+  }
+  useEffect(() => {
+    Pesquisa()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pagina, status]);
 
   // Atualiza sempre que os pagamentos mudar para página 1
@@ -53,9 +57,10 @@ const FuncionariosAdmin = () => {
     setPagina(1);
   }, [total]);
 
-  const AdicionarProfessor = async () => {
+  const AdicionarFuncionario = async () => {
     const dados = await openMenu();
-    if (!dados) return;
+    if (!dados || funcionarios.length < 6) return;
+    return Pesquisa();
   };
 
   const maxPaginas = Math.max(1, Math.ceil(total / ITENS_POR_PAGINA));
@@ -67,7 +72,7 @@ const FuncionariosAdmin = () => {
       botao={{
         ativo: true,
         mensagem: "Novo Professor",
-        adicionar: AdicionarProfessor,
+        adicionar: AdicionarFuncionario,
       }}
       load={loading}
     >

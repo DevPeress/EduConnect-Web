@@ -35,7 +35,7 @@ const ProfessoresAdmin = () => {
   ];
 
   // Requisita os dados novos toda vez que status, categoria ou meses mudar
-  useEffect(() => {
+  const Pesquisa = () => {
     http
       .get(
         `api/professores/filtro/selecionada/${selecionada}/status/${status}/page/${pagina}`
@@ -50,6 +50,10 @@ const ProfessoresAdmin = () => {
       .finally(function () {
         setLoading(false);
       });
+  }
+  useEffect(() => {
+    Pesquisa()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pagina, selecionada, status]);
 
   // Atualiza sempre que os pagamentos mudar para página 1
@@ -59,20 +63,8 @@ const ProfessoresAdmin = () => {
 
   const AdicionarProfessor = async () => {
     const dados = await cadastroProfessor();
-    if (!dados) return;
-    return setProfessores((prevDados) => [
-      ...prevDados,
-      {
-        nome: dados.nome,
-        turma: dados.turmas,
-        email: dados.email,
-        telefone: dados.telefone,
-        status: dados.status,
-        registro: dados.codigo,
-        nasc: dados.nasc,
-        foto: "",
-      },
-    ]);
+    if (!dados || professores.length < 6) return;
+    return Pesquisa();
   };
 
   const maxPaginas = Math.max(1, Math.ceil(total / ITENS_POR_PAGINA));

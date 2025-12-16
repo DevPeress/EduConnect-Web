@@ -35,7 +35,7 @@ const AlunosAdmin = () => {
   ];
 
   // Requisita os dados novos toda vez que status, categoria ou meses mudar
-  useEffect(() => {
+  const Pesquisa = () => {
     http
       .get(
         `api/alunos/filtro/selecionada/${selecionada}/status/${status}/page/${pagina}`
@@ -50,6 +50,11 @@ const AlunosAdmin = () => {
       .finally(function () {
         setLoading(false);
       });
+  }
+
+  useEffect(() => {
+    Pesquisa()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pagina, selecionada, status]);
 
   // Atualiza sempre que os pagamentos mudar para página 1
@@ -59,20 +64,8 @@ const AlunosAdmin = () => {
 
   const AdicionarAluno = async () => {
     const dados = await cadastroAluno();
-    if (!dados) return;
-    return setAlunos((prevDados) => [
-      ...prevDados,
-      {
-        registro: dados.matricula,
-        nome: dados.nome,
-        nasc: dados.nascimento,
-        turma: dados.turma,
-        email: dados.email,
-        telefone: dados.telefone,
-        status: dados.status,
-        foto: "",
-      },
-    ]);
+    if (!dados || alunos.length < 6) return;
+    return Pesquisa();
   };
 
   const maxPaginas = Math.max(1, Math.ceil(total / ITENS_POR_PAGINA));
