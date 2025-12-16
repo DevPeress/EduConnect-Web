@@ -165,8 +165,8 @@ export interface TablePropsTable {
 }
 
 export interface TablePropsGrid {
-  head: string[];
   exibicao: Pessoa[] | Financeiro[] | Funcionario[];
+  head?: string[];
 }
 
 export interface TrocaPaginas {
