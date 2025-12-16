@@ -22,16 +22,6 @@ const FuncionariosAdmin = () => {
   const [total, setTotal] = useState<number>(0);
   const [pagina, setPagina] = useState<number>(1);
 
-  const head: string[] = [
-    "Código",
-    "Nome",
-    "Cargo",
-    "Departamento",
-    "Data de Admissão",
-    "Status",
-    "Ação",
-  ];
-
   // Requisita os dados novos toda vez que status, categoria ou meses mudar
   const Pesquisa = () => {
     http
@@ -92,7 +82,7 @@ const FuncionariosAdmin = () => {
         </div>
       ) : (
         <div className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden mb-6">
-          <Table head={head} exibicao={funcionarios} />
+          <Table exibicao={funcionarios} />
         </div>
       )}
 

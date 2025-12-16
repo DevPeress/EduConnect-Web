@@ -19,16 +19,6 @@ const TurmasAdmin = () => {
   const [total, setTotal] = useState<number>(0);
   const [pagina, setPagina] = useState<number>(1);
 
-  const head: string[] = [
-    "Código",
-    "Nome",
-    "Turno",
-    "Professor",
-    "Horário",
-    "Capacidade",
-    "Ação",
-  ];
-
   // Requisita os dados novos toda vez que status, categoria ou meses mudar
   useEffect(() => {
     http
@@ -81,7 +71,7 @@ const TurmasAdmin = () => {
       </div>
 
       <div className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden mb-6">
-        <Table head={head} exibicao={turmas} />
+        <Table exibicao={turmas} />
       </div>
 
       <TrocaPagina

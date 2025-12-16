@@ -24,16 +24,6 @@ const AlunosAdmin = () => {
   const [total, setTotal] = useState<number>(0);
   const [pagina, setPagina] = useState<number>(1);
 
-  const head: string[] = [
-    "Matrícula",
-    "Nome",
-    "Turma",
-    "E-mail",
-    "Telefone",
-    "Status",
-    "Ação",
-  ];
-
   // Requisita os dados novos toda vez que status, categoria ou meses mudar
   const Pesquisa = () => {
     http
@@ -105,7 +95,7 @@ const AlunosAdmin = () => {
         </div>
       ) : (
         <div className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden mb-6">
-          <Table head={head} exibicao={alunos} />
+          <Table exibicao={alunos} />
         </div>
       )}
 

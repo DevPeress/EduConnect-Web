@@ -26,16 +26,6 @@ const FinanceiroAdmin = () => {
   const [total, setTotal] = useState<number>(0);
   const [pagina, setPagina] = useState<number>(1);
 
-  const head: string[] = [
-    "Aluno",
-    "Categoria",
-    "Valor",
-    "Vencimento",
-    "Pagamento",
-    "Status",
-    "Ação",
-  ];
-
   // API para requisitar os Dados
   const Pesquisa = () => {
     http
@@ -134,7 +124,7 @@ const FinanceiroAdmin = () => {
         </div>
       ) : (
         <div className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden mb-6">
-          <Table head={head} exibicao={pagamentos} />
+          <Table exibicao={pagamentos} />
         </div>
       )}
 

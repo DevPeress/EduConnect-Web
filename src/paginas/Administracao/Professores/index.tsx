@@ -24,16 +24,6 @@ const ProfessoresAdmin = () => {
   const [total, setTotal] = useState<number>(0);
   const [pagina, setPagina] = useState<number>(1);
 
-  const head: string[] = [
-    "Código",
-    "Nome",
-    "Turmas",
-    "E-mail",
-    "Telefone",
-    "Status",
-    "Ação",
-  ];
-
   // Requisita os dados novos toda vez que status, categoria ou meses mudar
   const Pesquisa = () => {
     http
@@ -101,7 +91,7 @@ const ProfessoresAdmin = () => {
         </div>
       ) : (
         <div className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden mb-6">
-          <Table head={head} exibicao={professores} />
+          <Table exibicao={professores} />
         </div>
       )}
 
