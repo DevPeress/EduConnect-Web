@@ -5,6 +5,7 @@ import { Grid, Table, ModoExibicao } from "../../../components/Exibicao";
 import { http } from "../../../utils/axios";
 import Selects from "../../../components/Administracao/Selects";
 import { useCadastroMenu } from "../../../context";
+import TrocaPagina from "../../../components/TrocaPagina";
 
 const ITENS_POR_PAGINA = 6;
 
@@ -112,25 +113,13 @@ const ProfessoresAdmin = () => {
         </div>
       )}
 
-      <div className="flex justify-center items-center gap-5 mt-8 pt-5 border-t-2 border-(--border-color)">
-        <button
-          onClick={() => pagina > 1 && setPagina(pagina - 1)}
-          className="py-2.5 px-4 bg-transparent border-2 border-(--border-color) text-(--text-primary) text-[14px] font-medium rounded-lg hover:bg-(--bg-input) hover:border-(--border-light)"
-          disabled={pagina === 1}
-        >
-          Anterior
-        </button>
-        <div className="text-[14px] text-(--text-secondary)">
-          Página {pagina} de {maxPaginas} ({total} professores)
-        </div>
-        <button
-          onClick={() => pagina < maxPaginas && setPagina(pagina + 1)}
-          className="py-2.5 px-4 bg-transparent border-2 border-(--border-color) text-(--text-primary) text-[14px] font-medium rounded-lg hover:bg-(--bg-input) hover:border-(--border-light)"
-          disabled={pagina === maxPaginas}
-        >
-          Próximo
-        </button>
-      </div>
+      <TrocaPagina
+        nome="Professores"
+        pagina={pagina}
+        maxPagina={maxPaginas}
+        total={total}
+        trocaPagina={setPagina}
+      />
     </LayoutLogado>
   );
 };

@@ -5,6 +5,7 @@ import LayoutLogado from "../../LayoutLogado";
 import { Table } from "../../../components/Exibicao";
 import { http } from "../../../utils/axios";
 import Selects from "../../../components/Administracao/Selects";
+import TrocaPagina from "../../../components/TrocaPagina";
 
 const ITENS_POR_PAGINA = 6;
 
@@ -31,7 +32,9 @@ const TurmasAdmin = () => {
   // Requisita os dados novos toda vez que status, categoria ou meses mudar
   useEffect(() => {
     http
-      .get(`api/turma/filtro/selecionada/${turno}/status/${status}/page/${pagina}`)
+      .get(
+        `api/turma/filtro/selecionada/${turno}/status/${status}/page/${pagina}`
+      )
       .then(function (dados) {
         setTotal(dados.data.total);
         setTurmas(dados.data.dados);
@@ -54,7 +57,7 @@ const TurmasAdmin = () => {
     if (!dados) return;
   };
 
-  const maxPaginas = Math.max(1, Math.ceil(total / ITENS_POR_PAGINA));
+  const maxPaginas: number = Math.max(1, Math.ceil(total / ITENS_POR_PAGINA));
 
   return (
     <LayoutLogado
@@ -69,7 +72,11 @@ const TurmasAdmin = () => {
     >
       <div className="flex justify-between items-center gap-5 mb-6 flex-wrap">
         <div className="flex gap-3 flex-wrap">
-          <Selects selecionadoTurno={setTurno} selecionadoStatus={setStatus} tipo="Turmas" />
+          <Selects
+            selecionadoTurno={setTurno}
+            selecionadoStatus={setStatus}
+            tipo="Turmas"
+          />
         </div>
       </div>
 
@@ -77,25 +84,13 @@ const TurmasAdmin = () => {
         <Table head={head} exibicao={turmas} />
       </div>
 
-      <div className="flex justify-center items-center gap-5 mt-8 pt-5 border-t-2 border-(--border-color)">
-        <button
-          onClick={() => pagina > 1 && setPagina(pagina - 1)}
-          className="py-2.5 px-4 bg-transparent border-2 border-(--border-color) text-(--text-primary) text-[14px] font-medium rounded-lg hover:bg-(--bg-input) hover:border-(--border-light)"
-          disabled={pagina === 1}
-        >
-          Anterior
-        </button>
-        <div className="text-[14px] text-(--text-secondary)">
-          Página {pagina} de {maxPaginas} ({total} turmas)
-        </div>
-        <button
-          onClick={() => pagina < maxPaginas && setPagina(pagina + 1)}
-          disabled={pagina === maxPaginas}
-          className="py-2.5 px-4 bg-transparent border-2 border-(--border-color) text-(--text-primary) text-[14px] font-medium rounded-lg hover:bg-(--bg-input) hover:border-(--border-light)"
-        >
-          Próximo
-        </button>
-      </div>
+      <TrocaPagina
+        nome="Turma"
+        pagina={pagina}
+        maxPagina={maxPaginas}
+        total={total}
+        trocaPagina={setPagina}
+      />
     </LayoutLogado>
   );
 };
