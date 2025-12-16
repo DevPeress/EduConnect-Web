@@ -3,6 +3,12 @@ import type { TablePropsTable } from "../../../types/types";
 import { formatBRL, formatTelefone } from "../../../utils/codigos";
 import { Head } from "../../../utils/head";
 
+interface Imagem {
+  foto: string;
+  nome: string;
+  data: string
+}
+
 const Table = ({ exibicao }: TablePropsTable) => {
   const location = useLocation();
   const pagina = location.pathname;
@@ -11,11 +17,7 @@ const Table = ({ exibicao }: TablePropsTable) => {
     foto,
     nome,
     data,
-  }: {
-    foto: string;
-    nome: string;
-    data: string;
-  }) => {
+  }: Imagem) => {
     return (
       <div className="flex items-center gap-3">
         <img
