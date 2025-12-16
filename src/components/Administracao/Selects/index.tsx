@@ -48,7 +48,7 @@ const Selects = ({ tipo, salas, selecionadaSala, selecionadoStatus, selecionadoT
                     className="bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] py-2.5 px-3.5 text-(--text-primary) text-[14px] cursor-pointer min-w-[180px] hover:border-(--border-light)"
                 >
                     <option>Todos os Status</option>
-                    {Retornos(tipo).map((tipos) => (<option>{tipos}</option>))}
+                    {Retornos(tipo).map((tipos) => (<option key={tipos}>{tipos}</option>))}
                 </select>
             }
             {selecionadoTurno &&
@@ -57,7 +57,7 @@ const Selects = ({ tipo, salas, selecionadaSala, selecionadoStatus, selecionadoT
                     className="bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] py-2.5 px-3.5 text-(--text-primary) text-[14px] cursor-pointer min-w-[180px] hover:border-(--border-light)"
                 >
                     <option>Todos os Turnos</option>
-                    {Turnos().map((tipos) => (<option>{tipos}</option>))}
+                    {Turnos().map((tipos) => (<option key={tipos}>{tipos}</option>))}
                 </select>
             }
             {tipo === "Financeiro" && selecionadoPagamento && selecionadoCategorias && selecionadoMeses ?
@@ -66,19 +66,19 @@ const Selects = ({ tipo, salas, selecionadaSala, selecionadoStatus, selecionadoT
                         onChange={(e) => selecionadoPagamento(e.target.value)}
                         className="bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] py-2.5 px-3.5 text-(--text-primary) text-[14px] cursor-pointer min-w-[180px] hover:border-(--border-light)"
                     >
-                        {Retornos("Pagamento").map((tipos) => (<option>{tipos}</option>))}
+                        {Retornos("Pagamento").map((tipos) => (<option key={tipos}>{tipos}</option>))}
                     </select>
                     <select
                         onChange={(e) => selecionadoCategorias(e.target.value)}
                         className="bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] py-2.5 px-3.5 text-(--text-primary) text-[14px] cursor-pointer min-w-[180px] hover:border-(--border-light)"
                     >
-                        {Retornos("Categorias").map((tipos) => (<option>{tipos}</option>))}
+                        {Retornos("Categorias").map((tipos) => (<option key={tipos}>{tipos}</option>))}
                     </select>
                     <select
                         onChange={(e) => selecionadoMeses(e.target.value)}
                         className="bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] py-2.5 px-3.5 text-(--text-primary) text-[14px] cursor-pointer min-w-[180px] hover:border-(--border-light)"
                     >
-                        {Retornos("Meses").map((tipos) => (<option>{tipos}</option>))}
+                        {Retornos("Meses").map((tipos) => (<option key={tipos}>{tipos}</option>))}
                     </select>
                 </>
                 : null
