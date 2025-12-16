@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import type { Pessoa } from "../../../types/types";
-import { useCadastroAluno } from "../../../context/CadastroAlunoContext";
 import LayoutLogado from "../../LayoutLogado";
 import { Grid, Table, ModoExibicao } from "../../../components/Exibicao";
 import { http } from "../../../utils/axios";
 import Selects from "../../../components/Administracao/Selects";
+import { useCadastroMenu } from "../../../context";
 
 const ITENS_POR_PAGINA = 6;
 
 const AlunosAdmin = () => {
-  const { openMenu } = useCadastroAluno();
+  const { cadastroAluno } = useCadastroMenu();
 
   const [loading, setLoading] = useState<boolean>(true);
   const [modo, setModo] = useState<boolean>(() => {
@@ -57,7 +57,7 @@ const AlunosAdmin = () => {
   }, [total]);
 
   const AdicionarAluno = async () => {
-    const dados = await openMenu();
+    const dados = await cadastroAluno();
     if (!dados) return;
     return setAlunos((prevDados) => [
       ...prevDados,
