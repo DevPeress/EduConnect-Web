@@ -4,13 +4,13 @@ import LayoutLogado from "../../LayoutLogado";
 import { Grid, Table, ModoExibicao } from "../../../components/Exibicao";
 import CardsFinanceiro from "../../../components/Administracao/CardsFinanceiro";
 import { http } from "../../../utils/axios";
-import { useCadastroPagamento } from "../../../context/CadastroPagamentoContext";
 import Selects from "../../../components/Administracao/Selects";
+import { useCadastroMenu } from "../../../context";
 
 const ITENS_POR_PAGINA = 6;
 
 const FinanceiroAdmin = () => {
-  const { openMenu } = useCadastroPagamento();
+  const { cadastroPagamento } = useCadastroMenu();
 
   const [loading, setLoading] = useState<boolean>(true);
   const [modo, setModo] = useState<boolean>(() => {
@@ -85,7 +85,7 @@ const FinanceiroAdmin = () => {
 
   // Adiciona um pagamento novo
   const AdicionarPagamento = async () => {
-    const dados = await openMenu();
+    const dados = await cadastroPagamento();
     if (!dados) return;
     Dados();
     if (pagamentos.length < 5) {
