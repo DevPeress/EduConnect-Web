@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import type { Pessoa } from "../../../types/types";
-import { useCadastroProfessor } from "../../../context/CadastroProfessorContext";
 import LayoutLogado from "../../LayoutLogado";
 import { Grid, Table, ModoExibicao } from "../../../components/Exibicao";
 import { http } from "../../../utils/axios";
 import Selects from "../../../components/Administracao/Selects";
+import { useCadastroMenu } from "../../../context";
 
 const ITENS_POR_PAGINA = 6;
 
 const ProfessoresAdmin = () => {
-  const { openMenu } = useCadastroProfessor();
+  const { cadastroProfessor } = useCadastroMenu();
 
   const [loading, setLoading] = useState<boolean>(true);
   const [modo, setModo] = useState<boolean>(() => {
@@ -57,7 +57,7 @@ const ProfessoresAdmin = () => {
   }, [total]);
 
   const AdicionarProfessor = async () => {
-    const dados = await openMenu();
+    const dados = await cadastroProfessor();
     if (!dados) return;
     return setProfessores((prevDados) => [
       ...prevDados,
