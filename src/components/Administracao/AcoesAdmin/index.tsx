@@ -24,8 +24,7 @@ const AcoesAdmin = () => {
           msg: "Cadastrar novo Estudante",
           svg: <CadastrarAluno />,
           bg: "rgba(59, 130, 246, 0.15)",
-          color: "var(--blue)",
-          click: cadastroAluno()
+          color: "var(--blue)"
         };
       case "Lançar Nota":
         return {
@@ -65,7 +64,7 @@ const AcoesAdmin = () => {
         <div className="flex flex-col gap-1">
           {tipos.map((item) => (
             <button
-              onClick={async () => await Acao(item)?.click}
+              onClick={async () => item === "Novo Aluno" ? cadastroAluno() : "" }
               key={item}
               className="flex items-center gap-3.5 p-3.5 bg-transparent border-2 border-(--border-color) rounded-[10px] cursor-pointer text-left w-full hover:bg-(--bg-hover) hover:border-(--border-light) hover:translate-x-1"
             >
