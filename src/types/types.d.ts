@@ -168,3 +168,11 @@ export interface TablePropsGrid {
   head: string[];
   exibicao: Pessoa[] | Financeiro[] | Funcionario[];
 }
+
+export interface TrocaPaginas {
+  nome: string;
+  pagina: number;
+  maxPagina: number;
+  total: number;
+  trocaPagina: (valor: number) => void;
+}
