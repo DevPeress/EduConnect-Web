@@ -30,10 +30,9 @@ const Header = () => {
         nome: data.nome,
         foto: data.foto,
       };
-
+      setDados({ nome: data.nome, foto: data.foto });
       localStorage.setItem("usuario", JSON.stringify(usuario));
-      setLoading(false);
-      return usuario;
+      return setLoading(false);
     }
 
     PegarUsuario();
