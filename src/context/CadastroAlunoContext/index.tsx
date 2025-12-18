@@ -62,6 +62,7 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
           Turma: dados.turma,
           Media: 0,
           DataMatricula: dados.nascimento,
+          Foto: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100",
         })
         .then(function () {
           resolveCallback(dados);
