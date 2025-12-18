@@ -42,7 +42,7 @@ const Login = ({ logado, cargo }: AuthPaginas) => {
         },
         error: (err) => {
           console.error(err);
-          return "Erro ao realizar o login!";
+          return "E-mail ou senha estão incorretos!";
         },
       },
       {
