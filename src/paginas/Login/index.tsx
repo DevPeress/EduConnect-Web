@@ -1,14 +1,16 @@
 import { useEffect, useState, type FormEvent } from "react";
-import type { AuthPaginas, LoginResponse } from "../../types/types";
+import type { AuthPaginas } from "../../types/types";
 import FundoBolhas from "../../components/FundoBolhas";
 import { http } from "../../utils/axios";
 import toast from "react-hot-toast";
 import { loginSchema, type LoginInput } from "../../schemas/loginSchema";
 import { useNavigate } from "react-router-dom";
 import { Options } from "../../utils/paginação";
+import { useAuth } from "../../context/AuthContext";
 
 const Login = ({ logado, cargo }: AuthPaginas) => {
   const navegar = useNavigate();
+  const auth = useAuth();
 
   const [dados, setDados] = useState<LoginInput>({ registro: "", senha: "" });
   const [menu, setMenu] = useState<boolean>(false);
@@ -28,7 +30,7 @@ const Login = ({ logado, cargo }: AuthPaginas) => {
     const result = loginSchema.safeParse(dados);
     if (!result.success) return toast.error(result.error.issues[0].message);
 
-    const loginPromise = http.post<LoginResponse>("/api/auth/login", {
+    const loginPromise = http.post("/api/auth/login", {
       Registro: registro,
       Senha: senha,
       Lembrar: true,
@@ -37,7 +39,17 @@ const Login = ({ logado, cargo }: AuthPaginas) => {
       loginPromise,
       {
         loading: "Entrando...",
-        success: () => {
+        success: (data) => {
+          console.log(data.data);
+          const opcao = Options.find((option) =>
+            option.cargos?.includes(data.data)
+          );
+
+          auth.AtualizarAuth();
+          setTimeout(() => {
+            navegar(opcao ? opcao.pagina : "/not-authorized");
+          }, 3000);
+
           return "Login realizado com sucesso!";
         },
         error: (err) => {

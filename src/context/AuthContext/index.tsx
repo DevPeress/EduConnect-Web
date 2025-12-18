@@ -8,7 +8,8 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [cargo, setCargo] = useState<string>("");
   const [token, setToken] = useState<boolean>(false);
-  const [loading, setLoading] = useState(true);
+  const [refresh, setRefresh] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     async function checkAuth() {
@@ -27,7 +28,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     }
 
     checkAuth();
-  }, []);
+  }, [refresh]);
 
   const removeAuth = async () => {
     setCargo("");
@@ -36,8 +37,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     await http.delete("/api/auth/usuario");
   };
 
+  const AtualizarAuth = () => {
+    setRefresh(!refresh);
+  };
+
   return (
-    <AuthContext.Provider value={{ cargo, token, loading, removeAuth }}>
+    <AuthContext.Provider
+      value={{ cargo, token, loading, removeAuth, AtualizarAuth }}
+    >
       {children}
     </AuthContext.Provider>
   );

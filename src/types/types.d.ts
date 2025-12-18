@@ -14,16 +14,12 @@ export interface PrivateRouteProps {
   redirectTo?: string;
 }
 
-export interface LoginResponse {
-  cargo: string;
-  token: string;
-}
-
 export interface AuthContextType {
   cargo: string;
   token: boolean;
   loading: boolean;
   removeAuth: () => void;
+  AtualizarAuth: () => void;
 }
 
 export interface AuthPaginas {
