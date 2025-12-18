@@ -160,12 +160,10 @@ export interface SelectProps {
 }
 
 export interface TablePropsTable {
-  head: string[];
   exibicao: Pessoa[] | Financeiro[] | Turmas[] | Funcionario[];
 }
 
 export interface TablePropsGrid {
-  head: string[];
   exibicao: Pessoa[] | Financeiro[] | Funcionario[];
 }
 

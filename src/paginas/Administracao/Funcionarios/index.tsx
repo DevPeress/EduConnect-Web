@@ -22,18 +22,8 @@ const FuncionariosAdmin = () => {
   const [total, setTotal] = useState<number>(0);
   const [pagina, setPagina] = useState<number>(1);
 
-  const head: string[] = [
-    "Código",
-    "Nome",
-    "Cargo",
-    "Departamento",
-    "Data de Admissão",
-    "Status",
-    "Ação",
-  ];
-
   // Requisita os dados novos toda vez que status, categoria ou meses mudar
-  useEffect(() => {
+  const Pesquisa = () => {
     http
       .get(`api/funcionarios/filtro/status/${status}/page/${pagina}`)
       .then(function (dados) {
@@ -46,6 +36,10 @@ const FuncionariosAdmin = () => {
       .finally(function () {
         setLoading(false);
       });
+  }
+  useEffect(() => {
+    Pesquisa()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pagina, status]);
 
   // Atualiza sempre que os pagamentos mudar para página 1
@@ -53,9 +47,10 @@ const FuncionariosAdmin = () => {
     setPagina(1);
   }, [total]);
 
-  const AdicionarProfessor = async () => {
+  const AdicionarFuncionario = async () => {
     const dados = await openMenu();
-    if (!dados) return;
+    if (!dados || funcionarios.length < 6) return;
+    return Pesquisa();
   };
 
   const maxPaginas = Math.max(1, Math.ceil(total / ITENS_POR_PAGINA));
@@ -67,7 +62,7 @@ const FuncionariosAdmin = () => {
       botao={{
         ativo: true,
         mensagem: "Novo Professor",
-        adicionar: AdicionarProfessor,
+        adicionar: AdicionarFuncionario,
       }}
       load={loading}
     >
@@ -83,11 +78,11 @@ const FuncionariosAdmin = () => {
 
       {modo ? (
         <div className="grid grid-cols-3 overflow-hidden gap-x-6 gap-y-5 w-full">
-          <Grid exibicao={funcionarios} head={[]} />
+          <Grid exibicao={funcionarios} />
         </div>
       ) : (
         <div className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden mb-6">
-          <Table head={head} exibicao={funcionarios} />
+          <Table exibicao={funcionarios} />
         </div>
       )}
 

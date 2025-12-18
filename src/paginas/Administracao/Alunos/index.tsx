@@ -24,18 +24,8 @@ const AlunosAdmin = () => {
   const [total, setTotal] = useState<number>(0);
   const [pagina, setPagina] = useState<number>(1);
 
-  const head: string[] = [
-    "Matrícula",
-    "Nome",
-    "Turma",
-    "E-mail",
-    "Telefone",
-    "Status",
-    "Ação",
-  ];
-
   // Requisita os dados novos toda vez que status, categoria ou meses mudar
-  useEffect(() => {
+  const Pesquisa = () => {
     http
       .get(
         `api/alunos/filtro/selecionada/${selecionada}/status/${status}/page/${pagina}`
@@ -50,6 +40,11 @@ const AlunosAdmin = () => {
       .finally(function () {
         setLoading(false);
       });
+  }
+
+  useEffect(() => {
+    Pesquisa()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pagina, selecionada, status]);
 
   // Atualiza sempre que os pagamentos mudar para página 1
@@ -59,20 +54,8 @@ const AlunosAdmin = () => {
 
   const AdicionarAluno = async () => {
     const dados = await cadastroAluno();
-    if (!dados) return;
-    return setAlunos((prevDados) => [
-      ...prevDados,
-      {
-        registro: dados.matricula,
-        nome: dados.nome,
-        nasc: dados.nascimento,
-        turma: dados.turma,
-        email: dados.email,
-        telefone: dados.telefone,
-        status: dados.status,
-        foto: "",
-      },
-    ]);
+    if (!dados || alunos.length < 6) return;
+    return Pesquisa();
   };
 
   const maxPaginas = Math.max(1, Math.ceil(total / ITENS_POR_PAGINA));
@@ -108,11 +91,11 @@ const AlunosAdmin = () => {
 
       {modo ? (
         <div className="grid grid-cols-3 overflow-hidden gap-x-6 gap-y-5 w-full">
-          <Grid exibicao={alunos} head={[]} />
+          <Grid exibicao={alunos} />
         </div>
       ) : (
         <div className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden mb-6">
-          <Table head={head} exibicao={alunos} />
+          <Table exibicao={alunos} />
         </div>
       )}
 

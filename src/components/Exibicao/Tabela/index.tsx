@@ -1,16 +1,23 @@
+import { useLocation } from "react-router-dom";
 import type { TablePropsTable } from "../../../types/types";
 import { formatBRL, formatTelefone } from "../../../utils/codigos";
+import { Head } from "../../../utils/head";
 
-const Table = ({ head, exibicao }: TablePropsTable) => {
+interface Imagem {
+  foto: string;
+  nome: string;
+  data: string
+}
+
+const Table = ({ exibicao }: TablePropsTable) => {
+  const location = useLocation();
+  const pagina = location.pathname;
+
   const Img = ({
     foto,
     nome,
     data,
-  }: {
-    foto: string;
-    nome: string;
-    data: string;
-  }) => {
+  }: Imagem) => {
     return (
       <div className="flex items-center gap-3">
         <img
@@ -49,6 +56,8 @@ const Table = ({ head, exibicao }: TablePropsTable) => {
     }
   };
 
+  const head: string[] = Head(pagina)
+
   return (
     <table className="w-full border-collapse">
       <thead className="bg-(--cabecalho)">
@@ -72,34 +81,34 @@ const Table = ({ head, exibicao }: TablePropsTable) => {
             "turma" in item
               ? item.turma
               : "turno" in item
-              ? item.turno
-              : "cargo" in item
-              ? item.cargo
-              : "R$ " + formatBRL(item.valor);
+                ? item.turno
+                : "cargo" in item
+                  ? item.cargo
+                  : "R$ " + formatBRL(item.valor);
           const dado3: string =
             "email" in item
               ? item.email
               : "professor" in item
-              ? item.professor
-              : "departamento" in item
-              ? item.departamento
-              : new Date(item.dataVencimento + "T00:00:00").toLocaleDateString(
-                  "pt-BR"
-                );
+                ? item.professor
+                : "departamento" in item
+                  ? item.departamento
+                  : new Date(item.dataVencimento + "T00:00:00").toLocaleDateString(
+                    "pt-BR"
+                  );
           const dado4: string =
             "telefone" in item
               ? formatTelefone(item.telefone)
               : "horario" in item
-              ? item.horario
-              : "data" in item
-              ? item.data
-              : new Date(item.dataPagamento + "T00:00:00").toLocaleDateString(
-                  "pt-BR"
-                ) != "Invalid Date"
-              ? new Date(item.dataPagamento + "T00:00:00").toLocaleDateString(
-                  "pt-BR"
-                )
-              : "Aguardando";
+                ? item.horario
+                : "data" in item
+                  ? item.data
+                  : new Date(item.dataPagamento + "T00:00:00").toLocaleDateString(
+                    "pt-BR"
+                  ) != "Invalid Date"
+                    ? new Date(item.dataPagamento + "T00:00:00").toLocaleDateString(
+                      "pt-BR"
+                    )
+                    : "Aguardando";
           const dado5: string | number =
             "horario" in item ? item.horario : item.status;
 

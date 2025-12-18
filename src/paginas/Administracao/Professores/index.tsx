@@ -24,18 +24,8 @@ const ProfessoresAdmin = () => {
   const [total, setTotal] = useState<number>(0);
   const [pagina, setPagina] = useState<number>(1);
 
-  const head: string[] = [
-    "Código",
-    "Nome",
-    "Turmas",
-    "E-mail",
-    "Telefone",
-    "Status",
-    "Ação",
-  ];
-
   // Requisita os dados novos toda vez que status, categoria ou meses mudar
-  useEffect(() => {
+  const Pesquisa = () => {
     http
       .get(
         `api/professores/filtro/selecionada/${selecionada}/status/${status}/page/${pagina}`
@@ -50,6 +40,10 @@ const ProfessoresAdmin = () => {
       .finally(function () {
         setLoading(false);
       });
+  }
+  useEffect(() => {
+    Pesquisa()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pagina, selecionada, status]);
 
   // Atualiza sempre que os pagamentos mudar para página 1
@@ -59,20 +53,8 @@ const ProfessoresAdmin = () => {
 
   const AdicionarProfessor = async () => {
     const dados = await cadastroProfessor();
-    if (!dados) return;
-    return setProfessores((prevDados) => [
-      ...prevDados,
-      {
-        nome: dados.nome,
-        turma: dados.turmas,
-        email: dados.email,
-        telefone: dados.telefone,
-        status: dados.status,
-        registro: dados.codigo,
-        nasc: dados.nasc,
-        foto: "",
-      },
-    ]);
+    if (!dados || professores.length < 6) return;
+    return Pesquisa();
   };
 
   const maxPaginas = Math.max(1, Math.ceil(total / ITENS_POR_PAGINA));
@@ -105,11 +87,11 @@ const ProfessoresAdmin = () => {
 
       {modo ? (
         <div className="grid grid-cols-3 overflow-hidden gap-x-6 gap-y-5 w-full">
-          <Grid exibicao={professores} head={[]} />
+          <Grid exibicao={professores} />
         </div>
       ) : (
         <div className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden mb-6">
-          <Table head={head} exibicao={professores} />
+          <Table exibicao={professores} />
         </div>
       )}
 
