@@ -54,6 +54,11 @@ const Login = ({ logado, cargo }: AuthPaginas) => {
         },
         error: (err) => {
           console.error(err);
+          if (typeof err === "number") {
+            const max = 5;
+            return `Você tem mais ${max - err} tentativas de login!`;
+          }
+
           return "E-mail ou senha estão incorretos!";
         },
       },
