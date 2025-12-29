@@ -40,12 +40,12 @@ const Login = ({ logado, cargo }: AuthPaginas) => {
       {
         loading: "Entrando...",
         success: (data) => {
-          console.log(data.data);
           const opcao = Options.find((option) =>
             option.cargos?.includes(data.data)
           );
 
           auth.AtualizarAuth();
+          
           setTimeout(() => {
             navegar(opcao ? opcao.pagina : "/not-authorized");
           }, 3000);
