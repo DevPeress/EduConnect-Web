@@ -6,18 +6,15 @@ import { Head } from "../../../utils/head";
 interface Imagem {
   foto: string;
   nome: string;
-  data: string
+  data: string;
 }
 
 const Table = ({ exibicao }: TablePropsTable) => {
   const location = useLocation();
   const pagina = location.pathname;
+  const head: string[] = Head(pagina);
 
-  const Img = ({
-    foto,
-    nome,
-    data,
-  }: Imagem) => {
+  const Img = ({ foto, nome, data }: Imagem) => {
     return (
       <div className="flex items-center gap-3">
         <img
@@ -56,8 +53,6 @@ const Table = ({ exibicao }: TablePropsTable) => {
     }
   };
 
-  const head: string[] = Head(pagina)
-
   return (
     <table className="w-full border-collapse">
       <thead className="bg-(--cabecalho)">
@@ -81,50 +76,46 @@ const Table = ({ exibicao }: TablePropsTable) => {
             "turma" in item
               ? item.turma
               : "turno" in item
-                ? item.turno
-                : "cargo" in item
-                  ? item.cargo
-                  : "R$ " + formatBRL(item.valor);
+              ? item.turno
+              : "cargo" in item
+              ? item.cargo
+              : "R$ " + formatBRL(item.valor);
           const dado3: string =
             "email" in item
               ? item.email
               : "professor" in item
-                ? item.professor
-                : "departamento" in item
-                  ? item.departamento
-                  : new Date(item.dataVencimento + "T00:00:00").toLocaleDateString(
-                    "pt-BR"
-                  );
+              ? item.professor
+              : "departamento" in item
+              ? item.departamento
+              : new Date(item.dataVencimento + "T00:00:00").toLocaleDateString(
+                  "pt-BR"
+                );
           const dado4: string =
             "telefone" in item
               ? formatTelefone(item.telefone)
               : "horario" in item
-                ? item.horario
-                : "data" in item
-                  ? item.data
-                  : new Date(item.dataPagamento + "T00:00:00").toLocaleDateString(
-                    "pt-BR"
-                  ) != "Invalid Date"
-                    ? new Date(item.dataPagamento + "T00:00:00").toLocaleDateString(
-                      "pt-BR"
-                    )
-                    : "Aguardando";
+              ? item.horario
+              : "data" in item
+              ? item.data
+              : new Date(item.dataPagamento + "T00:00:00").toLocaleDateString(
+                  "pt-BR"
+                ) != "Invalid Date"
+              ? new Date(item.dataPagamento + "T00:00:00").toLocaleDateString(
+                  "pt-BR"
+                )
+              : "Aguardando";
           const dado5: string | number =
             "horario" in item ? item.horario : item.status;
 
           return (
             <tr
-              key={item.registro}
+              key={registro}
               className="hover:bg-(--bg-input) text-(--text-primary)"
             >
               <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
                 <span className="font-semibold text-(--primary-color) text-[13px]">
                   {"aluno" in item ? (
-                    <Img
-                      foto={item.foto}
-                      nome={registro}
-                      data={item.nasc}
-                    />
+                    <Img foto={item.foto} nome={registro} data={item.nasc} />
                   ) : (
                     <>{registro}</>
                   )}
@@ -132,11 +123,7 @@ const Table = ({ exibicao }: TablePropsTable) => {
               </td>
               <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
                 {"nasc" in item && "telefone" in item ? (
-                  <Img
-                    foto={item.foto}
-                    nome={dado1}
-                    data={item.nasc}
-                  />
+                  <Img foto={item.foto} nome={dado1} data={item.nasc} />
                 ) : (
                   <>{dado1}</>
                 )}
