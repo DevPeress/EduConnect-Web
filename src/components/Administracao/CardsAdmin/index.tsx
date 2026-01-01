@@ -24,7 +24,7 @@ const CardsAdmin = ({ dados }: { dados: CardsAdminType }) => {
     const analise: boolean = valor >= 0;
     switch (tipo) {
       case "Alunos":
-        return analise ? "+" + valor + " este mês" : "-" + valor + " este mês";
+        return analise ? "+" + valor + " este mês" : valor + " este mês";
       case "Professores":
         return analise
           ? valor + " novos contratados"
