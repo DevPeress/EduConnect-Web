@@ -15,9 +15,7 @@ import LayoutLogado from "../../LayoutLogado";
 
 const InicioAdm = () => {
   const [loading, setLoading] = useState<boolean>(true);
-  const [dados, setDados] = useState<CardsAdminType[]>([
-    { dado: "Presença", total: 94.5, aumento: 94.5, porcentagem: 2.3 },
-  ]);
+  const [dados, setDados] = useState<CardsAdminType[]>([]);
 
   const [atividades, setAtividades] = useState<AtividadeType[]>([]);
 
