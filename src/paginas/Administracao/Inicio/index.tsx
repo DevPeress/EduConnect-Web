@@ -16,7 +16,6 @@ import LayoutLogado from "../../LayoutLogado";
 const InicioAdm = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [dados, setDados] = useState<CardsAdminType[]>([]);
-
   const [atividades, setAtividades] = useState<AtividadeType[]>([]);
 
   const [calendario] = useState<CalendarioType[]>([
