@@ -18,14 +18,16 @@ const FuncionariosAdmin = () => {
     return cargo ? true : false;
   });
   const [status, setStatus] = useState<string>("Todos os Status");
+  const [ano, setAno] = useState<string>("Todos os Anos");
   const [funcionarios, setFuncionarios] = useState<Funcionario[]>([]);
+  const [anos, setAnos] = useState<string[]>([]);
   const [total, setTotal] = useState<number>(0);
   const [pagina, setPagina] = useState<number>(1);
 
   // Requisita os dados novos toda vez que status, categoria ou meses mudar
   const Pesquisa = () => {
     http
-      .get(`api/funcionarios/filtro/status/${status}/page/${pagina}`)
+      .get(`api/funcionarios/filtro/status/${status}/page/${pagina}/ano/${ano}`)
       .then(function (dados) {
         setTotal(dados.data.total);
         setFuncionarios(dados.data.dados);
@@ -36,16 +38,22 @@ const FuncionariosAdmin = () => {
       .finally(function () {
         setLoading(false);
       });
-  }
+  };
   useEffect(() => {
-    Pesquisa()
+    Pesquisa();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pagina, status]);
+  }, [pagina, status, anos]);
 
   // Atualiza sempre que os pagamentos mudar para página 1
   useEffect(() => {
     setPagina(1);
   }, [total]);
+
+  useEffect(() => {
+    http.get("api/funcionarios/pegarAnos").then(function (dados) {
+      setAnos(dados.data);
+    });
+  }, []);
 
   const AdicionarFuncionario = async () => {
     const dados = await openMenu();
@@ -68,7 +76,12 @@ const FuncionariosAdmin = () => {
     >
       <div className="flex justify-between items-center gap-5 mb-6 flex-wrap">
         <div className="flex gap-3 flex-wrap">
-          <Selects selecionadoStatus={setStatus} tipo="Funcionarios" />
+          <Selects
+            selecionadoStatus={setStatus}
+            selecionadoAno={setAno}
+            tipo="Funcionarios"
+            anos={anos}
+          />
         </div>
 
         <div className="flex gap-2 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] p-1.5">
