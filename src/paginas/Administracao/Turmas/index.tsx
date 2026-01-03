@@ -15,7 +15,9 @@ const TurmasAdmin = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [turno, setTurno] = useState<string>("Todos os Turnos");
   const [status, setStatus] = useState<string>("Todos os Status");
+  const [ano, setAno] = useState<string>("Todos os Anos");
   const [turmas, setTurmas] = useState<Turmas[]>([]);
+  const [anos, setAnos] = useState<string[]>([]);
   const [total, setTotal] = useState<number>(0);
   const [pagina, setPagina] = useState<number>(1);
 
@@ -23,7 +25,7 @@ const TurmasAdmin = () => {
   useEffect(() => {
     http
       .get(
-        `api/turma/filtro/selecionada/${turno}/status/${status}/page/${pagina}`
+        `api/turma/filtro/turno/${turno}/status/${status}/page/${pagina}/ano/${ano}`
       )
       .then(function (dados) {
         setTotal(dados.data.total);
@@ -35,12 +37,18 @@ const TurmasAdmin = () => {
       .finally(function () {
         setLoading(false);
       });
-  }, [turno, status, pagina]);
+  }, [turno, status, pagina, ano]);
 
   // Atualiza sempre que os pagamentos mudar para página 1
   useEffect(() => {
     setPagina(1);
   }, [total]);
+
+  useEffect(() => {
+    http.get("api/turma/pegarAnos").then(function (dados) {
+      setAnos(dados.data);
+    });
+  }, []);
 
   const AdicionarAluno = async () => {
     const dados = await openMenu();
@@ -65,7 +73,9 @@ const TurmasAdmin = () => {
           <Selects
             selecionadoTurno={setTurno}
             selecionadoStatus={setStatus}
+            selecionadoAno={setAno}
             tipo="Turmas"
+            anos={anos}
           />
         </div>
       </div>
