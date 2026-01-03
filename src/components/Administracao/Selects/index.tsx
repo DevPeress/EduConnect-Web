@@ -19,7 +19,7 @@ const Retornos = (tipo: string) => {
     case "Categorias":
       return ["Todas as Categorias", "Mensalidade", "Material", "Extra"];
     case "Meses":
-      return ["Todos os Meses", "Janeiro"];
+      return ["Todos os Meses", "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" ];
     default:
       return [];
   }
