@@ -146,6 +146,7 @@ export interface CadastroFlexProps<
 
 export interface SelectProps {
   tipo: string;
+  anos?: string[];
   salas?: string[];
   selecionadaSala?: (valor: string) => void;
   selecionadoStatus?: (valor: string) => void;
@@ -153,6 +154,7 @@ export interface SelectProps {
   selecionadoPagamento?: (valor: string) => void;
   selecionadoCategorias?: (valor: string) => void;
   selecionadoMeses?: (valor: string) => void;
+  selecionadoAno?: (valor: string) => void;
 }
 
 export interface TablePropsTable {

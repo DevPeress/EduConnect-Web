@@ -30,6 +30,7 @@ const Turnos = () => {
 };
 
 const Selects = ({
+  anos,
   tipo,
   salas,
   selecionadaSala,
@@ -38,9 +39,20 @@ const Selects = ({
   selecionadoPagamento,
   selecionadoCategorias,
   selecionadoMeses,
+  selecionadoAno,
 }: SelectProps) => {
   return (
     <>
+      {selecionadoAno && anos && (
+        <select
+          onChange={(e) => selecionadoAno(e.target.value)}
+          className="bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] py-2.5 px-3.5 text-(--text-primary) text-[14px] cursor-pointer min-w-[180px] hover:border-(--border-light)"
+        >
+          {anos.map((item) => (
+            <option key={item}>{item}</option>
+          ))}
+        </select>
+      )}
       {salas && selecionadaSala && (
         <select
           onChange={(e) => selecionadaSala(e.target.value)}
