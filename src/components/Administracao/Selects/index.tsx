@@ -19,7 +19,21 @@ const Retornos = (tipo: string) => {
     case "Categorias":
       return ["Todas as Categorias", "Mensalidade", "Material", "Extra"];
     case "Meses":
-      return ["Todos os Meses", "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro" ];
+      return [
+        "Todos os Meses",
+        "Janeiro",
+        "Fevereiro",
+        "Março",
+        "Abril",
+        "Maio",
+        "Junho",
+        "Julho",
+        "Agosto",
+        "Setembro",
+        "Outubro",
+        "Novembro",
+        "Dezembro",
+      ];
     default:
       return [];
   }
@@ -33,6 +47,7 @@ const Selects = ({
   anos,
   tipo,
   salas,
+  departamento,
   selecionadaSala,
   selecionadoStatus,
   selecionadoTurno,
@@ -40,10 +55,22 @@ const Selects = ({
   selecionadoCategorias,
   selecionadoMeses,
   selecionadoAno,
+  selecionadoDepartamento,
 }: SelectProps) => {
   return (
     <>
-      {selecionadoAno && anos && (
+      {departamento && selecionadoDepartamento && (
+        <select
+          onChange={(e) => selecionadoDepartamento(e.target.value)}
+          className="bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] py-2.5 px-3.5 text-(--text-primary) text-[14px] cursor-pointer min-w-[180px] hover:border-(--border-light)"
+        >
+          <option>Todos os Departamentos</option>
+          {departamento.map((item) => (
+            <option key={item}>{item}</option>
+          ))}
+        </select>
+      )}
+      {anos && selecionadoAno && (
         <select
           onChange={(e) => selecionadoAno(e.target.value)}
           className="bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] py-2.5 px-3.5 text-(--text-primary) text-[14px] cursor-pointer min-w-[180px] hover:border-(--border-light)"

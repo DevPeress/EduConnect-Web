@@ -148,6 +148,7 @@ export interface SelectProps {
   tipo: string;
   anos?: string[];
   salas?: string[];
+  departamento: string[];
   selecionadaSala?: (valor: string) => void;
   selecionadoStatus?: (valor: string) => void;
   selecionadoTurno?: (valor: string) => void;
@@ -155,6 +156,7 @@ export interface SelectProps {
   selecionadoCategorias?: (valor: string) => void;
   selecionadoMeses?: (valor: string) => void;
   selecionadoAno?: (valor: string) => void;
+  selecionadoDepartamento?: (valor: string) => void;
 }
 
 export interface TablePropsTable {
