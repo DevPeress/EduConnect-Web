@@ -148,7 +148,7 @@ export interface SelectProps {
   tipo: string;
   anos?: string[];
   salas?: string[];
-  departamento: string[];
+  departamento?: string[];
   selecionadaSala?: (valor: string) => void;
   selecionadoStatus?: (valor: string) => void;
   selecionadoTurno?: (valor: string) => void;
