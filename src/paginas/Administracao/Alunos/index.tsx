@@ -20,7 +20,9 @@ const AlunosAdmin = () => {
   const [salas] = useState<string[]>(["Todas as Salas", "9º A", "9º B"]);
   const [selecionada, setSelecionada] = useState<string>("Todas as Salas");
   const [status, setStatus] = useState<string>("Todos os Status");
+  const [ano, setAno] = useState<string>("Todos os Anos");
   const [alunos, setAlunos] = useState<Pessoa[]>([]);
+  const [anos, setAnos] = useState<string[]>([]);
   const [total, setTotal] = useState<number>(0);
   const [pagina, setPagina] = useState<number>(1);
 
@@ -28,7 +30,7 @@ const AlunosAdmin = () => {
   const Pesquisa = () => {
     http
       .get(
-        `api/alunos/filtro/selecionada/${selecionada}/status/${status}/page/${pagina}`
+        `api/alunos/filtro/selecionada/${selecionada}/status/${status}/page/${pagina}/ano/${ano}`
       )
       .then(function (dados) {
         setTotal(dados.data.total);
@@ -40,10 +42,10 @@ const AlunosAdmin = () => {
       .finally(function () {
         setLoading(false);
       });
-  }
+  };
 
   useEffect(() => {
-    Pesquisa()
+    Pesquisa();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pagina, selecionada, status]);
 
@@ -51,6 +53,12 @@ const AlunosAdmin = () => {
   useEffect(() => {
     setPagina(1);
   }, [total]);
+
+  useEffect(() => {
+    http.get("api/alunos/pegarAnos").then(function (dados) {
+      setAnos(dados.data);
+    });
+  }, []);
 
   const AdicionarAluno = async () => {
     const dados = await cadastroAluno();
@@ -77,7 +85,9 @@ const AlunosAdmin = () => {
             salas={salas}
             selecionadaSala={setSelecionada}
             selecionadoStatus={setStatus}
+            selecionadoAno={setAno}
             tipo="Alunos"
+            anos={anos}
           />
         </div>
 
