@@ -1,6 +1,7 @@
 import type { CadastroAlunoInput } from "../../schemas/alunoSchema";
 import type { CadastroPagamentoInput } from "../../schemas/pagementoSchema";
 import type { CadastroProfessorInput } from "../../schemas/professorSchema";
+import type { CadastroTurmaInput } from "../../schemas/turmaSchema";
 import type { CadastroFlexProps } from "../../types/types";
 import { http } from "../../utils/axios";
 import {
@@ -10,14 +11,22 @@ import {
 } from "../../utils/codigos";
 
 interface CadastroFlex2Prop<
-  T extends CadastroAlunoInput | CadastroProfessorInput | CadastroPagamentoInput
+  T extends
+    | CadastroAlunoInput
+    | CadastroProfessorInput
+    | CadastroPagamentoInput
+    | CadastroTurmaInput
 > extends CadastroFlexProps<T> {
   opcao1: string;
   opcao2: string;
 }
 
 const CadastroFlex2 = async <
-  T extends CadastroAlunoInput | CadastroProfessorInput | CadastroPagamentoInput
+  T extends
+    | CadastroAlunoInput
+    | CadastroProfessorInput
+    | CadastroPagamentoInput
+    | CadastroTurmaInput
 >({
   opcao1,
   opcao2,

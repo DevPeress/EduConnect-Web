@@ -143,7 +143,11 @@ export interface SlotInfo {
 }
 
 export interface CadastroFlexProps<
-  T extends CadastroAlunoInput | CadastroProfessorInput | CadastroPagamentoInput
+  T extends
+    | CadastroAlunoInput
+    | CadastroProfessorInput
+    | CadastroPagamentoInput
+    | CadastroTurmaInput
 > {
   infos: T;
   setInfos: React.Dispatch<React.SetStateAction<T>>;
