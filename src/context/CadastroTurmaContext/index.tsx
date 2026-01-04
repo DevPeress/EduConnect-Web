@@ -15,7 +15,7 @@ import { http } from "../../utils/axios";
 const CadastroTurmaContext = createContext<
   CadastroContextType<CadastroTurmaInput> | undefined
 >(undefined);
-export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
+export function CadastroTurmaProvider({ children }: { children: ReactNode }) {
   const [menu, setMenu] = useState<boolean>(false);
   const [dados, setDados] = useState<CadastroTurmaInput>({
     matricula: "",
@@ -36,7 +36,7 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
   >(null);
 
   const openMenu = async (): Promise<CadastroTurmaInput | null> => {
-    const matriculaNova = await http.get("api/alunos/Cadastro");
+    const matriculaNova = await http.get("api/turma/Cadastro");
     setMenu(true);
     setDados((prevDados) => ({ ...prevDados, matricula: matriculaNova.data }));
     return new Promise((resolve) => {
@@ -50,7 +50,7 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
 
     if (resolveCallback) {
       await http
-        .post("/api/alunos", {
+        .post("/api/turma", {
           matricula: "",
           status: "Ativa",
           nome: "",
@@ -115,7 +115,7 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
             className="bg-(--bg-card) border border-(--border-color) rounded-2xl w-full max-w-[700px] max-h-[90vh] overflow-hidden amimate-slideUp flex flex-col"
             style={{ boxShadow: "0 20px 60px rgba(0, 0, 0, 0.5)" }}
           >
-            <CadastroTitulo titulo="Cadastrar Novo Aluno" cancelar={Cancel} />
+            <CadastroTitulo titulo="Cadastrar Nova Turma" cancelar={Cancel} />
 
             <form className="p-7 overflow-y-auto flex-1">
               <div className="mb-7">
