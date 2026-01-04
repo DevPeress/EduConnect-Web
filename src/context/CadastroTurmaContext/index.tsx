@@ -7,34 +7,35 @@ import {
 } from "../../components/Cadastros";
 import toast from "react-hot-toast";
 import {
-  cadastroAlunoSchema,
-  type CadastroAlunoInput,
-} from "../../schemas/alunoSchema";
+  cadastroTurmaSchema,
+  type CadastroTurmaInput,
+} from "../../schemas/turmaSchema";
 import { http } from "../../utils/axios";
 
 const CadastroTurmaContext = createContext<
-  CadastroContextType<CadastroAlunoInput> | undefined
+  CadastroContextType<CadastroTurmaInput> | undefined
 >(undefined);
 export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
   const [menu, setMenu] = useState<boolean>(false);
-  const [dados, setDados] = useState<CadastroAlunoInput>({
+  const [dados, setDados] = useState<CadastroTurmaInput>({
     matricula: "",
-    status: "Ativo",
+    status: "Ativa",
     nome: "",
-    cpf: "",
-    turma: "Selecionar Turma",
-    email: "",
-    telefone: "",
-    endereco: "",
-    nascimento: new Date().toISOString().split("T")[0],
-    nomeEmergencia: "",
-    telefoneEmergencia: "",
+    ano: "2026",
+    turno: "Selecionar o Turno",
+    sala: "",
+    capacidade: 0,
+    professor: "",
+    inicio: "",
+    fim: "",
+    dias: "",
+    disciplinas: "",
   });
   const [resolveCallback, setResolveCallback] = useState<
-    ((data: CadastroAlunoInput | null) => void) | null
+    ((data: CadastroTurmaInput | null) => void) | null
   >(null);
 
-  const openMenu = async (): Promise<CadastroAlunoInput | null> => {
+  const openMenu = async (): Promise<CadastroTurmaInput | null> => {
     const matriculaNova = await http.get("api/alunos/Cadastro");
     setMenu(true);
     setDados((prevDados) => ({ ...prevDados, matricula: matriculaNova.data }));
@@ -44,25 +45,24 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
   };
 
   const Confirm = async () => {
-    const result = cadastroAlunoSchema.safeParse(dados);
+    const result = cadastroTurmaSchema.safeParse(dados);
     if (!result.success) return toast.error(result.error.issues[0].message);
 
     if (resolveCallback) {
       await http
         .post("/api/alunos", {
-          Registro: dados.matricula,
-          Nome: dados.nome,
-          Email: dados.email,
-          Telefone: dados.telefone,
-          Status: dados.status,
-          Nasc: dados.nascimento,
-          Endereco: dados.endereco,
-          Cpf: dados.cpf,
-          ContatoEmergencia: dados.telefoneEmergencia,
-          Turma: dados.turma,
-          Media: 0,
-          DataMatricula: dados.nascimento,
-          Foto: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100",
+          matricula: "",
+          status: "Ativa",
+          nome: "",
+          ano: "2026",
+          turno: "Selecionar o Turno",
+          sala: "",
+          capacidade: 0,
+          professor: "",
+          inicio: "",
+          fim: "",
+          dias: "",
+          disciplinas: "",
         })
         .then(function () {
           resolveCallback(dados);
@@ -91,16 +91,17 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
   const ResetarDados = () => {
     setDados({
       matricula: "",
-      status: "",
+      status: "Ativa",
       nome: "",
-      cpf: "",
-      turma: "",
-      email: "",
-      telefone: "",
-      endereco: "",
-      nascimento: new Date().toISOString().split("T")[0],
-      nomeEmergencia: "",
-      telefoneEmergencia: "",
+      ano: "2026",
+      turno: "Selecionar o Turno",
+      sala: "",
+      capacidade: 0,
+      professor: "",
+      inicio: "",
+      fim: "",
+      dias: "",
+      disciplinas: "",
     });
     setMenu(false);
   };
