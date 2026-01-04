@@ -2,6 +2,7 @@ import type { CadastroAlunoInput } from "../../schemas/alunoSchema";
 import type { CadastroPagamentoInput } from "../../schemas/pagementoSchema";
 import type { CadastroProfessorInput } from "../../schemas/professorSchema";
 import type { CadastroFlexProps } from "../../types/types";
+import { http } from "../../utils/axios";
 import {
   formatCPF,
   formatTelefone,
@@ -15,7 +16,7 @@ interface CadastroFlex2Prop<
   opcao2: string;
 }
 
-const CadastroFlex2 = <
+const CadastroFlex2 = async <
   T extends CadastroAlunoInput | CadastroProfessorInput | CadastroPagamentoInput
 >({
   opcao1,
@@ -52,7 +53,7 @@ const CadastroFlex2 = <
   // Define os tipos de informações exibidas no select com base no tipo fornecido.
   const selectOptions: Record<string, string[]> = {
     status: ["Ativo", "Inativo", "Suspenso"],
-    turma: ["Selecionar Turma", "1A", "2B", "3C"],
+    turma: await http.get("api/turma/validas"),
     categoria: ["Selecionar categoria", "Mensalidade", "Material"],
     statuspagamento: ["Selecionar status", "Pendente", "Pago", "Cancelado"],
     metodo: [
