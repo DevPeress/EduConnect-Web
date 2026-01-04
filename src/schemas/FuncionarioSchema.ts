@@ -15,7 +15,12 @@ export const cadastroFuncionarioSchema = z.object({
   cargo: z.string(),
   departamento: z.string(),
   supervisor: z.string(),
-  turno: z.string(),
+  turno: z
+    .string()
+    .refine(
+      (value) => value !== "Selecionar o Turno",
+      "Selecione um turno válido!"
+    ),
 });
 
 export type CadastroFuncionarioInput = z.infer<
