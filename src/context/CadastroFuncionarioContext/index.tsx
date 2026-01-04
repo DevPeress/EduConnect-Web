@@ -5,23 +5,20 @@ import {
   CadastroFlex2,
   CadastroTitulo,
 } from "../../components/Cadastros";
-import {
-  cadastroProfessorSchema,
-  type CadastroProfessorInput,
-} from "../../schemas/professorSchema";
 import toast from "react-hot-toast";
 import { http } from "../../utils/axios";
+import { cadastroFuncionarioSchema, type CadastroFuncionarioInput } from "../../schemas/FuncionarioSchema";
 
-const CadastroProfessorContext = createContext<
-  CadastroContextType<CadastroProfessorInput> | undefined
+const CadastroFuncionarioContext = createContext<
+  CadastroContextType<CadastroFuncionarioInput> | undefined
 >(undefined);
-export function CadastroProfessorProvider({
+export function CadastroFuncionarioProvider({
   children,
 }: {
   children: ReactNode;
 }) {
   const [menu, setMenu] = useState<boolean>(false);
-  const [dados, setDados] = useState<CadastroProfessorInput>({
+  const [dados, setDados] = useState<CadastroFuncionarioInput>({
     codigo: "",
     status: "Ativo",
     nome: "",
@@ -38,11 +35,11 @@ export function CadastroProfessorProvider({
     telefoneEmergencia: "",
   });
   const [resolveCallback, setResolveCallback] = useState<
-    ((data: CadastroProfessorInput | null) => void) | null
+    ((data: CadastroFuncionarioInput | null) => void) | null
   >(null);
 
-  const openMenu = async (): Promise<CadastroProfessorInput | null> => {
-    const matriculaNova = await http.get("api/professores/Cadastro");
+  const openMenu = async (): Promise<CadastroFuncionarioInput | null> => {
+    const matriculaNova = await http.get("api/funcionario/Cadastro");
     setMenu(true);
     setDados((prevDados) => ({ ...prevDados, codigo: matriculaNova.data }));
     return new Promise((resolve) => {
@@ -51,12 +48,12 @@ export function CadastroProfessorProvider({
   };
 
   const Confirm = async () => {
-    const result = cadastroProfessorSchema.safeParse(dados);
+    const result = cadastroFuncionarioSchema.safeParse(dados);
     if (!result.success) return toast.error(result.error.issues[0].message);
 
     if (resolveCallback) {
       await http
-        .post("api/professores", {
+        .post("api/funcionario", {
           Registro: dados.codigo,
           Nome: dados.nome,
           Email: dados.email,
@@ -118,7 +115,7 @@ export function CadastroProfessorProvider({
   };
 
   return (
-    <CadastroProfessorContext.Provider value={{ openMenu, setDados }}>
+    <CadastroFuncionarioContext.Provider value={{ openMenu, setDados }}>
       {children}
       {menu && (
         <div className="flex fixed top-0 bottom-0 right-0 left-0 bg-[#000000B3] backdrop-blur-sm z-10 animate-fadeIn items-center justify-center p-5">
@@ -127,7 +124,7 @@ export function CadastroProfessorProvider({
             style={{ boxShadow: "0 20px 60px rgba(0, 0, 0, 0.5)" }}
           >
             <CadastroTitulo
-              titulo="Cadastrar Novo Professor"
+              titulo="Cadastrar Novo Funcionário"
               cancelar={Cancel}
             />
 
@@ -233,22 +230,22 @@ export function CadastroProfessorProvider({
                 >
                   <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
-                Salvar Professor
+                Salvar Funcionário
               </button>
             </div>
           </div>
         </div>
       )}
-    </CadastroProfessorContext.Provider>
+    </CadastroFuncionarioContext.Provider>
   );
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
-export function useCadastroProfessor() {
-  const context = useContext(CadastroProfessorContext);
+export function useCadastroFuncionario() {
+  const context = useContext(CadastroFuncionarioContext);
   if (!context) {
     throw new Error(
-      "useCadastroProfessor deve ser usado dentro do CadastroProfessorProvider"
+      "useCadastroFuncionario deve ser usado dentro do CadastroFuncionarioProvider"
     );
   }
   return context;
