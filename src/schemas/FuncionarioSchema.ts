@@ -16,7 +16,6 @@ export const cadastroFuncionarioSchema = z.object({
   departamento: z.string(),
   supervisor: z.string(),
   turno: z.string(),
-  contratacao: z.string(),
 });
 
 export type CadastroFuncionarioInput = z.infer<
