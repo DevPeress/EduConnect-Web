@@ -40,12 +40,11 @@ const CadastroFlex1 = <
 }: CadastroFlex1Prop<T>) => {
   // Processa a opção recebida e retorna o resultado conforme o contexto de criação de alunos ou professores.
   const tipo = IdentificarTipo(titulo) as keyof T;
-  const [disciplinas, setDisciplinas] = useState<Disciplina[]>([
-    { id: 1, nome: "Teste" },
-    { id: 2, nome: "Teste" },
-    { id: 3, nome: "Teste" },
-  ]);
+  const [disciplinas, setDisciplinas] = useState<Disciplina[]>([]);
   const [selecionadas, setSelecionadas] = useState<Disciplina[]>([]);
+
+  const semana = ["Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado"]
+  const [selecionadasSemana, SetSelecionadasSemana] = useState<string[]>([])
 
   function adicionarDisciplina(id: number) {
     const disciplina = disciplinas.find((d) => d.id === id);
@@ -67,7 +66,6 @@ const CadastroFlex1 = <
       case "nome":
       case "descricao":
       case "endereco":
-      case "semana":
         return (
           <input
             value={infos[tipo] as string}
@@ -84,6 +82,47 @@ const CadastroFlex1 = <
             placeholder={place}
             required
           />
+        );
+      case "semana":
+        return (
+          <div className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)">
+            <select
+              className="w-full bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] px-3 py-2 text-(--text-primary) text-[14px]"
+              onChange={(e) => SetSelecionadasSemana((prev) => [...prev, e.target.value])}
+              defaultValue=""
+            >
+              <option value="" disabled>
+                Selecionar dias da Semana
+              </option>
+
+              {semana.map((d) => (
+                <option
+                  key={d}
+                  value={d}
+                  disabled={selecionadasSemana.some((s) => s === d)}
+                >
+                  {d}
+                </option>
+              ))}
+            </select>
+
+            <div className="flex flex-wrap gap-2 py-2">
+              {selecionadasSemana.map((d) => (
+                <span
+                  key={d}
+                  className="flex items-center gap-2 bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm"
+                >
+                  {d}
+                  <button
+                    onClick={() => SetSelecionadasSemana(selecionadasSemana.filter((dados) => dados !== d))}
+                    className="text-blue-600 hover:text-red-600 font-bold"
+                  >
+                    ×
+                  </button>
+                </span>
+              ))}
+            </div>
+          </div>
         );
       case "disciplinas":
         return (
