@@ -1,6 +1,7 @@
 import type { CadastroAlunoInput } from "../schemas/alunoSchema";
 import type { CadastroPagamentoInput } from "../schemas/pagementoSchema";
 import type { CadastroProfessorInput } from "../schemas/professorSchema";
+import type { CadastroTurmaInput } from "../schemas/turmaSchema";
 
 export interface ThemeType {
   toggleTheme: () => void;
@@ -118,7 +119,11 @@ export interface Turmas {
 }
 
 export interface CadastroContextType<
-  T extends CadastroProfessorInput | CadastroAlunoInput | CadastroPagamentoInput
+  T extends
+    | CadastroProfessorInput
+    | CadastroAlunoInput
+    | CadastroPagamentoInput
+    | CadastroTurmaInput
 > {
   openMenu: () => Promise<T | null>;
   setDados: React.Dispatch<React.SetStateAction<T>>;
