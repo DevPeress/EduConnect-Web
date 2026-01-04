@@ -35,7 +35,6 @@ export function CadastroFuncionarioProvider({
     departamento: "",
     supervisor: "",
     turno: "",
-    contratacao: "",
   });
   const [resolveCallback, setResolveCallback] = useState<
     ((data: CadastroFuncionarioInput | null) => void) | null
@@ -112,7 +111,6 @@ export function CadastroFuncionarioProvider({
       departamento: "",
       supervisor: "",
       turno: "",
-      contratacao: "",
     });
     setMenu(false);
   };
@@ -137,24 +135,24 @@ export function CadastroFuncionarioProvider({
                   Informações Pessoais
                 </h3>
                 <CadastroFlex2
-                  opcao1="Código"
+                  opcao1="Registro"
                   opcao2="Status"
                   infos={dados}
                   setInfos={setDados}
                 />
 
                 <CadastroFlex2
-                  opcao1="Nome completo"
-                  opcao2="Data de Nascimento"
+                  opcao1="Data de Nascimento"
+                  opcao2="CPF"
                   infos={dados}
                   setInfos={setDados}
                 />
 
-                <CadastroFlex2
-                  opcao1="Data de Contratação"
-                  opcao2="CPF/Documento"
+                <CadastroFlex1
+                  titulo="Nome Completo"
                   infos={dados}
                   setInfos={setDados}
+                  place="ex: Fabrício Peres ..."
                 />
               </div>
 
@@ -163,17 +161,17 @@ export function CadastroFuncionarioProvider({
                   Profissional
                 </h3>
                 <CadastroFlex2
-                  opcao1="Disciplina Principal"
-                  opcao2="Formação Academica"
+                  opcao1="Cargo"
+                  opcao2="Departamento"
                   infos={dados}
                   setInfos={setDados}
                 />
 
-                <CadastroFlex1
-                  titulo="Turmas"
+                <CadastroFlex2
+                  opcao1="SuperVisor"
+                  opcao2="Turno"
                   infos={dados}
                   setInfos={setDados}
-                  place="ex: 9º A, 8º B, 7º A"
                 />
               </div>
 
