@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { CadastroAlunoInput } from "../../schemas/alunoSchema";
 import type { CadastroFuncionarioInput } from "../../schemas/funcionarioSchema";
 import type { CadastroPagamentoInput } from "../../schemas/pagementoSchema";
@@ -43,8 +43,16 @@ const CadastroFlex1 = <
   const [disciplinas, setDisciplinas] = useState<Disciplina[]>([]);
   const [selecionadas, setSelecionadas] = useState<Disciplina[]>([]);
 
-  const semana = ["Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado"]
-  const [selecionadasSemana, SetSelecionadasSemana] = useState<string[]>([])
+  const semana = [
+    "Domingo",
+    "Segunda-Feira",
+    "Terça-Feira",
+    "Quarta-Feira",
+    "Quinta-Feira",
+    "Sexta-Feira",
+    "Sábado",
+  ];
+  const [selecionadasSemana, SetSelecionadasSemana] = useState<string[]>([]);
 
   function adicionarDisciplina(id: number) {
     const disciplina = disciplinas.find((d) => d.id === id);
@@ -60,8 +68,14 @@ const CadastroFlex1 = <
     setSelecionadas((prev) => prev.filter((d) => d.id !== id));
   }
 
+  async function asycnDisciplinas() {
+    await http.get("api/disciplinas/pegarDisciplinas").then(function (dados) {
+      return setDisciplinas(dados.data);
+    });
+  }
+
   // Cria o Select ou Input para ser demonstrado
-  const TipoDiv = () => {
+  const TipoDiv = async () => {
     switch (tipo) {
       case "nome":
       case "descricao":
@@ -88,7 +102,9 @@ const CadastroFlex1 = <
           <div className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)">
             <select
               className="w-full bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] px-3 py-2 text-(--text-primary) text-[14px]"
-              onChange={(e) => SetSelecionadasSemana((prev) => [...prev, e.target.value])}
+              onChange={(e) =>
+                SetSelecionadasSemana((prev) => [...prev, e.target.value])
+              }
               defaultValue=""
             >
               <option value="" disabled>
@@ -114,7 +130,11 @@ const CadastroFlex1 = <
                 >
                   {d}
                   <button
-                    onClick={() => SetSelecionadasSemana(selecionadasSemana.filter((dados) => dados !== d))}
+                    onClick={() =>
+                      SetSelecionadasSemana(
+                        selecionadasSemana.filter((dados) => dados !== d)
+                      )
+                    }
                     className="text-blue-600 hover:text-red-600 font-bold"
                   >
                     ×
@@ -125,6 +145,7 @@ const CadastroFlex1 = <
           </div>
         );
       case "disciplinas":
+        await asycnDisciplinas();
         return (
           <div className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)">
             <select
@@ -169,16 +190,6 @@ const CadastroFlex1 = <
         return null;
     }
   };
-
-  useEffect(() => {
-    async function asycnDisciplinas() {
-      await http.get("api/disciplinas/pegarDisciplinas").then(function (dados) {
-        setDisciplinas(dados.data);
-      });
-    }
-
-    asycnDisciplinas();
-  }, []);
 
   return (
     <div className="grid grid-cols-1 gap-5 mb-5">
