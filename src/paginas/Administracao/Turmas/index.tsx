@@ -69,7 +69,7 @@ const TurmasAdmin = () => {
       desc="Visualize e Gerencie as turmas da Escola"
       botao={{
         ativo: true,
-        mensagem: "Novo Turma",
+        mensagem: "Nova Turma",
         adicionar: AdicionarTurma,
       }}
       load={loading}
