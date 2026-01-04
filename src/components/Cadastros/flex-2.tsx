@@ -76,6 +76,7 @@ const CadastroFlex2 = <
 
   // Define os tipos de informações exibidas no select com base no tipo fornecido.
   const selectOptions: Record<string, string[]> = {
+    turno: ["Selecionar o Turno", "Matutino", "Vespertino", "Noturno"],
     status: ["Ativo", "Inativo", "Suspenso"],
     turma: ["Selecionar Turma", ...turmas.map((t: string) => t)],
     categoria: ["Selecionar categoria", "Mensalidade", "Material"],
@@ -99,6 +100,8 @@ const CadastroFlex2 = <
     email: "email",
     cpf: "text",
     telefone: "text",
+    inicio: "time",
+    fim: "time",
   };
 
   // Cria o Select ou Input para ser demonstrado
