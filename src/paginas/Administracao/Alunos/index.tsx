@@ -55,7 +55,7 @@ const AlunosAdmin = () => {
   }, [total]);
 
   useEffect(() => {
-    http.get("api/alunos/pegarAnos").then(function (dados) {
+    http.get("api/alunos/pegarInformativos").then(function (dados) {
       setAnos(dados.data);
     });
   }, []);
