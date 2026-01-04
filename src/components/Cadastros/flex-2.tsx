@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import type { CadastroAlunoInput } from "../../schemas/alunoSchema";
 import type { CadastroPagamentoInput } from "../../schemas/pagementoSchema";
 import type { CadastroProfessorInput } from "../../schemas/professorSchema";
@@ -21,7 +22,7 @@ interface CadastroFlex2Prop<
   opcao2: string;
 }
 
-const CadastroFlex2 = async <
+const CadastroFlex2 = <
   T extends
     | CadastroAlunoInput
     | CadastroProfessorInput
@@ -55,7 +56,16 @@ const CadastroFlex2 = async <
     }));
   };
 
-  const turmas = await http.get("api/turma/validas");
+  const [turmas, setTurmas] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      await http.get("api/turma/validas").then(function (dados) {
+        setTurmas(dados.data);
+      });
+    }
+    fetchData();
+  }, []);
 
   // Classes utilitárias do Tailwind utilizadas para estilização dos campos de entrada.
   const baseClass =
@@ -64,7 +74,7 @@ const CadastroFlex2 = async <
   // Define os tipos de informações exibidas no select com base no tipo fornecido.
   const selectOptions: Record<string, string[]> = {
     status: ["Ativo", "Inativo", "Suspenso"],
-    turma: ["Selecionar Turma", ...turmas.data.map((t: string) => t)],
+    turma: ["Selecionar Turma", ...turmas.map((t: string) => t)],
     categoria: ["Selecionar categoria", "Mensalidade", "Material"],
     statuspagamento: ["Selecionar status", "Pendente", "Pago", "Cancelado"],
     metodo: [
