@@ -45,7 +45,7 @@ const TurmasAdmin = () => {
   }, [total]);
 
   useEffect(() => {
-    http.get("api/turma/pegarAnos").then(function (dados) {
+    http.get("api/turma/pegarInformativos").then(function (dados) {
       setAnos(dados.data);
     });
   }, []);
