@@ -10,7 +10,7 @@ import {
   formatTelefone,
   IdentificarTipo,
 } from "../../utils/codigos";
-import type { CadastroFuncionarioInput } from "../../schemas/FuncionarioSchema";
+import type { CadastroFuncionarioInput } from "../../schemas/funcionarioSchema";
 
 interface CadastroFlex2Prop<
   T extends
