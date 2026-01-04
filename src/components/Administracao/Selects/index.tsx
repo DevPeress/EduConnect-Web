@@ -86,7 +86,7 @@ const Selects = ({
           onChange={(e) => selecionadaSala(e.target.value)}
           className="bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] py-2.5 px-3.5 text-(--text-primary) text-[14px] cursor-pointer min-w-[180px] hover:border-(--border-light)"
         >
-          <option>Todos as Salas</option>
+          <option>Todas as Salas</option>
           {salas.map((item) => (
             <option key={item}>{item}</option>
           ))}
