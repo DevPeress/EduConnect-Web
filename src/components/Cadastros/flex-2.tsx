@@ -1,7 +1,10 @@
+import { useEffect, useState } from "react";
 import type { CadastroAlunoInput } from "../../schemas/alunoSchema";
 import type { CadastroPagamentoInput } from "../../schemas/pagementoSchema";
 import type { CadastroProfessorInput } from "../../schemas/professorSchema";
+import type { CadastroTurmaInput } from "../../schemas/turmaSchema";
 import type { CadastroFlexProps } from "../../types/types";
+import { http } from "../../utils/axios";
 import {
   formatCPF,
   formatTelefone,
@@ -9,14 +12,22 @@ import {
 } from "../../utils/codigos";
 
 interface CadastroFlex2Prop<
-  T extends CadastroAlunoInput | CadastroProfessorInput | CadastroPagamentoInput
+  T extends
+    | CadastroAlunoInput
+    | CadastroProfessorInput
+    | CadastroPagamentoInput
+    | CadastroTurmaInput
 > extends CadastroFlexProps<T> {
   opcao1: string;
   opcao2: string;
 }
 
 const CadastroFlex2 = <
-  T extends CadastroAlunoInput | CadastroProfessorInput | CadastroPagamentoInput
+  T extends
+    | CadastroAlunoInput
+    | CadastroProfessorInput
+    | CadastroPagamentoInput
+    | CadastroTurmaInput
 >({
   opcao1,
   opcao2,
@@ -45,6 +56,17 @@ const CadastroFlex2 = <
     }));
   };
 
+  const [turmas, setTurmas] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      await http.get("api/turma/validas").then(function (dados) {
+        setTurmas(dados.data);
+      });
+    }
+    fetchData();
+  }, []);
+
   // Classes utilitárias do Tailwind utilizadas para estilização dos campos de entrada.
   const baseClass =
     "w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)";
@@ -52,7 +74,7 @@ const CadastroFlex2 = <
   // Define os tipos de informações exibidas no select com base no tipo fornecido.
   const selectOptions: Record<string, string[]> = {
     status: ["Ativo", "Inativo", "Suspenso"],
-    turma: ["Selecionar Turma", "1A", "2B", "3C"],
+    turma: ["Selecionar Turma", ...turmas.map((t: string) => t)],
     categoria: ["Selecionar categoria", "Mensalidade", "Material"],
     statuspagamento: ["Selecionar status", "Pendente", "Pago", "Cancelado"],
     metodo: [

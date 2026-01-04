@@ -75,16 +75,16 @@ const Grid = ({ exibicao }: TablePropsGrid) => {
                 "pt-BR"
               );
         const dado4: string =
-          "telefone" in item
-            ? formatTelefone(item.telefone)
-            : "data" in item
-            ? item.data
-            : new Date(item.dataPagamento + "T00:00:00").toLocaleDateString(
+          "dataAdmissao" in item
+            ? new Date(item.dataAdmissao + "T00:00:00").toLocaleDateString(
                 "pt-BR"
-              ) != "Invalid Date"
+              )
+            : "dataPagamento" in item
             ? new Date(item.dataPagamento + "T00:00:00").toLocaleDateString(
                 "pt-BR"
               )
+            : "telefone" in item
+            ? formatTelefone(item.telefone)
             : "Aguardando";
         const dado5: string = item.status;
 

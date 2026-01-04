@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import type { Funcionario } from "../../../types/types";
-import { useCadastroProfessor } from "../../../context/CadastroProfessorContext";
 import LayoutLogado from "../../LayoutLogado";
 import { Grid, Table, ModoExibicao } from "../../../components/Exibicao";
 import { http } from "../../../utils/axios";
 import Selects from "../../../components/Administracao/Selects";
 import TrocaPagina from "../../../components/TrocaPagina";
+import { useCadastroMenu } from "../../../context";
 
 const ITENS_POR_PAGINA = 6;
 
 const FuncionariosAdmin = () => {
-  const { openMenu } = useCadastroProfessor();
+  const { cadastroProfessor } = useCadastroMenu();
 
   const [loading, setLoading] = useState<boolean>(true);
   const [modo, setModo] = useState<boolean>(() => {
@@ -58,12 +58,12 @@ const FuncionariosAdmin = () => {
   useEffect(() => {
     http.get("api/funcionarios/pegarInformativos").then(function (dados) {
       setAnos(dados.data.anos);
-      setDepartamentos(dados.data.departamentos)
+      setDepartamentos(dados.data.departamentos);
     });
   }, []);
 
   const AdicionarFuncionario = async () => {
-    const dados = await openMenu();
+    const dados = await cadastroProfessor();
     if (!dados || funcionarios.length < 6) return;
     return Pesquisa();
   };
@@ -76,7 +76,7 @@ const FuncionariosAdmin = () => {
       desc="Visualize e Gerencie as informações dos funcionários"
       botao={{
         ativo: true,
-        mensagem: "Novo Professor",
+        mensagem: "Novo Funcionário",
         adicionar: AdicionarFuncionario,
       }}
       load={loading}

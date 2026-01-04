@@ -1,6 +1,7 @@
 import type { CadastroAlunoInput } from "../schemas/alunoSchema";
 import type { CadastroPagamentoInput } from "../schemas/pagementoSchema";
 import type { CadastroProfessorInput } from "../schemas/professorSchema";
+import type { CadastroTurmaInput } from "../schemas/turmaSchema";
 
 export interface ThemeType {
   toggleTheme: () => void;
@@ -88,7 +89,7 @@ export interface Funcionario {
   registro: string;
   nome: string;
   cargo: string;
-  data: string;
+  dataAdmissao: string;
   departamento: string;
   status: string;
   nasc: string;
@@ -118,7 +119,11 @@ export interface Turmas {
 }
 
 export interface CadastroContextType<
-  T extends CadastroProfessorInput | CadastroAlunoInput | CadastroPagamentoInput
+  T extends
+    | CadastroProfessorInput
+    | CadastroAlunoInput
+    | CadastroPagamentoInput
+    | CadastroTurmaInput
 > {
   openMenu: () => Promise<T | null>;
   setDados: React.Dispatch<React.SetStateAction<T>>;
@@ -138,7 +143,11 @@ export interface SlotInfo {
 }
 
 export interface CadastroFlexProps<
-  T extends CadastroAlunoInput | CadastroProfessorInput | CadastroPagamentoInput
+  T extends
+    | CadastroAlunoInput
+    | CadastroProfessorInput
+    | CadastroPagamentoInput
+    | CadastroTurmaInput
 > {
   infos: T;
   setInfos: React.Dispatch<React.SetStateAction<T>>;

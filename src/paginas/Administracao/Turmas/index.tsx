@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import type { Turmas } from "../../../types/types";
-import { useCadastroAluno } from "../../../context/CadastroAlunoContext";
 import LayoutLogado from "../../LayoutLogado";
 import { Table } from "../../../components/Exibicao";
 import { http } from "../../../utils/axios";
 import Selects from "../../../components/Administracao/Selects";
 import TrocaPagina from "../../../components/TrocaPagina";
+import { useCadastroMenu } from "../../../context";
 
 const ITENS_POR_PAGINA = 6;
 
 const TurmasAdmin = () => {
-  const { openMenu } = useCadastroAluno();
+  const { cadastroTurma } = useCadastroMenu();
 
   const [loading, setLoading] = useState<boolean>(false);
   const [turno, setTurno] = useState<string>("Todos os Turnos");
@@ -21,8 +21,7 @@ const TurmasAdmin = () => {
   const [total, setTotal] = useState<number>(0);
   const [pagina, setPagina] = useState<number>(1);
 
-  // Requisita os dados novos toda vez que status, categoria ou meses mudar
-  useEffect(() => {
+  const Pesquisa = () => {
     http
       .get(
         `api/turma/filtro/turno/${turno}/status/${status}/page/${pagina}/ano/${ano}`
@@ -37,6 +36,12 @@ const TurmasAdmin = () => {
       .finally(function () {
         setLoading(false);
       });
+  };
+
+  // Requisita os dados novos toda vez que status, categoria ou meses mudar
+  useEffect(() => {
+    Pesquisa();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [turno, status, pagina, ano]);
 
   // Atualiza sempre que os pagamentos mudar para página 1
@@ -45,14 +50,15 @@ const TurmasAdmin = () => {
   }, [total]);
 
   useEffect(() => {
-    http.get("api/turma/pegarAnos").then(function (dados) {
+    http.get("api/turma/pegarInformativos").then(function (dados) {
       setAnos(dados.data);
     });
   }, []);
 
-  const AdicionarAluno = async () => {
-    const dados = await openMenu();
-    if (!dados) return;
+  const AdicionarTurma = async () => {
+    const dados = await cadastroTurma();
+    if (!dados || turmas.length < 6) return;
+    return Pesquisa();
   };
 
   const maxPaginas: number = Math.max(1, Math.ceil(total / ITENS_POR_PAGINA));
@@ -63,8 +69,8 @@ const TurmasAdmin = () => {
       desc="Visualize e Gerencie as turmas da Escola"
       botao={{
         ativo: true,
-        mensagem: "Novo Turma",
-        adicionar: AdicionarAluno,
+        mensagem: "Nova Turma",
+        adicionar: AdicionarTurma,
       }}
       load={loading}
     >

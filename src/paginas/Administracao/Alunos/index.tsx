@@ -17,7 +17,7 @@ const AlunosAdmin = () => {
     const cargo = localStorage.getItem("Exibir");
     return cargo ? true : false;
   });
-  const [salas] = useState<string[]>(["Todas as Salas", "9º A", "9º B"]);
+  const [salas, setSalas] = useState<string[]>([]);
   const [selecionada, setSelecionada] = useState<string>("Todas as Salas");
   const [status, setStatus] = useState<string>("Todos os Status");
   const [ano, setAno] = useState<string>("Todos os Anos");
@@ -47,7 +47,7 @@ const AlunosAdmin = () => {
   useEffect(() => {
     Pesquisa();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pagina, selecionada, status]);
+  }, [pagina, selecionada, status, ano]);
 
   // Atualiza sempre que os pagamentos mudar para página 1
   useEffect(() => {
@@ -55,8 +55,9 @@ const AlunosAdmin = () => {
   }, [total]);
 
   useEffect(() => {
-    http.get("api/alunos/pegarAnos").then(function (dados) {
-      setAnos(dados.data);
+    http.get("api/alunos/pegarInformativos").then(function (dados) {
+      setAnos(dados.data.anos);
+      setSalas(dados.data.salas)
     });
   }, []);
 

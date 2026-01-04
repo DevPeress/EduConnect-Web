@@ -17,7 +17,7 @@ const ProfessoresAdmin = () => {
     const cargo = localStorage.getItem("Exibir");
     return cargo ? true : false;
   });
-  const [salas] = useState<string[]>(["Todas as Salas", "9º A", "9º B"]);
+  const [salas, setSalas] = useState<string[]>([]);
   const [selecionada, setSelecionada] = useState<string>("Todas as Salas");
   const [status, setStatus] = useState<string>("Todos os Status");
   const [ano, setAno] = useState<string>("Todos os Anos");
@@ -55,11 +55,12 @@ const ProfessoresAdmin = () => {
   }, [total]);
 
   useEffect(() => {
-    http.get("api/professores/pegarAnos").then(function (dados) {
-      setAnos(dados.data);
+    http.get("api/professores/pegarInformativos").then(function (dados) {
+      setAnos(dados.data.anos);
+      setSalas(dados.data.salas);
     });
   }, []);
-  
+
   const AdicionarProfessor = async () => {
     const dados = await cadastroProfessor();
     if (!dados || professores.length < 6) return;
