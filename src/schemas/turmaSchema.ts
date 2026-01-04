@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const cadastroTurmaSchema = z.object({
-  matricula: z.string(),
+  codigo: z.string(),
   status: z.string(),
   nome: z.string().min(3, "Nome deve ter no mínimo 3 caracteres!"),
   ano: z.string().min(3, "Ano Letivo inválido!"),
