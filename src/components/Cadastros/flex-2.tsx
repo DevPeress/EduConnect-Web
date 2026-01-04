@@ -46,6 +46,8 @@ const CadastroFlex2 = async <
     }));
   };
 
+  const turmas = await http.get("api/turma/validas");
+
   // Classes utilitárias do Tailwind utilizadas para estilização dos campos de entrada.
   const baseClass =
     "w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)";
@@ -53,7 +55,7 @@ const CadastroFlex2 = async <
   // Define os tipos de informações exibidas no select com base no tipo fornecido.
   const selectOptions: Record<string, string[]> = {
     status: ["Ativo", "Inativo", "Suspenso"],
-    turma: await http.get("api/turma/validas"),
+    turma: ["Selecionar Turma", ...turmas.data.map((t: string) => t)],
     categoria: ["Selecionar categoria", "Mensalidade", "Material"],
     statuspagamento: ["Selecionar status", "Pendente", "Pago", "Cancelado"],
     metodo: [
