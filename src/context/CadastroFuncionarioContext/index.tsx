@@ -41,7 +41,7 @@ export function CadastroFuncionarioProvider({
   >(null);
 
   const openMenu = async (): Promise<CadastroFuncionarioInput | null> => {
-    const matriculaNova = await http.get("api/funcionario/Cadastro");
+    const matriculaNova = await http.get("api/funcionarios/Cadastro");
     setMenu(true);
     setDados((prevDados) => ({ ...prevDados, codigo: matriculaNova.data }));
     return new Promise((resolve) => {
@@ -143,13 +143,13 @@ export function CadastroFuncionarioProvider({
 
                 <CadastroFlex2
                   opcao1="Data de Nascimento"
-                  opcao2="CPF"
+                  opcao2="CPF/Documento"
                   infos={dados}
                   setInfos={setDados}
                 />
 
                 <CadastroFlex1
-                  titulo="Nome Completo"
+                  titulo="Nome completo"
                   infos={dados}
                   setInfos={setDados}
                   place="ex: Fabrício Peres ..."
