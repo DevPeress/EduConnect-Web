@@ -7,7 +7,10 @@ import {
 } from "../../components/Cadastros";
 import toast from "react-hot-toast";
 import { http } from "../../utils/axios";
-import { cadastroFuncionarioSchema, type CadastroFuncionarioInput } from "../../schemas/FuncionarioSchema";
+import {
+  cadastroFuncionarioSchema,
+  type CadastroFuncionarioInput,
+} from "../../schemas/FuncionarioSchema";
 
 const CadastroFuncionarioContext = createContext<
   CadastroContextType<CadastroFuncionarioInput> | undefined
@@ -19,20 +22,20 @@ export function CadastroFuncionarioProvider({
 }) {
   const [menu, setMenu] = useState<boolean>(false);
   const [dados, setDados] = useState<CadastroFuncionarioInput>({
-    codigo: "",
-    status: "Ativo",
+    registro: "",
     nome: "",
-    cpf: "",
-    contratacao: new Date().toISOString().split("T")[0],
-    disciplina: "",
-    formacao: "",
-    turmas: [""],
     email: "",
     telefone: "",
+    status: "",
+    nasc: "",
     endereco: "",
-    nasc: new Date().toISOString().split("T")[0],
-    nomeEmergencia: "",
+    cpf: "",
     telefoneEmergencia: "",
+    cargo: "",
+    departamento: "",
+    supervisor: "",
+    turno: "",
+    contratacao: "",
   });
   const [resolveCallback, setResolveCallback] = useState<
     ((data: CadastroFuncionarioInput | null) => void) | null
@@ -54,7 +57,7 @@ export function CadastroFuncionarioProvider({
     if (resolveCallback) {
       await http
         .post("api/funcionario", {
-          Registro: dados.codigo,
+          Registro: dados.registro,
           Nome: dados.nome,
           Email: dados.email,
           Telefone: dados.telefone,
@@ -63,10 +66,10 @@ export function CadastroFuncionarioProvider({
           Endereco: dados.endereco,
           Cpf: dados.cpf,
           ContatoEmergencia: dados.telefoneEmergencia,
-          Turma: dados.turmas,
-          Disciplina: dados.disciplina,
-          Contratacao: dados.contratacao,
-          Formacao: dados.formacao,
+          Cargo: dados.cargo,
+          Departamento: dados.departamento,
+          Supervisor: dados.supervisor,
+          Turno: dados.turno,
           Foto: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100",
         })
         .then(function () {
@@ -96,20 +99,20 @@ export function CadastroFuncionarioProvider({
 
   const ResetarDados = () => {
     setDados({
-      codigo: "",
-      status: "",
+      registro: "",
       nome: "",
-      cpf: "",
-      contratacao: new Date().toISOString().split("T")[0],
-      disciplina: "",
-      formacao: "",
-      turmas: [""],
       email: "",
       telefone: "",
+      status: "",
+      nasc: "",
       endereco: "",
-      nasc: new Date().toISOString().split("T")[0],
-      nomeEmergencia: "",
+      cpf: "",
       telefoneEmergencia: "",
+      cargo: "",
+      departamento: "",
+      supervisor: "",
+      turno: "",
+      contratacao: "",
     });
     setMenu(false);
   };
