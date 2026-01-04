@@ -18,7 +18,7 @@ const CadastroTurmaContext = createContext<
 export function CadastroTurmaProvider({ children }: { children: ReactNode }) {
   const [menu, setMenu] = useState<boolean>(false);
   const [dados, setDados] = useState<CadastroTurmaInput>({
-    matricula: "",
+    codigo: "",
     status: "Ativa",
     nome: "",
     ano: "2026",
@@ -38,7 +38,7 @@ export function CadastroTurmaProvider({ children }: { children: ReactNode }) {
   const openMenu = async (): Promise<CadastroTurmaInput | null> => {
     const matriculaNova = await http.get("api/turma/Cadastro");
     setMenu(true);
-    setDados((prevDados) => ({ ...prevDados, matricula: matriculaNova.data }));
+    setDados((prevDados) => ({ ...prevDados, codigo: matriculaNova.data }));
     return new Promise((resolve) => {
       setResolveCallback(() => resolve);
     });
@@ -51,18 +51,17 @@ export function CadastroTurmaProvider({ children }: { children: ReactNode }) {
     if (resolveCallback) {
       await http
         .post("/api/turma", {
-          matricula: "",
-          status: "Ativa",
-          nome: "",
-          ano: "2026",
-          turno: "Selecionar o Turno",
-          sala: "",
-          capacidade: 0,
-          professor: "",
-          inicio: "",
-          fim: "",
-          dias: "",
-          disciplinas: "",
+          Registro: dados.codigo,
+          Nome: dados.nome,
+          Turno: dados.turno,
+          Status: dados.status,
+          AnoEletivo: dados.ano,
+          Capacidade: dados.capacidade,
+          ProfessorResponsavel: dados.professor,
+          Inicio: dados.inicio,
+          Fim: dados.fim,
+          Sala: dados.sala,
+          Dias: dados.dias,
         })
         .then(function () {
           resolveCallback(dados);
@@ -90,7 +89,7 @@ export function CadastroTurmaProvider({ children }: { children: ReactNode }) {
 
   const ResetarDados = () => {
     setDados({
-      matricula: "",
+      codigo: "",
       status: "Ativa",
       nome: "",
       ano: "2026",
