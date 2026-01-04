@@ -78,6 +78,27 @@ function IdentificarTipo(dado: string) {
       return "metodo";
     case "Observações":
       return "observacoes";
+    case "Nome da Turma":
+      return "nome";
+    case "Ano Letivo":
+      return "ano";
+    case "Turno":
+      return "turno";
+    case "Sala":
+      return "sala";
+    case "Capacidade":
+      return "capacidade";
+    case "Professor":
+      return "professor";
+    case "Horário Início":
+      return "inicio";
+    case "Horário Fim":
+      return "fim";
+    case "Dias da Semana":
+      return "semana";
+    case "Disciplinas":
+      return "disciplinas";
+
     default:
       return "";
   }
