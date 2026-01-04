@@ -10,7 +10,7 @@ import { useCadastroMenu } from "../../../context";
 const ITENS_POR_PAGINA = 6;
 
 const FuncionariosAdmin = () => {
-  const { cadastroProfessor } = useCadastroMenu();
+  const { cadastroFuncionario } = useCadastroMenu();
 
   const [loading, setLoading] = useState<boolean>(true);
   const [modo, setModo] = useState<boolean>(() => {
@@ -63,7 +63,7 @@ const FuncionariosAdmin = () => {
   }, []);
 
   const AdicionarFuncionario = async () => {
-    const dados = await cadastroProfessor();
+    const dados = await cadastroFuncionario();
     if (!dados || funcionarios.length < 6) return;
     return Pesquisa();
   };
