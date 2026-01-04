@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import type { CadastroAlunoInput } from "../../schemas/alunoSchema";
 import type { CadastroFuncionarioInput } from "../../schemas/funcionarioSchema";
 import type { CadastroPagamentoInput } from "../../schemas/pagementoSchema";
@@ -5,6 +6,12 @@ import type { CadastroProfessorInput } from "../../schemas/professorSchema";
 import type { CadastroTurmaInput } from "../../schemas/turmaSchema";
 import type { CadastroFlexProps } from "../../types/types";
 import { IdentificarTipo } from "../../utils/codigos";
+import { http } from "../../utils/axios";
+
+type Disciplina = {
+  id: number;
+  nome: string;
+};
 
 interface CadastroFlex1Prop<
   T extends
@@ -33,6 +40,26 @@ const CadastroFlex1 = <
 }: CadastroFlex1Prop<T>) => {
   // Processa a opção recebida e retorna o resultado conforme o contexto de criação de alunos ou professores.
   const tipo = IdentificarTipo(titulo) as keyof T;
+  const [disciplinas, setDisciplinas] = useState<Disciplina[]>([
+    { id: 1, nome: "Teste" },
+    { id: 2, nome: "Teste" },
+    { id: 3, nome: "Teste" },
+  ]);
+  const [selecionadas, setSelecionadas] = useState<Disciplina[]>([]);
+
+  function adicionarDisciplina(id: number) {
+    const disciplina = disciplinas.find((d) => d.id === id);
+    if (!disciplina) return;
+
+    // evita duplicar
+    if (selecionadas.some((d) => d.id === id)) return;
+
+    setSelecionadas((prev) => [...prev, disciplina]);
+  }
+
+  function removerDisciplina(id: number) {
+    setSelecionadas((prev) => prev.filter((d) => d.id !== id));
+  }
 
   // Cria o Select ou Input para ser demonstrado
   const TipoDiv = () => {
@@ -58,10 +85,61 @@ const CadastroFlex1 = <
             required
           />
         );
+      case "disciplinas":
+        return (
+          <div className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)">
+            <select
+              className="w-full bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] px-3 py-2 text-(--text-primary) text-[14px]"
+              onChange={(e) => adicionarDisciplina(Number(e.target.value))}
+              defaultValue=""
+            >
+              <option value="" disabled>
+                Selecionar disciplina
+              </option>
+
+              {disciplinas.map((d) => (
+                <option
+                  key={d.id}
+                  value={d.id}
+                  disabled={selecionadas.some((s) => s.id === d.id)}
+                >
+                  {d.nome}
+                </option>
+              ))}
+            </select>
+
+            <div className="flex flex-wrap gap-2 py-2">
+              {selecionadas.map((d) => (
+                <span
+                  key={d.id}
+                  className="flex items-center gap-2 bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm"
+                >
+                  {d.nome}
+                  <button
+                    onClick={() => removerDisciplina(d.id)}
+                    className="text-blue-600 hover:text-red-600 font-bold"
+                  >
+                    ×
+                  </button>
+                </span>
+              ))}
+            </div>
+          </div>
+        );
       default:
         return null;
     }
   };
+
+  useEffect(() => {
+    async function asycnDisciplinas() {
+      await http.get("api/disciplinas/pegarDisciplinas").then(function (dados) {
+        setDisciplinas(dados.data);
+      });
+    }
+
+    asycnDisciplinas();
+  }, []);
 
   return (
     <div className="grid grid-cols-1 gap-5 mb-5">
