@@ -17,6 +17,7 @@ interface CadastroFlex2Prop<
     | CadastroProfessorInput
     | CadastroPagamentoInput
     | CadastroTurmaInput
+    | CadastroTurmaInput
 > extends CadastroFlexProps<T> {
   opcao1: string;
   opcao2: string;
@@ -27,6 +28,7 @@ const CadastroFlex2 = <
     | CadastroAlunoInput
     | CadastroProfessorInput
     | CadastroPagamentoInput
+    | CadastroTurmaInput
     | CadastroTurmaInput
 >({
   opcao1,
