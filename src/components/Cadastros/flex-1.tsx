@@ -9,7 +9,7 @@ import { IdentificarTipo } from "../../utils/codigos";
 import { http } from "../../utils/axios";
 
 type Disciplina = {
-  id: number;
+  registro: string;
   nome: string;
 };
 
@@ -54,18 +54,18 @@ const CadastroFlex1 = <
   ];
   const [selecionadasSemana, SetSelecionadasSemana] = useState<string[]>([]);
 
-  function adicionarDisciplina(id: number) {
-    const disciplina = disciplinas.find((d) => d.id === id);
+  function adicionarDisciplina(registro: string) {
+    const disciplina = disciplinas.find((d) => d.registro === registro);
     if (!disciplina) return;
 
     // evita duplicar
-    if (selecionadas.some((d) => d.id === id)) return;
+    if (selecionadas.some((d) => d.registro === registro)) return;
 
     setSelecionadas((prev) => [...prev, disciplina]);
   }
 
-  function removerDisciplina(id: number) {
-    setSelecionadas((prev) => prev.filter((d) => d.id !== id));
+  function removerDisciplina(registro: string) {
+    setSelecionadas((prev) => prev.filter((d) => d.registro !== registro));
   }
 
   async function asycnDisciplinas() {
@@ -150,7 +150,7 @@ const CadastroFlex1 = <
           <div className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)">
             <select
               className="w-full bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] px-3 py-2 text-(--text-primary) text-[14px]"
-              onChange={(e) => adicionarDisciplina(Number(e.target.value))}
+              onChange={(e) => adicionarDisciplina(e.target.value)}
               defaultValue=""
             >
               <option value="" disabled>
@@ -159,9 +159,9 @@ const CadastroFlex1 = <
 
               {disciplinas.map((d) => (
                 <option
-                  key={d.id}
-                  value={d.id}
-                  disabled={selecionadas.some((s) => s.id === d.id)}
+                  key={d.registro}
+                  value={d.registro}
+                  disabled={selecionadas.some((s) => s.registro === d.registro)}
                 >
                   {d.nome}
                 </option>
@@ -171,12 +171,12 @@ const CadastroFlex1 = <
             <div className="flex flex-wrap gap-2 py-2">
               {selecionadas.map((d) => (
                 <span
-                  key={d.id}
+                  key={d.registro}
                   className="flex items-center gap-2 bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm"
                 >
                   {d.nome}
                   <button
-                    onClick={() => removerDisciplina(d.id)}
+                    onClick={() => removerDisciplina(d.registro)}
                     className="text-blue-600 hover:text-red-600 font-bold"
                   >
                     ×
