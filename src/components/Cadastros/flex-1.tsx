@@ -40,6 +40,7 @@ const CadastroFlex1 = <
       case "nome":
       case "descricao":
       case "endereco":
+      case "semana":
         return (
           <input
             value={infos[tipo] as string}
