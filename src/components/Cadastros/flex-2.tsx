@@ -10,6 +10,7 @@ import {
   formatTelefone,
   IdentificarTipo,
 } from "../../utils/codigos";
+import type { CadastroFuncionarioInput } from "../../schemas/FuncionarioSchema";
 
 interface CadastroFlex2Prop<
   T extends
@@ -17,7 +18,7 @@ interface CadastroFlex2Prop<
     | CadastroProfessorInput
     | CadastroPagamentoInput
     | CadastroTurmaInput
-    | CadastroTurmaInput
+    | CadastroFuncionarioInput
 > extends CadastroFlexProps<T> {
   opcao1: string;
   opcao2: string;
@@ -29,7 +30,7 @@ const CadastroFlex2 = <
     | CadastroProfessorInput
     | CadastroPagamentoInput
     | CadastroTurmaInput
-    | CadastroTurmaInput
+    | CadastroFuncionarioInput
 >({
   opcao1,
   opcao2,
