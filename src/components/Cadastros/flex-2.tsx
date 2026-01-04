@@ -129,7 +129,7 @@ const CadastroFlex2 = <
 
     const type: string = inputTypes[String(Escolhas)] ?? "text";
     const apenasLer: boolean =
-      Escolhas === "codigo" || Escolhas === "matricula";
+      Escolhas === "codigo" || Escolhas === "matricula" || Escolhas === "registro";
 
     return apenasLer ? (
       <input
