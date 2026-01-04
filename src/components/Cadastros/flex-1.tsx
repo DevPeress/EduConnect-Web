@@ -70,12 +70,12 @@ const CadastroFlex1 = <
 
   async function asycnDisciplinas() {
     await http.get("api/disciplinas/pegarDisciplinas").then(function (dados) {
-      return setDisciplinas(dados.data);
+      setDisciplinas(dados.data);
     });
   }
 
   // Cria o Select ou Input para ser demonstrado
-  const TipoDiv = async () => {
+  const TipoDiv = () => {
     switch (tipo) {
       case "nome":
       case "descricao":
@@ -145,7 +145,7 @@ const CadastroFlex1 = <
           </div>
         );
       case "disciplinas":
-        await asycnDisciplinas();
+        asycnDisciplinas();
         return (
           <div className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)">
             <select
