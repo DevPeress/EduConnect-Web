@@ -88,7 +88,7 @@ export interface Funcionario {
   registro: string;
   nome: string;
   cargo: string;
-  data: string;
+  dataAdmissao: string;
   departamento: string;
   status: string;
   nasc: string;

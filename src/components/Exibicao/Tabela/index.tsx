@@ -91,18 +91,18 @@ const Table = ({ exibicao }: TablePropsTable) => {
                   "pt-BR"
                 );
           const dado4: string =
-            "telefone" in item
-              ? formatTelefone(item.telefone)
-              : "horario" in item
-              ? item.horario
-              : "data" in item
-              ? item.data
-              : new Date(item.dataPagamento + "T00:00:00").toLocaleDateString(
+            "dataAdmissao" in item
+              ? new Date(item.dataAdmissao + "T00:00:00").toLocaleDateString(
                   "pt-BR"
-                ) != "Invalid Date"
+                )
+              : "dataPagamento" in item
               ? new Date(item.dataPagamento + "T00:00:00").toLocaleDateString(
                   "pt-BR"
                 )
+              : "telefone" in item
+              ? formatTelefone(item.telefone)
+              : "horario" in item
+              ? item.horario
               : "Aguardando";
           const dado5: string | number =
             "horario" in item ? item.horario : item.status;
