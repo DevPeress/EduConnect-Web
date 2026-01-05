@@ -7,6 +7,7 @@ import type { CadastroTurmaInput } from "../../schemas/turmaSchema";
 import type { CadastroFlexProps } from "../../types/types";
 import { IdentificarTipo } from "../../utils/codigos";
 import { http } from "../../utils/axios";
+import type { CadastroDisciplinasInput } from "../../schemas/disciplinaSchema";
 
 type Disciplina = {
   registro: string;
@@ -20,6 +21,7 @@ interface CadastroFlex1Prop<
     | CadastroPagamentoInput
     | CadastroTurmaInput
     | CadastroFuncionarioInput
+    | CadastroDisciplinasInput
 > extends CadastroFlexProps<T> {
   titulo: string;
   place: string;
@@ -32,6 +34,7 @@ const CadastroFlex1 = <
     | CadastroPagamentoInput
     | CadastroTurmaInput
     | CadastroFuncionarioInput
+    | CadastroDisciplinasInput
 >({
   titulo,
   infos,
