@@ -12,6 +12,7 @@ import PrivateRoute from "./middleware";
 import FinanceiroAdmin from "./paginas/Administracao/Financeiro";
 import TurmasAdmin from "./paginas/Administracao/Turmas";
 import FuncionariosAdmin from "./paginas/Administracao/Funcionarios";
+import DisciplinasAdmin from "./paginas/Administracao/Disciplinas";
 
 function App() {
   const auth = useAuth();
@@ -29,6 +30,7 @@ function App() {
         <Route path="/" element={<Inicial logado={user} cargo={cargo} />} />
         <Route path="/login" element={<Login logado={user} cargo={cargo} />} />
 
+        {/* Acesso Admin e Funcionario*/}
         <Route
           element={
             <PrivateRoute
@@ -41,10 +43,23 @@ function App() {
           <Route path="/admin/dashboard" element={<InicioAdm />} />
           <Route path="/admin/alunos" element={<AlunosAdmin />} />
           <Route path="/admin/professores" element={<ProfessoresAdmin />} />
-          <Route path="/admin/funcionarios" element={<FuncionariosAdmin />} />
           <Route path="/admin/turmas" element={<TurmasAdmin />} />
           <Route path="/admin/calendario" element={<CalendarioAdm />} />
           <Route path="/admin/financeiro" element={<FinanceiroAdmin />} />
+
+          {/* Acesso exclusivo de Admin*/}
+          <Route
+            element={
+              <PrivateRoute
+                isAuthenticated={user}
+                userRole={cargo}
+                allowedRoles={["Administrador"]}
+              />
+            }
+          >
+            <Route path="/admin/funcionarios" element={<FuncionariosAdmin />} />
+            <Route path="/admin/disciplinas" element={<DisciplinasAdmin />} />
+          </Route>
         </Route>
         {/* Página de sem acesso */}
         <Route
