@@ -1,34 +1,27 @@
 import { useEffect, useState } from "react";
-import type { Turmas } from "../../../types/types";
+import type { Disciplinas } from "../../../types/types";
 import LayoutLogado from "../../LayoutLogado";
-import { Table } from "../../../components/Exibicao";
 import { http } from "../../../utils/axios";
-import Selects from "../../../components/Administracao/Selects";
 import TrocaPagina from "../../../components/TrocaPagina";
 import { useCadastroMenu } from "../../../context";
 
 const ITENS_POR_PAGINA = 6;
 
 const TurmasAdmin = () => {
-  const { cadastroTurma } = useCadastroMenu();
+  const { cadastroDisciplinas } = useCadastroMenu();
 
   const [loading, setLoading] = useState<boolean>(false);
-  const [turno, setTurno] = useState<string>("Todos os Turnos");
-  const [status, setStatus] = useState<string>("Todos os Status");
-  const [ano, setAno] = useState<string>("Todos os Anos");
-  const [turmas, setTurmas] = useState<Turmas[]>([]);
-  const [anos, setAnos] = useState<string[]>([]);
+  const [disciplinas, setDisciplinas] = useState<Disciplinas[]>([]);
+
   const [total, setTotal] = useState<number>(0);
   const [pagina, setPagina] = useState<number>(1);
 
   const Pesquisa = () => {
     http
-      .get(
-        `api/turma/filtro/turno/${turno}/status/${status}/page/${pagina}/ano/${ano}`
-      )
+      .get(`api/turma/filtro/disciplinas`)
       .then(function (dados) {
         setTotal(dados.data.total);
-        setTurmas(dados.data.dados);
+        setDisciplinas(dados.data.dados);
       })
       .catch(function (error) {
         console.log(error);
@@ -38,26 +31,14 @@ const TurmasAdmin = () => {
       });
   };
 
-  // Requisita os dados novos toda vez que status, categoria ou meses mudar
-  useEffect(() => {
-    Pesquisa();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [turno, status, pagina, ano]);
-
   // Atualiza sempre que os pagamentos mudar para página 1
   useEffect(() => {
     setPagina(1);
   }, [total]);
 
-  useEffect(() => {
-    http.get("api/turma/pegarInformativos").then(function (dados) {
-      setAnos(dados.data);
-    });
-  }, []);
-
-  const AdicionarTurma = async () => {
-    const dados = await cadastroTurma();
-    if (!dados || turmas.length < 6) return;
+  const AdicionarDisciplina = async () => {
+    const dados = await cadastroDisciplinas();
+    if (!dados || disciplinas.length < 6) return;
     return Pesquisa();
   };
 
@@ -65,29 +46,62 @@ const TurmasAdmin = () => {
 
   return (
     <LayoutLogado
-      titulo="Gerenciamento de Turmas"
-      desc="Visualize e Gerencie as turmas da Escola"
+      titulo="Gerenciamento de Disciplinas"
+      desc="Visualize e Gerencie as disciplinas da Escola"
       botao={{
         ativo: true,
-        mensagem: "Nova Turma",
-        adicionar: AdicionarTurma,
+        mensagem: "Nova Disciplinas",
+        adicionar: AdicionarDisciplina,
       }}
       load={loading}
     >
-      <div className="flex justify-between items-center gap-5 mb-6 flex-wrap">
-        <div className="flex gap-3 flex-wrap">
-          <Selects
-            selecionadoTurno={setTurno}
-            selecionadoStatus={setStatus}
-            selecionadoAno={setAno}
-            tipo="Turmas"
-            anos={anos}
-          />
-        </div>
-      </div>
-
       <div className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden mb-6">
-        <Table exibicao={turmas} />
+        <table className="w-full border-collapse">
+          <thead className="bg-(--cabecalho)">
+            <tr>
+              <th className="py-4 px-5 text-left text-[13px] font-semibold text-(--text-muted) uppercase leading-4 border-b-2 border-(--border-color)">
+                Registro
+              </th>
+              <th className="py-4 px-5 text-left text-[13px] font-semibold text-(--text-muted) uppercase leading-4 border-b-2 border-(--border-color)">
+                Nome
+              </th>
+              <th className="py-4 px-5 text-left text-[13px] font-semibold text-(--text-muted) uppercase leading-4 border-b-2 border-(--border-color)">
+                Descrição
+              </th>
+              <th className="py-4 px-5 text-left text-[13px] font-semibold text-(--text-muted) uppercase leading-4 border-b-2 border-(--border-color)">
+                Data de Criação
+              </th>
+              <th className="py-4 px-5 text-left text-[13px] font-semibold text-(--text-muted) uppercase leading-4 border-b-2 border-(--border-color)">
+                Remover
+              </th>
+            </tr>
+
+            <tbody>
+              {disciplinas.map((item) => (
+                <tr
+                  key={item.registro}
+                  className="hover:bg-(--bg-input) text-(--text-primary)"
+                >
+                  <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
+                    {item.registro}
+                  </td>
+                  <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
+                    {item.nome}
+                  </td>
+                  <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
+                    {item.descricao}
+                  </td>
+                  <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
+                    {item.data}
+                  </td>
+                  <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
+                    Remover
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </thead>
+        </table>
       </div>
 
       <TrocaPagina
