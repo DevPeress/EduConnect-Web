@@ -99,15 +99,15 @@ export function CadastroDisciplinasProvider({
                   Informações Básicas
                 </h3>
                 <CadastroFlex2
-                  opcao1="Código"
+                  opcao1="Registro"
                   opcao2="Status"
                   infos={dados}
                   setInfos={setDados}
                 />
 
                 <CadastroFlex2
-                  opcao1="Nome da Turma"
-                  opcao2="Ano Letivo"
+                  opcao1="Nome"
+                  opcao2="Descrição"
                   infos={dados}
                   setInfos={setDados}
                 />
