@@ -7,7 +7,7 @@ import { useCadastroMenu } from "../../../context";
 
 const ITENS_POR_PAGINA = 6;
 
-const TurmasAdmin = () => {
+const DisciplinasAdmin = () => {
   const { cadastroDisciplinas } = useCadastroMenu();
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -95,7 +95,7 @@ const TurmasAdmin = () => {
                     {item.data}
                   </td>
                   <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
-                    Remover
+                    ❌
                   </td>
                 </tr>
               ))}
@@ -105,7 +105,7 @@ const TurmasAdmin = () => {
       </div>
 
       <TrocaPagina
-        nome="Turma"
+        nome="Disciplinas"
         pagina={pagina}
         maxPagina={maxPaginas}
         total={total}
@@ -115,4 +115,4 @@ const TurmasAdmin = () => {
   );
 };
 
-export default TurmasAdmin;
+export default DisciplinasAdmin;
