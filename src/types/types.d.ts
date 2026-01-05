@@ -119,6 +119,13 @@ export interface Turmas {
   capacidade: number;
 }
 
+export interface Disciplinas {
+  registro: string;
+  nome: string;
+  descricao: string;
+  data: string
+}
+
 export interface CadastroContextType<
   T extends
     | CadastroProfessorInput
