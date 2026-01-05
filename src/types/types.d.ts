@@ -126,6 +126,7 @@ export interface CadastroContextType<
     | CadastroPagamentoInput
     | CadastroTurmaInput
     | CadastroFuncionarioInput
+    | CadastroDisciplinasInput
 > {
   openMenu: () => Promise<T | null>;
   setDados: React.Dispatch<React.SetStateAction<T>>;
@@ -151,6 +152,7 @@ export interface CadastroFlexProps<
     | CadastroPagamentoInput
     | CadastroTurmaInput
     | CadastroFuncionarioInput
+    | CadastroDisciplinasInput
 > {
   infos: T;
   setInfos: React.Dispatch<React.SetStateAction<T>>;
