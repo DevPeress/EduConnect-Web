@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
 import type { CadastroContextType } from "../../types/types";
-import { CadastroFlex2, CadastroTitulo } from "../../components/Cadastros";
+import { CadastroFlex1, CadastroFlex2, CadastroTitulo } from "../../components/Cadastros";
 import toast from "react-hot-toast";
 import { http } from "../../utils/axios";
 import {
@@ -98,18 +98,19 @@ export function CadastroDisciplinasProvider({
                 <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
                   Informações Básicas
                 </h3>
+
                 <CadastroFlex2
                   opcao1="Registro"
-                  opcao2="Status"
+                  opcao2="Nome"
                   infos={dados}
                   setInfos={setDados}
                 />
 
-                <CadastroFlex2
-                  opcao1="Nome"
-                  opcao2="Descrição"
+                <CadastroFlex1
+                  titulo="Descrição"
                   infos={dados}
                   setInfos={setDados}
+                  place="ex: Matéria criada baseada na lei..."
                 />
               </div>
             </form>
