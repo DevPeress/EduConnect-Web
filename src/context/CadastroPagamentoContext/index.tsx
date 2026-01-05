@@ -50,17 +50,16 @@ export function CadastroPagamentoProvider({
     if (resolveCallback) {
       await http
         .post("/api/financeiro", {
-          AlunoId: 4,
+          AlunoRegistro: dados.aluno,
           Categoria: dados.categoria,
+          Metodo: dados.metodo,
+          Descricao: dados.descricao,
           Valor: dados.valor,
           DataVencimento: dados.dataVencimento,
+          Pago: dados.statuspagamento === "Pago" ? true : false,
           dataPagamento:
             dados.dataPagamento !== "" ? dados.dataPagamento : null,
-          Pago: dados.statuspagamento === "Pago" ? true : false,
-          Cancelado: dados.statuspagamento === "Cancelado" ? true : false,
-          Metodo: dados.metodo,
           Observacoes: dados.observacoes,
-          Descricao: dados.descricao,
         })
         .then(function () {
           resolveCallback(dados);
