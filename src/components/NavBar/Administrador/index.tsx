@@ -25,6 +25,7 @@ const Paginas: Nav[] = [
     svg: NavProfessores,
   },
   { nome: "Turmas", pagina: "/admin/turmas", svg: NavTurmas },
+  { nome: "Disciplinas", pagina: "/admin/disciplinas", svg: NavTurmas },
 
   { nome: "Notas", pagina: "/admin/notas", svg: NavNotas },
   {
