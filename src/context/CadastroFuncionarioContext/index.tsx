@@ -8,61 +8,72 @@ import {
 import toast from "react-hot-toast";
 import { http } from "../../utils/axios";
 import {
-  cadastroPagamentoSchema,
-  type CadastroPagamentoInput,
-} from "../../schemas/pagementoSchema";
+  cadastroFuncionarioSchema,
+  type CadastroFuncionarioInput,
+} from "../../schemas/funcionarioSchema";
 
-const CadastroPagamentoContext = createContext<
-  CadastroContextType<CadastroPagamentoInput> | undefined
+const CadastroFuncionarioContext = createContext<
+  CadastroContextType<CadastroFuncionarioInput> | undefined
 >(undefined);
-export function CadastroPagamentoProvider({
+export function CadastroFuncionarioProvider({
   children,
 }: {
   children: ReactNode;
 }) {
   const [menu, setMenu] = useState<boolean>(false);
-  const [dados, setDados] = useState<CadastroPagamentoInput>({
-    aluno: "",
-    descricao: "",
-    valor: 0,
-    observacoes: "",
-    categoria: "",
-    statuspagamento: "",
-    metodo: "",
-    dataVencimento: new Date().toISOString().split("T")[0],
-    dataPagamento: "",
+  const [dados, setDados] = useState<CadastroFuncionarioInput>({
+    registro: "",
+    nome: "",
+    email: "",
+    telefone: "",
+    status: "",
+    nasc: "",
+    endereco: "",
+    cpf: "",
+    telefoneEmergencia: "",
+    cargo: "",
+    departamento: "",
+    supervisor: "",
+    turno: "",
   });
   const [resolveCallback, setResolveCallback] = useState<
-    ((data: CadastroPagamentoInput | null) => void) | null
+    ((data: CadastroFuncionarioInput | null) => void) | null
   >(null);
 
-  const openMenu = async (): Promise<CadastroPagamentoInput | null> => {
+  const openMenu = async (): Promise<CadastroFuncionarioInput | null> => {
+    const matriculaNova = await http.get("api/funcionarios/Cadastro");
     setMenu(true);
+    setDados((prevDados) => ({ ...prevDados, registro: matriculaNova.data }));
     return new Promise((resolve) => {
       setResolveCallback(() => resolve);
     });
   };
 
   const Confirm = async () => {
-    const result = cadastroPagamentoSchema.safeParse(dados);
+    const result = cadastroFuncionarioSchema.safeParse(dados);
     if (!result.success) return toast.error(result.error.issues[0].message);
 
     if (resolveCallback) {
       await http
-        .post("/api/financeiro", {
-          AlunoRegistro: dados.aluno,
-          Categoria: dados.categoria,
-          Metodo: dados.metodo,
-          Descricao: dados.descricao,
-          Valor: dados.valor,
-          DataVencimento: dados.dataVencimento,
-          Pago: dados.statuspagamento === "Pago" ? true : false,
-          dataPagamento:
-            dados.dataPagamento !== "" ? dados.dataPagamento : null,
-          Observacoes: dados.observacoes,
+        .post("api/funcionario", {
+          Registro: dados.registro,
+          Nome: dados.nome,
+          Email: dados.email,
+          Telefone: dados.telefone,
+          Status: dados.status,
+          Nasc: dados.nasc,
+          Endereco: dados.endereco,
+          Cpf: dados.cpf,
+          ContatoEmergencia: dados.telefoneEmergencia,
+          Cargo: dados.cargo,
+          Departamento: dados.departamento,
+          Supervisor: dados.supervisor,
+          Turno: dados.turno,
+          Foto: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100",
         })
         .then(function () {
           resolveCallback(dados);
+          setResolveCallback(null);
           toast.success("Cadastro realizado com sucesso!");
         })
         .catch(function (error) {
@@ -87,21 +98,25 @@ export function CadastroPagamentoProvider({
 
   const ResetarDados = () => {
     setDados({
-      aluno: "",
-      descricao: "",
-      valor: 0,
-      observacoes: "",
-      categoria: "",
-      statuspagamento: "",
-      metodo: "",
-      dataVencimento: new Date().toISOString().split("T")[0],
-      dataPagamento: "",
+      registro: "",
+      nome: "",
+      email: "",
+      telefone: "",
+      status: "",
+      nasc: "",
+      endereco: "",
+      cpf: "",
+      telefoneEmergencia: "",
+      cargo: "",
+      departamento: "",
+      supervisor: "",
+      turno: "",
     });
     setMenu(false);
   };
 
   return (
-    <CadastroPagamentoContext.Provider value={{ openMenu, setDados }}>
+    <CadastroFuncionarioContext.Provider value={{ openMenu, setDados }}>
       {children}
       {menu && (
         <div className="flex fixed top-0 bottom-0 right-0 left-0 bg-[#000000B3] backdrop-blur-sm z-10 animate-fadeIn items-center justify-center p-5">
@@ -109,44 +124,83 @@ export function CadastroPagamentoProvider({
             className="bg-(--bg-card) border border-(--border-color) rounded-2xl w-full max-w-[700px] max-h-[90vh] overflow-hidden amimate-slideUp flex flex-col"
             style={{ boxShadow: "0 20px 60px rgba(0, 0, 0, 0.5)" }}
           >
-            <CadastroTitulo titulo="Registrar Pagamento" cancelar={Cancel} />
+            <CadastroTitulo
+              titulo="Cadastrar Novo Funcionário"
+              cancelar={Cancel}
+            />
 
             <form className="p-7 overflow-y-auto flex-1">
               <div className="mb-7">
                 <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
-                  Informações do Pagamento
+                  Informações Pessoais
                 </h3>
                 <CadastroFlex2
-                  opcao1="Aluno"
-                  opcao2="Categoria"
+                  opcao1="Registro"
+                  opcao2="Status"
+                  infos={dados}
+                  setInfos={setDados}
+                />
+
+                <CadastroFlex2
+                  opcao1="Data de Nascimento"
+                  opcao2="CPF/Documento"
                   infos={dados}
                   setInfos={setDados}
                 />
 
                 <CadastroFlex1
-                  titulo="Descrição"
+                  titulo="Nome completo"
                   infos={dados}
                   setInfos={setDados}
-                  place="ex: Mensalidade Dezembro 2025"
+                  place="ex: Fabrício Peres ..."
+                />
+              </div>
+
+              <div className="mb-7">
+                <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
+                  Profissional
+                </h3>
+                <CadastroFlex2
+                  opcao1="Cargo"
+                  opcao2="Departamento"
+                  infos={dados}
+                  setInfos={setDados}
                 />
 
                 <CadastroFlex2
-                  opcao1="Valor"
-                  opcao2="Vencimento"
+                  opcao1="SuperVisor"
+                  opcao2="Turno"
+                  infos={dados}
+                  setInfos={setDados}
+                />
+              </div>
+
+              <div className="mb-7">
+                <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
+                  Contato
+                </h3>
+                <CadastroFlex2
+                  opcao1="E-mail"
+                  opcao2="Telefone"
                   infos={dados}
                   setInfos={setDados}
                 />
 
-                <CadastroFlex2
-                  opcao1="Status do Pagamento"
-                  opcao2="Data do Pagamento"
+                <CadastroFlex1
+                  titulo="Endereço"
                   infos={dados}
                   setInfos={setDados}
+                  place="Rua, número, bairro, cidade - Estado"
                 />
+              </div>
 
+              <div className="mb-7">
+                <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
+                  Contato de Emergência
+                </h3>
                 <CadastroFlex2
-                  opcao1="Método do Pagameto"
-                  opcao2="Observações"
+                  opcao1="Nome do Contato de Emergência"
+                  opcao2="Telefone do Contato de Emergência"
                   infos={dados}
                   setInfos={setDados}
                 />
@@ -177,22 +231,22 @@ export function CadastroPagamentoProvider({
                 >
                   <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
-                Salvar Pagamento
+                Salvar Funcionário
               </button>
             </div>
           </div>
         </div>
       )}
-    </CadastroPagamentoContext.Provider>
+    </CadastroFuncionarioContext.Provider>
   );
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
-export function useCadastroPagamento() {
-  const context = useContext(CadastroPagamentoContext);
+export function useCadastroFuncionario() {
+  const context = useContext(CadastroFuncionarioContext);
   if (!context) {
     throw new Error(
-      "useCadastroPagamento deve ser usado dentro do CadastroPagamentoProvider"
+      "useCadastroFuncionario deve ser usado dentro do CadastroFuncionarioProvider"
     );
   }
   return context;

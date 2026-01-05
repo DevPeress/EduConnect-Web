@@ -1,65 +1,50 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
 import type { CadastroContextType } from "../../types/types";
-import {
-  CadastroFlex1,
-  CadastroFlex2,
-  CadastroTitulo,
-} from "../../components/Cadastros";
+import { CadastroFlex1, CadastroFlex2, CadastroTitulo } from "../../components/Cadastros";
 import toast from "react-hot-toast";
 import { http } from "../../utils/axios";
 import {
-  cadastroPagamentoSchema,
-  type CadastroPagamentoInput,
-} from "../../schemas/pagementoSchema";
+  cadastroDisciplinasSchema,
+  type CadastroDisciplinasInput,
+} from "../../schemas/disciplinaSchema";
 
-const CadastroPagamentoContext = createContext<
-  CadastroContextType<CadastroPagamentoInput> | undefined
+const CadastroDisciplinasContext = createContext<
+  CadastroContextType<CadastroDisciplinasInput> | undefined
 >(undefined);
-export function CadastroPagamentoProvider({
+export function CadastroDisciplinasProvider({
   children,
 }: {
   children: ReactNode;
 }) {
   const [menu, setMenu] = useState<boolean>(false);
-  const [dados, setDados] = useState<CadastroPagamentoInput>({
-    aluno: "",
+  const [dados, setDados] = useState<CadastroDisciplinasInput>({
+    registro: "",
+    nome: "",
     descricao: "",
-    valor: 0,
-    observacoes: "",
-    categoria: "",
-    statuspagamento: "",
-    metodo: "",
-    dataVencimento: new Date().toISOString().split("T")[0],
-    dataPagamento: "",
   });
   const [resolveCallback, setResolveCallback] = useState<
-    ((data: CadastroPagamentoInput | null) => void) | null
+    ((data: CadastroDisciplinasInput | null) => void) | null
   >(null);
 
-  const openMenu = async (): Promise<CadastroPagamentoInput | null> => {
+  const openMenu = async (): Promise<CadastroDisciplinasInput | null> => {
+    const matriculaNova = await http.get("api/disciplinas/Cadastro");
     setMenu(true);
+    setDados((prevDados) => ({ ...prevDados, codigo: matriculaNova.data }));
     return new Promise((resolve) => {
       setResolveCallback(() => resolve);
     });
   };
 
   const Confirm = async () => {
-    const result = cadastroPagamentoSchema.safeParse(dados);
+    const result = cadastroDisciplinasSchema.safeParse(dados);
     if (!result.success) return toast.error(result.error.issues[0].message);
 
     if (resolveCallback) {
       await http
-        .post("/api/financeiro", {
-          AlunoRegistro: dados.aluno,
-          Categoria: dados.categoria,
-          Metodo: dados.metodo,
+        .post("/api/disciplinas", {
+          Registro: dados.registro,
+          Nome: dados.nome,
           Descricao: dados.descricao,
-          Valor: dados.valor,
-          DataVencimento: dados.dataVencimento,
-          Pago: dados.statuspagamento === "Pago" ? true : false,
-          dataPagamento:
-            dados.dataPagamento !== "" ? dados.dataPagamento : null,
-          Observacoes: dados.observacoes,
         })
         .then(function () {
           resolveCallback(dados);
@@ -87,21 +72,15 @@ export function CadastroPagamentoProvider({
 
   const ResetarDados = () => {
     setDados({
-      aluno: "",
+      registro: "",
+      nome: "",
       descricao: "",
-      valor: 0,
-      observacoes: "",
-      categoria: "",
-      statuspagamento: "",
-      metodo: "",
-      dataVencimento: new Date().toISOString().split("T")[0],
-      dataPagamento: "",
     });
     setMenu(false);
   };
 
   return (
-    <CadastroPagamentoContext.Provider value={{ openMenu, setDados }}>
+    <CadastroDisciplinasContext.Provider value={{ openMenu, setDados }}>
       {children}
       {menu && (
         <div className="flex fixed top-0 bottom-0 right-0 left-0 bg-[#000000B3] backdrop-blur-sm z-10 animate-fadeIn items-center justify-center p-5">
@@ -109,16 +88,20 @@ export function CadastroPagamentoProvider({
             className="bg-(--bg-card) border border-(--border-color) rounded-2xl w-full max-w-[700px] max-h-[90vh] overflow-hidden amimate-slideUp flex flex-col"
             style={{ boxShadow: "0 20px 60px rgba(0, 0, 0, 0.5)" }}
           >
-            <CadastroTitulo titulo="Registrar Pagamento" cancelar={Cancel} />
+            <CadastroTitulo
+              titulo="Cadastrar Nova Disciplina"
+              cancelar={Cancel}
+            />
 
             <form className="p-7 overflow-y-auto flex-1">
               <div className="mb-7">
                 <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
-                  Informações do Pagamento
+                  Informações Básicas
                 </h3>
+
                 <CadastroFlex2
-                  opcao1="Aluno"
-                  opcao2="Categoria"
+                  opcao1="Registro"
+                  opcao2="Nome"
                   infos={dados}
                   setInfos={setDados}
                 />
@@ -127,28 +110,7 @@ export function CadastroPagamentoProvider({
                   titulo="Descrição"
                   infos={dados}
                   setInfos={setDados}
-                  place="ex: Mensalidade Dezembro 2025"
-                />
-
-                <CadastroFlex2
-                  opcao1="Valor"
-                  opcao2="Vencimento"
-                  infos={dados}
-                  setInfos={setDados}
-                />
-
-                <CadastroFlex2
-                  opcao1="Status do Pagamento"
-                  opcao2="Data do Pagamento"
-                  infos={dados}
-                  setInfos={setDados}
-                />
-
-                <CadastroFlex2
-                  opcao1="Método do Pagameto"
-                  opcao2="Observações"
-                  infos={dados}
-                  setInfos={setDados}
+                  place="ex: Matéria criada baseada na lei..."
                 />
               </div>
             </form>
@@ -177,22 +139,22 @@ export function CadastroPagamentoProvider({
                 >
                   <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
-                Salvar Pagamento
+                Salvar Disciplina
               </button>
             </div>
           </div>
         </div>
       )}
-    </CadastroPagamentoContext.Provider>
+    </CadastroDisciplinasContext.Provider>
   );
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
-export function useCadastroPagamento() {
-  const context = useContext(CadastroPagamentoContext);
+export function useCadastroDisciplinas() {
+  const context = useContext(CadastroDisciplinasContext);
   if (!context) {
     throw new Error(
-      "useCadastroPagamento deve ser usado dentro do CadastroPagamentoProvider"
+      "useCadastroDisciplinas deve ser usado dentro do CadastroDisciplinasProvider"
     );
   }
   return context;

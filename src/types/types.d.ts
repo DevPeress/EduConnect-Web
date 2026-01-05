@@ -1,4 +1,5 @@
 import type { CadastroAlunoInput } from "../schemas/alunoSchema";
+import type { CadastroFuncionarioInput } from "../schemas/funcionarioSchema";
 import type { CadastroPagamentoInput } from "../schemas/pagementoSchema";
 import type { CadastroProfessorInput } from "../schemas/professorSchema";
 import type { CadastroTurmaInput } from "../schemas/turmaSchema";
@@ -118,12 +119,21 @@ export interface Turmas {
   capacidade: number;
 }
 
+export interface Disciplinas {
+  registro: string;
+  nome: string;
+  descricao: string;
+  data: string
+}
+
 export interface CadastroContextType<
   T extends
     | CadastroProfessorInput
     | CadastroAlunoInput
     | CadastroPagamentoInput
     | CadastroTurmaInput
+    | CadastroFuncionarioInput
+    | CadastroDisciplinasInput
 > {
   openMenu: () => Promise<T | null>;
   setDados: React.Dispatch<React.SetStateAction<T>>;
@@ -148,6 +158,8 @@ export interface CadastroFlexProps<
     | CadastroProfessorInput
     | CadastroPagamentoInput
     | CadastroTurmaInput
+    | CadastroFuncionarioInput
+    | CadastroDisciplinasInput
 > {
   infos: T;
   setInfos: React.Dispatch<React.SetStateAction<T>>;

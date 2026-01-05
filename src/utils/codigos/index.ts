@@ -98,6 +98,12 @@ function IdentificarTipo(dado: string) {
       return "semana";
     case "Disciplinas":
       return "disciplinas";
+    case "Registro":
+      return "registro";
+    case "Cargo":
+      return "cargo";
+    case "SuperVisor":
+      return "supervisor";
 
     default:
       return "";

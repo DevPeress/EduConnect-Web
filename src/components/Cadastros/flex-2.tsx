@@ -10,6 +10,8 @@ import {
   formatTelefone,
   IdentificarTipo,
 } from "../../utils/codigos";
+import type { CadastroFuncionarioInput } from "../../schemas/funcionarioSchema";
+import type { CadastroDisciplinasInput } from "../../schemas/disciplinaSchema";
 
 interface CadastroFlex2Prop<
   T extends
@@ -17,6 +19,8 @@ interface CadastroFlex2Prop<
     | CadastroProfessorInput
     | CadastroPagamentoInput
     | CadastroTurmaInput
+    | CadastroFuncionarioInput
+    | CadastroDisciplinasInput
 > extends CadastroFlexProps<T> {
   opcao1: string;
   opcao2: string;
@@ -28,6 +32,8 @@ const CadastroFlex2 = <
     | CadastroProfessorInput
     | CadastroPagamentoInput
     | CadastroTurmaInput
+    | CadastroFuncionarioInput
+    | CadastroDisciplinasInput
 >({
   opcao1,
   opcao2,
@@ -73,6 +79,7 @@ const CadastroFlex2 = <
 
   // Define os tipos de informações exibidas no select com base no tipo fornecido.
   const selectOptions: Record<string, string[]> = {
+    turno: ["Selecionar o Turno", "Matutino", "Vespertino", "Noturno"],
     status: ["Ativo", "Inativo", "Suspenso"],
     turma: ["Selecionar Turma", ...turmas.map((t: string) => t)],
     categoria: ["Selecionar categoria", "Mensalidade", "Material"],
@@ -96,6 +103,8 @@ const CadastroFlex2 = <
     email: "email",
     cpf: "text",
     telefone: "text",
+    inicio: "time",
+    fim: "time",
   };
 
   // Cria o Select ou Input para ser demonstrado
@@ -123,7 +132,7 @@ const CadastroFlex2 = <
 
     const type: string = inputTypes[String(Escolhas)] ?? "text";
     const apenasLer: boolean =
-      Escolhas === "codigo" || Escolhas === "matricula";
+      Escolhas === "codigo" || Escolhas === "matricula" || Escolhas === "registro";
 
     return apenasLer ? (
       <input
