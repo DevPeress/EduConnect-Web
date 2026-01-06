@@ -116,7 +116,7 @@ const DisciplinasAdmin = () => {
                   )}
                 </td>
                 <td
-                  className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]"
+                  className="py-4 px-5 border-b-2 border-(--border-color) text-[14px] hover:cursor-pointer"
                   onClick={() => Deletar(item.registro)}
                 >
                   ❌
