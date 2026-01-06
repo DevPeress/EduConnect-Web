@@ -24,10 +24,11 @@ export function useCadastroMenu() {
   };
 }
 
-export function useEditarMenu(Registro: string) {
-  const editarFuncionario = useEditarFuncionario().openMenu(Registro);
+export function useEditarMenu() {
+  const editarFuncionarioCtx = useEditarFuncionario();
 
   return {
-    editarFuncionario,
+    editarFuncionario: (registro: string) =>
+      editarFuncionarioCtx.openMenu(registro),
   };
 }
