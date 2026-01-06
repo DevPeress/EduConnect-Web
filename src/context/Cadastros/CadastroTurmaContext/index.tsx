@@ -33,7 +33,7 @@ export function CadastroTurmaProvider({ children }: { children: ReactNode }) {
     disciplinasValidas: "",
   });
   const [resolveCallback, setResolveCallback] = useState<
-    ((data: CadastroTurmaInput | null) => void) | null
+    ((data: true | null) => void) | null
   >(null);
 
   const openMenu = async (): Promise<CadastroTurmaInput | null> => {
@@ -72,7 +72,7 @@ export function CadastroTurmaProvider({ children }: { children: ReactNode }) {
           Dias: dados.dias,
         })
         .then(function () {
-          resolveCallback(dados);
+          resolveCallback(true);
           toast.success("Cadastro realizado com sucesso!");
         })
         .catch(function (error) {

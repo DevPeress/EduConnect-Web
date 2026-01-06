@@ -33,7 +33,7 @@ export function CadastroPagamentoProvider({
     dataPagamento: "",
   });
   const [resolveCallback, setResolveCallback] = useState<
-    ((data: CadastroPagamentoInput | null) => void) | null
+    ((data: true | null) => void) | null
   >(null);
 
   const openMenu = async (): Promise<CadastroPagamentoInput | null> => {
@@ -62,7 +62,7 @@ export function CadastroPagamentoProvider({
           Observacoes: dados.observacoes,
         })
         .then(function () {
-          resolveCallback(dados);
+          resolveCallback(true);
           toast.success("Cadastro realizado com sucesso!");
         })
         .catch(function (error) {

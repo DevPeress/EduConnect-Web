@@ -38,7 +38,7 @@ export function CadastroProfessorProvider({
     telefoneEmergencia: "",
   });
   const [resolveCallback, setResolveCallback] = useState<
-    ((data: CadastroProfessorInput | null) => void) | null
+    ((data: true | null) => void) | null
   >(null);
 
   const openMenu = async (): Promise<CadastroProfessorInput | null> => {
@@ -73,7 +73,7 @@ export function CadastroProfessorProvider({
           Foto: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100",
         })
         .then(function () {
-          resolveCallback(dados);
+          resolveCallback(true);
           setResolveCallback(null);
           toast.success("Cadastro realizado com sucesso!");
         })

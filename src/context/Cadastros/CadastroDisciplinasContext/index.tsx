@@ -27,7 +27,7 @@ export function CadastroDisciplinasProvider({
     descricao: "",
   });
   const [resolveCallback, setResolveCallback] = useState<
-    ((data: CadastroDisciplinasInput | null) => void) | null
+    ((data: true | null) => void) | null
   >(null);
 
   const openMenu = async (): Promise<CadastroDisciplinasInput | null> => {
@@ -51,7 +51,7 @@ export function CadastroDisciplinasProvider({
           Descricao: dados.descricao,
         })
         .then(function () {
-          resolveCallback(dados);
+          resolveCallback(true);
           toast.success("Cadastro realizado com sucesso!");
         })
         .catch(function (error) {

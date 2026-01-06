@@ -31,7 +31,7 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
     telefoneEmergencia: "",
   });
   const [resolveCallback, setResolveCallback] = useState<
-    ((data: CadastroAlunoInput | null) => void) | null
+    ((data: true | null) => void) | null
   >(null);
 
   const openMenu = async (): Promise<CadastroAlunoInput | null> => {
@@ -65,7 +65,7 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
           Foto: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100",
         })
         .then(function () {
-          resolveCallback(dados);
+          resolveCallback(true);
           toast.success("Cadastro realizado com sucesso!");
         })
         .catch(function (error) {
