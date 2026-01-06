@@ -8,7 +8,7 @@ import {
 import {
   cadastroProfessorSchema,
   type CadastroProfessorInput,
-} from "../../../schemas/Cadastro/professorSchema";
+} from "../../../schemas/Cadastro/CadastroProfessorSchema";
 import toast from "react-hot-toast";
 import { http } from "../../../utils/axios";
 

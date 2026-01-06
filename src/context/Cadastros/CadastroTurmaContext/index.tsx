@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 import {
   cadastroTurmaSchema,
   type CadastroTurmaInput,
-} from "../../../schemas/Cadastro/turmaSchema";
+} from "../../../schemas/Cadastro/CadastroTurmaSchema";
 import { http } from "../../../utils/axios";
 
 const CadastroTurmaContext = createContext<

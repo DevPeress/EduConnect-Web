@@ -10,7 +10,7 @@ import { http } from "../../../utils/axios";
 import {
   cadastroFuncionarioSchema,
   type CadastroFuncionarioInput,
-} from "../../../schemas/Cadastro/funcionarioSchema";
+} from "../../../schemas/Cadastro/CadastroFuncionarioSchema";
 
 const CadastroFuncionarioContext = createContext<
   ContextType<CadastroFuncionarioInput> | undefined

@@ -1,8 +1,8 @@
-import type { CadastroAlunoInput } from "../schemas/Cadastro/alunoSchema";
-import type { CadastroFuncionarioInput } from "../schemas/Cadastro/funcionarioSchema";
-import type { CadastroPagamentoInput } from "../schemas/Cadastro/pagementoSchema";
-import type { CadastroProfessorInput } from "../schemas/Cadastro/professorSchema";
-import type { CadastroTurmaInput } from "../schemas/Cadastro/turmaSchema";
+import type { CadastroAlunoInput } from "../schemas/Cadastro/CadastroAlunoSchema";
+import type { CadastroFuncionarioInput } from "../schemas/Cadastro/CadastroFuncionarioSchema";
+import type { CadastroPagamentoInput } from "../schemas/Cadastro/CadastroPagementoSchema";
+import type { CadastroProfessorInput } from "../schemas/Cadastro/CadastroProfessorSchema";
+import type { CadastroTurmaInput } from "../schemas/Cadastro/CadastroTurmaSchema";
 
 export interface ThemeType {
   toggleTheme: () => void;

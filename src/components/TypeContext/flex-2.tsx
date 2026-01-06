@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import type { CadastroAlunoInput } from "../../schemas/Cadastro/alunoSchema";
-import type { CadastroPagamentoInput } from "../../schemas/Cadastro/pagementoSchema";
-import type { CadastroProfessorInput } from "../../schemas/Cadastro/professorSchema";
-import type { CadastroTurmaInput } from "../../schemas/Cadastro/turmaSchema";
+import type { CadastroAlunoInput } from "../../schemas/Cadastro/CadastroAlunoSchema";
+import type { CadastroPagamentoInput } from "../../schemas/Cadastro/CadastroPagementoSchema";
+import type { CadastroProfessorInput } from "../../schemas/Cadastro/CadastroProfessorSchema";
+import type { CadastroTurmaInput } from "../../schemas/Cadastro/CadastroTurmaSchema";
 import type { FlexContext } from "../../types/types";
 import { http } from "../../utils/axios";
 import {
@@ -10,8 +10,8 @@ import {
   formatTelefone,
   IdentificarTipo,
 } from "../../utils/codigos";
-import type { CadastroFuncionarioInput } from "../../schemas/Cadastro/funcionarioSchema";
-import type { CadastroDisciplinasInput } from "../../schemas/Cadastro/disciplinaSchema";
+import type { CadastroFuncionarioInput } from "../../schemas/Cadastro/CadastroFuncionarioSchema";
+import type { CadastroDisciplinasInput } from "../../schemas/Cadastro/CadastroDisciplinaSchema";
 import type { EditarFuncionarioInput } from "../../schemas/Editar/EditarFuncionarioSchema";
 
 interface Flex2ContextProp<

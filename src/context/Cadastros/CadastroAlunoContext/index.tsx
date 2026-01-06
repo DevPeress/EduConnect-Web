@@ -9,7 +9,7 @@ import toast from "react-hot-toast";
 import {
   cadastroAlunoSchema,
   type CadastroAlunoInput,
-} from "../../../schemas/Cadastro/alunoSchema";
+} from "../../../schemas/Cadastro/CadastroAlunoSchema";
 import { http } from "../../../utils/axios";
 
 const CadastroAlunoContext = createContext<
