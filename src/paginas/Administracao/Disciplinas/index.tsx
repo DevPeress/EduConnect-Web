@@ -56,7 +56,7 @@ const DisciplinasAdmin = () => {
 
   const AdicionarDisciplina = async () => {
     const dados = await cadastroDisciplinas();
-    if (!dados || disciplinas.length < 10) return;
+    if (!dados || disciplinas.length < 9) return;
     return Pesquisa();
   };
 
