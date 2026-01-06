@@ -3,36 +3,13 @@ import type { TablePropsTable } from "../../../types/types";
 import { formatBRL, formatTelefone } from "../../../utils/codigos";
 import { Head } from "../../../utils/head";
 import { useState } from "react";
-
-interface Imagem {
-  foto: string;
-  nome: string;
-  data: string;
-}
+import ImgExibicao from "../imgExibicao";
 
 const Table = ({ exibicao, excluir }: TablePropsTable) => {
   const location = useLocation();
   const pagina = location.pathname;
   const head: string[] = Head(pagina);
   const [menuAberto, setMenuAberto] = useState<string>("");
-
-  const Img = ({ foto, nome, data }: Imagem) => {
-    return (
-      <div className="flex items-center gap-3">
-        <img
-          className="w-10 h-10 rounded-[50%] object-cover border-2 border-(--border-color)"
-          src={foto}
-          alt="Imagem da Pessoa"
-        />
-        <div>
-          <p className="font-semibold">{nome}</p>
-          <p className="text-[12px] text-(--text-muted)">
-            {new Date(data + "T00:00:00").toLocaleDateString("pt-BR")}
-          </p>
-        </div>
-      </div>
-    );
-  };
 
   const VerificarCor = (tipo: string) => {
     switch (tipo) {
@@ -117,7 +94,12 @@ const Table = ({ exibicao, excluir }: TablePropsTable) => {
               <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
                 <span className="font-semibold text-(--primary-color) text-[13px]">
                   {"aluno" in item ? (
-                    <Img foto={item.foto} nome={registro} data={item.nasc} />
+                    <ImgExibicao
+                      tabela={true}
+                      foto={item.foto}
+                      nome={registro}
+                      data={item.nasc}
+                    />
                   ) : (
                     <>{registro}</>
                   )}
@@ -125,7 +107,12 @@ const Table = ({ exibicao, excluir }: TablePropsTable) => {
               </td>
               <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
                 {"nasc" in item && "telefone" in item ? (
-                  <Img foto={item.foto} nome={dado1} data={item.nasc} />
+                  <ImgExibicao
+                    tabela={true}
+                    foto={item.foto}
+                    nome={dado1}
+                    data={item.nasc}
+                  />
                 ) : (
                   <>{dado1}</>
                 )}

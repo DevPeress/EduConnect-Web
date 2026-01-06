@@ -1,40 +1,8 @@
 import type { TablePropsGrid } from "../../../types/types";
 import { formatBRL, formatTelefone } from "../../../utils/codigos";
+import ImgExibicao from "../imgExibicao";
 
 const Grid = ({ exibicao }: TablePropsGrid) => {
-  const Img = ({
-    foto,
-    nome,
-    data,
-    registro,
-  }: {
-    foto: string;
-    nome: string;
-    data: string;
-    registro: string;
-  }) => {
-    return (
-      <div className="flex flex-col items-center gap-3">
-        <img
-          className="w-35 h-35 rounded-[50%] object-cover border-2 border-(--border-color) mt-2"
-          src={foto}
-          alt="Imagem do Aluno"
-        />
-        <div className="px-5 border-b-2 border-(--border-color) text-[14px]">
-          <span className="font-semibold text-(--primary-color) text-[13px]">
-            {registro}
-          </span>
-        </div>
-        <div className="text-center">
-          <p className="font-semibold">{nome}</p>
-          <p className="text-[12px] text-(--text-muted)">
-            {new Date(data + "T00:00:00").toLocaleDateString("pt-BR")}
-          </p>
-        </div>
-      </div>
-    );
-  };
-
   const VerificarCor = (tipo: string) => {
     switch (tipo) {
       case "Ativo":
@@ -93,11 +61,12 @@ const Grid = ({ exibicao }: TablePropsGrid) => {
             key={item.registro}
             className="grid grid-cols-2 w-125 h-63 bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden hover:bg-(--bg-input) text-(--text-primary) items-center"
           >
-            <Img
+            <ImgExibicao
               registro={item.registro}
               nome={registro}
               data={item.nasc}
               foto={item.foto}
+              tabela={false}
             />
 
             <div className="flex flex-col items-center gap-3">
