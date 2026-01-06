@@ -54,7 +54,7 @@ function App() {
             <PrivateRoute
               isAuthenticated={user}
               userRole={cargo}
-              allowedRoles={["Administrador", "Funcionário"]}
+              allowedRoles={["Administrador"]}
             />
           }
         >
