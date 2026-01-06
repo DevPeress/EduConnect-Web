@@ -1,24 +1,70 @@
-import { createContext, useContext, type ReactNode } from "react";
+import { createContext, useContext, useState, type ReactNode } from "react";
 import {
   CadastroFlex1,
   CadastroFlex2,
   CadastroTitulo,
 } from "../../../components/Cadastros";
 import { http } from "../../../utils/axios";
+import type { EditarContextType } from "../../../types/types";
+import type { CadastroFuncionarioInput } from "../../../schemas/Cadastro/funcionarioSchema";
+import type { EditarFuncionarioInput } from "../../../schemas/Editar/EditarFuncionarioSchema";
 
-const EditarFuncionarioContext = createContext(undefined);
+const EditarFuncionarioContext = createContext<
+  EditarContextType<EditarFuncionarioInput> | undefined
+>(undefined);
 
-export function EditarFuncionaroProvider({ children }: { childre: ReactNode }) {
+export function EditarFuncionaroProvider({
+  children,
+}: {
+  children: ReactNode;
+}) {
   const [menu, setMenu] = useState<boolean>(false);
+  const [dados, setDados] = useState<EditarFuncionarioInput>({
+    registro: "",
+    nome: "",
+    email: "",
+    telefone: "",
+    status: "",
+    nasc: "",
+    endereco: "",
+    cpf: "",
+    contatoEmergencia: "",
+    foto: "",
+    cargo: "",
+    departamento: "",
+    supervisor: "",
+    turno: "",
+    salario: 0,
+  });
 
   const [resolveCallback, setResolveCallback] = useState<
     ((data: CadastroFuncionarioInput | null) => void) | null
   >(null);
 
-  const openMenu = async (): Promise<CadastroFuncionarioInput | null> => {
-    const matriculaNova = await http.get("api/funcionarios/Cadastro");
+  const openMenu = async (
+    registro: string
+  ): Promise<EditarFuncionarioInput | null> => {
+    await http.get(`api/funcionarios/${registro}`).then(function (dados) {
+      const infos: EditarFuncionarioInput = dados.data;
+      setDados({
+        registro: registro,
+        nome: infos.nome,
+        email: infos.email,
+        telefone: infos.telefone,
+        status: infos.status,
+        nasc: infos.nasc,
+        endereco: infos.endereco,
+        cpf: infos.cpf,
+        contatoEmergencia: infos.contatoEmergencia,
+        foto: infos.foto,
+        cargo: infos.cargo,
+        departamento: infos.departamento,
+        supervisor: infos.supervisor,
+        turno: infos.turno,
+        salario: infos.salario,
+      });
+    });
     setMenu(true);
-    setDados((prevDados) => ({ ...prevDados, registro: matriculaNova.data }));
     return new Promise((resolve) => {
       setResolveCallback(() => resolve);
     });
@@ -29,11 +75,10 @@ export function EditarFuncionaroProvider({ children }: { childre: ReactNode }) {
       resolveCallback(null);
       setResolveCallback(null);
     }
-    ResetarDados();
   };
 
   return (
-    <EditarFuncionarioContext.Provider value={{}}>
+    <EditarFuncionarioContext.Provider value={{ openMenu, setDados }}>
       {children}
       {menu && <></>}
     </EditarFuncionarioContext.Provider>
