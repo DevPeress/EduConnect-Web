@@ -4,7 +4,7 @@ import type { CadastroFuncionarioInput } from "../../schemas/Cadastro/funcionari
 import type { CadastroPagamentoInput } from "../../schemas/Cadastro/pagementoSchema";
 import type { CadastroProfessorInput } from "../../schemas/Cadastro/professorSchema";
 import type { CadastroTurmaInput } from "../../schemas/Cadastro/turmaSchema";
-import type { CadastroFlexProps } from "../../types/types";
+import type { FlexContext } from "../../types/types";
 import { IdentificarTipo } from "../../utils/codigos";
 import type { CadastroDisciplinasInput } from "../../schemas/Cadastro/disciplinaSchema";
 
@@ -13,7 +13,7 @@ type Disciplina = {
   nome: string;
 };
 
-interface CadastroFlex1Prop<
+interface Flex1ContextProp<
   T extends
     | CadastroAlunoInput
     | CadastroProfessorInput
@@ -21,12 +21,12 @@ interface CadastroFlex1Prop<
     | CadastroTurmaInput
     | CadastroFuncionarioInput
     | CadastroDisciplinasInput
-> extends CadastroFlexProps<T> {
+> extends FlexContext<T> {
   titulo: string;
   place: string;
 }
 
-const CadastroFlex1 = <
+const Flex1Context = <
   T extends
     | CadastroAlunoInput
     | CadastroProfessorInput
@@ -39,7 +39,7 @@ const CadastroFlex1 = <
   infos,
   setInfos,
   place,
-}: CadastroFlex1Prop<T>) => {
+}: Flex1ContextProp<T>) => {
   // Processa a opção recebida e retorna o resultado conforme o contexto de criação de alunos ou professores.
   const tipo = IdentificarTipo(titulo) as keyof T;
   const [selecionadas, setSelecionadas] = useState<Disciplina[]>([]);
@@ -242,4 +242,4 @@ const CadastroFlex1 = <
   );
 };
 
-export default CadastroFlex1;
+export default Flex1Context;

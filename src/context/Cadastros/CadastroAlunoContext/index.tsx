@@ -1,9 +1,9 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
 import type { CadastroContextType } from "../../../types/types";
 import {
-  CadastroFlex1,
-  CadastroFlex2,
-  CadastroTitulo,
+  Flex1Context,
+  Flex2Context,
+  TituloContext,
 } from "../../../components/Cadastros";
 import toast from "react-hot-toast";
 import {
@@ -114,28 +114,28 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
             className="bg-(--bg-card) border border-(--border-color) rounded-2xl w-full max-w-[700px] max-h-[90vh] overflow-hidden amimate-slideUp flex flex-col"
             style={{ boxShadow: "0 20px 60px rgba(0, 0, 0, 0.5)" }}
           >
-            <CadastroTitulo titulo="Cadastrar Novo Aluno" cancelar={Cancel} />
+            <TituloContext titulo="Cadastrar Novo Aluno" cancelar={Cancel} />
 
             <form className="p-7 overflow-y-auto flex-1">
               <div className="mb-7">
                 <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
                   Informações Pessoais
                 </h3>
-                <CadastroFlex2
+                <Flex2Context
                   opcao1="Matrícula"
                   opcao2="Status"
                   infos={dados}
                   setInfos={setDados}
                 />
 
-                <CadastroFlex2
+                <Flex2Context
                   opcao1="Nome completo"
                   opcao2="CPF/Documento"
                   infos={dados}
                   setInfos={setDados}
                 />
 
-                <CadastroFlex2
+                <Flex2Context
                   opcao1="Data de Nascimento"
                   opcao2="Turma"
                   infos={dados}
@@ -147,14 +147,14 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
                 <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
                   Contato
                 </h3>
-                <CadastroFlex2
+                <Flex2Context
                   opcao1="E-mail"
                   opcao2="Telefone"
                   infos={dados}
                   setInfos={setDados}
                 />
 
-                <CadastroFlex1
+                <Flex1Context
                   titulo="Endereço"
                   infos={dados}
                   setInfos={setDados}
@@ -166,7 +166,7 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
                 <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
                   Contato de Emergência
                 </h3>
-                <CadastroFlex2
+                <Flex2Context
                   opcao1="Nome do Contato de Emergência"
                   opcao2="Telefone do Contato de Emergência"
                   infos={dados}

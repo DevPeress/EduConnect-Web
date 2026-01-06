@@ -157,7 +157,7 @@ export interface SlotInfo {
   action: "select" | "click" | "doubleClick";
 }
 
-export interface CadastroFlexProps<
+export interface FlexContext<
   T extends
     | CadastroAlunoInput
     | CadastroProfessorInput

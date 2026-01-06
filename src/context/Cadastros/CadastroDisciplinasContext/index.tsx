@@ -1,9 +1,9 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
 import type { CadastroContextType } from "../../../types/types";
 import {
-  CadastroFlex1,
-  CadastroFlex2,
-  CadastroTitulo,
+  Flex1Context,
+  Flex2Context,
+  TituloContext,
 } from "../../../components/Cadastros";
 import toast from "react-hot-toast";
 import { http } from "../../../utils/axios";
@@ -92,7 +92,7 @@ export function CadastroDisciplinasProvider({
             className="bg-(--bg-card) border border-(--border-color) rounded-2xl w-full max-w-[700px] max-h-[90vh] overflow-hidden amimate-slideUp flex flex-col"
             style={{ boxShadow: "0 20px 60px rgba(0, 0, 0, 0.5)" }}
           >
-            <CadastroTitulo
+            <TituloContext
               titulo="Cadastrar Nova Disciplina"
               cancelar={Cancel}
             />
@@ -103,14 +103,14 @@ export function CadastroDisciplinasProvider({
                   Informações Básicas
                 </h3>
 
-                <CadastroFlex2
+                <Flex2Context
                   opcao1="Registro"
                   opcao2="Nome"
                   infos={dados}
                   setInfos={setDados}
                 />
 
-                <CadastroFlex1
+                <Flex1Context
                   titulo="Descrição"
                   infos={dados}
                   setInfos={setDados}

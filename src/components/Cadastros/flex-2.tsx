@@ -3,7 +3,7 @@ import type { CadastroAlunoInput } from "../../schemas/Cadastro/alunoSchema";
 import type { CadastroPagamentoInput } from "../../schemas/Cadastro/pagementoSchema";
 import type { CadastroProfessorInput } from "../../schemas/Cadastro/professorSchema";
 import type { CadastroTurmaInput } from "../../schemas/Cadastro/turmaSchema";
-import type { CadastroFlexProps } from "../../types/types";
+import type { FlexContext } from "../../types/types";
 import { http } from "../../utils/axios";
 import {
   formatCPF,
@@ -13,7 +13,7 @@ import {
 import type { CadastroFuncionarioInput } from "../../schemas/Cadastro/funcionarioSchema";
 import type { CadastroDisciplinasInput } from "../../schemas/Cadastro/disciplinaSchema";
 
-interface CadastroFlex2Prop<
+interface Flex2ContextProp<
   T extends
     | CadastroAlunoInput
     | CadastroProfessorInput
@@ -21,12 +21,12 @@ interface CadastroFlex2Prop<
     | CadastroTurmaInput
     | CadastroFuncionarioInput
     | CadastroDisciplinasInput
-> extends CadastroFlexProps<T> {
+> extends FlexContext<T> {
   opcao1: string;
   opcao2: string;
 }
 
-const CadastroFlex2 = <
+const Flex2Context = <
   T extends
     | CadastroAlunoInput
     | CadastroProfessorInput
@@ -39,7 +39,7 @@ const CadastroFlex2 = <
   opcao2,
   infos,
   setInfos,
-}: CadastroFlex2Prop<T>) => {
+}: Flex2ContextProp<T>) => {
   // Processa a opção recebida e retorna o resultado conforme o contexto de criação de alunos ou professores.
   const tipo1 = IdentificarTipo(opcao1) as keyof T;
   const tipo2 = IdentificarTipo(opcao2) as keyof T;
@@ -185,4 +185,4 @@ const CadastroFlex2 = <
   );
 };
 
-export default CadastroFlex2;
+export default Flex2Context;

@@ -1,9 +1,9 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
 import type { CadastroContextType } from "../../../types/types";
 import {
-  CadastroFlex1,
-  CadastroFlex2,
-  CadastroTitulo,
+  Flex1Context,
+  Flex2Context,
+  TituloContext,
 } from "../../../components/Cadastros";
 import toast from "react-hot-toast";
 import { http } from "../../../utils/axios";
@@ -109,42 +109,42 @@ export function CadastroPagamentoProvider({
             className="bg-(--bg-card) border border-(--border-color) rounded-2xl w-full max-w-[700px] max-h-[90vh] overflow-hidden amimate-slideUp flex flex-col"
             style={{ boxShadow: "0 20px 60px rgba(0, 0, 0, 0.5)" }}
           >
-            <CadastroTitulo titulo="Registrar Pagamento" cancelar={Cancel} />
+            <TituloContext titulo="Registrar Pagamento" cancelar={Cancel} />
 
             <form className="p-7 overflow-y-auto flex-1">
               <div className="mb-7">
                 <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
                   Informações do Pagamento
                 </h3>
-                <CadastroFlex2
+                <Flex2Context
                   opcao1="Aluno"
                   opcao2="Categoria"
                   infos={dados}
                   setInfos={setDados}
                 />
 
-                <CadastroFlex1
+                <Flex1Context
                   titulo="Descrição"
                   infos={dados}
                   setInfos={setDados}
                   place="ex: Mensalidade Dezembro 2025"
                 />
 
-                <CadastroFlex2
+                <Flex2Context
                   opcao1="Valor"
                   opcao2="Vencimento"
                   infos={dados}
                   setInfos={setDados}
                 />
 
-                <CadastroFlex2
+                <Flex2Context
                   opcao1="Status do Pagamento"
                   opcao2="Data do Pagamento"
                   infos={dados}
                   setInfos={setDados}
                 />
 
-                <CadastroFlex2
+                <Flex2Context
                   opcao1="Método do Pagameto"
                   opcao2="Observações"
                   infos={dados}

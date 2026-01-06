@@ -1,7 +1,7 @@
-import CadastroFlex1 from "./flex-1";
-import CadastroFlex2 from "./flex-2";
+import Flex1Context from "./flex-1";
+import Flex2Context from "./flex-2";
 
-const CadastroTitulo = ({
+const TituloContext = ({
   titulo,
   cancelar,
 }: {
@@ -51,4 +51,4 @@ const CadastroTitulo = ({
   );
 };
 
-export { CadastroFlex1, CadastroFlex2, CadastroTitulo };
+export { Flex1Context, Flex2Context, TituloContext };
