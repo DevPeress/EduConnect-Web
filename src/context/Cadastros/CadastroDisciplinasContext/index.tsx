@@ -4,7 +4,7 @@ import {
   Flex1Context,
   Flex2Context,
   TituloContext,
-} from "../../../components/Cadastros";
+} from "../../../components/TypeContext";
 import toast from "react-hot-toast";
 import { http } from "../../../utils/axios";
 import {
