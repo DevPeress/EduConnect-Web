@@ -18,7 +18,7 @@ const DisciplinasAdmin = () => {
 
   const Pesquisa = () => {
     http
-      .get(`api/turma/filtro/disciplinas`)
+      .get(`api/disciplinas/filtro/page/${pagina}`)
       .then(function (dados) {
         setTotal(dados.data.total);
         setDisciplinas(dados.data.dados);
@@ -30,6 +30,11 @@ const DisciplinasAdmin = () => {
         setLoading(false);
       });
   };
+
+  useEffect(() => {
+    Pesquisa();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pagina]);
 
   // Atualiza sempre que os pagamentos mudar para página 1
   useEffect(() => {
@@ -93,7 +98,7 @@ const DisciplinasAdmin = () => {
                   {item.descricao}
                 </td>
                 <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
-                  {item.data}
+                  {item.dataCriacao}
                 </td>
                 <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
                   ❌
