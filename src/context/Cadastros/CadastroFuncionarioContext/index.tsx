@@ -1,16 +1,16 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
-import type { CadastroContextType } from "../../types/types";
+import type { CadastroContextType } from "../../../types/types";
 import {
   CadastroFlex1,
   CadastroFlex2,
   CadastroTitulo,
-} from "../../components/Cadastros";
+} from "../../../components/Cadastros";
 import toast from "react-hot-toast";
-import { http } from "../../utils/axios";
+import { http } from "../../../utils/axios";
 import {
   cadastroFuncionarioSchema,
   type CadastroFuncionarioInput,
-} from "../../schemas/funcionarioSchema";
+} from "../../../schemas/funcionarioSchema";
 
 const CadastroFuncionarioContext = createContext<
   CadastroContextType<CadastroFuncionarioInput> | undefined
