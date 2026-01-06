@@ -6,6 +6,7 @@ import { http } from "../../../utils/axios";
 import Selects from "../../../components/Administracao/Selects";
 import { useCadastroMenu } from "../../../context";
 import TrocaPagina from "../../../components/TrocaPagina";
+import toast from "react-hot-toast";
 
 const ITENS_POR_PAGINA = 6;
 
@@ -67,6 +68,18 @@ const ProfessoresAdmin = () => {
     return Pesquisa();
   };
 
+  const Excluir = async (Registro: string) => {
+    http
+      .delete(`api/funcionarios/${Registro}`)
+      .then(function () {
+        Pesquisa();
+      })
+      .catch(function (error) {
+        console.log(error);
+        toast.error("Não foi possivel deletar o Funcionário");
+      });
+  };
+
   const maxPaginas = Math.max(1, Math.ceil(total / ITENS_POR_PAGINA));
 
   return (
@@ -103,7 +116,7 @@ const ProfessoresAdmin = () => {
         </div>
       ) : (
         <div className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden mb-6">
-          <Table exibicao={professores} />
+          <Table exibicao={professores} excluir={Excluir} />
         </div>
       )}
 
