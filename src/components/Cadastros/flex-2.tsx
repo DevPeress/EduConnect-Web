@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import type { CadastroAlunoInput } from "../../schemas/alunoSchema";
-import type { CadastroPagamentoInput } from "../../schemas/pagementoSchema";
-import type { CadastroProfessorInput } from "../../schemas/professorSchema";
-import type { CadastroTurmaInput } from "../../schemas/turmaSchema";
+import type { CadastroAlunoInput } from "../../schemas/Cadastro/alunoSchema";
+import type { CadastroPagamentoInput } from "../../schemas/Cadastro/pagementoSchema";
+import type { CadastroProfessorInput } from "../../schemas/Cadastro/professorSchema";
+import type { CadastroTurmaInput } from "../../schemas/Cadastro/turmaSchema";
 import type { CadastroFlexProps } from "../../types/types";
 import { http } from "../../utils/axios";
 import {
@@ -10,8 +10,8 @@ import {
   formatTelefone,
   IdentificarTipo,
 } from "../../utils/codigos";
-import type { CadastroFuncionarioInput } from "../../schemas/funcionarioSchema";
-import type { CadastroDisciplinasInput } from "../../schemas/disciplinaSchema";
+import type { CadastroFuncionarioInput } from "../../schemas/Cadastro/funcionarioSchema";
+import type { CadastroDisciplinasInput } from "../../schemas/Cadastro/disciplinaSchema";
 
 interface CadastroFlex2Prop<
   T extends
@@ -132,7 +132,9 @@ const CadastroFlex2 = <
 
     const type: string = inputTypes[String(Escolhas)] ?? "text";
     const apenasLer: boolean =
-      Escolhas === "codigo" || Escolhas === "matricula" || Escolhas === "registro";
+      Escolhas === "codigo" ||
+      Escolhas === "matricula" ||
+      Escolhas === "registro";
 
     return apenasLer ? (
       <input

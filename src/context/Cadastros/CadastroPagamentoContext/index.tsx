@@ -10,7 +10,7 @@ import { http } from "../../../utils/axios";
 import {
   cadastroPagamentoSchema,
   type CadastroPagamentoInput,
-} from "../../../schemas/pagementoSchema";
+} from "../../../schemas/Cadastro/pagementoSchema";
 
 const CadastroPagamentoContext = createContext<
   CadastroContextType<CadastroPagamentoInput> | undefined

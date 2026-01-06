@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import type { CadastroAlunoInput } from "../../schemas/alunoSchema";
-import type { CadastroFuncionarioInput } from "../../schemas/funcionarioSchema";
-import type { CadastroPagamentoInput } from "../../schemas/pagementoSchema";
-import type { CadastroProfessorInput } from "../../schemas/professorSchema";
-import type { CadastroTurmaInput } from "../../schemas/turmaSchema";
+import type { CadastroAlunoInput } from "../../schemas/Cadastro/alunoSchema";
+import type { CadastroFuncionarioInput } from "../../schemas/Cadastro/funcionarioSchema";
+import type { CadastroPagamentoInput } from "../../schemas/Cadastro/pagementoSchema";
+import type { CadastroProfessorInput } from "../../schemas/Cadastro/professorSchema";
+import type { CadastroTurmaInput } from "../../schemas/Cadastro/turmaSchema";
 import type { CadastroFlexProps } from "../../types/types";
 import { IdentificarTipo } from "../../utils/codigos";
-import type { CadastroDisciplinasInput } from "../../schemas/disciplinaSchema";
+import type { CadastroDisciplinasInput } from "../../schemas/Cadastro/disciplinaSchema";
 
 type Disciplina = {
   registro: string;
