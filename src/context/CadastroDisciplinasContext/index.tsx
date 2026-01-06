@@ -29,7 +29,7 @@ export function CadastroDisciplinasProvider({
   const openMenu = async (): Promise<CadastroDisciplinasInput | null> => {
     const matriculaNova = await http.get("api/disciplinas/Cadastro");
     setMenu(true);
-    setDados((prevDados) => ({ ...prevDados, codigo: matriculaNova.data }));
+    setDados((prevDados) => ({ ...prevDados, registro: matriculaNova.data }));
     return new Promise((resolve) => {
       setResolveCallback(() => resolve);
     });
