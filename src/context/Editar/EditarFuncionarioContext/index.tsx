@@ -161,6 +161,13 @@ export function EditarFuncionaroProvider({
                   Profissional
                 </h3>
                 <Flex2Context
+                  opcao1="Foto"
+                  opcao2="Salario"
+                  infos={dados}
+                  setInfos={setDados}
+                />
+
+                <Flex2Context
                   opcao1="Cargo"
                   opcao2="Departamento"
                   infos={dados}
