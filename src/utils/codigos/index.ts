@@ -29,6 +29,7 @@ function formatTelefone(value: string) {
 function IdentificarTipo(dado: string) {
   switch (dado) {
     case "Nome completo":
+    case "Nome":
       return "nome";
     case "Endereço":
       return "endereco";
@@ -45,7 +46,7 @@ function IdentificarTipo(dado: string) {
     case "Turma":
       return "turma";
     case "E-mail":
-      return "email";
+      return "eNail";
     case "Telefone":
       return "telefone";
     case "Disciplina Principal":
