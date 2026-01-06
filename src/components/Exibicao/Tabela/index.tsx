@@ -5,7 +5,7 @@ import { Head } from "../../../utils/head";
 import { useState } from "react";
 import ImgExibicao from "../imgExibicao";
 
-const Table = ({ exibicao, excluir }: TablePropsTable) => {
+const Table = ({ exibicao, excluir, editar }: TablePropsTable) => {
   const location = useLocation();
   const pagina = location.pathname;
   const head: string[] = Head(pagina);
@@ -146,6 +146,7 @@ const Table = ({ exibicao, excluir }: TablePropsTable) => {
                         onClick={() => {
                           if (menuAberto === registro) {
                             setMenuAberto("");
+                            editar(registro);
                           } else {
                             setMenuAberto(registro);
                           }
