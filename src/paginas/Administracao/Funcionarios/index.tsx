@@ -5,13 +5,14 @@ import { Grid, Table, ModoExibicao } from "../../../components/Exibicao";
 import { http } from "../../../utils/axios";
 import Selects from "../../../components/Administracao/Selects";
 import TrocaPagina from "../../../components/TrocaPagina";
-import { useCadastroMenu } from "../../../context";
+import { useCadastroMenu, useEditarMenu } from "../../../context";
 import toast from "react-hot-toast";
 
 const ITENS_POR_PAGINA = 6;
 
 const FuncionariosAdmin = () => {
   const { cadastroFuncionario } = useCadastroMenu();
+  const { editarFuncionario } = useEditarMenu();
 
   const [loading, setLoading] = useState<boolean>(true);
   const [modo, setModo] = useState<boolean>(() => {
@@ -73,7 +74,7 @@ const FuncionariosAdmin = () => {
     http
       .delete(`api/funcionarios/${Registro}`)
       .then(function () {
-        toast.success("Funcionário deletado com sucesso!")
+        toast.success("Funcionário deletado com sucesso!");
       })
       .catch(function (error) {
         console.log(error);
@@ -81,7 +82,13 @@ const FuncionariosAdmin = () => {
       })
       .finally(function () {
         Pesquisa();
-      })
+      });
+  };
+
+  const Editar = async (Registro: string) => {
+    const dados = await editarFuncionario(Registro);
+    if (!dados) return;
+    return Pesquisa();
   };
 
   const maxPaginas = Math.max(1, Math.ceil(total / ITENS_POR_PAGINA));
@@ -120,7 +127,7 @@ const FuncionariosAdmin = () => {
         </div>
       ) : (
         <div className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden mb-6">
-          <Table exibicao={funcionarios} excluir={Excluir} />
+          <Table exibicao={funcionarios} excluir={Excluir} editar={Editar} />
         </div>
       )}
 
