@@ -98,7 +98,7 @@ const DisciplinasAdmin = () => {
                   {item.descricao}
                 </td>
                 <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
-                  {item.dataCriacao}
+                   {new Date(item.dataCriacao + "T00:00:00").toLocaleDateString("pt-BR")}
                 </td>
                 <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
                   ❌
