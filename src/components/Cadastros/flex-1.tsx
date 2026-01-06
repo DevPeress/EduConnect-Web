@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { CadastroAlunoInput } from "../../schemas/alunoSchema";
 import type { CadastroFuncionarioInput } from "../../schemas/funcionarioSchema";
 import type { CadastroPagamentoInput } from "../../schemas/pagementoSchema";
@@ -6,7 +6,6 @@ import type { CadastroProfessorInput } from "../../schemas/professorSchema";
 import type { CadastroTurmaInput } from "../../schemas/turmaSchema";
 import type { CadastroFlexProps } from "../../types/types";
 import { IdentificarTipo } from "../../utils/codigos";
-import { http } from "../../utils/axios";
 import type { CadastroDisciplinasInput } from "../../schemas/disciplinaSchema";
 
 type Disciplina = {
@@ -43,7 +42,6 @@ const CadastroFlex1 = <
 }: CadastroFlex1Prop<T>) => {
   // Processa a opção recebida e retorna o resultado conforme o contexto de criação de alunos ou professores.
   const tipo = IdentificarTipo(titulo) as keyof T;
-  const [disciplinas, setDisciplinas] = useState<Disciplina[]>([]);
   const [selecionadas, setSelecionadas] = useState<Disciplina[]>([]);
 
   const semana = [
@@ -56,26 +54,59 @@ const CadastroFlex1 = <
     "Sábado",
   ];
   const [selecionadasSemana, SetSelecionadasSemana] = useState<string[]>([]);
+  const disciplinasValidas: Disciplina[] = temDisciplinasValidas(infos)
+    ? infos.disciplinasValidas
+    : [];
 
   function adicionarDisciplina(registro: string) {
-    const disciplina = disciplinas.find((d) => d.registro === registro);
+    const disciplina = disciplinasValidas.find((d) => d.registro === registro);
+
     if (!disciplina) return;
 
     // evita duplicar
     if (selecionadas.some((d) => d.registro === registro)) return;
 
-    setSelecionadas((prev) => [...prev, disciplina]);
+    const novas = [...selecionadas, disciplina];
+    setSelecionadas(novas);
+
+    // sincroniza com o form (envia só os registros)
+    setInfos((prev) => ({
+      ...prev,
+      disciplinas: novas.map((d) => d.registro),
+    }));
   }
 
   function removerDisciplina(registro: string) {
-    setSelecionadas((prev) => prev.filter((d) => d.registro !== registro));
+    const novas = selecionadas.filter((d) => d.registro !== registro);
+
+    setSelecionadas(novas);
+
+    setInfos((prev) => ({
+      ...prev,
+      disciplinas: novas.map((d) => d.registro),
+    }));
   }
 
-  async function asycnDisciplinas() {
-    await http.get("api/disciplinas/pegarDisciplinas").then(function (dados) {
-      setDisciplinas(dados.data);
-    });
+  function temDisciplinasValidas(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    data: any
+  ): data is { disciplinasValidas: Disciplina[] } {
+    return Array.isArray(data?.disciplinasValidas);
   }
+
+  useEffect(() => {
+    setInfos((prev) => ({
+      ...prev,
+      semana: selecionadasSemana,
+    }));
+  }, [selecionadasSemana, setInfos]);
+
+  useEffect(() => {
+    setInfos((prev) => ({
+      ...prev,
+      disciplinas: selecionadas.map((d) => d.registro),
+    }));
+  }, [selecionadas, setInfos]);
 
   // Cria o Select ou Input para ser demonstrado
   const TipoDiv = () => {
@@ -148,7 +179,6 @@ const CadastroFlex1 = <
           </div>
         );
       case "disciplinas":
-        asycnDisciplinas();
         return (
           <div className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)">
             <select
@@ -160,15 +190,18 @@ const CadastroFlex1 = <
                 Selecionar disciplina
               </option>
 
-              {disciplinas.map((d) => (
-                <option
-                  key={d.registro}
-                  value={d.registro}
-                  disabled={selecionadas.some((s) => s.registro === d.registro)}
-                >
-                  {d.nome}
-                </option>
-              ))}
+              {temDisciplinasValidas(infos) &&
+                infos.disciplinasValidas.map((d) => (
+                  <option
+                    key={d.registro}
+                    value={d.registro}
+                    disabled={selecionadas.some(
+                      (s) => s.registro === d.registro
+                    )}
+                  >
+                    {d.nome}
+                  </option>
+                ))}
             </select>
 
             <div className="flex flex-wrap gap-2 py-2">

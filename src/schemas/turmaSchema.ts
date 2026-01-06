@@ -18,6 +18,7 @@ export const cadastroTurmaSchema = z.object({
   fim: z.string(),
   dias: z.string(),
   disciplinas: z.string(),
+  disciplinasValidas: z.string(),
 });
 
 export type CadastroTurmaInput = z.infer<typeof cadastroTurmaSchema>;

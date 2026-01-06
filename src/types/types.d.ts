@@ -123,7 +123,7 @@ export interface Disciplinas {
   registro: string;
   nome: string;
   descricao: string;
-  data: string
+  dataCriacao: string;
 }
 
 export interface CadastroContextType<

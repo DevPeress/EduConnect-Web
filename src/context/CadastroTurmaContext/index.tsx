@@ -30,6 +30,7 @@ export function CadastroTurmaProvider({ children }: { children: ReactNode }) {
     fim: "",
     dias: "",
     disciplinas: "",
+    disciplinasValidas: "",
   });
   const [resolveCallback, setResolveCallback] = useState<
     ((data: CadastroTurmaInput | null) => void) | null
@@ -37,8 +38,15 @@ export function CadastroTurmaProvider({ children }: { children: ReactNode }) {
 
   const openMenu = async (): Promise<CadastroTurmaInput | null> => {
     const matriculaNova = await http.get("api/turma/Cadastro");
+    const disciplinasValidas = await http.get(
+      "api/disciplinas/pegarDisciplinas"
+    );
     setMenu(true);
     setDados((prevDados) => ({ ...prevDados, codigo: matriculaNova.data }));
+    setDados((prevDados) => ({
+      ...prevDados,
+      disciplinasValidas: disciplinasValidas.data,
+    }));
     return new Promise((resolve) => {
       setResolveCallback(() => resolve);
     });
@@ -101,6 +109,7 @@ export function CadastroTurmaProvider({ children }: { children: ReactNode }) {
       fim: "",
       dias: "",
       disciplinas: "",
+      disciplinasValidas: "",
     });
     setMenu(false);
   };

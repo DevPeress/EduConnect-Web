@@ -4,6 +4,7 @@ import LayoutLogado from "../../LayoutLogado";
 import { http } from "../../../utils/axios";
 import TrocaPagina from "../../../components/TrocaPagina";
 import { useCadastroMenu } from "../../../context";
+import toast from "react-hot-toast";
 
 const ITENS_POR_PAGINA = 6;
 
@@ -18,7 +19,7 @@ const DisciplinasAdmin = () => {
 
   const Pesquisa = () => {
     http
-      .get(`api/turma/filtro/disciplinas`)
+      .get(`api/disciplinas/filtro/page/${pagina}`)
       .then(function (dados) {
         setTotal(dados.data.total);
         setDisciplinas(dados.data.dados);
@@ -31,6 +32,23 @@ const DisciplinasAdmin = () => {
       });
   };
 
+  const Deletar = (Registro: string) => {
+    http
+      .delete(`api/disciplinas/${Registro}`)
+      .then(function () {
+        Pesquisa();
+      })
+      .catch(function (error) {
+        console.log(error);
+        toast.error("Não foi possível realizar a exclusão da disciplina!");
+      });
+  };
+
+  useEffect(() => {
+    Pesquisa();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pagina]);
+
   // Atualiza sempre que os pagamentos mudar para página 1
   useEffect(() => {
     setPagina(1);
@@ -38,7 +56,7 @@ const DisciplinasAdmin = () => {
 
   const AdicionarDisciplina = async () => {
     const dados = await cadastroDisciplinas();
-    if (!dados || disciplinas.length < 6) return;
+    if (!dados || disciplinas.length < 9) return;
     return Pesquisa();
   };
 
@@ -75,32 +93,37 @@ const DisciplinasAdmin = () => {
                 Remover
               </th>
             </tr>
-
-            <tbody>
-              {disciplinas.map((item) => (
-                <tr
-                  key={item.registro}
-                  className="hover:bg-(--bg-input) text-(--text-primary)"
-                >
-                  <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
-                    {item.registro}
-                  </td>
-                  <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
-                    {item.nome}
-                  </td>
-                  <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
-                    {item.descricao}
-                  </td>
-                  <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
-                    {item.data}
-                  </td>
-                  <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
-                    ❌
-                  </td>
-                </tr>
-              ))}
-            </tbody>
           </thead>
+
+          <tbody>
+            {disciplinas.map((item) => (
+              <tr
+                key={item.registro}
+                className="hover:bg-(--bg-input) text-(--text-primary)"
+              >
+                <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
+                  {item.registro}
+                </td>
+                <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
+                  {item.nome}
+                </td>
+                <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
+                  {item.descricao}
+                </td>
+                <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
+                  {new Date(item.dataCriacao + "T00:00:00").toLocaleDateString(
+                    "pt-BR"
+                  )}
+                </td>
+                <td
+                  className="py-4 px-5 border-b-2 border-(--border-color) text-[14px] hover:cursor-pointer"
+                  onClick={() => Deletar(item.registro)}
+                >
+                  ❌
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
 
