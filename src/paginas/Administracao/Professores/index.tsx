@@ -72,7 +72,7 @@ const ProfessoresAdmin = () => {
     http
       .delete(`api/funcionarios/${Registro}`)
       .then(function () {
-        toast.success("Professor deletado com sucesso!")
+        toast.success("Professor deletado com sucesso!");
       })
       .catch(function (error) {
         console.log(error);
@@ -115,7 +115,7 @@ const ProfessoresAdmin = () => {
 
       {modo ? (
         <div className="grid grid-cols-3 overflow-hidden gap-x-6 gap-y-5 w-full">
-          <Grid exibicao={professores} />
+          <Grid exibicao={professores} excluir={Excluir} />
         </div>
       ) : (
         <div className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden mb-6">

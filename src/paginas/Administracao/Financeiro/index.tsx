@@ -136,7 +136,7 @@ const FinanceiroAdmin = () => {
 
       {modo ? (
         <div className="grid grid-cols-3 overflow-hidden gap-x-6 gap-y-5 w-full">
-          <Grid exibicao={pagamentos} />
+          <Grid exibicao={pagamentos} excluir={Excluir} />
         </div>
       ) : (
         <div className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden mb-6">
