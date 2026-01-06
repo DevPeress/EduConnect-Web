@@ -73,12 +73,15 @@ const FuncionariosAdmin = () => {
     http
       .delete(`api/funcionarios/${Registro}`)
       .then(function () {
-        Pesquisa();
+        toast.success("Funcionário deletado com sucesso!")
       })
       .catch(function (error) {
         console.log(error);
         toast.error("Não foi possivel deletar o Funcionário");
-      });
+      })
+      .finally(function () {
+        Pesquisa();
+      })
   };
 
   const maxPaginas = Math.max(1, Math.ceil(total / ITENS_POR_PAGINA));
