@@ -12,7 +12,7 @@ const ITENS_POR_PAGINA = 6;
 const TurmasAdmin = () => {
   const { cadastroTurma } = useCadastroMenu();
 
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [turno, setTurno] = useState<string>("Todos os Turnos");
   const [status, setStatus] = useState<string>("Todos os Status");
   const [ano, setAno] = useState<string>("Todos os Anos");

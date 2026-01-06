@@ -11,7 +11,7 @@ const ITENS_POR_PAGINA = 6;
 const DisciplinasAdmin = () => {
   const { cadastroDisciplinas } = useCadastroMenu();
 
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [disciplinas, setDisciplinas] = useState<Disciplinas[]>([]);
 
   const [total, setTotal] = useState<number>(0);
