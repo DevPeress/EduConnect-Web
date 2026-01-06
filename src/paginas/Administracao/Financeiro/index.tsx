@@ -89,11 +89,14 @@ const FinanceiroAdmin = () => {
     http
       .delete(`api/funcionarios/${Registro}`)
       .then(function () {
-        Pesquisa();
+        toast.success("Fatura deletada com sucesso!");
       })
       .catch(function (error) {
         console.log(error);
-        toast.error("Não foi possivel deletar o Funcionário");
+        toast.error("Não foi possivel deletar a Fatura!");
+      })
+      .finally(function () {
+        Pesquisa();
       });
   };
 
