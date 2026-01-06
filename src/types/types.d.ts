@@ -139,6 +139,19 @@ export interface CadastroContextType<
   setDados: React.Dispatch<React.SetStateAction<T>>;
 }
 
+export interface EditarContextType<
+  T extends
+    | CadastroProfessorInput
+    | CadastroAlunoInput
+    | CadastroPagamentoInput
+    | CadastroTurmaInput
+    | CadastroFuncionarioInput
+    | CadastroDisciplinasInput
+> {
+  openMenu: () => Promise<T | null>;
+  setDados: React.Dispatch<React.SetStateAction<T>>;
+}
+
 export interface CalendarioEvento {
   title: string;
   start: Date;
