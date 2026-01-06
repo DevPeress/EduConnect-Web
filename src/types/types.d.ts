@@ -187,6 +187,7 @@ export interface TablePropsTable {
 
 export interface TablePropsGrid {
   exibicao: Pessoa[] | Financeiro[] | Funcionario[];
+  excluir: (valor: string) => void;
 }
 
 export interface TrocaPaginas {
