@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import {
   loginSchema,
   type LoginInput,
-} from "../../schemas/Cadastro/loginSchema";
+} from "../../schemas/loginSchema";
 import { useNavigate } from "react-router-dom";
 import { Options } from "../../utils/paginação";
 import { useAuth } from "../../context/AuthContext";
