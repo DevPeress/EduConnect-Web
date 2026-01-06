@@ -134,6 +134,7 @@ export interface CadastroContextType<
     | CadastroTurmaInput
     | CadastroFuncionarioInput
     | CadastroDisciplinasInput
+    | EditarFuncionarioInput
 > {
   openMenu: () => Promise<T | null>;
   setDados: React.Dispatch<React.SetStateAction<T>>;

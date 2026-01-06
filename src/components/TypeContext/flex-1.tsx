@@ -7,6 +7,7 @@ import type { CadastroTurmaInput } from "../../schemas/Cadastro/turmaSchema";
 import type { FlexContext } from "../../types/types";
 import { IdentificarTipo } from "../../utils/codigos";
 import type { CadastroDisciplinasInput } from "../../schemas/Cadastro/disciplinaSchema";
+import type { EditarFuncionarioInput } from "../../schemas/Editar/EditarFuncionarioSchema";
 
 type Disciplina = {
   registro: string;
@@ -21,6 +22,7 @@ interface Flex1ContextProp<
     | CadastroTurmaInput
     | CadastroFuncionarioInput
     | CadastroDisciplinasInput
+    | EditarFuncionarioInput
 > extends FlexContext<T> {
   titulo: string;
   place: string;
@@ -34,6 +36,7 @@ const Flex1Context = <
     | CadastroTurmaInput
     | CadastroFuncionarioInput
     | CadastroDisciplinasInput
+    | EditarFuncionarioInput
 >({
   titulo,
   infos,

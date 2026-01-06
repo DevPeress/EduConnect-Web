@@ -12,6 +12,7 @@ import {
 } from "../../utils/codigos";
 import type { CadastroFuncionarioInput } from "../../schemas/Cadastro/funcionarioSchema";
 import type { CadastroDisciplinasInput } from "../../schemas/Cadastro/disciplinaSchema";
+import type { EditarFuncionarioInput } from "../../schemas/Editar/EditarFuncionarioSchema";
 
 interface Flex2ContextProp<
   T extends
@@ -21,6 +22,7 @@ interface Flex2ContextProp<
     | CadastroTurmaInput
     | CadastroFuncionarioInput
     | CadastroDisciplinasInput
+    | EditarFuncionarioInput
 > extends FlexContext<T> {
   opcao1: string;
   opcao2: string;
@@ -34,6 +36,7 @@ const Flex2Context = <
     | CadastroTurmaInput
     | CadastroFuncionarioInput
     | CadastroDisciplinasInput
+    | EditarFuncionarioInput
 >({
   opcao1,
   opcao2,
