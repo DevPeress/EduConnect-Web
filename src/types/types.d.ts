@@ -189,6 +189,7 @@ export interface SelectProps {
 export interface TablePropsTable {
   exibicao: Pessoa[] | Financeiro[] | Turmas[] | Funcionario[];
   excluir: (valor: string) => void;
+  editar: (valor: string) => void;
 }
 
 export interface TablePropsGrid {
