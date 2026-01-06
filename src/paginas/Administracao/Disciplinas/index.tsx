@@ -4,6 +4,7 @@ import LayoutLogado from "../../LayoutLogado";
 import { http } from "../../../utils/axios";
 import TrocaPagina from "../../../components/TrocaPagina";
 import { useCadastroMenu } from "../../../context";
+import toast from "react-hot-toast";
 
 const ITENS_POR_PAGINA = 6;
 
@@ -31,6 +32,18 @@ const DisciplinasAdmin = () => {
       });
   };
 
+  const Deletar = (Registro: string) => {
+    http
+      .delete(`api/disciplinas/${Registro}`)
+      .then(function () {
+        Pesquisa();
+      })
+      .catch(function (error) {
+        console.log(error);
+        toast.error("Não foi possível realizar a exclusão da disciplina!");
+      });
+  };
+
   useEffect(() => {
     Pesquisa();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -43,7 +56,7 @@ const DisciplinasAdmin = () => {
 
   const AdicionarDisciplina = async () => {
     const dados = await cadastroDisciplinas();
-    if (!dados || disciplinas.length < 6) return;
+    if (!dados || disciplinas.length < 10) return;
     return Pesquisa();
   };
 
@@ -98,9 +111,14 @@ const DisciplinasAdmin = () => {
                   {item.descricao}
                 </td>
                 <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
-                   {new Date(item.dataCriacao + "T00:00:00").toLocaleDateString("pt-BR")}
+                  {new Date(item.dataCriacao + "T00:00:00").toLocaleDateString(
+                    "pt-BR"
+                  )}
                 </td>
-                <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
+                <td
+                  className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]"
+                  onClick={() => Deletar(item.registro)}
+                >
                   ❌
                 </td>
               </tr>
