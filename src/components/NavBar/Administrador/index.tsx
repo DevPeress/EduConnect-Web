@@ -52,7 +52,7 @@ const NavAdministrador = ({ pagina }: { pagina: string }) => {
         <span className="block text-[11px] font-semibold text-(--text-muted) uppercase leading-[0.5px] px-2 py-1 mb-5">
           Principal
         </span>
-        {Paginas.slice(0, 5).map((item) => {
+        {Paginas.slice(0, 6).map((item) => {
           const paginaAtual: boolean = pagina === item.pagina;
 
           return (
