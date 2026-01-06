@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const cadastroDisciplinasSchema = z.object({
   registro: z.string(),
-  nome: z.string().min(3, "Nome da disciplina muito pequena!"),
+  nome: z.string(),
   descricao: z.string(),
 });
 
