@@ -46,21 +46,22 @@ function App() {
           <Route path="/admin/turmas" element={<TurmasAdmin />} />
           <Route path="/admin/calendario" element={<CalendarioAdm />} />
           <Route path="/admin/financeiro" element={<FinanceiroAdmin />} />
-
-          {/* Acesso exclusivo de Admin*/}
-          <Route
-            element={
-              <PrivateRoute
-                isAuthenticated={user}
-                userRole={cargo}
-                allowedRoles={["Administrador"]}
-              />
-            }
-          >
-            <Route path="/admin/funcionarios" element={<FuncionariosAdmin />} />
-            <Route path="/admin/disciplinas" element={<DisciplinasAdmin />} />
-          </Route>
         </Route>
+
+        {/* Acesso Admin */}
+        <Route
+          element={
+            <PrivateRoute
+              isAuthenticated={user}
+              userRole={cargo}
+              allowedRoles={["Administrador", "Funcionário"]}
+            />
+          }
+        >
+          <Route path="/admin/funcionarios" element={<FuncionariosAdmin />} />
+          <Route path="/admin/disciplinas" element={<DisciplinasAdmin />} />
+        </Route>
+
         {/* Página de sem acesso */}
         <Route
           path="/not-authorized"
