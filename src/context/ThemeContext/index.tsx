@@ -7,6 +7,7 @@ import { CadastroProfessorProvider } from "../CadastroProfessorContext";
 import { CadastroPagamentoProvider } from "../CadastroPagamentoContext";
 import { CadastroTurmaProvider } from "../CadastroTurmaContext";
 import { CadastroFuncionarioProvider } from "../CadastroFuncionarioContext";
+import { CadastroDisciplinasProvider } from "../CadastroDisciplinasContext";
 
 const ThemeContext = createContext<ThemeType | undefined>(undefined);
 
@@ -37,7 +38,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
           <CadastroPagamentoProvider>
             <CadastroTurmaProvider>
               <CadastroFuncionarioProvider>
-                {children}
+                <CadastroDisciplinasProvider>
+                  {children}
+                </CadastroDisciplinasProvider>
               </CadastroFuncionarioProvider>
             </CadastroTurmaProvider>
           </CadastroPagamentoProvider>
