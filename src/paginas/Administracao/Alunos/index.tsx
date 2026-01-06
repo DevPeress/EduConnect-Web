@@ -6,6 +6,7 @@ import { http } from "../../../utils/axios";
 import Selects from "../../../components/Administracao/Selects";
 import { useCadastroMenu } from "../../../context";
 import TrocaPagina from "../../../components/TrocaPagina";
+import toast from "react-hot-toast";
 
 const ITENS_POR_PAGINA = 6;
 
@@ -57,7 +58,7 @@ const AlunosAdmin = () => {
   useEffect(() => {
     http.get("api/alunos/pegarInformativos").then(function (dados) {
       setAnos(dados.data.anos);
-      setSalas(dados.data.salas)
+      setSalas(dados.data.salas);
     });
   }, []);
 
@@ -65,6 +66,18 @@ const AlunosAdmin = () => {
     const dados = await cadastroAluno();
     if (!dados || alunos.length < 6) return;
     return Pesquisa();
+  };
+
+  const Excluir = async (Registro: string) => {
+    http
+      .delete(`api/funcionarios/${Registro}`)
+      .then(function () {
+        Pesquisa();
+      })
+      .catch(function (error) {
+        console.log(error);
+        toast.error("Não foi possivel deletar o Funcionário");
+      });
   };
 
   const maxPaginas = Math.max(1, Math.ceil(total / ITENS_POR_PAGINA));
@@ -106,7 +119,7 @@ const AlunosAdmin = () => {
         </div>
       ) : (
         <div className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden mb-6">
-          <Table exibicao={alunos} />
+          <Table exibicao={alunos} excluir={Excluir} />
         </div>
       )}
 
