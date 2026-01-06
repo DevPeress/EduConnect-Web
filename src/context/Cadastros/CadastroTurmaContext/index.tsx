@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
-import type { CadastroContextType } from "../../../types/types";
+import type { ContextType } from "../../../types/types";
 import {
   Flex1Context,
   Flex2Context,
@@ -13,7 +13,7 @@ import {
 import { http } from "../../../utils/axios";
 
 const CadastroTurmaContext = createContext<
-  CadastroContextType<CadastroTurmaInput> | undefined
+  ContextType<CadastroTurmaInput> | undefined
 >(undefined);
 export function CadastroTurmaProvider({ children }: { children: ReactNode }) {
   const [menu, setMenu] = useState<boolean>(false);

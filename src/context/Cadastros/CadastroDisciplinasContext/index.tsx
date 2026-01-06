@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
-import type { CadastroContextType } from "../../../types/types";
+import type { ContextType } from "../../../types/types";
 import {
   Flex1Context,
   Flex2Context,
@@ -13,7 +13,7 @@ import {
 } from "../../../schemas/Cadastro/disciplinaSchema";
 
 const CadastroDisciplinasContext = createContext<
-  CadastroContextType<CadastroDisciplinasInput> | undefined
+  ContextType<CadastroDisciplinasInput> | undefined
 >(undefined);
 export function CadastroDisciplinasProvider({
   children,

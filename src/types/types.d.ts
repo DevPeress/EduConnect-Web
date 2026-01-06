@@ -126,7 +126,7 @@ export interface Disciplinas {
   dataCriacao: string;
 }
 
-export interface CadastroContextType<
+export interface ContextType<
   T extends
     | CadastroProfessorInput
     | CadastroAlunoInput
