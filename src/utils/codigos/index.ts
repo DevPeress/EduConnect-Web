@@ -105,6 +105,10 @@ function IdentificarTipo(dado: string) {
       return "cargo";
     case "SuperVisor":
       return "supervisor";
+    case "Foto":
+      return "foto";
+    case "Salario":
+      return "salario";
 
     default:
       return "";
