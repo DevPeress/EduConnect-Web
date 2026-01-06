@@ -108,6 +108,7 @@ const Flex2Context = <
     telefone: "text",
     inicio: "time",
     fim: "time",
+    salario: "number",
   };
 
   // Cria o Select ou Input para ser demonstrado
