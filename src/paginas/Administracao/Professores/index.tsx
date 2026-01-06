@@ -72,11 +72,14 @@ const ProfessoresAdmin = () => {
     http
       .delete(`api/funcionarios/${Registro}`)
       .then(function () {
-        Pesquisa();
+        toast.success("Professor deletado com sucesso!")
       })
       .catch(function (error) {
         console.log(error);
-        toast.error("Não foi possivel deletar o Funcionário");
+        toast.error("Não foi possivel deletar o Professor!");
+      })
+      .finally(function () {
+        Pesquisa();
       });
   };
 
