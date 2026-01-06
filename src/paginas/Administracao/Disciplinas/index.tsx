@@ -75,32 +75,32 @@ const DisciplinasAdmin = () => {
                 Remover
               </th>
             </tr>
-
-            <tbody>
-              {disciplinas.map((item) => (
-                <tr
-                  key={item.registro}
-                  className="hover:bg-(--bg-input) text-(--text-primary)"
-                >
-                  <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
-                    {item.registro}
-                  </td>
-                  <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
-                    {item.nome}
-                  </td>
-                  <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
-                    {item.descricao}
-                  </td>
-                  <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
-                    {item.data}
-                  </td>
-                  <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
-                    ❌
-                  </td>
-                </tr>
-              ))}
-            </tbody>
           </thead>
+
+          <tbody>
+            {disciplinas.map((item) => (
+              <tr
+                key={item.registro}
+                className="hover:bg-(--bg-input) text-(--text-primary)"
+              >
+                <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
+                  {item.registro}
+                </td>
+                <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
+                  {item.nome}
+                </td>
+                <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
+                  {item.descricao}
+                </td>
+                <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
+                  {item.data}
+                </td>
+                <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
+                  ❌
+                </td>
+              </tr>
+            ))}
+          </tbody>
         </table>
       </div>
 
