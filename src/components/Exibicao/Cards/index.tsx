@@ -2,7 +2,7 @@ import type { TablePropsGrid } from "../../../types/types";
 import { formatBRL, formatTelefone } from "../../../utils/codigos";
 import ImgExibicao from "../imgExibicao";
 
-const Grid = ({ exibicao }: TablePropsGrid) => {
+const Grid = ({ exibicao, excluir }: TablePropsGrid) => {
   const VerificarCor = (tipo: string) => {
     switch (tipo) {
       case "Ativo":
@@ -136,6 +136,7 @@ const Grid = ({ exibicao }: TablePropsGrid) => {
 
               <div className="flex justify-end gap-3">
                 <button
+                  onClick={() => excluir}
                   type="button"
                   className="py-2 px-6 rounded-[10px] text-[14px] font-semibold cursor-pointer border-none flex items-center gap-2 bg-(--bg-body) text-(--text-primary) border border-(--border-color) hover:bg-(--bg-sidebar) hover:scale-110"
                 >
