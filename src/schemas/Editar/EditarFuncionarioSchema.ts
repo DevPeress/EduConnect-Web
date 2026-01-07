@@ -6,10 +6,13 @@ export const editarFuncionarioSchema = z.object({
   email: z.string().email("E-mail inválido!"),
   telefone: z.string().min(14, "Número de Telefone inválido!"),
   status: z.string(),
-  nasc: z.string(),
+  nascimento: z.string(),
   endereco: z.string().min(5, "Endereço inválido!"),
   cpf: z.string().min(14, "CPF inválido!"),
-  contatoEmergencia: z
+  telefoneEmergencia: z
+    .string()
+    .min(14, "Número do Contato de Emergência inválido!"),
+  nomeEmergencia: z
     .string()
     .min(14, "Número do Contato de Emergência inválido!"),
   foto: z.string(),
