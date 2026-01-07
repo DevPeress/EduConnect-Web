@@ -16,7 +16,7 @@ const EditarFuncionarioContext = createContext<
   EditarContextType<EditarFuncionarioInput> | undefined
 >(undefined);
 
-export function EditarFuncionaroProvider({
+export function EditarFuncionarioProvider({
   children,
 }: {
   children: ReactNode;
