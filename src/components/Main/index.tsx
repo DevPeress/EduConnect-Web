@@ -9,10 +9,17 @@ import type { MainProps } from "../../types/types";
 // - As configurações do botão: se estará ativo, qual função será executada e o texto exibido;
 // - A função de loading, utilizada para controlar a exibição do loader.
 
-const Main = ({ titulo, desc, botao, load, children }: MainProps) => {
+const Main = ({
+  titulo,
+  desc,
+  botao,
+  load,
+  children,
+  exibirPesquisa,
+}: MainProps) => {
   return (
     <main className="flex-1 ml-72 flex flex-col bg-(--bg-body)">
-      <Header />
+      <Header exibirPesquisa={exibirPesquisa} />
       {load ? (
         <Loader />
       ) : (
