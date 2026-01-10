@@ -90,7 +90,11 @@ const ProfessoresAdmin = () => {
     <LayoutLogado
       titulo="Gerenciamento de Professores"
       desc="Visualize e Gerencie as informações dos professores"
-      exibirPesquisa={true}
+      exibirPesquisa={{
+        exibir: true,
+        valor: pesquisa,
+        set: setPesquisa,
+      }}
       botao={{
         ativo: true,
         mensagem: "Novo Professor",
