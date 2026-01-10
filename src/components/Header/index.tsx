@@ -84,7 +84,7 @@ const Header = ({ exibirPesquisa }: { exibirPesquisa: boolean }) => {
             </div>
           </>
         ) : (
-          <></>
+          null
         )}
       </div>
 
