@@ -51,6 +51,14 @@ export interface MainProps {
   load?: boolean;
 }
 
+export interface PaginaMainProps {
+  titulo: string;
+  desc: string;
+  children: ReactNode;
+  botao: { ativo: boolean; adicionar?: () => void; mensagem?: string };
+}
+
+
 export interface CardsAdminType {
   dado: string;
   total: number;
