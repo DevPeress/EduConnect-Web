@@ -46,7 +46,11 @@ export interface MainProps {
   titulo: string;
   desc: string;
   children: ReactNode;
-  exibirPesquisa: boolean;
+  exibirPesquisa: {
+    exibir: boolean;
+    valor?: string;
+    set?: (valor: string) => void;
+  };
   botao: { ativo: boolean; adicionar?: () => void; mensagem?: string };
   load: boolean;
 }
