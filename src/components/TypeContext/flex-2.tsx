@@ -1,19 +1,20 @@
 import { useEffect, useState } from "react";
-import type { CadastroAlunoInput } from "../../schemas/alunoSchema";
-import type { CadastroPagamentoInput } from "../../schemas/pagementoSchema";
-import type { CadastroProfessorInput } from "../../schemas/professorSchema";
-import type { CadastroTurmaInput } from "../../schemas/turmaSchema";
-import type { CadastroFlexProps } from "../../types/types";
+import type { CadastroAlunoInput } from "../../schemas/Cadastro/CadastroAlunoSchema";
+import type { CadastroPagamentoInput } from "../../schemas/Cadastro/CadastroPagementoSchema";
+import type { CadastroProfessorInput } from "../../schemas/Cadastro/CadastroProfessorSchema";
+import type { CadastroTurmaInput } from "../../schemas/Cadastro/CadastroTurmaSchema";
+import type { FlexContext } from "../../types/types";
 import { http } from "../../utils/axios";
 import {
   formatCPF,
   formatTelefone,
   IdentificarTipo,
 } from "../../utils/codigos";
-import type { CadastroFuncionarioInput } from "../../schemas/funcionarioSchema";
-import type { CadastroDisciplinasInput } from "../../schemas/disciplinaSchema";
+import type { CadastroFuncionarioInput } from "../../schemas/Cadastro/CadastroFuncionarioSchema";
+import type { CadastroDisciplinasInput } from "../../schemas/Cadastro/CadastroDisciplinaSchema";
+import type { EditarFuncionarioInput } from "../../schemas/Editar/EditarFuncionarioSchema";
 
-interface CadastroFlex2Prop<
+interface Flex2ContextProp<
   T extends
     | CadastroAlunoInput
     | CadastroProfessorInput
@@ -21,12 +22,13 @@ interface CadastroFlex2Prop<
     | CadastroTurmaInput
     | CadastroFuncionarioInput
     | CadastroDisciplinasInput
-> extends CadastroFlexProps<T> {
+    | EditarFuncionarioInput
+> extends FlexContext<T> {
   opcao1: string;
   opcao2: string;
 }
 
-const CadastroFlex2 = <
+const Flex2Context = <
   T extends
     | CadastroAlunoInput
     | CadastroProfessorInput
@@ -34,12 +36,13 @@ const CadastroFlex2 = <
     | CadastroTurmaInput
     | CadastroFuncionarioInput
     | CadastroDisciplinasInput
+    | EditarFuncionarioInput
 >({
   opcao1,
   opcao2,
   infos,
   setInfos,
-}: CadastroFlex2Prop<T>) => {
+}: Flex2ContextProp<T>) => {
   // Processa a opção recebida e retorna o resultado conforme o contexto de criação de alunos ou professores.
   const tipo1 = IdentificarTipo(opcao1) as keyof T;
   const tipo2 = IdentificarTipo(opcao2) as keyof T;
@@ -105,6 +108,7 @@ const CadastroFlex2 = <
     telefone: "text",
     inicio: "time",
     fim: "time",
+    salario: "number",
   };
 
   // Cria o Select ou Input para ser demonstrado
@@ -132,7 +136,9 @@ const CadastroFlex2 = <
 
     const type: string = inputTypes[String(Escolhas)] ?? "text";
     const apenasLer: boolean =
-      Escolhas === "codigo" || Escolhas === "matricula" || Escolhas === "registro";
+      Escolhas === "codigo" ||
+      Escolhas === "matricula" ||
+      Escolhas === "registro";
 
     return apenasLer ? (
       <input
@@ -183,4 +189,4 @@ const CadastroFlex2 = <
   );
 };
 
-export default CadastroFlex2;
+export default Flex2Context;

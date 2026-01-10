@@ -1,9 +1,10 @@
-import { useCadastroAluno } from "./CadastroAlunoContext";
-import { useCadastroDisciplinas } from "./CadastroDisciplinasContext";
-import { useCadastroFuncionario } from "./CadastroFuncionarioContext";
-import { useCadastroPagamento } from "./CadastroPagamentoContext";
-import { useCadastroProfessor } from "./CadastroProfessorContext";
-import { useCadastroTurma } from "./CadastroTurmaContext";
+import { useCadastroAluno } from "./Cadastros/CadastroAlunoContext";
+import { useCadastroDisciplinas } from "./Cadastros/CadastroDisciplinasContext";
+import { useCadastroFuncionario } from "./Cadastros/CadastroFuncionarioContext";
+import { useCadastroPagamento } from "./Cadastros/CadastroPagamentoContext";
+import { useCadastroProfessor } from "./Cadastros/CadastroProfessorContext";
+import { useCadastroTurma } from "./Cadastros/CadastroTurmaContext";
+import { useEditarFuncionario } from "./Editar/EditarFuncionarioContext";
 
 export function useCadastroMenu() {
   const cadastroProfessor = useCadastroProfessor().openMenu;
@@ -20,5 +21,14 @@ export function useCadastroMenu() {
     cadastroTurma,
     cadastroFuncionario,
     cadastroDisciplinas,
+  };
+}
+
+export function useEditarMenu() {
+  const editarFuncionarioCtx = useEditarFuncionario();
+
+  return {
+    editarFuncionario: (registro: string) =>
+      editarFuncionarioCtx.openMenu(registro),
   };
 }

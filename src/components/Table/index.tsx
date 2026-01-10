@@ -1,36 +1,15 @@
 import { useLocation } from "react-router-dom";
-import type { TablePropsTable } from "../../../types/types";
-import { formatBRL, formatTelefone } from "../../../utils/codigos";
-import { Head } from "../../../utils/head";
+import type { TablePropsTable } from "../../types/types";
+import { formatBRL, formatTelefone } from "../../utils/codigos";
+import { Head } from "../../utils/head";
+import { useState } from "react";
+import ImgExibicao from "./imgExibicao";
 
-interface Imagem {
-  foto: string;
-  nome: string;
-  data: string;
-}
-
-const Table = ({ exibicao }: TablePropsTable) => {
+const Table = ({ exibicao, excluir, editar }: TablePropsTable) => {
   const location = useLocation();
   const pagina = location.pathname;
   const head: string[] = Head(pagina);
-
-  const Img = ({ foto, nome, data }: Imagem) => {
-    return (
-      <div className="flex items-center gap-3">
-        <img
-          className="w-10 h-10 rounded-[50%] object-cover border-2 border-(--border-color)"
-          src={foto}
-          alt="Imagem da Pessoa"
-        />
-        <div>
-          <p className="font-semibold">{nome}</p>
-          <p className="text-[12px] text-(--text-muted)">
-            {new Date(data + "T00:00:00").toLocaleDateString("pt-BR")}
-          </p>
-        </div>
-      </div>
-    );
-  };
+  const [menuAberto, setMenuAberto] = useState<string>("");
 
   const VerificarCor = (tipo: string) => {
     switch (tipo) {
@@ -115,7 +94,11 @@ const Table = ({ exibicao }: TablePropsTable) => {
               <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
                 <span className="font-semibold text-(--primary-color) text-[13px]">
                   {"aluno" in item ? (
-                    <Img foto={item.foto} nome={registro} data={item.nasc} />
+                    <ImgExibicao
+                      foto={item.foto}
+                      nome={registro}
+                      data={item.nasc}
+                    />
                   ) : (
                     <>{registro}</>
                   )}
@@ -123,7 +106,7 @@ const Table = ({ exibicao }: TablePropsTable) => {
               </td>
               <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
                 {"nasc" in item && "telefone" in item ? (
-                  <Img foto={item.foto} nome={dado1} data={item.nasc} />
+                  <ImgExibicao foto={item.foto} nome={dado1} data={item.nasc} />
                 ) : (
                   <>{dado1}</>
                 )}
@@ -149,25 +132,56 @@ const Table = ({ exibicao }: TablePropsTable) => {
                 </span>
               </td>
               <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
-                <button className="relative bg-transparent border-none text-(--text-secondary) cursor-pointer py-1 px-2 rounded-sm flex items-center justify-center">
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="currentColor"
-                  >
-                    <circle cx="12" cy="5" r="2"></circle>
-                    <circle cx="12" cy="12" r="2"></circle>
-                    <circle cx="12" cy="19" r="2"></circle>
-                  </svg>
-                </button>
-                <div className="absolute top-full r-0 bg-(--bg-card) border-2 border-(--border-color) rounded-[10px] min-w-40 z-10 opacity-0 hidden -translate-y-2.5 mt-1">
-                  <div className="block py-2.5 px-4 text-(--text-primary) text-[13px] hover:text-(--primary-color) pl-5">
-                    Editar
-                  </div>
-                  <div className="block py-2.5 px-4 text-(--text-primary) text-[13px] hover:text-(--red) pl-5">
-                    Deletar
-                  </div>
+                <div>
+                  {menuAberto == registro ? (
+                    <div className="flex gap-2">
+                      <button
+                        className="hover:scale-110 hover:cursor-pointer"
+                        onClick={() => {
+                          if (menuAberto === registro) {
+                            setMenuAberto("");
+                            editar(registro);
+                          } else {
+                            setMenuAberto(registro);
+                          }
+                        }}
+                      >
+                        ✏️
+                      </button>
+
+                      <button
+                        className="hover:scale-110 hover:cursor-pointer"
+                        onClick={() => {
+                          if (menuAberto === registro) {
+                            setMenuAberto("");
+                            excluir(registro);
+                          } else {
+                            setMenuAberto(registro);
+                          }
+                        }}
+                      >
+                        ❌
+                      </button>
+                    </div>
+                  ) : (
+                    <button
+                      onClick={() =>
+                        setMenuAberto(menuAberto === registro ? "" : registro)
+                      }
+                      className="relative bg-transparent border-none text-(--text-secondary) cursor-pointer py-1 px-2 rounded-sm flex items-center justify-center"
+                    >
+                      <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <circle cx="12" cy="5" r="2"></circle>
+                        <circle cx="12" cy="12" r="2"></circle>
+                        <circle cx="12" cy="19" r="2"></circle>
+                      </svg>
+                    </button>
+                  )}
                 </div>
               </td>
             </tr>

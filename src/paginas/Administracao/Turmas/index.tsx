@@ -1,21 +1,23 @@
 import { useEffect, useState } from "react";
 import type { Turmas } from "../../../types/types";
 import LayoutLogado from "../../LayoutLogado";
-import { Table } from "../../../components/Exibicao";
+import Table from "../../../components/Table";
 import { http } from "../../../utils/axios";
 import Selects from "../../../components/Administracao/Selects";
 import TrocaPagina from "../../../components/TrocaPagina";
 import { useCadastroMenu } from "../../../context";
+import toast from "react-hot-toast";
 
 const ITENS_POR_PAGINA = 6;
 
 const TurmasAdmin = () => {
   const { cadastroTurma } = useCadastroMenu();
 
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [turno, setTurno] = useState<string>("Todos os Turnos");
   const [status, setStatus] = useState<string>("Todos os Status");
   const [ano, setAno] = useState<string>("Todos os Anos");
+  const [pesquisa, setPesquisa] = useState<string>("");
   const [turmas, setTurmas] = useState<Turmas[]>([]);
   const [anos, setAnos] = useState<string[]>([]);
   const [total, setTotal] = useState<number>(0);
@@ -24,7 +26,7 @@ const TurmasAdmin = () => {
   const Pesquisa = () => {
     http
       .get(
-        `api/turma/filtro/turno/${turno}/status/${status}/page/${pagina}/ano/${ano}`
+        `api/turma/filtro/turno/${turno}/status/${status}/page/${pagina}/ano/${ano}/pesquisa/${pesquisa}`
       )
       .then(function (dados) {
         setTotal(dados.data.total);
@@ -42,7 +44,7 @@ const TurmasAdmin = () => {
   useEffect(() => {
     Pesquisa();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [turno, status, pagina, ano]);
+  }, [turno, status, pagina, ano, pesquisa]);
 
   // Atualiza sempre que os pagamentos mudar para página 1
   useEffect(() => {
@@ -61,12 +63,37 @@ const TurmasAdmin = () => {
     return Pesquisa();
   };
 
+  const Excluir = async (Registro: string) => {
+    http
+      .delete(`api/funcionarios/${Registro}`)
+      .then(function () {
+        toast.success("Turma deletada com sucesso!");
+      })
+      .catch(function (error) {
+        console.log(error);
+        toast.error("Não foi possivel deletar a Turma!");
+      })
+      .finally(function () {
+        Pesquisa();
+      });
+  };
+
+  const Editar = async (Registro: string) => {
+    console.log(Registro);
+    return Pesquisa();
+  };
+
   const maxPaginas: number = Math.max(1, Math.ceil(total / ITENS_POR_PAGINA));
 
   return (
     <LayoutLogado
       titulo="Gerenciamento de Turmas"
       desc="Visualize e Gerencie as turmas da Escola"
+      exibirPesquisa={{
+        exibir: true,
+        valor: pesquisa,
+        set: setPesquisa,
+      }}
       botao={{
         ativo: true,
         mensagem: "Nova Turma",
@@ -87,7 +114,7 @@ const TurmasAdmin = () => {
       </div>
 
       <div className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden mb-6">
-        <Table exibicao={turmas} />
+        <Table exibicao={turmas} excluir={Excluir} editar={Editar} />
       </div>
 
       <TrocaPagina

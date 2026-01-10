@@ -46,7 +46,9 @@ function IdentificarTipo(dado: string) {
     case "Turma":
       return "turma";
     case "E-mail":
-      return "eNail";
+      return "email";
+    case "Departamento":
+      return "departamento";
     case "Telefone":
       return "telefone";
     case "Disciplina Principal":
@@ -105,6 +107,10 @@ function IdentificarTipo(dado: string) {
       return "cargo";
     case "SuperVisor":
       return "supervisor";
+    case "Foto":
+      return "foto";
+    case "Salario":
+      return "salario";
 
     default:
       return "";

@@ -1,71 +1,80 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
-import type { CadastroContextType } from "../../types/types";
+import type { ContextType } from "../../../types/types";
 import {
-  CadastroFlex1,
-  CadastroFlex2,
-  CadastroTitulo,
-} from "../../components/Cadastros";
+  Flex1Context,
+  Flex2Context,
+  TituloContext,
+} from "../../../components/TypeContext";
+import {
+  cadastroProfessorSchema,
+  type CadastroProfessorInput,
+} from "../../../schemas/Cadastro/CadastroProfessorSchema";
 import toast from "react-hot-toast";
-import {
-  cadastroAlunoSchema,
-  type CadastroAlunoInput,
-} from "../../schemas/alunoSchema";
-import { http } from "../../utils/axios";
+import { http } from "../../../utils/axios";
 
-const CadastroAlunoContext = createContext<
-  CadastroContextType<CadastroAlunoInput> | undefined
+const CadastroProfessorContext = createContext<
+  ContextType<CadastroProfessorInput> | undefined
 >(undefined);
-export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
+export function CadastroProfessorProvider({
+  children,
+}: {
+  children: ReactNode;
+}) {
   const [menu, setMenu] = useState<boolean>(false);
-  const [dados, setDados] = useState<CadastroAlunoInput>({
-    matricula: "",
+  const [dados, setDados] = useState<CadastroProfessorInput>({
+    codigo: "",
     status: "Ativo",
     nome: "",
     cpf: "",
-    turma: "Selecionar Turma",
+    contratacao: new Date().toISOString().split("T")[0],
+    disciplina: "",
+    formacao: "",
+    turmas: [""],
     email: "",
     telefone: "",
     endereco: "",
-    nascimento: new Date().toISOString().split("T")[0],
+    nasc: new Date().toISOString().split("T")[0],
     nomeEmergencia: "",
     telefoneEmergencia: "",
   });
   const [resolveCallback, setResolveCallback] = useState<
-    ((data: CadastroAlunoInput | null) => void) | null
+    ((data: true | null) => void) | null
   >(null);
 
-  const openMenu = async (): Promise<CadastroAlunoInput | null> => {
-    const matriculaNova = await http.get("api/alunos/Cadastro");
+  const openMenu = async (): Promise<CadastroProfessorInput | null> => {
+    const matriculaNova = await http.get("api/professores/Cadastro");
     setMenu(true);
-    setDados((prevDados) => ({ ...prevDados, matricula: matriculaNova.data }));
+    setDados((prevDados) => ({ ...prevDados, codigo: matriculaNova.data }));
     return new Promise((resolve) => {
       setResolveCallback(() => resolve);
     });
   };
 
   const Confirm = async () => {
-    const result = cadastroAlunoSchema.safeParse(dados);
+    const result = cadastroProfessorSchema.safeParse(dados);
     if (!result.success) return toast.error(result.error.issues[0].message);
 
     if (resolveCallback) {
       await http
-        .post("/api/alunos", {
-          Registro: dados.matricula,
+        .post("api/professores", {
+          Registro: dados.codigo,
           Nome: dados.nome,
           Email: dados.email,
           Telefone: dados.telefone,
           Status: dados.status,
-          Nasc: dados.nascimento,
+          Nasc: dados.nasc,
           Endereco: dados.endereco,
           Cpf: dados.cpf,
           ContatoEmergencia: dados.telefoneEmergencia,
-          Turma: dados.turma,
-          Media: 0,
-          DataMatricula: dados.nascimento,
+          Turma: dados.turmas,
+          Disciplina: dados.disciplina,
+          Contratacao: dados.contratacao,
+          Formacao: dados.formacao,
           Foto: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100",
         })
         .then(function () {
-          resolveCallback(dados);
+          resolveCallback(true);
+          setResolveCallback(null);
           toast.success("Cadastro realizado com sucesso!");
         })
         .catch(function (error) {
@@ -90,15 +99,18 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
 
   const ResetarDados = () => {
     setDados({
-      matricula: "",
+      codigo: "",
       status: "",
       nome: "",
       cpf: "",
-      turma: "",
+      contratacao: new Date().toISOString().split("T")[0],
+      disciplina: "",
+      formacao: "",
+      turmas: [""],
       email: "",
       telefone: "",
       endereco: "",
-      nascimento: new Date().toISOString().split("T")[0],
+      nasc: new Date().toISOString().split("T")[0],
       nomeEmergencia: "",
       telefoneEmergencia: "",
     });
@@ -106,7 +118,7 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <CadastroAlunoContext.Provider value={{ openMenu, setDados }}>
+    <CadastroProfessorContext.Provider value={{ openMenu, setDados }}>
       {children}
       {menu && (
         <div className="flex fixed top-0 bottom-0 right-0 left-0 bg-[#000000B3] backdrop-blur-sm z-10 animate-fadeIn items-center justify-center p-5">
@@ -114,30 +126,33 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
             className="bg-(--bg-card) border border-(--border-color) rounded-2xl w-full max-w-[700px] max-h-[90vh] overflow-hidden amimate-slideUp flex flex-col"
             style={{ boxShadow: "0 20px 60px rgba(0, 0, 0, 0.5)" }}
           >
-            <CadastroTitulo titulo="Cadastrar Novo Aluno" cancelar={Cancel} />
+            <TituloContext
+              titulo="Cadastrar Novo Professor"
+              cancelar={Cancel}
+            />
 
             <form className="p-7 overflow-y-auto flex-1">
               <div className="mb-7">
                 <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
                   Informações Pessoais
                 </h3>
-                <CadastroFlex2
-                  opcao1="Matrícula"
+                <Flex2Context
+                  opcao1="Código"
                   opcao2="Status"
                   infos={dados}
                   setInfos={setDados}
                 />
 
-                <CadastroFlex2
+                <Flex2Context
                   opcao1="Nome completo"
-                  opcao2="CPF/Documento"
+                  opcao2="Data de Nascimento"
                   infos={dados}
                   setInfos={setDados}
                 />
 
-                <CadastroFlex2
-                  opcao1="Data de Nascimento"
-                  opcao2="Turma"
+                <Flex2Context
+                  opcao1="Data de Contratação"
+                  opcao2="CPF/Documento"
                   infos={dados}
                   setInfos={setDados}
                 />
@@ -145,16 +160,35 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
 
               <div className="mb-7">
                 <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
+                  Profissional
+                </h3>
+                <Flex2Context
+                  opcao1="Disciplina Principal"
+                  opcao2="Formação Academica"
+                  infos={dados}
+                  setInfos={setDados}
+                />
+
+                <Flex1Context
+                  titulo="Turmas"
+                  infos={dados}
+                  setInfos={setDados}
+                  place="ex: 9º A, 8º B, 7º A"
+                />
+              </div>
+
+              <div className="mb-7">
+                <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
                   Contato
                 </h3>
-                <CadastroFlex2
+                <Flex2Context
                   opcao1="E-mail"
                   opcao2="Telefone"
                   infos={dados}
                   setInfos={setDados}
                 />
 
-                <CadastroFlex1
+                <Flex1Context
                   titulo="Endereço"
                   infos={dados}
                   setInfos={setDados}
@@ -166,7 +200,7 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
                 <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
                   Contato de Emergência
                 </h3>
-                <CadastroFlex2
+                <Flex2Context
                   opcao1="Nome do Contato de Emergência"
                   opcao2="Telefone do Contato de Emergência"
                   infos={dados}
@@ -199,22 +233,22 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
                 >
                   <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
-                Salvar Aluno
+                Salvar Professor
               </button>
             </div>
           </div>
         </div>
       )}
-    </CadastroAlunoContext.Provider>
+    </CadastroProfessorContext.Provider>
   );
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
-export function useCadastroAluno() {
-  const context = useContext(CadastroAlunoContext);
+export function useCadastroProfessor() {
+  const context = useContext(CadastroProfessorContext);
   if (!context) {
     throw new Error(
-      "useCadastroAluno deve ser usado dentro do CadastroAlunoProvider"
+      "useCadastroProfessor deve ser usado dentro do CadastroProfessorProvider"
     );
   }
   return context;

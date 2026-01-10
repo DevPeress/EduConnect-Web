@@ -1,53 +1,68 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
-import type { CadastroContextType } from "../../types/types";
-import { CadastroFlex1, CadastroFlex2, CadastroTitulo } from "../../components/Cadastros";
-import toast from "react-hot-toast";
-import { http } from "../../utils/axios";
+import type { ContextType } from "../../../types/types";
 import {
-  cadastroDisciplinasSchema,
-  type CadastroDisciplinasInput,
-} from "../../schemas/disciplinaSchema";
+  Flex1Context,
+  Flex2Context,
+  TituloContext,
+} from "../../../components/TypeContext";
+import toast from "react-hot-toast";
+import { http } from "../../../utils/axios";
+import {
+  cadastroPagamentoSchema,
+  type CadastroPagamentoInput,
+} from "../../../schemas/Cadastro/CadastroPagementoSchema";
 
-const CadastroDisciplinasContext = createContext<
-  CadastroContextType<CadastroDisciplinasInput> | undefined
+const CadastroPagamentoContext = createContext<
+  ContextType<CadastroPagamentoInput> | undefined
 >(undefined);
-export function CadastroDisciplinasProvider({
+export function CadastroPagamentoProvider({
   children,
 }: {
   children: ReactNode;
 }) {
   const [menu, setMenu] = useState<boolean>(false);
-  const [dados, setDados] = useState<CadastroDisciplinasInput>({
-    registro: "",
-    nome: "",
+  const [dados, setDados] = useState<CadastroPagamentoInput>({
+    aluno: "",
     descricao: "",
+    valor: 0,
+    observacoes: "",
+    categoria: "",
+    statuspagamento: "",
+    metodo: "",
+    dataVencimento: new Date().toISOString().split("T")[0],
+    dataPagamento: "",
   });
   const [resolveCallback, setResolveCallback] = useState<
-    ((data: CadastroDisciplinasInput | null) => void) | null
+    ((data: true | null) => void) | null
   >(null);
 
-  const openMenu = async (): Promise<CadastroDisciplinasInput | null> => {
-    const matriculaNova = await http.get("api/disciplinas/Cadastro");
+  const openMenu = async (): Promise<CadastroPagamentoInput | null> => {
     setMenu(true);
-    setDados((prevDados) => ({ ...prevDados, registro: matriculaNova.data }));
     return new Promise((resolve) => {
       setResolveCallback(() => resolve);
     });
   };
 
   const Confirm = async () => {
-    const result = cadastroDisciplinasSchema.safeParse(dados);
+    const result = cadastroPagamentoSchema.safeParse(dados);
     if (!result.success) return toast.error(result.error.issues[0].message);
 
     if (resolveCallback) {
       await http
-        .post("/api/disciplinas", {
-          Registro: dados.registro,
-          Nome: dados.nome,
+        .post("/api/financeiro", {
+          AlunoRegistro: dados.aluno,
+          Categoria: dados.categoria,
+          Metodo: dados.metodo,
           Descricao: dados.descricao,
+          Valor: dados.valor,
+          DataVencimento: dados.dataVencimento,
+          Pago: dados.statuspagamento === "Pago" ? true : false,
+          dataPagamento:
+            dados.dataPagamento !== "" ? dados.dataPagamento : null,
+          Observacoes: dados.observacoes,
         })
         .then(function () {
-          resolveCallback(dados);
+          resolveCallback(true);
           toast.success("Cadastro realizado com sucesso!");
         })
         .catch(function (error) {
@@ -72,15 +87,21 @@ export function CadastroDisciplinasProvider({
 
   const ResetarDados = () => {
     setDados({
-      registro: "",
-      nome: "",
+      aluno: "",
       descricao: "",
+      valor: 0,
+      observacoes: "",
+      categoria: "",
+      statuspagamento: "",
+      metodo: "",
+      dataVencimento: new Date().toISOString().split("T")[0],
+      dataPagamento: "",
     });
     setMenu(false);
   };
 
   return (
-    <CadastroDisciplinasContext.Provider value={{ openMenu, setDados }}>
+    <CadastroPagamentoContext.Provider value={{ openMenu, setDados }}>
       {children}
       {menu && (
         <div className="flex fixed top-0 bottom-0 right-0 left-0 bg-[#000000B3] backdrop-blur-sm z-10 animate-fadeIn items-center justify-center p-5">
@@ -88,29 +109,46 @@ export function CadastroDisciplinasProvider({
             className="bg-(--bg-card) border border-(--border-color) rounded-2xl w-full max-w-[700px] max-h-[90vh] overflow-hidden amimate-slideUp flex flex-col"
             style={{ boxShadow: "0 20px 60px rgba(0, 0, 0, 0.5)" }}
           >
-            <CadastroTitulo
-              titulo="Cadastrar Nova Disciplina"
-              cancelar={Cancel}
-            />
+            <TituloContext titulo="Registrar Pagamento" cancelar={Cancel} />
 
             <form className="p-7 overflow-y-auto flex-1">
               <div className="mb-7">
                 <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
-                  Informações Básicas
+                  Informações do Pagamento
                 </h3>
-
-                <CadastroFlex2
-                  opcao1="Registro"
-                  opcao2="Nome"
+                <Flex2Context
+                  opcao1="Aluno"
+                  opcao2="Categoria"
                   infos={dados}
                   setInfos={setDados}
                 />
 
-                <CadastroFlex1
+                <Flex1Context
                   titulo="Descrição"
                   infos={dados}
                   setInfos={setDados}
-                  place="ex: Matéria criada baseada na lei..."
+                  place="ex: Mensalidade Dezembro 2025"
+                />
+
+                <Flex2Context
+                  opcao1="Valor"
+                  opcao2="Vencimento"
+                  infos={dados}
+                  setInfos={setDados}
+                />
+
+                <Flex2Context
+                  opcao1="Status do Pagamento"
+                  opcao2="Data do Pagamento"
+                  infos={dados}
+                  setInfos={setDados}
+                />
+
+                <Flex2Context
+                  opcao1="Método do Pagameto"
+                  opcao2="Observações"
+                  infos={dados}
+                  setInfos={setDados}
                 />
               </div>
             </form>
@@ -139,22 +177,22 @@ export function CadastroDisciplinasProvider({
                 >
                   <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
-                Salvar Disciplina
+                Salvar Pagamento
               </button>
             </div>
           </div>
         </div>
       )}
-    </CadastroDisciplinasContext.Provider>
+    </CadastroPagamentoContext.Provider>
   );
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
-export function useCadastroDisciplinas() {
-  const context = useContext(CadastroDisciplinasContext);
+export function useCadastroPagamento() {
+  const context = useContext(CadastroPagamentoContext);
   if (!context) {
     throw new Error(
-      "useCadastroDisciplinas deve ser usado dentro do CadastroDisciplinasProvider"
+      "useCadastroPagamento deve ser usado dentro do CadastroPagamentoProvider"
     );
   }
   return context;

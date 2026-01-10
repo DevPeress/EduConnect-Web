@@ -7,6 +7,7 @@ const LayoutLogado = ({
   titulo,
   desc,
   botao,
+  exibirPesquisa,
   load,
 }: MainProps) => {
   const BotaoAtivo: boolean = botao.ativo;
@@ -18,6 +19,7 @@ const LayoutLogado = ({
       <Main
         titulo={titulo}
         desc={desc}
+        exibirPesquisa={exibirPesquisa}
         botao={{
           ativo: BotaoAtivo,
           mensagem: BotaoMensagem,

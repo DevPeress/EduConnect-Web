@@ -2,12 +2,13 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import type { ReactNode } from "react";
 import type { ThemeType } from "../../types/types";
-import { CadastroAlunoProvider } from "../CadastroAlunoContext";
-import { CadastroProfessorProvider } from "../CadastroProfessorContext";
-import { CadastroPagamentoProvider } from "../CadastroPagamentoContext";
-import { CadastroTurmaProvider } from "../CadastroTurmaContext";
-import { CadastroFuncionarioProvider } from "../CadastroFuncionarioContext";
-import { CadastroDisciplinasProvider } from "../CadastroDisciplinasContext";
+import { CadastroAlunoProvider } from "../Cadastros/CadastroAlunoContext";
+import { CadastroProfessorProvider } from "../Cadastros/CadastroProfessorContext";
+import { CadastroPagamentoProvider } from "../Cadastros/CadastroPagamentoContext";
+import { CadastroTurmaProvider } from "../Cadastros/CadastroTurmaContext";
+import { CadastroFuncionarioProvider } from "../Cadastros/CadastroFuncionarioContext";
+import { CadastroDisciplinasProvider } from "../Cadastros/CadastroDisciplinasContext";
+import { EditarFuncionarioProvider } from "../Editar/EditarFuncionarioContext";
 
 const ThemeContext = createContext<ThemeType | undefined>(undefined);
 
@@ -39,7 +40,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
             <CadastroTurmaProvider>
               <CadastroFuncionarioProvider>
                 <CadastroDisciplinasProvider>
-                  {children}
+                  <EditarFuncionarioProvider>
+                    {children}
+                  </EditarFuncionarioProvider>
                 </CadastroDisciplinasProvider>
               </CadastroFuncionarioProvider>
             </CadastroTurmaProvider>

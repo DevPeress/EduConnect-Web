@@ -1,19 +1,19 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
-import type { CadastroContextType } from "../../types/types";
+import type { ContextType } from "../../../types/types";
 import {
-  CadastroFlex1,
-  CadastroFlex2,
-  CadastroTitulo,
-} from "../../components/Cadastros";
+  Flex1Context,
+  Flex2Context,
+  TituloContext,
+} from "../../../components/TypeContext";
 import toast from "react-hot-toast";
 import {
   cadastroTurmaSchema,
   type CadastroTurmaInput,
-} from "../../schemas/turmaSchema";
-import { http } from "../../utils/axios";
+} from "../../../schemas/Cadastro/CadastroTurmaSchema";
+import { http } from "../../../utils/axios";
 
 const CadastroTurmaContext = createContext<
-  CadastroContextType<CadastroTurmaInput> | undefined
+  ContextType<CadastroTurmaInput> | undefined
 >(undefined);
 export function CadastroTurmaProvider({ children }: { children: ReactNode }) {
   const [menu, setMenu] = useState<boolean>(false);
@@ -33,7 +33,7 @@ export function CadastroTurmaProvider({ children }: { children: ReactNode }) {
     disciplinasValidas: "",
   });
   const [resolveCallback, setResolveCallback] = useState<
-    ((data: CadastroTurmaInput | null) => void) | null
+    ((data: true | null) => void) | null
   >(null);
 
   const openMenu = async (): Promise<CadastroTurmaInput | null> => {
@@ -72,7 +72,7 @@ export function CadastroTurmaProvider({ children }: { children: ReactNode }) {
           Dias: dados.dias,
         })
         .then(function () {
-          resolveCallback(dados);
+          resolveCallback(true);
           toast.success("Cadastro realizado com sucesso!");
         })
         .catch(function (error) {
@@ -123,28 +123,28 @@ export function CadastroTurmaProvider({ children }: { children: ReactNode }) {
             className="bg-(--bg-card) border border-(--border-color) rounded-2xl w-full max-w-[700px] max-h-[90vh] overflow-hidden amimate-slideUp flex flex-col"
             style={{ boxShadow: "0 20px 60px rgba(0, 0, 0, 0.5)" }}
           >
-            <CadastroTitulo titulo="Cadastrar Nova Turma" cancelar={Cancel} />
+            <TituloContext titulo="Cadastrar Nova Turma" cancelar={Cancel} />
 
             <form className="p-7 overflow-y-auto flex-1">
               <div className="mb-7">
                 <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
                   Informações Básicas
                 </h3>
-                <CadastroFlex2
+                <Flex2Context
                   opcao1="Código"
                   opcao2="Status"
                   infos={dados}
                   setInfos={setDados}
                 />
 
-                <CadastroFlex2
+                <Flex2Context
                   opcao1="Nome da Turma"
                   opcao2="Ano Letivo"
                   infos={dados}
                   setInfos={setDados}
                 />
 
-                <CadastroFlex2
+                <Flex2Context
                   opcao1="Turno"
                   opcao2="Sala"
                   infos={dados}
@@ -156,7 +156,7 @@ export function CadastroTurmaProvider({ children }: { children: ReactNode }) {
                 <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
                   Capacidade e Professor
                 </h3>
-                <CadastroFlex2
+                <Flex2Context
                   opcao1="Capacidade"
                   opcao2="Professor"
                   infos={dados}
@@ -168,14 +168,14 @@ export function CadastroTurmaProvider({ children }: { children: ReactNode }) {
                 <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
                   Horários
                 </h3>
-                <CadastroFlex2
+                <Flex2Context
                   opcao1="Horário Início"
                   opcao2="Horário Fim"
                   infos={dados}
                   setInfos={setDados}
                 />
 
-                <CadastroFlex1
+                <Flex1Context
                   titulo="Dias da Semana"
                   infos={dados}
                   setInfos={setDados}
@@ -188,7 +188,7 @@ export function CadastroTurmaProvider({ children }: { children: ReactNode }) {
                   Disciplinas
                 </h3>
 
-                <CadastroFlex1
+                <Flex1Context
                   titulo="Disciplinas"
                   infos={dados}
                   setInfos={setDados}

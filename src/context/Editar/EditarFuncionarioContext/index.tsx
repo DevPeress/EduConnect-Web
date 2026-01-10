@@ -1,79 +1,105 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
-import type { CadastroContextType } from "../../types/types";
 import {
-  CadastroFlex1,
-  CadastroFlex2,
-  CadastroTitulo,
-} from "../../components/Cadastros";
+  Flex1Context,
+  Flex2Context,
+  TituloContext,
+} from "../../../components/TypeContext";
+import { http } from "../../../utils/axios";
+import type { EditarContextType } from "../../../types/types";
 import {
-  cadastroProfessorSchema,
-  type CadastroProfessorInput,
-} from "../../schemas/professorSchema";
+  editarFuncionarioSchema,
+  type EditarFuncionarioInput,
+} from "../../../schemas/Editar/EditarFuncionarioSchema";
 import toast from "react-hot-toast";
-import { http } from "../../utils/axios";
 
-const CadastroProfessorContext = createContext<
-  CadastroContextType<CadastroProfessorInput> | undefined
+const EditarFuncionarioContext = createContext<
+  EditarContextType<EditarFuncionarioInput> | undefined
 >(undefined);
-export function CadastroProfessorProvider({
+
+export function EditarFuncionarioProvider({
   children,
 }: {
   children: ReactNode;
 }) {
   const [menu, setMenu] = useState<boolean>(false);
-  const [dados, setDados] = useState<CadastroProfessorInput>({
-    codigo: "",
-    status: "Ativo",
+  const [dados, setDados] = useState<EditarFuncionarioInput>({
+    registro: "",
     nome: "",
-    cpf: "",
-    contratacao: new Date().toISOString().split("T")[0],
-    disciplina: "",
-    formacao: "",
-    turmas: [""],
     email: "",
     telefone: "",
+    status: "",
+    nascimento: "",
     endereco: "",
-    nasc: new Date().toISOString().split("T")[0],
-    nomeEmergencia: "",
+    cpf: "",
     telefoneEmergencia: "",
+    nomeEmergencia: "",
+    foto: "",
+    cargo: "",
+    departamento: "",
+    supervisor: "",
+    turno: "",
+    salario: 0,
   });
+
   const [resolveCallback, setResolveCallback] = useState<
-    ((data: CadastroProfessorInput | null) => void) | null
+    ((data: true | null) => void) | null
   >(null);
 
-  const openMenu = async (): Promise<CadastroProfessorInput | null> => {
-    const matriculaNova = await http.get("api/professores/Cadastro");
+  const openMenu = async (
+    registro: string
+  ): Promise<EditarFuncionarioInput | null> => {
+    await http.get(`api/funcionarios/${registro}`).then(function (dados) {
+      const infos = dados.data;
+      setDados({
+        registro: registro,
+        nome: infos.nome,
+        email: infos.email,
+        telefone: infos.telefone,
+        status: infos.status,
+        nascimento: infos.nasc,
+        endereco: infos.endereco,
+        cpf: infos.cpf,
+        telefoneEmergencia: infos.contatoEmergencia,
+        nomeEmergencia: infos.nomeEmergencia,
+        foto: infos.foto,
+        cargo: infos.cargo,
+        departamento: infos.departamento,
+        supervisor: infos.supervisor,
+        turno: infos.turno,
+        salario: infos.salario,
+      });
+    });
     setMenu(true);
-    setDados((prevDados) => ({ ...prevDados, codigo: matriculaNova.data }));
     return new Promise((resolve) => {
       setResolveCallback(() => resolve);
     });
   };
 
   const Confirm = async () => {
-    const result = cadastroProfessorSchema.safeParse(dados);
+    const result = editarFuncionarioSchema.safeParse(dados);
     if (!result.success) return toast.error(result.error.issues[0].message);
 
     if (resolveCallback) {
       await http
-        .post("api/professores", {
-          Registro: dados.codigo,
+        .post("api/funcionario", {
+          Registro: dados.registro,
           Nome: dados.nome,
           Email: dados.email,
           Telefone: dados.telefone,
           Status: dados.status,
-          Nasc: dados.nasc,
+          Nasc: dados.nascimento,
           Endereco: dados.endereco,
           Cpf: dados.cpf,
           ContatoEmergencia: dados.telefoneEmergencia,
-          Turma: dados.turmas,
-          Disciplina: dados.disciplina,
-          Contratacao: dados.contratacao,
-          Formacao: dados.formacao,
+          NomeEmergencia: dados.nomeEmergencia,
+          Cargo: dados.cargo,
+          Departamento: dados.departamento,
+          Supervisor: dados.supervisor,
+          Turno: dados.turno,
           Foto: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100",
         })
         .then(function () {
-          resolveCallback(dados);
+          resolveCallback(true);
           setResolveCallback(null);
           toast.success("Cadastro realizado com sucesso!");
         })
@@ -84,7 +110,6 @@ export function CadastroProfessorProvider({
         })
         .finally(function () {
           setResolveCallback(null);
-          ResetarDados();
         });
     }
   };
@@ -94,31 +119,10 @@ export function CadastroProfessorProvider({
       resolveCallback(null);
       setResolveCallback(null);
     }
-    ResetarDados();
-  };
-
-  const ResetarDados = () => {
-    setDados({
-      codigo: "",
-      status: "",
-      nome: "",
-      cpf: "",
-      contratacao: new Date().toISOString().split("T")[0],
-      disciplina: "",
-      formacao: "",
-      turmas: [""],
-      email: "",
-      telefone: "",
-      endereco: "",
-      nasc: new Date().toISOString().split("T")[0],
-      nomeEmergencia: "",
-      telefoneEmergencia: "",
-    });
-    setMenu(false);
   };
 
   return (
-    <CadastroProfessorContext.Provider value={{ openMenu, setDados }}>
+    <EditarFuncionarioContext.Provider value={{ openMenu, setDados }}>
       {children}
       {menu && (
         <div className="flex fixed top-0 bottom-0 right-0 left-0 bg-[#000000B3] backdrop-blur-sm z-10 animate-fadeIn items-center justify-center p-5">
@@ -126,35 +130,32 @@ export function CadastroProfessorProvider({
             className="bg-(--bg-card) border border-(--border-color) rounded-2xl w-full max-w-[700px] max-h-[90vh] overflow-hidden amimate-slideUp flex flex-col"
             style={{ boxShadow: "0 20px 60px rgba(0, 0, 0, 0.5)" }}
           >
-            <CadastroTitulo
-              titulo="Cadastrar Novo Professor"
-              cancelar={Cancel}
-            />
+            <TituloContext titulo="Editar Funcionário" cancelar={Cancel} />
 
             <form className="p-7 overflow-y-auto flex-1">
               <div className="mb-7">
                 <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
                   Informações Pessoais
                 </h3>
-                <CadastroFlex2
-                  opcao1="Código"
+                <Flex2Context
+                  opcao1="Registro"
                   opcao2="Status"
                   infos={dados}
                   setInfos={setDados}
                 />
 
-                <CadastroFlex2
-                  opcao1="Nome completo"
-                  opcao2="Data de Nascimento"
+                <Flex2Context
+                  opcao1="Data de Nascimento"
+                  opcao2="CPF/Documento"
                   infos={dados}
                   setInfos={setDados}
                 />
 
-                <CadastroFlex2
-                  opcao1="Data de Contratação"
-                  opcao2="CPF/Documento"
+                <Flex1Context
+                  titulo="Nome completo"
                   infos={dados}
                   setInfos={setDados}
+                  place="ex: Fabrício Peres ..."
                 />
               </div>
 
@@ -162,18 +163,25 @@ export function CadastroProfessorProvider({
                 <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
                   Profissional
                 </h3>
-                <CadastroFlex2
-                  opcao1="Disciplina Principal"
-                  opcao2="Formação Academica"
+                <Flex2Context
+                  opcao1="Foto"
+                  opcao2="Salario"
                   infos={dados}
                   setInfos={setDados}
                 />
 
-                <CadastroFlex1
-                  titulo="Turmas"
+                <Flex2Context
+                  opcao1="Cargo"
+                  opcao2="Departamento"
                   infos={dados}
                   setInfos={setDados}
-                  place="ex: 9º A, 8º B, 7º A"
+                />
+
+                <Flex2Context
+                  opcao1="SuperVisor"
+                  opcao2="Turno"
+                  infos={dados}
+                  setInfos={setDados}
                 />
               </div>
 
@@ -181,14 +189,14 @@ export function CadastroProfessorProvider({
                 <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
                   Contato
                 </h3>
-                <CadastroFlex2
+                <Flex2Context
                   opcao1="E-mail"
                   opcao2="Telefone"
                   infos={dados}
                   setInfos={setDados}
                 />
 
-                <CadastroFlex1
+                <Flex1Context
                   titulo="Endereço"
                   infos={dados}
                   setInfos={setDados}
@@ -200,7 +208,7 @@ export function CadastroProfessorProvider({
                 <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
                   Contato de Emergência
                 </h3>
-                <CadastroFlex2
+                <Flex2Context
                   opcao1="Nome do Contato de Emergência"
                   opcao2="Telefone do Contato de Emergência"
                   infos={dados}
@@ -208,6 +216,7 @@ export function CadastroProfessorProvider({
                 />
               </div>
             </form>
+
             <div className="py-5 px-7 border-t border-(--border-color) flex justify-end gap-3 bg-[#0000001A]">
               <button
                 onClick={Cancel}
@@ -233,22 +242,22 @@ export function CadastroProfessorProvider({
                 >
                   <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
-                Salvar Professor
+                Salvar Funcionário
               </button>
             </div>
           </div>
         </div>
       )}
-    </CadastroProfessorContext.Provider>
+    </EditarFuncionarioContext.Provider>
   );
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
-export function useCadastroProfessor() {
-  const context = useContext(CadastroProfessorContext);
+export function useEditarFuncionario() {
+  const context = useContext(EditarFuncionarioContext);
   if (!context) {
     throw new Error(
-      "useCadastroProfessor deve ser usado dentro do CadastroProfessorProvider"
+      "useEditarFuncionario deve ser usado dentro do EditarFuncionarioProvider"
     );
   }
   return context;

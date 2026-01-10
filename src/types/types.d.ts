@@ -1,8 +1,8 @@
-import type { CadastroAlunoInput } from "../schemas/alunoSchema";
-import type { CadastroFuncionarioInput } from "../schemas/funcionarioSchema";
-import type { CadastroPagamentoInput } from "../schemas/pagementoSchema";
-import type { CadastroProfessorInput } from "../schemas/professorSchema";
-import type { CadastroTurmaInput } from "../schemas/turmaSchema";
+import type { CadastroAlunoInput } from "../schemas/Cadastro/CadastroAlunoSchema";
+import type { CadastroFuncionarioInput } from "../schemas/Cadastro/CadastroFuncionarioSchema";
+import type { CadastroPagamentoInput } from "../schemas/Cadastro/CadastroPagementoSchema";
+import type { CadastroProfessorInput } from "../schemas/Cadastro/CadastroProfessorSchema";
+import type { CadastroTurmaInput } from "../schemas/Cadastro/CadastroTurmaSchema";
 
 export interface ThemeType {
   toggleTheme: () => void;
@@ -46,9 +46,22 @@ export interface MainProps {
   titulo: string;
   desc: string;
   children: ReactNode;
+  exibirPesquisa: {
+    exibir: boolean;
+    valor?: string;
+    set?: (valor: string) => void;
+  };
   botao: { ativo: boolean; adicionar?: () => void; mensagem?: string };
-  load?: boolean;
+  load: boolean;
 }
+
+export interface PaginaMainProps {
+  titulo: string;
+  desc: string;
+  children: ReactNode;
+  botao: { ativo: boolean; adicionar?: () => void; mensagem?: string };
+}
+
 
 export interface CardsAdminType {
   dado: string;
@@ -126,7 +139,7 @@ export interface Disciplinas {
   dataCriacao: string;
 }
 
-export interface CadastroContextType<
+export interface ContextType<
   T extends
     | CadastroProfessorInput
     | CadastroAlunoInput
@@ -134,8 +147,14 @@ export interface CadastroContextType<
     | CadastroTurmaInput
     | CadastroFuncionarioInput
     | CadastroDisciplinasInput
+    | EditarFuncionarioInput
 > {
   openMenu: () => Promise<T | null>;
+  setDados: React.Dispatch<React.SetStateAction<T>>;
+}
+
+export interface EditarContextType<T extends EditarContextType> {
+  openMenu: (valor: string) => Promise<T | null>;
   setDados: React.Dispatch<React.SetStateAction<T>>;
 }
 
@@ -152,7 +171,7 @@ export interface SlotInfo {
   action: "select" | "click" | "doubleClick";
 }
 
-export interface CadastroFlexProps<
+export interface FlexContext<
   T extends
     | CadastroAlunoInput
     | CadastroProfessorInput
@@ -182,10 +201,13 @@ export interface SelectProps {
 
 export interface TablePropsTable {
   exibicao: Pessoa[] | Financeiro[] | Turmas[] | Funcionario[];
+  excluir: (valor: string) => void;
+  editar: (valor: string) => void;
 }
 
 export interface TablePropsGrid {
   exibicao: Pessoa[] | Financeiro[] | Funcionario[];
+  excluir: (valor: string) => void;
 }
 
 export interface TrocaPaginas {
