@@ -48,7 +48,7 @@ export interface MainProps {
   children: ReactNode;
   exibirPesquisa: boolean;
   botao: { ativo: boolean; adicionar?: () => void; mensagem?: string };
-  load?: boolean;
+  load: boolean;
 }
 
 export interface PaginaMainProps {
