@@ -89,6 +89,7 @@ const AlunosAdmin = () => {
     <LayoutLogado
       titulo="Gerenciamento de Alunos"
       desc="Visualize e Gerencie as informações dos estudantes"
+      exibirPesquisa={true}
       botao={{
         ativo: true,
         mensagem: "Novo Aluno",

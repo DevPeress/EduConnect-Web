@@ -27,6 +27,7 @@ const CalendarioAdm = () => {
     <LayoutLogado
       titulo="Calendário"
       desc="Visão geral do Calendário"
+      exibirPesquisa={false}
       botao={{
         ativo: false,
       }}

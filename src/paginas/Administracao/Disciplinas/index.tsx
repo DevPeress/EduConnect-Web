@@ -66,6 +66,7 @@ const DisciplinasAdmin = () => {
     <LayoutLogado
       titulo="Gerenciamento de Disciplinas"
       desc="Visualize e Gerencie as disciplinas da Escola"
+      exibirPesquisa={true}
       botao={{
         ativo: true,
         mensagem: "Nova Disciplinas",

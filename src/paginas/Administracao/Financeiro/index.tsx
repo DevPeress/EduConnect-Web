@@ -104,6 +104,7 @@ const FinanceiroAdmin = () => {
     <LayoutLogado
       titulo="Gestão Financeira"
       desc="Controle de pagamentos e mensalidades"
+      exibirPesquisa={true}
       botao={{
         ativo: true,
         mensagem: "Novo Pagamento",

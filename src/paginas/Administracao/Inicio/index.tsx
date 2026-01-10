@@ -66,6 +66,7 @@ const InicioAdm = () => {
     <LayoutLogado
       titulo="Bem-Vindo"
       desc="Visão geral da Escola e Estatísticas"
+      exibirPesquisa={false}
       botao={{
         ativo: false,
       }}

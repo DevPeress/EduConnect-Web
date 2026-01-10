@@ -97,6 +97,7 @@ const FuncionariosAdmin = () => {
     <LayoutLogado
       titulo="Gerenciamento de Funcionários"
       desc="Visualize e Gerencie as informações dos funcionários"
+      exibirPesquisa={true}
       botao={{
         ativo: true,
         mensagem: "Novo Funcionário",
