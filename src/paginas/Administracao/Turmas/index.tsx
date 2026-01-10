@@ -78,6 +78,11 @@ const TurmasAdmin = () => {
       });
   };
 
+  const Editar = async (Registro: string) => {
+    console.log(Registro);
+    return Pesquisa();
+  };
+
   const maxPaginas: number = Math.max(1, Math.ceil(total / ITENS_POR_PAGINA));
 
   return (
@@ -109,7 +114,7 @@ const TurmasAdmin = () => {
       </div>
 
       <div className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden mb-6">
-        <Table exibicao={turmas} excluir={Excluir} />
+        <Table exibicao={turmas} excluir={Excluir} editar={Editar} />
       </div>
 
       <TrocaPagina

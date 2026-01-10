@@ -80,6 +80,11 @@ const AlunosAdmin = () => {
       });
   };
 
+  const Editar = async (Registro: string) => {
+    console.log(Registro);
+    return Pesquisa();
+  };
+
   const maxPaginas = Math.max(1, Math.ceil(total / ITENS_POR_PAGINA));
 
   return (
@@ -112,7 +117,7 @@ const AlunosAdmin = () => {
       </div>
 
       <div className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden mb-6">
-        <Table exibicao={alunos} excluir={Excluir} />
+        <Table exibicao={alunos} excluir={Excluir} editar={Editar} />
       </div>
 
       <TrocaPagina

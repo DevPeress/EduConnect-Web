@@ -65,8 +65,6 @@ const FinanceiroAdmin = () => {
     setPagina(1);
   }, [pagamentos]);
 
-  const maxPaginas = Math.max(1, Math.ceil(total / ITENS_POR_PAGINA));
-
   // Dados do DashBoard
   useEffect(() => {
     Dados();
@@ -96,6 +94,13 @@ const FinanceiroAdmin = () => {
         Pesquisa();
       });
   };
+
+  const Editar = async (Registro: string) => {
+    console.log(Registro);
+    return Pesquisa();
+  };
+
+  const maxPaginas = Math.max(1, Math.ceil(total / ITENS_POR_PAGINA));
 
   return (
     <LayoutLogado
@@ -130,7 +135,7 @@ const FinanceiroAdmin = () => {
       </div>
 
       <div className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden mb-6">
-        <Table exibicao={pagamentos} excluir={Excluir} />
+        <Table exibicao={pagamentos} excluir={Excluir} editar={Editar} />
       </div>
 
       <TrocaPagina
