@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type { Pessoa } from "../../../types/types";
 import LayoutLogado from "../../LayoutLogado";
-import { Grid, Table, ModoExibicao } from "../../../components/Exibicao";
+import Table from "../../../components/Table";
 import { http } from "../../../utils/axios";
 import Selects from "../../../components/Administracao/Selects";
 import { useCadastroMenu } from "../../../context";
@@ -14,10 +14,6 @@ const AlunosAdmin = () => {
   const { cadastroAluno } = useCadastroMenu();
 
   const [loading, setLoading] = useState<boolean>(true);
-  const [modo, setModo] = useState<boolean>(() => {
-    const cargo = localStorage.getItem("Exibir");
-    return cargo ? true : false;
-  });
   const [salas, setSalas] = useState<string[]>([]);
   const [selecionada, setSelecionada] = useState<string>("Todas as Salas");
   const [status, setStatus] = useState<string>("Todos os Status");
@@ -113,24 +109,11 @@ const AlunosAdmin = () => {
             anos={anos}
           />
         </div>
-
-        <div className="flex gap-2 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] p-1.5">
-          <ModoExibicao
-            modoExibir={modo}
-            trocarModo={() => setModo((m) => !m)}
-          />
-        </div>
       </div>
 
-      {modo ? (
-        <div className="grid grid-cols-3 overflow-hidden gap-x-6 gap-y-5 w-full">
-          <Grid exibicao={alunos} excluir={Excluir} />
-        </div>
-      ) : (
-        <div className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden mb-6">
-          <Table exibicao={alunos} excluir={Excluir} />
-        </div>
-      )}
+      <div className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden mb-6">
+        <Table exibicao={alunos} excluir={Excluir} />
+      </div>
 
       <TrocaPagina
         nome="Alunos"

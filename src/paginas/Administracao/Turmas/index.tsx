@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type { Turmas } from "../../../types/types";
 import LayoutLogado from "../../LayoutLogado";
-import { Table } from "../../../components/Exibicao";
+import Table from "../../../components/Table";
 import { http } from "../../../utils/axios";
 import Selects from "../../../components/Administracao/Selects";
 import TrocaPagina from "../../../components/TrocaPagina";

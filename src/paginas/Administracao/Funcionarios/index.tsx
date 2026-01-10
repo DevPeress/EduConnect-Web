@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type { Funcionario } from "../../../types/types";
 import LayoutLogado from "../../LayoutLogado";
-import { Grid, Table, ModoExibicao } from "../../../components/Exibicao";
+import Table from "../../../components/Table";
 import { http } from "../../../utils/axios";
 import Selects from "../../../components/Administracao/Selects";
 import TrocaPagina from "../../../components/TrocaPagina";
@@ -15,10 +15,6 @@ const FuncionariosAdmin = () => {
   const { editarFuncionario } = useEditarMenu();
 
   const [loading, setLoading] = useState<boolean>(true);
-  const [modo, setModo] = useState<boolean>(() => {
-    const cargo = localStorage.getItem("Exibir");
-    return cargo ? true : false;
-  });
   const [selecionada, setSelecionada] = useState<string>(
     "Todos os Departamentos"
   );
@@ -121,21 +117,11 @@ const FuncionariosAdmin = () => {
             departamento={departamentos}
           />
         </div>
-
-        <div className="flex gap-2 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] p-1.5">
-          <ModoExibicao modoExibir={modo} trocarModo={() => setModo(!modo)} />
-        </div>
       </div>
 
-      {modo ? (
-        <div className="grid grid-cols-3 overflow-hidden gap-x-6 gap-y-5 w-full">
-          <Grid exibicao={funcionarios} excluir={Excluir} />
-        </div>
-      ) : (
-        <div className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden mb-6">
-          <Table exibicao={funcionarios} excluir={Excluir} editar={Editar} />
-        </div>
-      )}
+      <div className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden mb-6">
+        <Table exibicao={funcionarios} excluir={Excluir} editar={Editar} />
+      </div>
 
       <TrocaPagina
         nome="Funcionários"
