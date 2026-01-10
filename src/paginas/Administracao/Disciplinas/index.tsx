@@ -13,13 +13,13 @@ const DisciplinasAdmin = () => {
 
   const [loading, setLoading] = useState<boolean>(true);
   const [disciplinas, setDisciplinas] = useState<Disciplinas[]>([]);
-
+  const [pesquisa, setPesquisa] = useState<string>("");
   const [total, setTotal] = useState<number>(0);
   const [pagina, setPagina] = useState<number>(1);
 
   const Pesquisa = () => {
     http
-      .get(`api/disciplinas/filtro/page/${pagina}`)
+      .get(`api/disciplinas/filtro/page/${pagina}/pesquisa/${pesquisa}`)
       .then(function (dados) {
         setTotal(dados.data.total);
         setDisciplinas(dados.data.dados);
@@ -47,7 +47,7 @@ const DisciplinasAdmin = () => {
   useEffect(() => {
     Pesquisa();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pagina]);
+  }, [pagina, pesquisa]);
 
   // Atualiza sempre que os pagamentos mudar para página 1
   useEffect(() => {

@@ -22,6 +22,7 @@ const FinanceiroAdmin = () => {
   const [status, setStatus] = useState<string>("Todos os Status");
   const [categorias, setCategorias] = useState<string>("Todas as Categorias");
   const [meses, setMeses] = useState<string>("Todos os Meses");
+  const [pesquisa, setPesquisa] = useState<string>("");
   const [tipo, setTipo] = useState<CardsFinanceiroType[]>([]);
   const [pagamentos, setPagamentos] = useState<Financeiro[]>([]);
   const [total, setTotal] = useState<number>(0);
@@ -31,7 +32,7 @@ const FinanceiroAdmin = () => {
   const Pesquisa = () => {
     http
       .get(
-        `api/financeiro/filtro/categoria/${categorias}/status/${status}/data/${meses}/page/${pagina}`
+        `api/financeiro/filtro/categoria/${categorias}/status/${status}/data/${meses}/page/${pagina}/pesquisa/${pesquisa}`
       )
       .then(function (dados) {
         setTotal(dados.data.total);
@@ -61,7 +62,7 @@ const FinanceiroAdmin = () => {
   useEffect(() => {
     Pesquisa();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [categorias, meses, pagina, status]);
+  }, [categorias, meses, pagina, status, pesquisa]);
 
   // Atualiza sempre que os pagamentos mudar para página 1
   useEffect(() => {

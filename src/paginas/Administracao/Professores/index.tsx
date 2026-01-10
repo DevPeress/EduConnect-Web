@@ -22,6 +22,7 @@ const ProfessoresAdmin = () => {
   const [selecionada, setSelecionada] = useState<string>("Todas as Salas");
   const [status, setStatus] = useState<string>("Todos os Status");
   const [ano, setAno] = useState<string>("Todos os Anos");
+  const [pesquisa, setPesquisa] = useState<string>("");
   const [professores, setProfessores] = useState<Pessoa[]>([]);
   const [anos, setAnos] = useState<string[]>([]);
   const [total, setTotal] = useState<number>(0);
@@ -31,7 +32,7 @@ const ProfessoresAdmin = () => {
   const Pesquisa = () => {
     http
       .get(
-        `api/professores/filtro/selecionada/${selecionada}/status/${status}/page/${pagina}/ano/${ano}`
+        `api/professores/filtro/selecionada/${selecionada}/status/${status}/page/${pagina}/ano/${ano}/pesquisa/${pesquisa}`
       )
       .then(function (dados) {
         setTotal(dados.data.total);
@@ -48,7 +49,7 @@ const ProfessoresAdmin = () => {
   useEffect(() => {
     Pesquisa();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pagina, selecionada, status, ano]);
+  }, [pagina, selecionada, status, ano, pesquisa]);
 
   // Atualiza sempre que os pagamentos mudar para página 1
   useEffect(() => {

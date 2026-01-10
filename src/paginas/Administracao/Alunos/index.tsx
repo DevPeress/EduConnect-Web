@@ -22,6 +22,7 @@ const AlunosAdmin = () => {
   const [selecionada, setSelecionada] = useState<string>("Todas as Salas");
   const [status, setStatus] = useState<string>("Todos os Status");
   const [ano, setAno] = useState<string>("Todos os Anos");
+  const [pesquisa, setPesquisa] = useState<string>("");
   const [alunos, setAlunos] = useState<Pessoa[]>([]);
   const [anos, setAnos] = useState<string[]>([]);
   const [total, setTotal] = useState<number>(0);
@@ -31,7 +32,7 @@ const AlunosAdmin = () => {
   const Pesquisa = () => {
     http
       .get(
-        `api/alunos/filtro/selecionada/${selecionada}/status/${status}/page/${pagina}/ano/${ano}`
+        `api/alunos/filtro/selecionada/${selecionada}/status/${status}/page/${pagina}/ano/${ano}/pesquisa/${pesquisa}`
       )
       .then(function (dados) {
         setTotal(dados.data.total);
@@ -48,7 +49,7 @@ const AlunosAdmin = () => {
   useEffect(() => {
     Pesquisa();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pagina, selecionada, status, ano]);
+  }, [pagina, selecionada, status, ano, pesquisa]);
 
   // Atualiza sempre que os pagamentos mudar para página 1
   useEffect(() => {
@@ -72,7 +73,7 @@ const AlunosAdmin = () => {
     http
       .delete(`api/funcionarios/${Registro}`)
       .then(function () {
-        toast.success("Aluno deletado com sucesso!")
+        toast.success("Aluno deletado com sucesso!");
       })
       .catch(function (error) {
         console.log(error);

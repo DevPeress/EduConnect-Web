@@ -17,6 +17,7 @@ const TurmasAdmin = () => {
   const [turno, setTurno] = useState<string>("Todos os Turnos");
   const [status, setStatus] = useState<string>("Todos os Status");
   const [ano, setAno] = useState<string>("Todos os Anos");
+  const [pesquisa, setPesquisa] = useState<string>("");
   const [turmas, setTurmas] = useState<Turmas[]>([]);
   const [anos, setAnos] = useState<string[]>([]);
   const [total, setTotal] = useState<number>(0);
@@ -25,7 +26,7 @@ const TurmasAdmin = () => {
   const Pesquisa = () => {
     http
       .get(
-        `api/turma/filtro/turno/${turno}/status/${status}/page/${pagina}/ano/${ano}`
+        `api/turma/filtro/turno/${turno}/status/${status}/page/${pagina}/ano/${ano}/pesquisa/${pesquisa}`
       )
       .then(function (dados) {
         setTotal(dados.data.total);
@@ -43,7 +44,7 @@ const TurmasAdmin = () => {
   useEffect(() => {
     Pesquisa();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [turno, status, pagina, ano]);
+  }, [turno, status, pagina, ano, pesquisa]);
 
   // Atualiza sempre que os pagamentos mudar para página 1
   useEffect(() => {

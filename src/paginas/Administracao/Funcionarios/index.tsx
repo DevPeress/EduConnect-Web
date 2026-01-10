@@ -24,6 +24,7 @@ const FuncionariosAdmin = () => {
   );
   const [status, setStatus] = useState<string>("Todos os Status");
   const [ano, setAno] = useState<string>("Todos os Anos");
+  const [pesquisa, setPesquisa] = useState<string>("");
   const [funcionarios, setFuncionarios] = useState<Funcionario[]>([]);
   const [departamentos, setDepartamentos] = useState<string[]>([]);
   const [anos, setAnos] = useState<string[]>([]);
@@ -34,7 +35,7 @@ const FuncionariosAdmin = () => {
   const Pesquisa = () => {
     http
       .get(
-        `api/funcionarios/filtro/selecionada/${selecionada}/status/${status}/page/${pagina}/ano/${ano}`
+        `api/funcionarios/filtro/selecionada/${selecionada}/status/${status}/page/${pagina}/ano/${ano}/pesquisa/${pesquisa}`
       )
       .then(function (dados) {
         setTotal(dados.data.total);
@@ -50,7 +51,7 @@ const FuncionariosAdmin = () => {
   useEffect(() => {
     Pesquisa();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pagina, status, anos, selecionada]);
+  }, [pagina, status, anos, selecionada, pesquisa]);
 
   // Atualiza sempre que os pagamentos mudar para página 1
   useEffect(() => {
