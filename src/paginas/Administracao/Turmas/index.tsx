@@ -83,6 +83,7 @@ const TurmasAdmin = () => {
     <LayoutLogado
       titulo="Gerenciamento de Turmas"
       desc="Visualize e Gerencie as turmas da Escola"
+      exibirPesquisa={true}
       botao={{
         ativo: true,
         mensagem: "Nova Turma",
