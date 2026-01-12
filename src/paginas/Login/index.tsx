@@ -3,10 +3,7 @@ import type { AuthPaginas } from "../../types/types";
 import FundoBolhas from "../../components/FundoBolhas";
 import { http } from "../../utils/axios";
 import toast from "react-hot-toast";
-import {
-  loginSchema,
-  type LoginInput,
-} from "../../schemas/loginSchema";
+import { loginSchema, type LoginInput } from "../../schemas/loginSchema";
 import { useNavigate } from "react-router-dom";
 import { Options } from "../../utils/paginação";
 import { useAuth } from "../../context/AuthContext";
@@ -56,8 +53,12 @@ const Login = ({ logado, cargo }: AuthPaginas) => {
           return "Login realizado com sucesso!";
         },
         error: (err) => {
-          if (typeof err === "number") {
-            return `Você tem mais ${err} tentativas de login!`;
+          if (typeof err.response?.data === "number") {
+            if (err.response.data == -1) {
+              return `Login bloqueado por enquanto!`;
+            } else {
+              return `Você tem mais ${err.response?.data} tentativas de login!`;
+            }
           }
 
           return "E-mail ou senha estão incorretos!";
