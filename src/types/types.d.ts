@@ -94,7 +94,7 @@ export interface Pessoa {
   email: string;
   telefone: string;
   status: string;
-  turma: string | string[];
+  turmaRegistro: string | string[];
   nasc: string;
   foto: string;
 }

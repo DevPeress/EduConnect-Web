@@ -52,8 +52,8 @@ const Table = ({ exibicao, excluir, editar }: TablePropsTable) => {
           const registro: string = "aluno" in item ? item.aluno : item.registro;
           const dado1: string = "aluno" in item ? item.categoria : item.nome;
           const dado2: string[] | string =
-            "turma" in item
-              ? item.turma
+            "turmaRegistro" in item
+              ? item.turmaRegistro
               : "turno" in item
               ? item.turno
               : "cargo" in item
