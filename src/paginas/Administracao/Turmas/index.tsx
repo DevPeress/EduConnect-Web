@@ -24,9 +24,10 @@ const TurmasAdmin = () => {
   const [pagina, setPagina] = useState<number>(1);
 
   const Pesquisa = () => {
+    const pesquisaFinal = pesquisa == "" ? "Todos" : pesquisa;
     http
       .get(
-        `api/turma/filtro/turno/${turno}/status/${status}/page/${pagina}/ano/${ano}/pesquisa/${pesquisa}`
+        `api/turma/filtro/turno/${turno}/status/${status}/page/${pagina}/ano/${ano}/pesquisa/${pesquisaFinal}`
       )
       .then(function (dados) {
         setTotal(dados.data.total);

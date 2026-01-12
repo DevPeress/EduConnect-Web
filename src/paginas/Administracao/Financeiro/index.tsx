@@ -26,9 +26,10 @@ const FinanceiroAdmin = () => {
 
   // API para requisitar os Dados
   const Pesquisa = () => {
+    const pesquisaFinal = pesquisa == "" ? "Todos" : pesquisa;
     http
       .get(
-        `api/financeiro/filtro/categoria/${categorias}/status/${status}/data/${meses}/page/${pagina}/pesquisa/${pesquisa}`
+        `api/financeiro/filtro/categoria/${categorias}/status/${status}/data/${meses}/page/${pagina}/pesquisa/${pesquisaFinal}`
       )
       .then(function (dados) {
         setTotal(dados.data.total);

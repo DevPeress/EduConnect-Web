@@ -26,9 +26,10 @@ const ProfessoresAdmin = () => {
 
   // Requisita os dados novos toda vez que status, categoria ou meses mudar
   const Pesquisa = () => {
+    const pesquisaFinal = pesquisa == "" ? "Todos" : pesquisa;
     http
       .get(
-        `api/professores/filtro/selecionada/${selecionada}/status/${status}/page/${pagina}/ano/${ano}/pesquisa/${pesquisa}`
+        `api/professores/filtro/selecionada/${selecionada}/status/${status}/page/${pagina}/ano/${ano}/pesquisa/${pesquisaFinal}`
       )
       .then(function (dados) {
         setTotal(dados.data.total);

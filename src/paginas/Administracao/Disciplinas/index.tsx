@@ -18,8 +18,9 @@ const DisciplinasAdmin = () => {
   const [pagina, setPagina] = useState<number>(1);
 
   const Pesquisa = () => {
+    const pesquisaFinal = pesquisa == "" ? "Todos" : pesquisa;
     http
-      .get(`api/disciplinas/filtro/page/${pagina}/pesquisa/${pesquisa}`)
+      .get(`api/disciplinas/filtro/page/${pagina}/pesquisa/${pesquisaFinal}`)
       .then(function (dados) {
         setTotal(dados.data.total);
         setDisciplinas(dados.data.dados);
