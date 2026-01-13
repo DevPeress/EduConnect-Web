@@ -87,7 +87,7 @@ const Header = ({
               <input
                 value={exibirPesquisa.valor}
                 onChange={(e) => exibirPesquisa.set?.(e.target.value)}
-                className="w-full bg-(--bg-input) border-4 border-(--border-color) pt-3 pr-4 pb-3 pl-10 text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color) focus:bg-(--bg-card)"
+                className="w-full bg-(--bg-input) border-2 border-(--border-color) rounded-2xl pt-3 pr-4 pb-3 pl-10 text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color) focus:bg-(--bg-card)"
                 type="text"
                 placeholder="Buscar por nome ou matrícula..."
               />
