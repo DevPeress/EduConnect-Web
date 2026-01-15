@@ -85,10 +85,10 @@ const Table = ({ exibicao, excluir, editar }: TablePropsTable) => {
               : "Aguardando";
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const dado5: any =
-            "horario" in item
-              ? item.horario
-              : "capacidade" in item
+            "capacidade" in item
               ? item.capacidade
+              : "horario" in item
+              ? item.horario
               : item.status;
 
           return (
