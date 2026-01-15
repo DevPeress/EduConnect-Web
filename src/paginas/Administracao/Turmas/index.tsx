@@ -60,7 +60,7 @@ const TurmasAdmin = () => {
 
   const AdicionarTurma = async () => {
     const dados = await cadastroTurma();
-    if (!dados || turmas.length < 6) return;
+    if (!dados || turmas.length > 6) return;
     return Pesquisa();
   };
 
