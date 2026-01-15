@@ -57,7 +57,8 @@ const Flex2Context = <
     if (Escolhas === "telefone" || Escolhas === "telefoneEmergencia")
       texto = formatTelefone(texto);
 
-    if (Escolhas === "valor") texto = parseInt(texto);
+    if (Escolhas === "valor" || Escolhas === "capacidade")
+      texto = parseInt(texto);
 
     setInfos((prev) => ({
       ...prev,
