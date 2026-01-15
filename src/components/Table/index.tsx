@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import type { TablePropsTable } from "../../types/types";
+import type { TablePropsTable, Turmas } from "../../types/types";
 import { formatBRL, formatTelefone } from "../../utils/codigos";
 import { Head } from "../../utils/head";
 import { useState } from "react";
@@ -11,7 +11,7 @@ const Table = ({ exibicao, excluir, editar }: TablePropsTable) => {
   const head: string[] = Head(pagina);
   const [menuAberto, setMenuAberto] = useState<string>("");
 
-  const VerificarCor = (tipo: string) => {
+  const VerificarCor = (tipo: string | number) => {
     switch (tipo) {
       case "Ativo":
       case "Pago":
@@ -31,6 +31,18 @@ const Table = ({ exibicao, excluir, editar }: TablePropsTable) => {
         return { bg: "rgba(239, 68, 68, 0.15)", color: "var(--red)" };
     }
   };
+
+  function isTurma(item: unknown): item is Turmas {
+  return (
+    typeof item === "object" &&
+    item !== null &&
+    "capacidade" in item &&
+    "turno" in item &&
+    "professor" in item &&
+    "horario" in item
+  );
+}
+
 
   return (
     <table className="w-full border-collapse">
@@ -83,8 +95,15 @@ const Table = ({ exibicao, excluir, editar }: TablePropsTable) => {
               : "horario" in item
               ? item.horario
               : "Aguardando";
-          const dado5: string | number =
-            "horario" in item ? item.horario : item.status;
+          let dado5: string | number = "";
+
+          if ("horario" in item && typeof item.horario === "string") {
+            dado5 = item.horario;
+          } else if (isTurma(item)) {
+            dado5 = item.capacidade;
+          } else if ("status" in item && typeof item.status === "string") {
+            dado5 = item.status;
+          }
 
           return (
             <tr
