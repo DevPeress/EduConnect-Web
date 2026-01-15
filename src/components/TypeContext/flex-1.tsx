@@ -47,7 +47,7 @@ const Flex1Context = <
   const tipo = IdentificarTipo(titulo) as keyof T;
   const [selecionadas, setSelecionadas] = useState<Disciplina[]>([]);
 
-  const semana = [
+  const dias = [
     "Domingo",
     "Segunda-Feira",
     "Terça-Feira",
@@ -56,7 +56,7 @@ const Flex1Context = <
     "Sexta-Feira",
     "Sábado",
   ];
-  const [selecionadasSemana, SetSelecionadasSemana] = useState<string[]>([]);
+  const [selecionadasDia, setSelecionadasDia] = useState<string[]>([]);
   const disciplinasValidas: Disciplina[] = temDisciplinasValidas(infos)
     ? infos.disciplinasValidas
     : [];
@@ -100,9 +100,9 @@ const Flex1Context = <
   useEffect(() => {
     setInfos((prev) => ({
       ...prev,
-      semana: selecionadasSemana,
+      dias: selecionadasDia,
     }));
-  }, [selecionadasSemana, setInfos]);
+  }, [selecionadasDia, setInfos]);
 
   useEffect(() => {
     setInfos((prev) => ({
@@ -140,7 +140,7 @@ const Flex1Context = <
             <select
               className="w-full bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] px-3 py-2 text-(--text-primary) text-[14px]"
               onChange={(e) =>
-                SetSelecionadasSemana((prev) => [...prev, e.target.value])
+                setSelecionadasDia((prev) => [...prev, e.target.value])
               }
               defaultValue=""
             >
@@ -148,11 +148,11 @@ const Flex1Context = <
                 Selecionar dias da Semana
               </option>
 
-              {semana.map((d) => (
+              {dias.map((d) => (
                 <option
                   key={d}
                   value={d}
-                  disabled={selecionadasSemana.some((s) => s === d)}
+                  disabled={selecionadasDia.some((s) => s === d)}
                 >
                   {d}
                 </option>
@@ -160,7 +160,7 @@ const Flex1Context = <
             </select>
 
             <div className="flex flex-wrap gap-2 py-2">
-              {selecionadasSemana.map((d) => (
+              {selecionadasDia.map((d) => (
                 <span
                   key={d}
                   className="flex items-center gap-2 bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm"
@@ -168,8 +168,8 @@ const Flex1Context = <
                   {d}
                   <button
                     onClick={() =>
-                      SetSelecionadasSemana(
-                        selecionadasSemana.filter((dados) => dados !== d)
+                      setSelecionadasDia(
+                        selecionadasDia.filter((dados) => dados !== d)
                       )
                     }
                     className="text-blue-600 hover:text-red-600 font-bold"
