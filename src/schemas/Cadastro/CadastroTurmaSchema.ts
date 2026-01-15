@@ -16,9 +16,8 @@ export const cadastroTurmaSchema = z.object({
   professor: z.string().min(5, "Professor inválido!"),
   inicio: z.string(),
   fim: z.string(),
-  dias: z.string(),
-  disciplinas: z.string(),
-  disciplinasValidas: z.string(),
+  dias: z.array(z.string()),
+  disciplinas: z.array(z.string()),
 });
 
 export type CadastroTurmaInput = z.infer<typeof cadastroTurmaSchema>;

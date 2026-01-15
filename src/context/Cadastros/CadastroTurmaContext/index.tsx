@@ -28,9 +28,8 @@ export function CadastroTurmaProvider({ children }: { children: ReactNode }) {
     professor: "",
     inicio: "",
     fim: "",
-    dias: "",
-    disciplinas: "",
-    disciplinasValidas: "",
+    dias: [],
+    disciplinas: [],
   });
   const [resolveCallback, setResolveCallback] = useState<
     ((data: true | null) => void) | null
@@ -107,9 +106,8 @@ export function CadastroTurmaProvider({ children }: { children: ReactNode }) {
       professor: "",
       inicio: "",
       fim: "",
-      dias: "",
-      disciplinas: "",
-      disciplinasValidas: "",
+      dias: [],
+      disciplinas: [],
     });
     setMenu(false);
   };

@@ -51,7 +51,7 @@ const Flex2Context = <
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
     Escolhas: keyof T
   ) => {
-    let texto: string | number = e.target.value;
+    let texto: string | number | string[] = e.target.value;
     if (Escolhas === "cpf") texto = formatCPF(texto);
 
     if (Escolhas === "telefone" || Escolhas === "telefoneEmergencia")
