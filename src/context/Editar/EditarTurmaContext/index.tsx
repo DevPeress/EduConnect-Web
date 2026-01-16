@@ -7,38 +7,31 @@ import {
 import { http } from "../../../utils/axios";
 import type { EditarContextType } from "../../../types/types";
 import {
-  editarFuncionarioSchema,
-  type EditarFuncionarioInput,
-} from "../../../schemas/Editar/EditarFuncionarioSchema";
+  editarTurmaSchema,
+  type EditarTurmaInput,
+} from "../../../schemas/Editar/EditarTurmaShema";
 import toast from "react-hot-toast";
 
-const EditarFuncionarioContext = createContext<
-  EditarContextType<EditarFuncionarioInput> | undefined
+const EditarTurmaContext = createContext<
+  EditarContextType<EditarTurmaInput> | undefined
 >(undefined);
 
-export function EditarFuncionarioProvider({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export function EditarTurmaProvider({ children }: { children: ReactNode }) {
   const [menu, setMenu] = useState<boolean>(false);
-  const [dados, setDados] = useState<EditarFuncionarioInput>({
-    registro: "",
+  const [dados, setDados] = useState<EditarTurmaInput>({
+    codigo: "",
+    status: "Ativa",
     nome: "",
-    email: "",
-    telefone: "",
-    status: "",
-    nascimento: "",
-    endereco: "",
-    cpf: "",
-    telefoneEmergencia: "",
-    nomeEmergencia: "",
-    foto: "",
-    cargo: "",
-    departamento: "",
-    supervisor: "",
-    turno: "",
-    salario: 0,
+    ano: "2026",
+    turno: "Selecionar o Turno",
+    sala: "",
+    capacidade: 0,
+    professor: "",
+    inicio: "",
+    fim: "",
+    dias: [],
+    disciplinas: [],
+    alunos: [],
   });
 
   const [resolveCallback, setResolveCallback] = useState<
@@ -47,26 +40,23 @@ export function EditarFuncionarioProvider({
 
   const openMenu = async (
     registro: string
-  ): Promise<EditarFuncionarioInput | null> => {
-    await http.get(`api/funcionarios/${registro}`).then(function (dados) {
+  ): Promise<EditarTurmaInput | null> => {
+    await http.get(`api/turmas/${registro}`).then(function (dados) {
       const infos = dados.data;
       setDados({
-        registro: registro,
-        nome: infos.nome,
-        email: infos.email,
-        telefone: infos.telefone,
+        codigo: registro,
         status: infos.status,
-        nascimento: infos.nasc,
-        endereco: infos.endereco,
-        cpf: infos.cpf,
-        telefoneEmergencia: infos.contatoEmergencia,
-        nomeEmergencia: infos.nomeEmergencia,
-        foto: infos.foto,
-        cargo: infos.cargo,
-        departamento: infos.departamento,
-        supervisor: infos.supervisor,
+        nome: infos.nome,
+        ano: infos.ano,
         turno: infos.turno,
-        salario: infos.salario,
+        sala: infos.sala,
+        capacidade: infos.capacidade,
+        professor: infos.professor,
+        inicio: infos.inicio,
+        fim: infos.fim,
+        dias: infos.dias,
+        disciplinas: infos.disciplinas,
+        alunos: infos.alunos,
       });
     });
     setMenu(true);
@@ -76,27 +66,25 @@ export function EditarFuncionarioProvider({
   };
 
   const Confirm = async () => {
-    const result = editarFuncionarioSchema.safeParse(dados);
+    const result = editarTurmaSchema.safeParse(dados);
     if (!result.success) return toast.error(result.error.issues[0].message);
 
     if (resolveCallback) {
       await http
-        .post("api/funcionario", {
-          Registro: dados.registro,
+        .post("api/turmas", {
+          Registro: dados.codigo,
           Nome: dados.nome,
-          Email: dados.email,
-          Telefone: dados.telefone,
-          Status: dados.status,
-          Nasc: dados.nascimento,
-          Endereco: dados.endereco,
-          Cpf: dados.cpf,
-          ContatoEmergencia: dados.telefoneEmergencia,
-          NomeEmergencia: dados.nomeEmergencia,
-          Cargo: dados.cargo,
-          Departamento: dados.departamento,
-          Supervisor: dados.supervisor,
           Turno: dados.turno,
-          Foto: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100",
+          Status: dados.status,
+          AnoEletivo: dados.ano,
+          Capacidade: dados.capacidade,
+          ProfessorResponsavel: dados.professor,
+          Inicio: dados.inicio,
+          Fim: dados.fim,
+          Sala: dados.sala,
+          Dias: dados.dias,
+          TurmaDisciplina: dados.disciplinas,
+          Alunos: dados.alunos
         })
         .then(function () {
           resolveCallback(true);
@@ -122,7 +110,7 @@ export function EditarFuncionarioProvider({
   };
 
   return (
-    <EditarFuncionarioContext.Provider value={{ openMenu, setDados }}>
+    <EditarTurmaContext.Provider value={{ openMenu, setDados }}>
       {children}
       {menu && (
         <div className="flex fixed top-0 bottom-0 right-0 left-0 bg-[#000000B3] backdrop-blur-sm z-10 animate-fadeIn items-center justify-center p-5">
@@ -248,16 +236,16 @@ export function EditarFuncionarioProvider({
           </div>
         </div>
       )}
-    </EditarFuncionarioContext.Provider>
+    </EditarTurmaContext.Provider>
   );
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
-export function useEditarFuncionario() {
-  const context = useContext(EditarFuncionarioContext);
+export function useEditarTurma() {
+  const context = useContext(EditarTurmaContext);
   if (!context) {
     throw new Error(
-      "useEditarFuncionario deve ser usado dentro do EditarFuncionarioProvider"
+      "useEditarTurma deve ser usado dentro do EditarTurmaProvider"
     );
   }
   return context;
