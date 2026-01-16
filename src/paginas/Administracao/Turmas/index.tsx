@@ -5,13 +5,14 @@ import Table from "../../../components/Table";
 import { http } from "../../../utils/axios";
 import Selects from "../../../components/Administracao/Selects";
 import TrocaPagina from "../../../components/TrocaPagina";
-import { useCadastroMenu } from "../../../context";
+import { useCadastroMenu, useEditarMenu } from "../../../context";
 import toast from "react-hot-toast";
 
 const ITENS_POR_PAGINA = 6;
 
 const TurmasAdmin = () => {
   const { cadastroTurma } = useCadastroMenu();
+  const { editarTurma } = useEditarMenu();
 
   const [loading, setLoading] = useState<boolean>(true);
   const [turno, setTurno] = useState<string>("Todos os Turnos");
@@ -80,7 +81,8 @@ const TurmasAdmin = () => {
   };
 
   const Editar = async (Registro: string) => {
-    console.log(Registro);
+    const dados = await editarTurma(Registro);
+    if (!dados) return;
     return Pesquisa();
   };
 
