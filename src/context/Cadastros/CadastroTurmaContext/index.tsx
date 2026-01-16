@@ -69,6 +69,7 @@ export function CadastroTurmaProvider({ children }: { children: ReactNode }) {
           Fim: dados.fim,
           Sala: dados.sala,
           Dias: dados.dias,
+          Disciplinas: dados.disciplinas
         })
         .then(function () {
           resolveCallback(true);
