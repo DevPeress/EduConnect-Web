@@ -41,7 +41,7 @@ export function EditarTurmaProvider({ children }: { children: ReactNode }) {
   const openMenu = async (
     registro: string
   ): Promise<EditarTurmaInput | null> => {
-    await http.get(`api/turmas/${registro}`).then(function (dados) {
+    await http.get(`api/turma/${registro}`).then(function (dados) {
       const infos = dados.data;
       setDados({
         codigo: registro,
@@ -71,7 +71,7 @@ export function EditarTurmaProvider({ children }: { children: ReactNode }) {
 
     if (resolveCallback) {
       await http
-        .post("api/turmas", {
+        .post("api/turma", {
           Registro: dados.codigo,
           Nome: dados.nome,
           Turno: dados.turno,
@@ -84,7 +84,7 @@ export function EditarTurmaProvider({ children }: { children: ReactNode }) {
           Sala: dados.sala,
           Dias: dados.dias,
           TurmaDisciplina: dados.disciplinas,
-          Alunos: dados.alunos
+          Alunos: dados.alunos,
         })
         .then(function () {
           resolveCallback(true);
