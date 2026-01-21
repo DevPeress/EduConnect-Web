@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const cadastroAlunoSchema = z.object({
+export const editarAlunoSchema = z.object({
     matricula: z.string(),
     status: z.string(),
     nome: z.string().min(3, "Nome deve ter no mínimo 3 caracteres!"),
@@ -17,4 +17,4 @@ export const cadastroAlunoSchema = z.object({
     telefoneEmergencia: z.string().min(14, "Número do Contato de Emergência inválido!")
 })
 
-export type CadastroAlunoInput = z.infer<typeof cadastroAlunoSchema>;
+export type EditarAlunoInput = z.infer<typeof editarAlunoSchema>;
