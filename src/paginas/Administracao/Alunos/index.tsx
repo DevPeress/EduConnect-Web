@@ -4,7 +4,7 @@ import LayoutLogado from "../../LayoutLogado";
 import Table from "../../../components/Table";
 import { http } from "../../../utils/axios";
 import Selects from "../../../components/Administracao/Selects";
-import { useCadastroMenu } from "../../../context";
+import { useCadastroMenu, useEditarMenu } from "../../../context";
 import TrocaPagina from "../../../components/TrocaPagina";
 import toast from "react-hot-toast";
 
@@ -12,6 +12,7 @@ const ITENS_POR_PAGINA = 6;
 
 const AlunosAdmin = () => {
   const { cadastroAluno } = useCadastroMenu();
+  const { editarAluno } = useEditarMenu();
 
   const [loading, setLoading] = useState<boolean>(true);
   const [salas, setSalas] = useState<string[]>([]);
@@ -29,7 +30,7 @@ const AlunosAdmin = () => {
     const pesquisaFinal = pesquisa == "" ? "Todos" : pesquisa;
     http
       .get(
-        `api/alunos/filtro/selecionada/${selecionada}/status/${status}/page/${pagina}/ano/${ano}/pesquisa/${pesquisaFinal}`
+        `api/alunos/filtro/selecionada/${selecionada}/status/${status}/page/${pagina}/ano/${ano}/pesquisa/${pesquisaFinal}`,
       )
       .then(function (dados) {
         setTotal(dados.data.total);
@@ -82,7 +83,8 @@ const AlunosAdmin = () => {
   };
 
   const Editar = async (Registro: string) => {
-    console.log(Registro);
+    const dados = await editarAluno(Registro);
+    if (!dados) return;
     return Pesquisa();
   };
 
