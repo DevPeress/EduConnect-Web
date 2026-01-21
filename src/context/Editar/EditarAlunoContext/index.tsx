@@ -7,22 +7,18 @@ import {
 import { http } from "../../../utils/axios";
 import type { EditarContextType } from "../../../types/types";
 import {
-  editarFuncionarioSchema,
-  type EditarFuncionarioInput,
-} from "../../../schemas/Editar/EditarFuncionarioSchema";
+  editarAlunoSchema,
+  type EditarAlunoInput,
+} from "../../../schemas/Editar/EditarAlunoSchema";
 import toast from "react-hot-toast";
 
-const EditarFuncionarioContext = createContext<
-  EditarContextType<EditarFuncionarioInput> | undefined
+const EditarAlunoContext = createContext<
+  EditarContextType<EditarAlunoInput> | undefined
 >(undefined);
 
-export function EditarFuncionarioProvider({
-  children,
-}: {
-  children: ReactNode;
-}) {
+export function EditarAlunoProvider({ children }: { children: ReactNode }) {
   const [menu, setMenu] = useState<boolean>(false);
-  const [dados, setDados] = useState<EditarFuncionarioInput>({
+  const [dados, setDados] = useState<EditarAlunoInput>({
     registro: "",
     nome: "",
     email: "",
@@ -46,9 +42,9 @@ export function EditarFuncionarioProvider({
   >(null);
 
   const openMenu = async (
-    registro: string
-  ): Promise<EditarFuncionarioInput | null> => {
-    await http.get(`api/funcionarios/${registro}`).then(function (dados) {
+    registro: string,
+  ): Promise<EditarAlunoInput | null> => {
+    await http.get(`api/Alunos/${registro}`).then(function (dados) {
       const infos = dados.data;
       setDados({
         registro: registro,
@@ -76,12 +72,12 @@ export function EditarFuncionarioProvider({
   };
 
   const Confirm = async () => {
-    const result = editarFuncionarioSchema.safeParse(dados);
+    const result = editarAlunoSchema.safeParse(dados);
     if (!result.success) return toast.error(result.error.issues[0].message);
 
     if (resolveCallback) {
       await http
-        .post("api/funcionario", {
+        .post("api/Aluno", {
           Registro: dados.registro,
           Nome: dados.nome,
           Email: dados.email,
@@ -122,7 +118,7 @@ export function EditarFuncionarioProvider({
   };
 
   return (
-    <EditarFuncionarioContext.Provider value={{ openMenu, setDados }}>
+    <EditarAlunoContext.Provider value={{ openMenu, setDados }}>
       {children}
       {menu && (
         <div className="flex fixed top-0 bottom-0 right-0 left-0 bg-[#000000B3] backdrop-blur-sm z-10 animate-fadeIn items-center justify-center p-5">
@@ -248,16 +244,16 @@ export function EditarFuncionarioProvider({
           </div>
         </div>
       )}
-    </EditarFuncionarioContext.Provider>
+    </EditarAlunoContext.Provider>
   );
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
-export function useEditarFuncionario() {
-  const context = useContext(EditarFuncionarioContext);
+export function useEditarAluno() {
+  const context = useContext(EditarAlunoContext);
   if (!context) {
     throw new Error(
-      "useEditarFuncionario deve ser usado dentro do EditarFuncionarioProvider"
+      "useEditarAluno deve ser usado dentro do EditarAlunoProvider",
     );
   }
   return context;
