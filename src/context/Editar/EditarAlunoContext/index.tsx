@@ -19,22 +19,17 @@ const EditarAlunoContext = createContext<
 export function EditarAlunoProvider({ children }: { children: ReactNode }) {
   const [menu, setMenu] = useState<boolean>(false);
   const [dados, setDados] = useState<EditarAlunoInput>({
-    registro: "",
+    matricula: "",
+    status: "Ativo",
     nome: "",
+    cpf: "",
+    turma: "Selecionar Turma",
     email: "",
     telefone: "",
-    status: "",
-    nascimento: "",
     endereco: "",
-    cpf: "",
-    telefoneEmergencia: "",
+    nascimento: new Date().toISOString().split("T")[0],
     nomeEmergencia: "",
-    foto: "",
-    cargo: "",
-    departamento: "",
-    supervisor: "",
-    turno: "",
-    salario: 0,
+    telefoneEmergencia: "",
   });
 
   const [resolveCallback, setResolveCallback] = useState<
@@ -44,25 +39,20 @@ export function EditarAlunoProvider({ children }: { children: ReactNode }) {
   const openMenu = async (
     registro: string,
   ): Promise<EditarAlunoInput | null> => {
-    await http.get(`api/Alunos/${registro}`).then(function (dados) {
+    await http.get(`api/alunos/${registro}`).then(function (dados) {
       const infos = dados.data;
       setDados({
-        registro: registro,
+        matricula: infos.Registro,
+        status: infos.status,
         nome: infos.nome,
+        cpf: infos.cpf,
+        turma: infos.turmaRegistro,
         email: infos.email,
         telefone: infos.telefone,
-        status: infos.status,
-        nascimento: infos.nasc,
         endereco: infos.endereco,
-        cpf: infos.cpf,
-        telefoneEmergencia: infos.contatoEmergencia,
+        nascimento: infos.Nasc,
         nomeEmergencia: infos.nomeEmergencia,
-        foto: infos.foto,
-        cargo: infos.cargo,
-        departamento: infos.departamento,
-        supervisor: infos.supervisor,
-        turno: infos.turno,
-        salario: infos.salario,
+        telefoneEmergencia: infos.contatoEmergencia,
       });
     });
     setMenu(true);
@@ -78,21 +68,17 @@ export function EditarAlunoProvider({ children }: { children: ReactNode }) {
     if (resolveCallback) {
       await http
         .post("api/Aluno", {
-          Registro: dados.registro,
+          Registro: dados.matricula,
+          Status: dados.status,
           Nome: dados.nome,
+          Cpf: dados.cpf,
+          TurmaRegistro: dados.turma,
           Email: dados.email,
           Telefone: dados.telefone,
-          Status: dados.status,
+          Rndereco: dados.endereco,
           Nasc: dados.nascimento,
-          Endereco: dados.endereco,
-          Cpf: dados.cpf,
-          ContatoEmergencia: dados.telefoneEmergencia,
           NomeEmergencia: dados.nomeEmergencia,
-          Cargo: dados.cargo,
-          Departamento: dados.departamento,
-          Supervisor: dados.supervisor,
-          Turno: dados.turno,
-          Foto: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=100",
+          ContatoEmergencia: dados.telefoneEmergencia,
         })
         .then(function () {
           resolveCallback(true);
