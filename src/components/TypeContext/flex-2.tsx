@@ -13,6 +13,7 @@ import {
 import type { CadastroFuncionarioInput } from "../../schemas/Cadastro/CadastroFuncionarioSchema";
 import type { CadastroDisciplinasInput } from "../../schemas/Cadastro/CadastroDisciplinaSchema";
 import type { EditarFuncionarioInput } from "../../schemas/Editar/EditarFuncionarioSchema";
+import type { EditarProfessorInput } from "../../schemas/Editar/EditarProfessorSchema";
 
 interface Flex2ContextProp<
   T extends
@@ -23,6 +24,7 @@ interface Flex2ContextProp<
     | CadastroFuncionarioInput
     | CadastroDisciplinasInput
     | EditarFuncionarioInput
+    | EditarProfessorInput,
 > extends FlexContext<T> {
   opcao1: string;
   opcao2: string;
@@ -37,6 +39,7 @@ const Flex2Context = <
     | CadastroFuncionarioInput
     | CadastroDisciplinasInput
     | EditarFuncionarioInput
+    | EditarProfessorInput,
 >({
   opcao1,
   opcao2,
@@ -49,7 +52,7 @@ const Flex2Context = <
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-    Escolhas: keyof T
+    Escolhas: keyof T,
   ) => {
     let texto: string | number | string[] = e.target.value;
     if (Escolhas === "cpf") texto = formatCPF(texto);

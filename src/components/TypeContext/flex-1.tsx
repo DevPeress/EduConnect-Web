@@ -8,6 +8,7 @@ import type { FlexContext } from "../../types/types";
 import { IdentificarTipo } from "../../utils/codigos";
 import type { CadastroDisciplinasInput } from "../../schemas/Cadastro/CadastroDisciplinaSchema";
 import type { EditarFuncionarioInput } from "../../schemas/Editar/EditarFuncionarioSchema";
+import type { EditarProfessorInput } from "../../schemas/Editar/EditarProfessorSchema";
 
 type Disciplina = {
   registro: string;
@@ -23,6 +24,7 @@ interface Flex1ContextProp<
     | CadastroFuncionarioInput
     | CadastroDisciplinasInput
     | EditarFuncionarioInput
+    | EditarProfessorInput,
 > extends FlexContext<T> {
   titulo: string;
   place: string;
@@ -37,6 +39,7 @@ const Flex1Context = <
     | CadastroFuncionarioInput
     | CadastroDisciplinasInput
     | EditarFuncionarioInput
+    | EditarProfessorInput,
 >({
   titulo,
   infos,
@@ -92,7 +95,7 @@ const Flex1Context = <
 
   function temDisciplinasValidas(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    data: any
+    data: any,
   ): data is { disciplinasValidas: Disciplina[] } {
     return Array.isArray(data?.disciplinasValidas);
   }
@@ -169,7 +172,7 @@ const Flex1Context = <
                   <button
                     onClick={() =>
                       setSelecionadasDia(
-                        selecionadasDia.filter((dados) => dados !== d)
+                        selecionadasDia.filter((dados) => dados !== d),
                       )
                     }
                     className="text-blue-600 hover:text-red-600 font-bold"
@@ -199,7 +202,7 @@ const Flex1Context = <
                     key={d.registro}
                     value={d.registro}
                     disabled={selecionadas.some(
-                      (s) => s.registro === d.registro
+                      (s) => s.registro === d.registro,
                     )}
                   >
                     {d.nome}
