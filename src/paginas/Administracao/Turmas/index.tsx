@@ -26,10 +26,18 @@ const TurmasAdmin = () => {
 
   const Pesquisa = () => {
     const pesquisaFinal = pesquisa == "" ? "Todos" : pesquisa;
+    const params = new URLSearchParams({
+      turno,
+      status,
+      page: String(pagina),
+      ano,
+      pesquisa: pesquisaFinal,
+    });
+
+    const url = `api/alunos/filtro?${params.toString()}`;
+
     http
-      .get(
-        `api/turma/filtro/turno/${turno}/status/${status}/page/${pagina}/ano/${ano}/pesquisa/${pesquisaFinal}`
-      )
+      .get(url)
       .then(function (dados) {
         setTotal(dados.data.total);
         setTurmas(dados.data.dados);

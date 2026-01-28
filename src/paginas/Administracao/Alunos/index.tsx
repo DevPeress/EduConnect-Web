@@ -28,10 +28,18 @@ const AlunosAdmin = () => {
   // Requisita os dados novos toda vez que status, categoria ou meses mudar
   const Pesquisa = () => {
     const pesquisaFinal = pesquisa == "" ? "Todos" : pesquisa;
+    const params = new URLSearchParams({
+      selecionada,
+      status,
+      page: String(pagina),
+      ano,
+      pesquisa: pesquisaFinal,
+    });
+
+    const url = `api/alunos/filtro?${params.toString()}`;
+
     http
-      .get(
-        `api/alunos/filtro/selecionada/${selecionada}/status/${status}/page/${pagina}/ano/${ano}/pesquisa/${pesquisaFinal}`,
-      )
+      .get(url)
       .then(function (dados) {
         setTotal(dados.data.total);
         setAlunos(dados.data.dados);

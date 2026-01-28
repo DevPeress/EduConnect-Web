@@ -16,7 +16,7 @@ const FuncionariosAdmin = () => {
 
   const [loading, setLoading] = useState<boolean>(true);
   const [selecionada, setSelecionada] = useState<string>(
-    "Todos os Departamentos"
+    "Todos os Departamentos",
   );
   const [status, setStatus] = useState<string>("Todos os Status");
   const [ano, setAno] = useState<string>("Todos os Anos");
@@ -30,10 +30,18 @@ const FuncionariosAdmin = () => {
   // Requisita os dados novos toda vez que status, categoria ou meses mudar
   const Pesquisa = () => {
     const pesquisaFinal = pesquisa == "" ? "Todos" : pesquisa;
+    const params = new URLSearchParams({
+      selecionada,
+      status,
+      page: String(pagina),
+      ano,
+      pesquisa: pesquisaFinal,
+    });
+
+    const url = `api/funcionarios/filtro?${params.toString()}`;
+
     http
-      .get(
-        `api/funcionarios/filtro/selecionada/${selecionada}/status/${status}/page/${pagina}/ano/${ano}/pesquisa/${pesquisaFinal}`
-      )
+      .get(url)
       .then(function (dados) {
         setTotal(dados.data.total);
         setFuncionarios(dados.data.dados);

@@ -27,10 +27,18 @@ const FinanceiroAdmin = () => {
   // API para requisitar os Dados
   const Pesquisa = () => {
     const pesquisaFinal = pesquisa == "" ? "Todos" : pesquisa;
+    const params = new URLSearchParams({
+      categoria: categorias,
+      status,
+      data: meses,
+      page: String(pagina),
+      pesquisa: pesquisaFinal,
+    });
+
+    const url = `api/financeiro/filtro?${params.toString()}`;
+
     http
-      .get(
-        `api/financeiro/filtro/categoria/${categorias}/status/${status}/data/${meses}/page/${pagina}/pesquisa/${pesquisaFinal}`
-      )
+      .get(url)
       .then(function (dados) {
         setTotal(dados.data.total);
         setPagamentos(dados.data.dados);

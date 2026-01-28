@@ -19,8 +19,15 @@ const DisciplinasAdmin = () => {
 
   const Pesquisa = () => {
     const pesquisaFinal = pesquisa == "" ? "Todos" : pesquisa;
+    const params = new URLSearchParams({
+      page: String(pagina),
+      pesquisa: pesquisaFinal,
+    });
+
+    const url = `api/disciplinas/filtro?${params.toString()}`;
+
     http
-      .get(`api/disciplinas/filtro/page/${pagina}/pesquisa/${pesquisaFinal}`)
+      .get(url)
       .then(function (dados) {
         setTotal(dados.data.total);
         setDisciplinas(dados.data.dados);
@@ -118,7 +125,7 @@ const DisciplinasAdmin = () => {
                 </td>
                 <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
                   {new Date(item.dataCriacao + "T00:00:00").toLocaleDateString(
-                    "pt-BR"
+                    "pt-BR",
                   )}
                 </td>
                 <td
