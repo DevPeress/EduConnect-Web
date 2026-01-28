@@ -11,6 +11,7 @@ import { CadastroDisciplinasProvider } from "../Cadastros/CadastroDisciplinasCon
 import { EditarFuncionarioProvider } from "../Editar/EditarFuncionarioContext";
 import { EditarTurmaProvider } from "../Editar/EditarTurmaContext";
 import { EditarAlunoProvider } from "../Editar/EditarAlunoContext";
+import { EditarProfessorProvider } from "../Editar/EditarProfessorSchema";
 
 const ThemeContext = createContext<ThemeType | undefined>(undefined);
 
@@ -44,7 +45,11 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
                 <CadastroDisciplinasProvider>
                   <EditarFuncionarioProvider>
                     <EditarTurmaProvider>
-                      <EditarAlunoProvider>{children}</EditarAlunoProvider>
+                      <EditarAlunoProvider>
+                        <EditarProfessorProvider>
+                          {children}
+                        </EditarProfessorProvider>
+                      </EditarAlunoProvider>
                     </EditarTurmaProvider>
                   </EditarFuncionarioProvider>
                 </CadastroDisciplinasProvider>
