@@ -5,7 +5,6 @@ export const editarProfessorSchema = z.object({
   status: z.string(),
   nome: z.string().min(3, "Nome deve ter no mínimo 3 caracteres"),
   cpf: z.string().min(14, "CPF inválido!"),
-  contratacao: z.string(),
   disciplina: z.string().min(1, "Disciplina inválida ou não digitada!"),
   formacao: z.string().min(1, "Disciplina inválida ou não digitada!"),
   turmas: z.array(z.string()),
