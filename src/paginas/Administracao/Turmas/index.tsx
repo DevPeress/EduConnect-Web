@@ -90,7 +90,7 @@ const TurmasAdmin = () => {
 
   const Editar = async (Registro: string) => {
     const dados = await editarTurma(Registro);
-    if (!dados) return;
+    if (!dados || turmas.length > 5) return;
     return Pesquisa();
   };
 

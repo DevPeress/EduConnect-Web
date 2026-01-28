@@ -71,7 +71,7 @@ const AlunosAdmin = () => {
 
   const AdicionarAluno = async () => {
     const dados = await cadastroAluno();
-    if (!dados || alunos.length < 6) return;
+    if (!dados || alunos.length > 5) return;
     return Pesquisa();
   };
 

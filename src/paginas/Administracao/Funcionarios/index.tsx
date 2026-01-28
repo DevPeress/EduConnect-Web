@@ -72,7 +72,7 @@ const FuncionariosAdmin = () => {
 
   const AdicionarFuncionario = async () => {
     const dados = await cadastroFuncionario();
-    if (!dados || funcionarios.length < 6) return;
+    if (!dados || funcionarios.length > 5) return;
     return Pesquisa();
   };
 
