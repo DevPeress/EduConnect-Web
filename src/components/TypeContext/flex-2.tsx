@@ -69,7 +69,7 @@ const Flex2Context = <
     }));
   };
 
-  const [turmas, setTurmas] = useState([]);
+  const [turmas, setTurmas] = useState([""]);
 
   useEffect(() => {
     async function fetchData() {
@@ -88,7 +88,7 @@ const Flex2Context = <
   const selectOptions: Record<string, string[]> = {
     turno: ["Selecionar o Turno", "Matutino", "Vespertino", "Noturno"],
     status: ["Ativo", "Inativo", "Suspenso"],
-    turma: ["Selecionar Turma", ...turmas.map((t: string) => t)],
+    turma: ["Selecionar Turma", ...(Array.isArray(turmas) ? turmas : [])],
     categoria: ["Selecionar categoria", "Mensalidade", "Material"],
     statuspagamento: ["Selecionar status", "Pendente", "Pago", "Cancelado"],
     metodo: [
