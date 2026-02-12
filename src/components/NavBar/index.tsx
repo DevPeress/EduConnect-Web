@@ -14,6 +14,10 @@ const NavBar = () => {
     <NavAdministrador pagina={pagina} />
   ) : cargo === "Funcionário" ? (
     <NavFuncionario pagina={pagina} />
+  ) : cargo === "Professor" ? (
+    <NavFuncionario pagina={pagina} />
+  ) : cargo === "Aluno" ? (
+    <NavFuncionario pagina={pagina} />
   ) : null;
 };
 
