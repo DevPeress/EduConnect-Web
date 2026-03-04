@@ -62,7 +62,7 @@ const Selects = ({
       {Array.isArray(departamento) && selecionadoDepartamento && (
         <select
           onChange={(e) => selecionadoDepartamento(e.target.value)}
-          className="bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] py-2.5 px-3.5 text-(--text-primary) text-[14px] cursor-pointer min-w-[180px] hover:border-(--border-light)"
+          className="bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] py-2.5 px-3.5 text-(--text-primary) text-[14px] cursor-pointer min-w-45 hover:border-(--border-light)"
         >
           <option>Todos os Departamentos</option>
           {departamento.map((item) => (
@@ -73,7 +73,7 @@ const Selects = ({
       {Array.isArray(anos) && selecionadoAno && (
         <select
           onChange={(e) => selecionadoAno(e.target.value)}
-          className="bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] py-2.5 px-3.5 text-(--text-primary) text-[14px] cursor-pointer min-w-[180px] hover:border-(--border-light)"
+          className="bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] py-2.5 px-3.5 text-(--text-primary) text-[14px] cursor-pointer min-w-45 hover:border-(--border-light)"
         >
           <option>Todos os Anos</option>
           {anos.map((item) => (
@@ -84,7 +84,7 @@ const Selects = ({
       {Array.isArray(salas) && selecionadaSala && (
         <select
           onChange={(e) => selecionadaSala(e.target.value)}
-          className="bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] py-2.5 px-3.5 text-(--text-primary) text-[14px] cursor-pointer min-w-[180px] hover:border-(--border-light)"
+          className="bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] py-2.5 px-3.5 text-(--text-primary) text-[14px] cursor-pointer min-w-45 hover:border-(--border-light)"
         >
           <option>Todas as Salas</option>
           {salas.map((item) => (
@@ -95,7 +95,7 @@ const Selects = ({
       {selecionadoStatus && (
         <select
           onChange={(e) => selecionadoStatus(e.target.value)}
-          className="bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] py-2.5 px-3.5 text-(--text-primary) text-[14px] cursor-pointer min-w-[180px] hover:border-(--border-light)"
+          className="bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] py-2.5 px-3.5 text-(--text-primary) text-[14px] cursor-pointer min-w-45 hover:border-(--border-light)"
         >
           <option>Todos os Status</option>
           {Retornos(tipo).map((tipos) => (
@@ -106,7 +106,7 @@ const Selects = ({
       {selecionadoTurno && (
         <select
           onChange={(e) => selecionadoTurno(e.target.value)}
-          className="bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] py-2.5 px-3.5 text-(--text-primary) text-[14px] cursor-pointer min-w-[180px] hover:border-(--border-light)"
+          className="bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] py-2.5 px-3.5 text-(--text-primary) text-[14px] cursor-pointer min-w-45 hover:border-(--border-light)"
         >
           <option>Todos os Turnos</option>
           {Turnos().map((tipos) => (
@@ -121,7 +121,7 @@ const Selects = ({
         <>
           <select
             onChange={(e) => selecionadoPagamento(e.target.value)}
-            className="bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] py-2.5 px-3.5 text-(--text-primary) text-[14px] cursor-pointer min-w-[180px] hover:border-(--border-light)"
+            className="bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] py-2.5 px-3.5 text-(--text-primary) text-[14px] cursor-pointer min-w-45 hover:border-(--border-light)"
           >
             {Retornos("Pagamento").map((tipos) => (
               <option key={tipos}>{tipos}</option>
@@ -129,7 +129,7 @@ const Selects = ({
           </select>
           <select
             onChange={(e) => selecionadoCategorias(e.target.value)}
-            className="bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] py-2.5 px-3.5 text-(--text-primary) text-[14px] cursor-pointer min-w-[180px] hover:border-(--border-light)"
+            className="bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] py-2.5 px-3.5 text-(--text-primary) text-[14px] cursor-pointer min-w-45 hover:border-(--border-light)"
           >
             {Retornos("Categorias").map((tipos) => (
               <option key={tipos}>{tipos}</option>
@@ -137,7 +137,7 @@ const Selects = ({
           </select>
           <select
             onChange={(e) => selecionadoMeses(e.target.value)}
-            className="bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] py-2.5 px-3.5 text-(--text-primary) text-[14px] cursor-pointer min-w-[180px] hover:border-(--border-light)"
+            className="bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] py-2.5 px-3.5 text-(--text-primary) text-[14px] cursor-pointer min-w-45 hover:border-(--border-light)"
           >
             {Retornos("Meses").map((tipos) => (
               <option key={tipos}>{tipos}</option>
