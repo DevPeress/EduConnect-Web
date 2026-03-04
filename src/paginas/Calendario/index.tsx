@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import Calendario from "../../../components/Calendario";
-import type { CalendarioEvento } from "../../../types/types";
-import LayoutLogado from "../../LayoutLogado";
+import Calendario from "../../components/Calendario";
+import type { CalendarioEvento } from "../../types/types";
+import LayoutLogado from "../LayoutLogado";
 
 const CalendarioAdm = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -28,7 +28,7 @@ const CalendarioAdm = () => {
       titulo="Calendário"
       desc="Visão geral do Calendário"
       exibirPesquisa={{
-        exibir: false
+        exibir: false,
       }}
       botao={{
         ativo: false,

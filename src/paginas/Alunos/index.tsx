@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import type { Pessoa } from "../../../types/types";
-import LayoutLogado from "../../LayoutLogado";
-import Table from "../../../components/Table";
-import { http } from "../../../utils/axios";
-import Selects from "../../../components/Administracao/Selects";
-import { useCadastroMenu, useEditarMenu } from "../../../context";
-import TrocaPagina from "../../../components/TrocaPagina";
+import type { Pessoa } from "../../types/types";
+import LayoutLogado from "../LayoutLogado";
+import Table from "../../components/Table";
+import { http } from "../../utils/axios";
+import Selects from "../../components/Administracao/Selects";
+import { useCadastroMenu, useEditarMenu } from "../../context";
+import TrocaPagina from "../../components/TrocaPagina";
 import toast from "react-hot-toast";
 
 const ITENS_POR_PAGINA = 6;

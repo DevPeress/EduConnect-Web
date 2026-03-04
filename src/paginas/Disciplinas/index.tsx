@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import type { Disciplinas } from "../../../types/types";
-import LayoutLogado from "../../LayoutLogado";
-import { http } from "../../../utils/axios";
-import TrocaPagina from "../../../components/TrocaPagina";
-import { useCadastroMenu } from "../../../context";
+import type { Disciplinas } from "../../types/types";
+import LayoutLogado from "../LayoutLogado";
+import { http } from "../../utils/axios";
+import TrocaPagina from "../../components/TrocaPagina";
+import { useCadastroMenu } from "../../context";
 import toast from "react-hot-toast";
 
 const ITENS_POR_PAGINA = 6;
