@@ -4,15 +4,15 @@ import Login from "./paginas/Login";
 import Inicial from "./paginas/Inicial";
 import SemAcesso from "./paginas/SemAcesso";
 import { useAuth } from "./context/AuthContext";
-import InicioAdm from "./paginas/Administracao/Inicio";
-import AlunosAdmin from "./paginas/Administracao/Alunos";
-import ProfessoresAdmin from "./paginas/Administracao/Professores";
-import CalendarioAdm from "./paginas/Administracao/Calendario";
+import InicioAdm from "./paginas/Inicio";
+import AlunosAdmin from "./paginas/Alunos";
+import ProfessoresAdmin from "./paginas/Professores";
+import CalendarioAdm from "./paginas/Calendario";
 import PrivateRoute from "./middleware";
-import FinanceiroAdmin from "./paginas/Administracao/Financeiro";
-import TurmasAdmin from "./paginas/Administracao/Turmas";
-import FuncionariosAdmin from "./paginas/Administracao/Funcionarios";
-import DisciplinasAdmin from "./paginas/Administracao/Disciplinas";
+import FinanceiroAdmin from "./paginas/Financeiro";
+import TurmasAdmin from "./paginas/Turmas";
+import FuncionariosAdmin from "./paginas/Funcionarios";
+import DisciplinasAdmin from "./paginas/Disciplinas";
 
 function App() {
   const auth = useAuth();
