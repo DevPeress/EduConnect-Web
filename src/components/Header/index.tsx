@@ -116,21 +116,6 @@ const Header = ({
           </span>
         </button>
 
-        <button className="relative bg-transparent border-none text-(--text-secondary) cursor-pointer p-2 rounded-[10px] hover:bg-(--bg-hover) hover:text-(--text-primary)">
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-          </svg>
-        </button>
-
         <div className="flex items-center gap-3 cursor-pointer rounded-[10px] pt-1.5 pr-3 pb-1.5 pl-1.5 hover:bg-(--bg-hover)">
           <img
             src={dados.foto}
