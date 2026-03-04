@@ -2,6 +2,8 @@ import { useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import NavAdministrador from "./Administrador";
 import NavFuncionario from "./Funcionario";
+import NavProfessores from "./Professor";
+import NavAlunos from "./Alunos";
 
 const NavBar = () => {
   const location = useLocation();
@@ -15,9 +17,9 @@ const NavBar = () => {
   ) : cargo === "Funcionário" ? (
     <NavFuncionario pagina={pagina} />
   ) : cargo === "Professor" ? (
-    <NavFuncionario pagina={pagina} />
+    <NavProfessores pagina={pagina} />
   ) : cargo === "Aluno" ? (
-    <NavFuncionario pagina={pagina} />
+    <NavAlunos pagina={pagina} />
   ) : null;
 };
 

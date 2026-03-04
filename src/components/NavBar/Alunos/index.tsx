@@ -10,27 +10,27 @@ import type { Nav } from "../../../types/types";
 import LinkPaginas from "../LinkPaginas/LinkPaginas";
 
 const Paginas: Nav[] = [
-  { nome: "DashBoard", pagina: "/admin/dashboard", svg: NavDashBoard },
-  { nome: "Turmas", pagina: "/admin/turmos", svg: NavTurmas },
-  { nome: "Notas", pagina: "/admin/notas", svg: NavNotas },
+  { nome: "DashBoard", pagina: "/alunos/dashboard", svg: NavDashBoard },
+  { nome: "Turmas", pagina: "/alunos/turmas", svg: NavTurmas },
+  { nome: "Notas", pagina: "/alunos/notas", svg: NavNotas },
   {
     nome: "Calendário",
-    pagina: "/admin/calendario",
+    pagina: "/alunos/calendario",
     svg: NavCalendario,
   },
   {
     nome: "Financeiro",
-    pagina: "/admin/financeiro",
+    pagina: "/alunos/financeiro",
     svg: NavFinanceiro,
   },
   {
     nome: "Relatórios",
-    pagina: "/admin/relatorio",
+    pagina: "/alunos/relatorio",
     svg: NavRelatorios,
   },
 ];
 
-const NavFuncionario = ({ pagina }: { pagina: string }) => {
+const NavAlunos = ({ pagina }: { pagina: string }) => {
   return (
     <nav className="flex-1 px-3.5 py-3.5">
       <div className="mb-4">
@@ -70,4 +70,4 @@ const NavFuncionario = ({ pagina }: { pagina: string }) => {
   );
 };
 
-export default NavFuncionario;
+export default NavAlunos;

@@ -11,7 +11,7 @@ import LinkPaginas from "../LinkPaginas/LinkPaginas";
 const Paginas: Nav[] = [
   { nome: "DashBoard", pagina: "/professores/dashboard", svg: NavDashBoard },
   { nome: "Alunos", pagina: "/professores/alunos", svg: NavAlunos },
-  { nome: "Turmas", pagina: "/professores/turmos", svg: NavTurmas },
+  { nome: "Turmas", pagina: "/professores/turmas", svg: NavTurmas },
   { nome: "Notas", pagina: "/professores/notas", svg: NavNotas },
   {
     nome: "Calendário",
@@ -20,7 +20,7 @@ const Paginas: Nav[] = [
   }
 ];
 
-const NavFuncionario = ({ pagina }: { pagina: string }) => {
+const NavProfessores = ({ pagina }: { pagina: string }) => {
   return (
     <nav className="flex-1 px-3.5 py-3.5">
       <div className="mb-4">
@@ -60,4 +60,4 @@ const NavFuncionario = ({ pagina }: { pagina: string }) => {
   );
 };
 
-export default NavFuncionario;
+export default NavProfessores;
