@@ -34,7 +34,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setCargo("");
     setToken(false);
     localStorage.removeItem("usuario");
-    await http.delete("/api/auth/usuario");
+    await http.post("/api/auth/logout");
   };
 
   const AtualizarAuth = () => {
