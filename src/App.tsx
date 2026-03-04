@@ -30,6 +30,24 @@ function App() {
         <Route path="/" element={<Inicial logado={user} cargo={cargo} />} />
         <Route path="/login" element={<Login logado={user} cargo={cargo} />} />
 
+        {/* Acesso Professores, Admin e Funcionario*/}
+        <Route
+          element={
+            <PrivateRoute
+              isAuthenticated={user}
+              userRole={cargo}
+              allowedRoles={["Administrador", "Funcionário"]}
+            />
+          }
+        >
+          <Route path="/professores/dashboard" element={<InicioPage />} />
+          <Route path="/professores/alunos" element={<AlunosPage />} />
+          <Route path="/professores/professores" element={<ProfessoresPage />} />
+          <Route path="/professores/turmas" element={<TurmasPage />} />
+          <Route path="/professores/calendario" element={<CalendarioPage />} />
+          <Route path="/professores/financeiro" element={<FinanceiroPage />} />
+        </Route>
+
         {/* Acesso Admin e Funcionario*/}
         <Route
           element={
