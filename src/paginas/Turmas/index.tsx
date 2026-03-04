@@ -1,38 +1,46 @@
 import { useEffect, useState } from "react";
-import type { Pessoa } from "../../../types/types";
-import LayoutLogado from "../../LayoutLogado";
-import Table from "../../../components/Table";
-import { http } from "../../../utils/axios";
-import Selects from "../../../components/Administracao/Selects";
-import { useCadastroMenu } from "../../../context";
-import TrocaPagina from "../../../components/TrocaPagina";
+import type { Turmas } from "../../types/types";
+import LayoutLogado from "../LayoutLogado";
+import Table from "../../components/Table";
+import { http } from "../../utils/axios";
+import Selects from "../../components/Administracao/Selects";
+import TrocaPagina from "../../components/TrocaPagina";
+import { useCadastroMenu, useEditarMenu } from "../../context";
 import toast from "react-hot-toast";
 
 const ITENS_POR_PAGINA = 6;
 
-const ProfessoresAdmin = () => {
-  const { cadastroProfessor } = useCadastroMenu();
+const TurmasAdmin = () => {
+  const { cadastroTurma } = useCadastroMenu();
+  const { editarTurma } = useEditarMenu();
 
   const [loading, setLoading] = useState<boolean>(true);
-  const [salas, setSalas] = useState<string[]>([]);
-  const [selecionada, setSelecionada] = useState<string>("Todas as Salas");
+  const [turno, setTurno] = useState<string>("Todos os Turnos");
   const [status, setStatus] = useState<string>("Todos os Status");
   const [ano, setAno] = useState<string>("Todos os Anos");
   const [pesquisa, setPesquisa] = useState<string>("");
-  const [professores, setProfessores] = useState<Pessoa[]>([]);
+  const [turmas, setTurmas] = useState<Turmas[]>([]);
   const [anos, setAnos] = useState<string[]>([]);
   const [total, setTotal] = useState<number>(0);
   const [pagina, setPagina] = useState<number>(1);
 
-  // Requisita os dados novos toda vez que status, categoria ou meses mudar
   const Pesquisa = () => {
+    const pesquisaFinal = pesquisa == "" ? "Todos" : pesquisa;
+    const params = new URLSearchParams({
+      turno,
+      status,
+      page: String(pagina),
+      ano,
+      pesquisa: pesquisaFinal,
+    });
+
+    const url = `api/alunos/filtro?${params.toString()}`;
+
     http
-      .get(
-        `api/professores/filtro/selecionada/${selecionada}/status/${status}/page/${pagina}/ano/${ano}/pesquisa/${pesquisa}`
-      )
+      .get(url)
       .then(function (dados) {
         setTotal(dados.data.total);
-        setProfessores(dados.data.dados);
+        setTurmas(dados.data.dados);
       })
       .catch(function (error) {
         console.log(error);
@@ -42,10 +50,11 @@ const ProfessoresAdmin = () => {
       });
   };
 
+  // Requisita os dados novos toda vez que status, categoria ou meses mudar
   useEffect(() => {
     Pesquisa();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pagina, selecionada, status, ano, pesquisa]);
+  }, [turno, status, pagina, ano, pesquisa]);
 
   // Atualiza sempre que os pagamentos mudar para página 1
   useEffect(() => {
@@ -53,15 +62,14 @@ const ProfessoresAdmin = () => {
   }, [total]);
 
   useEffect(() => {
-    http.get("api/professores/pegarInformativos").then(function (dados) {
-      setAnos(dados.data.anos);
-      setSalas(dados.data.salas);
+    http.get("api/turma/pegarInformativos").then(function (dados) {
+      setAnos(dados.data);
     });
   }, []);
 
-  const AdicionarProfessor = async () => {
-    const dados = await cadastroProfessor();
-    if (!dados || professores.length < 6) return;
+  const AdicionarTurma = async () => {
+    const dados = await cadastroTurma();
+    if (!dados || turmas.length > 6) return;
     return Pesquisa();
   };
 
@@ -69,11 +77,11 @@ const ProfessoresAdmin = () => {
     http
       .delete(`api/funcionarios/${Registro}`)
       .then(function () {
-        toast.success("Professor deletado com sucesso!");
+        toast.success("Turma deletada com sucesso!");
       })
       .catch(function (error) {
         console.log(error);
-        toast.error("Não foi possivel deletar o Professor!");
+        toast.error("Não foi possivel deletar a Turma!");
       })
       .finally(function () {
         Pesquisa();
@@ -81,16 +89,17 @@ const ProfessoresAdmin = () => {
   };
 
   const Editar = async (Registro: string) => {
-    console.log(Registro);
+    const dados = await editarTurma(Registro);
+    if (!dados || turmas.length > 5) return;
     return Pesquisa();
   };
 
-  const maxPaginas = Math.max(1, Math.ceil(total / ITENS_POR_PAGINA));
+  const maxPaginas: number = Math.max(1, Math.ceil(total / ITENS_POR_PAGINA));
 
   return (
     <LayoutLogado
-      titulo="Gerenciamento de Professores"
-      desc="Visualize e Gerencie as informações dos professores"
+      titulo="Gerenciamento de Turmas"
+      desc="Visualize e Gerencie as turmas da Escola"
       exibirPesquisa={{
         exibir: true,
         valor: pesquisa,
@@ -98,30 +107,29 @@ const ProfessoresAdmin = () => {
       }}
       botao={{
         ativo: true,
-        mensagem: "Novo Professor",
-        adicionar: AdicionarProfessor,
+        mensagem: "Nova Turma",
+        adicionar: AdicionarTurma,
       }}
       load={loading}
     >
       <div className="flex justify-between items-center gap-5 mb-6 flex-wrap">
         <div className="flex gap-3 flex-wrap">
           <Selects
-            salas={salas}
-            selecionadaSala={setSelecionada}
+            selecionadoTurno={setTurno}
             selecionadoStatus={setStatus}
             selecionadoAno={setAno}
-            tipo="Professor"
+            tipo="Turmas"
             anos={anos}
           />
         </div>
       </div>
 
       <div className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden mb-6">
-        <Table exibicao={professores} excluir={Excluir} editar={Editar} />
+        <Table exibicao={turmas} excluir={Excluir} editar={Editar} />
       </div>
 
       <TrocaPagina
-        nome="Professores"
+        nome="Turma"
         pagina={pagina}
         maxPagina={maxPaginas}
         total={total}
@@ -131,4 +139,4 @@ const ProfessoresAdmin = () => {
   );
 };
 
-export default ProfessoresAdmin;
+export default TurmasAdmin;

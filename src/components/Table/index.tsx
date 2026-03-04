@@ -11,7 +11,7 @@ const Table = ({ exibicao, excluir, editar }: TablePropsTable) => {
   const head: string[] = Head(pagina);
   const [menuAberto, setMenuAberto] = useState<string>("");
 
-  const VerificarCor = (tipo: string) => {
+  const VerificarCor = (tipo: string | number) => {
     switch (tipo) {
       case "Ativo":
       case "Pago":
@@ -52,8 +52,8 @@ const Table = ({ exibicao, excluir, editar }: TablePropsTable) => {
           const registro: string = "aluno" in item ? item.aluno : item.registro;
           const dado1: string = "aluno" in item ? item.categoria : item.nome;
           const dado2: string[] | string =
-            "turma" in item
-              ? item.turma
+            "turmaRegistro" in item
+              ? item.turmaRegistro
               : "turno" in item
               ? item.turno
               : "cargo" in item
@@ -83,8 +83,13 @@ const Table = ({ exibicao, excluir, editar }: TablePropsTable) => {
               : "horario" in item
               ? item.horario
               : "Aguardando";
-          const dado5: string | number =
-            "horario" in item ? item.horario : item.status;
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const dado5: any =
+            "capacidade" in item
+              ? item.capacidade
+              : "horario" in item
+              ? item.horario
+              : item.status;
 
           return (
             <tr

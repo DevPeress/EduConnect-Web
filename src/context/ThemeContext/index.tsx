@@ -9,6 +9,9 @@ import { CadastroTurmaProvider } from "../Cadastros/CadastroTurmaContext";
 import { CadastroFuncionarioProvider } from "../Cadastros/CadastroFuncionarioContext";
 import { CadastroDisciplinasProvider } from "../Cadastros/CadastroDisciplinasContext";
 import { EditarFuncionarioProvider } from "../Editar/EditarFuncionarioContext";
+import { EditarTurmaProvider } from "../Editar/EditarTurmaContext";
+import { EditarAlunoProvider } from "../Editar/EditarAlunoContext";
+import { EditarProfessorProvider } from "../Editar/EditarProfessorSchema";
 
 const ThemeContext = createContext<ThemeType | undefined>(undefined);
 
@@ -41,7 +44,13 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
               <CadastroFuncionarioProvider>
                 <CadastroDisciplinasProvider>
                   <EditarFuncionarioProvider>
-                    {children}
+                    <EditarTurmaProvider>
+                      <EditarAlunoProvider>
+                        <EditarProfessorProvider>
+                          {children}
+                        </EditarProfessorProvider>
+                      </EditarAlunoProvider>
+                    </EditarTurmaProvider>
                   </EditarFuncionarioProvider>
                 </CadastroDisciplinasProvider>
               </CadastroFuncionarioProvider>

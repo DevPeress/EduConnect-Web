@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
-import CardsAdmin from "../../../components/Administracao/CardsAdmin";
+import CardsAdmin from "../../components/Administracao/CardsAdmin";
 import type {
   AtividadeType,
   CalendarioType,
   CardsAdminType,
-} from "../../../types/types";
-import AtividadesRecentesAdmin from "../../../components/Administracao/AtividadesAdmin";
-import CalendarioAdmin from "../../../components/Administracao/CalendarioAdmin";
-import GraficoAdmin from "../../../components/Administracao/GraficoAdmin";
-import AcoesAdmin from "../../../components/Administracao/AcoesAdmin";
-import { http } from "../../../utils/axios";
+} from "../../types/types";
+import AtividadesRecentesAdmin from "../../components/Administracao/AtividadesAdmin";
+import CalendarioAdmin from "../../components/Administracao/CalendarioAdmin";
+import GraficoAdmin from "../../components/Administracao/GraficoAdmin";
+import AcoesAdmin from "../../components/Administracao/AcoesAdmin";
+import { http } from "../../utils/axios";
 import toast from "react-hot-toast";
-import LayoutLogado from "../../LayoutLogado";
+import LayoutLogado from "../LayoutLogado";
 
 const InicioAdm = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -38,7 +38,7 @@ const InicioAdm = () => {
         toast.error(
           error.message == "Network Error"
             ? "Não foi possível pegar os Dados!"
-            : "Erro inesperado"
+            : "Erro inesperado",
         );
       });
 
@@ -53,7 +53,7 @@ const InicioAdm = () => {
         toast.error(
           error.message == "Network Error"
             ? "Não foi possível pegar os Dados!"
-            : "Erro inesperado"
+            : "Erro inesperado",
         );
       });
   };
@@ -67,7 +67,7 @@ const InicioAdm = () => {
       titulo="Bem-Vindo"
       desc="Visão geral da Escola e Estatísticas"
       exibirPesquisa={{
-        exibir: false
+        exibir: false,
       }}
       botao={{
         ativo: false,

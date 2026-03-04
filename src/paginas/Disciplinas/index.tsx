@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import type { Disciplinas } from "../../../types/types";
-import LayoutLogado from "../../LayoutLogado";
-import { http } from "../../../utils/axios";
-import TrocaPagina from "../../../components/TrocaPagina";
-import { useCadastroMenu } from "../../../context";
+import type { Disciplinas } from "../../types/types";
+import LayoutLogado from "../LayoutLogado";
+import { http } from "../../utils/axios";
+import TrocaPagina from "../../components/TrocaPagina";
+import { useCadastroMenu } from "../../context";
 import toast from "react-hot-toast";
 
 const ITENS_POR_PAGINA = 6;
@@ -18,8 +18,16 @@ const DisciplinasAdmin = () => {
   const [pagina, setPagina] = useState<number>(1);
 
   const Pesquisa = () => {
+    const pesquisaFinal = pesquisa == "" ? "Todos" : pesquisa;
+    const params = new URLSearchParams({
+      page: String(pagina),
+      pesquisa: pesquisaFinal,
+    });
+
+    const url = `api/disciplinas/filtro?${params.toString()}`;
+
     http
-      .get(`api/disciplinas/filtro/page/${pagina}/pesquisa/${pesquisa}`)
+      .get(url)
       .then(function (dados) {
         setTotal(dados.data.total);
         setDisciplinas(dados.data.dados);
@@ -56,7 +64,7 @@ const DisciplinasAdmin = () => {
 
   const AdicionarDisciplina = async () => {
     const dados = await cadastroDisciplinas();
-    if (!dados || disciplinas.length < 9) return;
+    if (!dados || disciplinas.length > 8) return;
     return Pesquisa();
   };
 
@@ -117,7 +125,7 @@ const DisciplinasAdmin = () => {
                 </td>
                 <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
                   {new Date(item.dataCriacao + "T00:00:00").toLocaleDateString(
-                    "pt-BR"
+                    "pt-BR",
                   )}
                 </td>
                 <td

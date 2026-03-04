@@ -13,6 +13,7 @@ import {
 import type { CadastroFuncionarioInput } from "../../schemas/Cadastro/CadastroFuncionarioSchema";
 import type { CadastroDisciplinasInput } from "../../schemas/Cadastro/CadastroDisciplinaSchema";
 import type { EditarFuncionarioInput } from "../../schemas/Editar/EditarFuncionarioSchema";
+import type { EditarProfessorInput } from "../../schemas/Editar/EditarProfessorSchema";
 
 interface Flex2ContextProp<
   T extends
@@ -23,6 +24,7 @@ interface Flex2ContextProp<
     | CadastroFuncionarioInput
     | CadastroDisciplinasInput
     | EditarFuncionarioInput
+    | EditarProfessorInput,
 > extends FlexContext<T> {
   opcao1: string;
   opcao2: string;
@@ -37,6 +39,7 @@ const Flex2Context = <
     | CadastroFuncionarioInput
     | CadastroDisciplinasInput
     | EditarFuncionarioInput
+    | EditarProfessorInput,
 >({
   opcao1,
   opcao2,
@@ -49,15 +52,16 @@ const Flex2Context = <
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
-    Escolhas: keyof T
+    Escolhas: keyof T,
   ) => {
-    let texto: string | number = e.target.value;
+    let texto: string | number | string[] = e.target.value;
     if (Escolhas === "cpf") texto = formatCPF(texto);
 
     if (Escolhas === "telefone" || Escolhas === "telefoneEmergencia")
       texto = formatTelefone(texto);
 
-    if (Escolhas === "valor") texto = parseInt(texto);
+    if (Escolhas === "valor" || Escolhas === "capacidade")
+      texto = parseInt(texto);
 
     setInfos((prev) => ({
       ...prev,
@@ -65,7 +69,7 @@ const Flex2Context = <
     }));
   };
 
-  const [turmas, setTurmas] = useState([]);
+  const [turmas, setTurmas] = useState([""]);
 
   useEffect(() => {
     async function fetchData() {
@@ -84,7 +88,7 @@ const Flex2Context = <
   const selectOptions: Record<string, string[]> = {
     turno: ["Selecionar o Turno", "Matutino", "Vespertino", "Noturno"],
     status: ["Ativo", "Inativo", "Suspenso"],
-    turma: ["Selecionar Turma", ...turmas.map((t: string) => t)],
+    turma: ["Selecionar Turma", ...(Array.isArray(turmas) ? turmas : [])],
     categoria: ["Selecionar categoria", "Mensalidade", "Material"],
     statuspagamento: ["Selecionar status", "Pendente", "Pago", "Cancelado"],
     metodo: [

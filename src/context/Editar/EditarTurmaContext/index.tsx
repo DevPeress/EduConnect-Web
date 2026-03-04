@@ -1,23 +1,24 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
-import type { ContextType } from "../../../types/types";
 import {
   Flex1Context,
   Flex2Context,
   TituloContext,
 } from "../../../components/TypeContext";
-import toast from "react-hot-toast";
-import {
-  cadastroTurmaSchema,
-  type CadastroTurmaInput,
-} from "../../../schemas/Cadastro/CadastroTurmaSchema";
 import { http } from "../../../utils/axios";
+import type { EditarContextType } from "../../../types/types";
+import {
+  editarTurmaSchema,
+  type EditarTurmaInput,
+} from "../../../schemas/Editar/EditarTurmaShema";
+import toast from "react-hot-toast";
 
-const CadastroTurmaContext = createContext<
-  ContextType<CadastroTurmaInput> | undefined
+const EditarTurmaContext = createContext<
+  EditarContextType<EditarTurmaInput> | undefined
 >(undefined);
-export function CadastroTurmaProvider({ children }: { children: ReactNode }) {
+
+export function EditarTurmaProvider({ children }: { children: ReactNode }) {
   const [menu, setMenu] = useState<boolean>(false);
-  const [dados, setDados] = useState<CadastroTurmaInput>({
+  const [dados, setDados] = useState<EditarTurmaInput>({
     codigo: "",
     status: "Ativa",
     nome: "",
@@ -30,34 +31,47 @@ export function CadastroTurmaProvider({ children }: { children: ReactNode }) {
     fim: "",
     dias: [],
     disciplinas: [],
+    alunos: [],
   });
+
   const [resolveCallback, setResolveCallback] = useState<
     ((data: true | null) => void) | null
   >(null);
 
-  const openMenu = async (): Promise<CadastroTurmaInput | null> => {
-    const matriculaNova = await http.get("api/turma/Cadastro");
-    const disciplinasValidas = await http.get(
-      "api/disciplinas/pegarDisciplinas"
-    );
+  const openMenu = async (
+    registro: string
+  ): Promise<EditarTurmaInput | null> => {
+    await http.get(`api/turma/${registro}`).then(function (dados) {
+      const infos = dados.data;
+      setDados({
+        codigo: registro,
+        status: infos.status,
+        nome: infos.nome,
+        ano: infos.anoLetivo,
+        turno: infos.turno,
+        sala: infos.sala,
+        capacidade: infos.capacidade,
+        professor: infos.professorResponsavel,
+        inicio: infos.inicio,
+        fim: infos.fim,
+        dias: infos.dias,
+        disciplinas: infos.disciplinas,
+        alunos: infos.alunos,
+      });
+    });
     setMenu(true);
-    setDados((prevDados) => ({ ...prevDados, codigo: matriculaNova.data }));
-    setDados((prevDados) => ({
-      ...prevDados,
-      disciplinasValidas: disciplinasValidas.data,
-    }));
     return new Promise((resolve) => {
       setResolveCallback(() => resolve);
     });
   };
 
   const Confirm = async () => {
-    const result = cadastroTurmaSchema.safeParse(dados);
+    const result = editarTurmaSchema.safeParse(dados);
     if (!result.success) return toast.error(result.error.issues[0].message);
 
     if (resolveCallback) {
       await http
-        .post("/api/turma", {
+        .post("api/turma", {
           Registro: dados.codigo,
           Nome: dados.nome,
           Turno: dados.turno,
@@ -69,10 +83,12 @@ export function CadastroTurmaProvider({ children }: { children: ReactNode }) {
           Fim: dados.fim,
           Sala: dados.sala,
           Dias: dados.dias,
-          Disciplinas: dados.disciplinas
+          TurmaDisciplina: dados.disciplinas,
+          Alunos: dados.alunos,
         })
         .then(function () {
           resolveCallback(true);
+          setResolveCallback(null);
           toast.success("Cadastro realizado com sucesso!");
         })
         .catch(function (error) {
@@ -82,7 +98,6 @@ export function CadastroTurmaProvider({ children }: { children: ReactNode }) {
         })
         .finally(function () {
           setResolveCallback(null);
-          ResetarDados();
         });
     }
   };
@@ -92,29 +107,10 @@ export function CadastroTurmaProvider({ children }: { children: ReactNode }) {
       resolveCallback(null);
       setResolveCallback(null);
     }
-    ResetarDados();
-  };
-
-  const ResetarDados = () => {
-    setDados({
-      codigo: "",
-      status: "Ativa",
-      nome: "",
-      ano: "2026",
-      turno: "Selecionar o Turno",
-      sala: "",
-      capacidade: 0,
-      professor: "",
-      inicio: "",
-      fim: "",
-      dias: [],
-      disciplinas: [],
-    });
-    setMenu(false);
   };
 
   return (
-    <CadastroTurmaContext.Provider value={{ openMenu, setDados }}>
+    <EditarTurmaContext.Provider value={{ openMenu, setDados }}>
       {children}
       {menu && (
         <div className="flex fixed top-0 bottom-0 right-0 left-0 bg-[#000000B3] backdrop-blur-sm z-10 animate-fadeIn items-center justify-center p-5">
@@ -226,16 +222,16 @@ export function CadastroTurmaProvider({ children }: { children: ReactNode }) {
           </div>
         </div>
       )}
-    </CadastroTurmaContext.Provider>
+    </EditarTurmaContext.Provider>
   );
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
-export function useCadastroTurma() {
-  const context = useContext(CadastroTurmaContext);
+export function useEditarTurma() {
+  const context = useContext(EditarTurmaContext);
   if (!context) {
     throw new Error(
-      "useCadastroTurma deve ser usado dentro do CadastroTurmaProvider"
+      "useEditarTurma deve ser usado dentro do EditarTurmaProvider"
     );
   }
   return context;

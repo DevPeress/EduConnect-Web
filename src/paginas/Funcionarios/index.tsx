@@ -1,38 +1,50 @@
 import { useEffect, useState } from "react";
-import type { Pessoa } from "../../../types/types";
-import LayoutLogado from "../../LayoutLogado";
-import Table from "../../../components/Table";
-import { http } from "../../../utils/axios";
-import Selects from "../../../components/Administracao/Selects";
-import { useCadastroMenu } from "../../../context";
-import TrocaPagina from "../../../components/TrocaPagina";
+import type { Funcionario } from "../../types/types";
+import LayoutLogado from "../LayoutLogado";
+import Table from "../../components/Table";
+import { http } from "../../utils/axios";
+import Selects from "../../components/Administracao/Selects";
+import TrocaPagina from "../../components/TrocaPagina";
+import { useCadastroMenu, useEditarMenu } from "../../context";
 import toast from "react-hot-toast";
 
 const ITENS_POR_PAGINA = 6;
 
-const AlunosAdmin = () => {
-  const { cadastroAluno } = useCadastroMenu();
+const FuncionariosAdmin = () => {
+  const { cadastroFuncionario } = useCadastroMenu();
+  const { editarFuncionario } = useEditarMenu();
 
   const [loading, setLoading] = useState<boolean>(true);
-  const [salas, setSalas] = useState<string[]>([]);
-  const [selecionada, setSelecionada] = useState<string>("Todas as Salas");
+  const [selecionada, setSelecionada] = useState<string>(
+    "Todos os Departamentos",
+  );
   const [status, setStatus] = useState<string>("Todos os Status");
   const [ano, setAno] = useState<string>("Todos os Anos");
   const [pesquisa, setPesquisa] = useState<string>("");
-  const [alunos, setAlunos] = useState<Pessoa[]>([]);
+  const [funcionarios, setFuncionarios] = useState<Funcionario[]>([]);
+  const [departamentos, setDepartamentos] = useState<string[]>([]);
   const [anos, setAnos] = useState<string[]>([]);
   const [total, setTotal] = useState<number>(0);
   const [pagina, setPagina] = useState<number>(1);
 
   // Requisita os dados novos toda vez que status, categoria ou meses mudar
   const Pesquisa = () => {
+    const pesquisaFinal = pesquisa == "" ? "Todos" : pesquisa;
+    const params = new URLSearchParams({
+      selecionada,
+      status,
+      page: String(pagina),
+      ano,
+      pesquisa: pesquisaFinal,
+    });
+
+    const url = `api/funcionarios/filtro?${params.toString()}`;
+
     http
-      .get(
-        `api/alunos/filtro/selecionada/${selecionada}/status/${status}/page/${pagina}/ano/${ano}/pesquisa/${pesquisa}`
-      )
+      .get(url)
       .then(function (dados) {
         setTotal(dados.data.total);
-        setAlunos(dados.data.dados);
+        setFuncionarios(dados.data.dados);
       })
       .catch(function (error) {
         console.log(error);
@@ -41,11 +53,10 @@ const AlunosAdmin = () => {
         setLoading(false);
       });
   };
-
   useEffect(() => {
     Pesquisa();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pagina, selecionada, status, ano, pesquisa]);
+  }, [pagina, status, anos, selecionada, pesquisa]);
 
   // Atualiza sempre que os pagamentos mudar para página 1
   useEffect(() => {
@@ -53,15 +64,15 @@ const AlunosAdmin = () => {
   }, [total]);
 
   useEffect(() => {
-    http.get("api/alunos/pegarInformativos").then(function (dados) {
+    http.get("api/funcionarios/pegarInformativos").then(function (dados) {
       setAnos(dados.data.anos);
-      setSalas(dados.data.salas);
+      setDepartamentos(dados.data.departamentos);
     });
   }, []);
 
-  const AdicionarAluno = async () => {
-    const dados = await cadastroAluno();
-    if (!dados || alunos.length < 6) return;
+  const AdicionarFuncionario = async () => {
+    const dados = await cadastroFuncionario();
+    if (!dados || funcionarios.length > 5) return;
     return Pesquisa();
   };
 
@@ -69,11 +80,11 @@ const AlunosAdmin = () => {
     http
       .delete(`api/funcionarios/${Registro}`)
       .then(function () {
-        toast.success("Aluno deletado com sucesso!");
+        toast.success("Funcionário deletado com sucesso!");
       })
       .catch(function (error) {
         console.log(error);
-        toast.error("Não foi possivel deletar o Aluno!");
+        toast.error("Não foi possivel deletar o Funcionário");
       })
       .finally(function () {
         Pesquisa();
@@ -81,7 +92,8 @@ const AlunosAdmin = () => {
   };
 
   const Editar = async (Registro: string) => {
-    console.log(Registro);
+    const dados = await editarFuncionario(Registro);
+    if (!dados) return;
     return Pesquisa();
   };
 
@@ -89,8 +101,8 @@ const AlunosAdmin = () => {
 
   return (
     <LayoutLogado
-      titulo="Gerenciamento de Alunos"
-      desc="Visualize e Gerencie as informações dos estudantes"
+      titulo="Gerenciamento de Funcionários"
+      desc="Visualize e Gerencie as informações dos funcionários"
       exibirPesquisa={{
         exibir: true,
         valor: pesquisa,
@@ -98,30 +110,30 @@ const AlunosAdmin = () => {
       }}
       botao={{
         ativo: true,
-        mensagem: "Novo Aluno",
-        adicionar: AdicionarAluno,
+        mensagem: "Novo Funcionário",
+        adicionar: AdicionarFuncionario,
       }}
       load={loading}
     >
       <div className="flex justify-between items-center gap-5 mb-6 flex-wrap">
         <div className="flex gap-3 flex-wrap">
           <Selects
-            salas={salas}
-            selecionadaSala={setSelecionada}
+            selecionadoDepartamento={setSelecionada}
             selecionadoStatus={setStatus}
             selecionadoAno={setAno}
-            tipo="Alunos"
+            tipo="Funcionarios"
             anos={anos}
+            departamento={departamentos}
           />
         </div>
       </div>
 
       <div className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden mb-6">
-        <Table exibicao={alunos} excluir={Excluir} editar={Editar} />
+        <Table exibicao={funcionarios} excluir={Excluir} editar={Editar} />
       </div>
 
       <TrocaPagina
-        nome="Alunos"
+        nome="Funcionários"
         pagina={pagina}
         maxPagina={maxPaginas}
         total={total}
@@ -131,4 +143,4 @@ const AlunosAdmin = () => {
   );
 };
 
-export default AlunosAdmin;
+export default FuncionariosAdmin;

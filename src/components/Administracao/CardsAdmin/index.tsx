@@ -30,7 +30,7 @@ const CardsAdmin = ({ dados }: { dados: CardsAdminType }) => {
           ? valor + " novos contratados"
           : valor + " novas demissões";
       case "Turmas":
-        return analise ? valor + " turma nova" : "Sema alterações";
+        return analise ? valor + " turma nova" : "Sem alterações";
       case "Presença":
         return valor >= 50 ? "Acima da meta" : "Abaixo da meta";
     }

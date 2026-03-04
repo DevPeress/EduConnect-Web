@@ -51,51 +51,49 @@ const Header = ({
   return (
     <header className="bg-(--bg-sidebar) border-b-2 border-(--border-color) px-9.5 h-19.25 flex justify-between items-center sticky top-0 z-10">
       <div className="flex items-center gap-4 flex-1">
-        {exibirPesquisa.exibir &&
-          exibirPesquisa.set &&
-          exibirPesquisa.valor && (
-            <>
-              <button className="flex bg-transparent border-none text-(--text-secondary) cursor-pointer p-4 border-2">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <line x1="3" y1="12" x2="21" y2="12"></line>
-                  <line x1="3" y1="6" x2="21" y2="6"></line>
-                  <line x1="3" y1="18" x2="21" y2="18"></line>
-                </svg>
-              </button>
-              <div className="relative flex-1 max-w-[500px]">
-                <svg
-                  className="absolute left-3.5 top-[50%] -translate-y-[50%] text-(--text-muted) pointer-events-none"
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <circle cx="11" cy="11" r="8"></circle>
-                  <path d="m21 21-4.35-4.35"></path>
-                </svg>
-                <input
-                  value={exibirPesquisa.valor}
-                  onChange={(e) => exibirPesquisa.set?.(e.target.value)}
-                  className="w-full bg-(--bg-input) border-4 border-(--border-color) pt-3 pr-4 pb-3 pl-10 text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color) focus:bg-(--bg-card)"
-                  type="text"
-                  placeholder="Buscar por nome ou matrícula..."
-                />
-              </div>
-            </>
-          )}
+        {exibirPesquisa.exibir && (
+          <>
+            <button className="flex bg-transparent border-none text-(--text-secondary) cursor-pointer p-4 border-2">
+              <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+              </svg>
+            </button>
+            <div className="relative flex-1 max-w-[500px]">
+              <svg
+                className="absolute left-3.5 top-[50%] -translate-y-[50%] text-(--text-muted) pointer-events-none"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.35-4.35"></path>
+              </svg>
+              <input
+                value={exibirPesquisa.valor}
+                onChange={(e) => exibirPesquisa.set?.(e.target.value)}
+                className="w-full bg-(--bg-input) border-2 border-(--border-color) rounded-2xl pt-3 pr-4 pb-3 pl-10 text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color) focus:bg-(--bg-card)"
+                type="text"
+                placeholder="Buscar por nome ou matrícula..."
+              />
+            </div>
+          </>
+        )}
       </div>
 
       <div className="flex items-center gap-4">
@@ -118,21 +116,6 @@ const Header = ({
           </span>
         </button>
 
-        <button className="relative bg-transparent border-none text-(--text-secondary) cursor-pointer p-2 rounded-[10px] hover:bg-(--bg-hover) hover:text-(--text-primary)">
-          <svg
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-          </svg>
-        </button>
-
         <div className="flex items-center gap-3 cursor-pointer rounded-[10px] pt-1.5 pr-3 pb-1.5 pl-1.5 hover:bg-(--bg-hover)">
           <img
             src={dados.foto}
@@ -145,18 +128,6 @@ const Header = ({
             </span>
             <span className="text-[12px] text-(--text-muted)">{cargo}</span>
           </div>
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <polyline points="6 9 12 15 18 9"></polyline>
-          </svg>
         </div>
         <div className="max-w-15">
           {dark ? (

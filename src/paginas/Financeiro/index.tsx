@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import type { CardsFinanceiroType, Financeiro } from "../../../types/types";
-import LayoutLogado from "../../LayoutLogado";
-import Table from "../../../components/Table";
-import CardsFinanceiro from "../../../components/Administracao/CardsFinanceiro";
-import { http } from "../../../utils/axios";
-import Selects from "../../../components/Administracao/Selects";
-import { useCadastroMenu } from "../../../context";
-import TrocaPagina from "../../../components/TrocaPagina";
+import type { CardsFinanceiroType, Financeiro } from "../../types/types";
+import LayoutLogado from "../LayoutLogado";
+import Table from "../../components/Table";
+import CardsFinanceiro from "../../components/Administracao/CardsFinanceiro";
+import { http } from "../../utils/axios";
+import Selects from "../../components/Administracao/Selects";
+import { useCadastroMenu } from "../../context";
+import TrocaPagina from "../../components/TrocaPagina";
 import toast from "react-hot-toast";
 
 const ITENS_POR_PAGINA = 6;
@@ -26,10 +26,19 @@ const FinanceiroAdmin = () => {
 
   // API para requisitar os Dados
   const Pesquisa = () => {
+    const pesquisaFinal = pesquisa == "" ? "Todos" : pesquisa;
+    const params = new URLSearchParams({
+      categoria: categorias,
+      status,
+      data: meses,
+      page: String(pagina),
+      pesquisa: pesquisaFinal,
+    });
+
+    const url = `api/financeiro/filtro?${params.toString()}`;
+
     http
-      .get(
-        `api/financeiro/filtro/categoria/${categorias}/status/${status}/data/${meses}/page/${pagina}/pesquisa/${pesquisa}`
-      )
+      .get(url)
       .then(function (dados) {
         setTotal(dados.data.total);
         setPagamentos(dados.data.dados);

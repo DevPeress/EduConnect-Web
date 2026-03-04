@@ -1,78 +1,97 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
-import type { ContextType } from "../../../types/types";
 import {
   Flex1Context,
   Flex2Context,
   TituloContext,
 } from "../../../components/TypeContext";
-import toast from "react-hot-toast";
-import {
-  cadastroTurmaSchema,
-  type CadastroTurmaInput,
-} from "../../../schemas/Cadastro/CadastroTurmaSchema";
 import { http } from "../../../utils/axios";
+import type { EditarContextType } from "../../../types/types";
+import {
+  editarProfessorSchema,
+  type EditarProfessorInput,
+} from "../../../schemas/Editar/EditarProfessorSchema";
+import toast from "react-hot-toast";
 
-const CadastroTurmaContext = createContext<
-  ContextType<CadastroTurmaInput> | undefined
+const EditarProfessorContext = createContext<
+  EditarContextType<EditarProfessorInput> | undefined
 >(undefined);
-export function CadastroTurmaProvider({ children }: { children: ReactNode }) {
+
+export function EditarProfessorProvider({ children }: { children: ReactNode }) {
   const [menu, setMenu] = useState<boolean>(false);
-  const [dados, setDados] = useState<CadastroTurmaInput>({
+  const [dados, setDados] = useState<EditarProfessorInput>({
     codigo: "",
-    status: "Ativa",
+    status: "",
     nome: "",
-    ano: "2026",
-    turno: "Selecionar o Turno",
-    sala: "",
-    capacidade: 0,
-    professor: "",
-    inicio: "",
-    fim: "",
-    dias: [],
-    disciplinas: [],
+    cpf: "",
+    disciplina: "",
+    formacao: "",
+    turmas: [""],
+    email: "",
+    telefone: "",
+    endereco: "",
+    nasc: "",
+    nomeEmergencia: "",
+    telefoneEmergencia: "",
+    salario: 0,
   });
+
   const [resolveCallback, setResolveCallback] = useState<
     ((data: true | null) => void) | null
   >(null);
 
-  const openMenu = async (): Promise<CadastroTurmaInput | null> => {
-    const matriculaNova = await http.get("api/turma/Cadastro");
-    const disciplinasValidas = await http.get(
-      "api/disciplinas/pegarDisciplinas"
-    );
+  const openMenu = async (
+    registro: string,
+  ): Promise<EditarProfessorInput | null> => {
+    await http.get(`api/professores/${registro}`).then(function (dados) {
+      const infos = dados.data;
+      setDados({
+        codigo: infos.registro,
+        status: infos.status,
+        nome: infos.nome,
+        cpf: infos.cpf,
+        disciplina: infos.disciplinas,
+        formacao: infos.formacao,
+        turmas: infos.turmas,
+        email: infos.email,
+        telefone: infos.telefone,
+        endereco: infos.endereco,
+        nasc: infos.nasc,
+        nomeEmergencia: infos.nomeEmergencia,
+        telefoneEmergencia: infos.ContatoEmergencia,
+        salario: infos.salario,
+      });
+    });
     setMenu(true);
-    setDados((prevDados) => ({ ...prevDados, codigo: matriculaNova.data }));
-    setDados((prevDados) => ({
-      ...prevDados,
-      disciplinasValidas: disciplinasValidas.data,
-    }));
     return new Promise((resolve) => {
       setResolveCallback(() => resolve);
     });
   };
 
   const Confirm = async () => {
-    const result = cadastroTurmaSchema.safeParse(dados);
+    const result = editarProfessorSchema.safeParse(dados);
     if (!result.success) return toast.error(result.error.issues[0].message);
 
     if (resolveCallback) {
       await http
-        .post("/api/turma", {
+        .post("api/professores", {
           Registro: dados.codigo,
-          Nome: dados.nome,
-          Turno: dados.turno,
           Status: dados.status,
-          AnoEletivo: dados.ano,
-          Capacidade: dados.capacidade,
-          ProfessorResponsavel: dados.professor,
-          Inicio: dados.inicio,
-          Fim: dados.fim,
-          Sala: dados.sala,
-          Dias: dados.dias,
-          Disciplinas: dados.disciplinas
+          Nome: dados.nome,
+          CPF: dados.cpf,
+          Disciplina: dados.disciplina,
+          Formacao: dados.formacao,
+          Turmas: dados.turmas,
+          Email: dados.email,
+          Telefone: dados.telefone,
+          Endereco: dados.endereco,
+          Nasc: dados.nasc,
+          NomeEmergencia: dados.nomeEmergencia,
+          ContatoEmergencia: dados.telefoneEmergencia,
+          Salario: dados.salario,
         })
         .then(function () {
           resolveCallback(true);
+          setResolveCallback(null);
           toast.success("Cadastro realizado com sucesso!");
         })
         .catch(function (error) {
@@ -82,7 +101,6 @@ export function CadastroTurmaProvider({ children }: { children: ReactNode }) {
         })
         .finally(function () {
           setResolveCallback(null);
-          ResetarDados();
         });
     }
   };
@@ -92,29 +110,10 @@ export function CadastroTurmaProvider({ children }: { children: ReactNode }) {
       resolveCallback(null);
       setResolveCallback(null);
     }
-    ResetarDados();
-  };
-
-  const ResetarDados = () => {
-    setDados({
-      codigo: "",
-      status: "Ativa",
-      nome: "",
-      ano: "2026",
-      turno: "Selecionar o Turno",
-      sala: "",
-      capacidade: 0,
-      professor: "",
-      inicio: "",
-      fim: "",
-      dias: [],
-      disciplinas: [],
-    });
-    setMenu(false);
   };
 
   return (
-    <CadastroTurmaContext.Provider value={{ openMenu, setDados }}>
+    <EditarProfessorContext.Provider value={{ openMenu, setDados }}>
       {children}
       {menu && (
         <div className="flex fixed top-0 bottom-0 right-0 left-0 bg-[#000000B3] backdrop-blur-sm z-10 animate-fadeIn items-center justify-center p-5">
@@ -122,79 +121,86 @@ export function CadastroTurmaProvider({ children }: { children: ReactNode }) {
             className="bg-(--bg-card) border border-(--border-color) rounded-2xl w-full max-w-[700px] max-h-[90vh] overflow-hidden amimate-slideUp flex flex-col"
             style={{ boxShadow: "0 20px 60px rgba(0, 0, 0, 0.5)" }}
           >
-            <TituloContext titulo="Cadastrar Nova Turma" cancelar={Cancel} />
+            <TituloContext titulo="Editar Professor" cancelar={Cancel} />
 
             <form className="p-7 overflow-y-auto flex-1">
               <div className="mb-7">
                 <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
-                  Informações Básicas
+                  Informações Pessoais
                 </h3>
                 <Flex2Context
-                  opcao1="Código"
+                  opcao1="Codigo"
                   opcao2="Status"
                   infos={dados}
                   setInfos={setDados}
                 />
 
                 <Flex2Context
-                  opcao1="Nome da Turma"
-                  opcao2="Ano Letivo"
-                  infos={dados}
-                  setInfos={setDados}
-                />
-
-                <Flex2Context
-                  opcao1="Turno"
-                  opcao2="Sala"
-                  infos={dados}
-                  setInfos={setDados}
-                />
-              </div>
-
-              <div className="mb-7">
-                <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
-                  Capacidade e Professor
-                </h3>
-                <Flex2Context
-                  opcao1="Capacidade"
-                  opcao2="Professor"
-                  infos={dados}
-                  setInfos={setDados}
-                />
-              </div>
-
-              <div className="mb-7">
-                <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
-                  Horários
-                </h3>
-                <Flex2Context
-                  opcao1="Horário Início"
-                  opcao2="Horário Fim"
+                  opcao1="Data de Nascimento"
+                  opcao2="CPF/Documento"
                   infos={dados}
                   setInfos={setDados}
                 />
 
                 <Flex1Context
-                  titulo="Dias da Semana"
+                  titulo="Nome completo"
                   infos={dados}
                   setInfos={setDados}
-                  place="ex: Segunda, Terça, Quarta, Quinta, Sexta"
+                  place="ex: Fabrício Peres ..."
                 />
               </div>
 
               <div className="mb-7">
                 <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
-                  Disciplinas
+                  Profissional
                 </h3>
-
-                <Flex1Context
-                  titulo="Disciplinas"
+                <Flex2Context
+                  opcao1="Foto"
+                  opcao2="Salario"
                   infos={dados}
                   setInfos={setDados}
-                  place="ex: Matemática, Português"
+                />
+
+                <Flex2Context
+                  opcao1="Disciplina Principal"
+                  opcao2="Formação Academica"
+                  infos={dados}
+                  setInfos={setDados}
+                />
+              </div>
+
+              <div className="mb-7">
+                <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
+                  Contato
+                </h3>
+                <Flex2Context
+                  opcao1="E-mail"
+                  opcao2="Telefone"
+                  infos={dados}
+                  setInfos={setDados}
+                />
+
+                <Flex1Context
+                  titulo="Endereço"
+                  infos={dados}
+                  setInfos={setDados}
+                  place="Rua, número, bairro, cidade - Estado"
+                />
+              </div>
+
+              <div className="mb-7">
+                <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
+                  Contato de Emergência
+                </h3>
+                <Flex2Context
+                  opcao1="Nome do Contato de Emergência"
+                  opcao2="Telefone do Contato de Emergência"
+                  infos={dados}
+                  setInfos={setDados}
                 />
               </div>
             </form>
+
             <div className="py-5 px-7 border-t border-(--border-color) flex justify-end gap-3 bg-[#0000001A]">
               <button
                 onClick={Cancel}
@@ -220,22 +226,22 @@ export function CadastroTurmaProvider({ children }: { children: ReactNode }) {
                 >
                   <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
-                Salvar Turma
+                Salvar Funcionário
               </button>
             </div>
           </div>
         </div>
       )}
-    </CadastroTurmaContext.Provider>
+    </EditarProfessorContext.Provider>
   );
 }
 
 // eslint-disable-next-line react-refresh/only-export-components
-export function useCadastroTurma() {
-  const context = useContext(CadastroTurmaContext);
+export function useEditarProfessor() {
+  const context = useContext(EditarProfessorContext);
   if (!context) {
     throw new Error(
-      "useCadastroTurma deve ser usado dentro do CadastroTurmaProvider"
+      "useEditarProfessor deve ser usado dentro do EditarProfessorProvider",
     );
   }
   return context;
