@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 
 const ITENS_POR_PAGINA = 6;
 
-const DisciplinasAdmin = () => {
+const DisciplinasPage = () => {
   const { cadastroDisciplinas } = useCadastroMenu();
 
   const [loading, setLoading] = useState<boolean>(true);
@@ -151,4 +151,4 @@ const DisciplinasAdmin = () => {
   );
 };
 
-export default DisciplinasAdmin;
+export default DisciplinasPage;

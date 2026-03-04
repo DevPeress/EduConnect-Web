@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 
 const ITENS_POR_PAGINA = 6;
 
-const AlunosAdmin = () => {
+const AlunosPage = () => {
   const { cadastroAluno } = useCadastroMenu();
   const { editarAluno } = useEditarMenu();
 
@@ -142,4 +142,4 @@ const AlunosAdmin = () => {
   );
 };
 
-export default AlunosAdmin;
+export default AlunosPage;

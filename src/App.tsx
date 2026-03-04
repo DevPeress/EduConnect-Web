@@ -4,15 +4,15 @@ import Login from "./paginas/Login";
 import Inicial from "./paginas/Inicial";
 import SemAcesso from "./paginas/SemAcesso";
 import { useAuth } from "./context/AuthContext";
-import InicioAdm from "./paginas/Inicio";
-import AlunosAdmin from "./paginas/Alunos";
-import ProfessoresAdmin from "./paginas/Professores";
-import CalendarioAdm from "./paginas/Calendario";
+import InicioPage from "./paginas/Inicio";
+import AlunosPage from "./paginas/Alunos";
+import ProfessoresPage from "./paginas/Professores";
+import CalendarioPage from "./paginas/Calendario";
 import PrivateRoute from "./middleware";
-import FinanceiroAdmin from "./paginas/Financeiro";
-import TurmasAdmin from "./paginas/Turmas";
-import FuncionariosAdmin from "./paginas/Funcionarios";
-import DisciplinasAdmin from "./paginas/Disciplinas";
+import FinanceiroPage from "./paginas/Financeiro";
+import TurmasPage from "./paginas/Turmas";
+import FuncionariosPage from "./paginas/Funcionarios";
+import DisciplinasPage from "./paginas/Disciplinas";
 
 function App() {
   const auth = useAuth();
@@ -40,12 +40,12 @@ function App() {
             />
           }
         >
-          <Route path="/admin/dashboard" element={<InicioAdm />} />
-          <Route path="/admin/alunos" element={<AlunosAdmin />} />
-          <Route path="/admin/professores" element={<ProfessoresAdmin />} />
-          <Route path="/admin/turmas" element={<TurmasAdmin />} />
-          <Route path="/admin/calendario" element={<CalendarioAdm />} />
-          <Route path="/admin/financeiro" element={<FinanceiroAdmin />} />
+          <Route path="/admin/dashboard" element={<InicioPage />} />
+          <Route path="/admin/alunos" element={<AlunosPage />} />
+          <Route path="/admin/professores" element={<ProfessoresPage />} />
+          <Route path="/admin/turmas" element={<TurmasPage />} />
+          <Route path="/admin/calendario" element={<CalendarioPage />} />
+          <Route path="/admin/financeiro" element={<FinanceiroPage />} />
         </Route>
 
         {/* Acesso Admin */}
@@ -58,8 +58,8 @@ function App() {
             />
           }
         >
-          <Route path="/admin/funcionarios" element={<FuncionariosAdmin />} />
-          <Route path="/admin/disciplinas" element={<DisciplinasAdmin />} />
+          <Route path="/admin/funcionarios" element={<FuncionariosPage />} />
+          <Route path="/admin/disciplinas" element={<DisciplinasPage />} />
         </Route>
 
         {/* Página de sem acesso */}

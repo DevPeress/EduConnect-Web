@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 
 const ITENS_POR_PAGINA = 6;
 
-const FuncionariosAdmin = () => {
+const FuncionariosPage = () => {
   const { cadastroFuncionario } = useCadastroMenu();
   const { editarFuncionario } = useEditarMenu();
 
@@ -143,4 +143,4 @@ const FuncionariosAdmin = () => {
   );
 };
 
-export default FuncionariosAdmin;
+export default FuncionariosPage;

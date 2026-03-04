@@ -11,7 +11,7 @@ import toast from "react-hot-toast";
 
 const ITENS_POR_PAGINA = 6;
 
-const FinanceiroAdmin = () => {
+const FinanceiroPage = () => {
   const { cadastroPagamento } = useCadastroMenu();
 
   const [loading, setLoading] = useState<boolean>(true);
@@ -158,4 +158,4 @@ const FinanceiroAdmin = () => {
   );
 };
 
-export default FinanceiroAdmin;
+export default FinanceiroPage;

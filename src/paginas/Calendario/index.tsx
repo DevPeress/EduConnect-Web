@@ -4,7 +4,7 @@ import Calendario from "../../components/Calendario";
 import type { CalendarioEvento } from "../../types/types";
 import LayoutLogado from "../LayoutLogado";
 
-const CalendarioAdm = () => {
+const CalendarioPage = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [events, setEvents] = useState<CalendarioEvento[]>([
     {
@@ -40,4 +40,4 @@ const CalendarioAdm = () => {
   );
 };
 
-export default CalendarioAdm;
+export default CalendarioPage;

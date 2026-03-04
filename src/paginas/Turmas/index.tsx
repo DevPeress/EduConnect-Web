@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 
 const ITENS_POR_PAGINA = 6;
 
-const TurmasAdmin = () => {
+const TurmasPage = () => {
   const { cadastroTurma } = useCadastroMenu();
   const { editarTurma } = useEditarMenu();
 
@@ -139,4 +139,4 @@ const TurmasAdmin = () => {
   );
 };
 
-export default TurmasAdmin;
+export default TurmasPage;
