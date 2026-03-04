@@ -62,7 +62,6 @@ export interface PaginaMainProps {
   botao: { ativo: boolean; adicionar?: () => void; mensagem?: string };
 }
 
-
 export interface CardsAdminType {
   dado: string;
   total: number;
@@ -75,8 +74,17 @@ export interface CardsFinanceiroType {
   total: number;
 }
 
+export enum AuditAction {
+  Create = 1,
+  Update = 2,
+  Delete = 3,
+  Login = 4,
+  Logout = 5,
+  AccessDenied = 6,
+}
+
 export interface AtividadeType {
-  tipo: string;
+  tipo: AuditAction;
   dado: string;
   horario: number;
 }
@@ -147,7 +155,7 @@ export interface ContextType<
     | CadastroTurmaInput
     | CadastroFuncionarioInput
     | CadastroDisciplinasInput
-    | EditarFuncionarioInput
+    | EditarFuncionarioInput,
 > {
   openMenu: () => Promise<T | null>;
   setDados: React.Dispatch<React.SetStateAction<T>>;
@@ -178,7 +186,7 @@ export interface FlexContext<
     | CadastroPagamentoInput
     | CadastroTurmaInput
     | CadastroFuncionarioInput
-    | CadastroDisciplinasInput
+    | CadastroDisciplinasInput,
 > {
   infos: T;
   setInfos: React.Dispatch<React.SetStateAction<T>>;
