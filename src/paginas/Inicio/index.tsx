@@ -43,8 +43,9 @@ const InicioAdm = () => {
       });
 
     await http
-      .get("api/registros/DashBoard")
+      .get("api/dashboardadmin/Atividades")
       .then(function (dados) {
+        console.log(dados.data)
         setAtividades(dados.data);
         setLoading(false);
       })
