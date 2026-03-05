@@ -69,7 +69,7 @@ const Header = ({
                 <line x1="3" y1="18" x2="21" y2="18"></line>
               </svg>
             </button>
-            <div className="relative flex-1 max-w-[500px]">
+            <div className="relative flex-1 max-w-125">
               <svg
                 className="absolute left-3.5 top-[50%] -translate-y-[50%] text-(--text-muted) pointer-events-none"
                 width="18"
@@ -111,7 +111,7 @@ const Header = ({
             <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
             <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
           </svg>
-          <span className="absolute top-1 right-1 bg-(--red) text-white text-[10px] font-bold px-1 py-[5px] rounded-lg leading-1">
+          <span className="absolute top-1 right-1 bg-(--red) text-white text-[10px] font-bold px-1 py-1.25 rounded-lg leading-1">
             3
           </span>
         </button>
