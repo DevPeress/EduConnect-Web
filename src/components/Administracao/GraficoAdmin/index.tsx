@@ -4,9 +4,7 @@ const GraficoAdmin = () => {
       className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden"
       style={{ boxShadow: "0 1px 2px rgba(0, 0, 0, 0.3)" }}
     >
-      <div
-        className="py-5 px-6 border-b-2 border-(--border-color) flex justify-between items-center bg-(--cabecalho)"
-      >
+      <div className="py-5 px-6 border-b-2 border-(--border-color) flex justify-between items-center bg-(--cabecalho)">
         <h2 className="text-[16px] font-semibold text-(--text-primary)">
           Desempenho Acadêmico
         </h2>
@@ -35,15 +33,11 @@ const GraficoAdmin = () => {
         </div>
         <div className="flex gap-6 justify-center">
           <div className="flex items-center gap-2 text-[13px] text-(--text-secondary)">
-            <span
-              className="w-3 h-3 rounded-[3px] bg-(--blue)"
-            ></span>
+            <span className="w-3 h-3 rounded-[3px] bg-(--blue)"></span>
             <span className="">Média Geral</span>
           </div>
           <div className="flex items-center gap-2 text-[13px] text-(--text-secondary)">
-            <span
-              className="w-3 h-3 rounded-[3px] bg-(--green)"
-            ></span>
+            <span className="w-3 h-3 rounded-[3px] bg-(--green)"></span>
             <span className="">Meta</span>
           </div>
         </div>

@@ -54,7 +54,9 @@ const CustomToolbar = ({
         →
       </button>
     </div>
-    <h2 className="text-lg font-semibold text-(--calendario-texto-titulo)">{label}</h2>
+    <h2 className="text-lg font-semibold text-(--calendario-texto-titulo)">
+      {label}
+    </h2>
     <div className="flex gap-2">
       {(["month", "week", "day"] as View[]).map((v) => (
         <button

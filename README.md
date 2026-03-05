@@ -51,68 +51,77 @@ O **Edu Connect** é o front-end de um sistema escolar moderno desenvolvido com 
 ## ✨ Funcionalidades Existentes
 
 ### 🔐 Autenticação
-  - Login com validação estruturada.
-  - Redirecionamento automático conforme nível de permissão.
-  - Gestão de sessão segura utilizando tokens.
-  - Notificações com **React Hot Toast**.
+
+- Login com validação estruturada.
+- Redirecionamento automático conforme nível de permissão.
+- Gestão de sessão segura utilizando tokens.
+- Notificações com **React Hot Toast**.
 
 ### 🧩 Arquitetura Modular
-  - Baseada em **componentização** e **contextos globais**.
-  - Permite fácil **manutenção**, **evolução** e **reutilização** de componentes.
-  - Estrutura escalável voltada para projetos de médio e grande porte.
+
+- Baseada em **componentização** e **contextos globais**.
+- Permite fácil **manutenção**, **evolução** e **reutilização** de componentes.
+- Estrutura escalável voltada para projetos de médio e grande porte.
 
 ### 📊 Dashboard Administrativo
-  - Exibe dados gerais de usuários, professores e alunos.
-  - Gráficos analíticos interativos.
-  - Painel de atividades recentes.
-  - Indicadores e métricas em tempo real.
-  - Calendário de eventos integrado utilizando **React Big Calendar**.
+
+- Exibe dados gerais de usuários, professores e alunos.
+- Gráficos analíticos interativos.
+- Painel de atividades recentes.
+- Indicadores e métricas em tempo real.
+- Calendário de eventos integrado utilizando **React Big Calendar**.
 
 ### 👨‍🏫 Gestão de Usuários
-  - Listagem completa com filtros inteligentes.
-  - Cadastro de novos usuários.
-  - Organização por cargos e permissões.
-  
+
+- Listagem completa com filtros inteligentes.
+- Cadastro de novos usuários.
+- Organização por cargos e permissões.
+
 Tem suporte para:
-  - Alunos
-  - Professores
-  - Administradores
+
+- Alunos
+- Professores
+- Administradores
 
 ### 👥 Gestão Completa de Usuários
-  - CRUD completo de Alunos e Professores.
-  - Perfis individuais com dados detalhados.
-  - Possibilidade de editar e excluir registros.
-  - Upload de foto de perfil.
 
+- CRUD completo de Alunos e Professores.
+- Perfis individuais com dados detalhados.
+- Possibilidade de editar e excluir registros.
+- Upload de foto de perfil.
 
 ### 📘 Gerenciamento de Turmas e Disciplinas
-  - Criar, editar e excluir turmas.
-  - Atribuir professores e alunos a cada turma.
-  - Criar e organizar disciplinas por período.
+
+- Criar, editar e excluir turmas.
+- Atribuir professores e alunos a cada turma.
+- Criar e organizar disciplinas por período.
 
 ### 📝 Sistema de Notas e Frequência
-  - Registro de notas por prova, trabalho ou período.
-  - Histórico completo de rendimento por aluno.
-  - Controle de presença/faltas por turma.
-  - Dashboard de desempenho acadêmico.
 
+- Registro de notas por prova, trabalho ou período.
+- Histórico completo de rendimento por aluno.
+- Controle de presença/faltas por turma.
+- Dashboard de desempenho acadêmico.
 
 ### 🧑‍🏫 Painéis Personalizados
-  Cada tipo de usuário possui um painel dedicado:
 
-  - **Administrador:** visão geral, gráficos e gerenciamento completo.
-  - **Professor:** lançamentos de notas, presença e comunicados.
-  - **Aluno:** notas, faltas, calendário e avisos.
-  - **Responsável:** acompanhamento de rendimento e frequência.
+Cada tipo de usuário possui um painel dedicado:
+
+- **Administrador:** visão geral, gráficos e gerenciamento completo.
+- **Professor:** lançamentos de notas, presença e comunicados.
+- **Aluno:** notas, faltas, calendário e avisos.
+- **Responsável:** acompanhamento de rendimento e frequência.
 
 ### 🔍 Busca Avançada e Filtros Inteligentes
-  - Busca rápida por nome, turma, matrícula, disciplina.
-  - Filtros dinâmicos por período, desempenho e categoria.
+
+- Busca rápida por nome, turma, matrícula, disciplina.
+- Filtros dinâmicos por período, desempenho e categoria.
 
 ### 📱 UI/UX e Responsividade
-  - Interface otimizada para desktop e mobile.
-  - Layout totalmente responsivo via Tailwind.
-  - Componentes modernos e intuitivos.
+
+- Interface otimizada para desktop e mobile.
+- Layout totalmente responsivo via Tailwind.
+- Componentes modernos e intuitivos.
 
 ## ⚙️ Instalação
 

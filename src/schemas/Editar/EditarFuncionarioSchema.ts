@@ -23,7 +23,7 @@ export const editarFuncionarioSchema = z.object({
     .string()
     .refine(
       (value) => value !== "Selecionar o Turno",
-      "Selecione um turno válido!"
+      "Selecione um turno válido!",
     ),
   salario: z.number(),
 });

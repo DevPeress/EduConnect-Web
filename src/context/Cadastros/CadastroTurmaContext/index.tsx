@@ -38,7 +38,7 @@ export function CadastroTurmaProvider({ children }: { children: ReactNode }) {
   const openMenu = async (): Promise<CadastroTurmaInput | null> => {
     const matriculaNova = await http.get("api/turma/Cadastro");
     const disciplinasValidas = await http.get(
-      "api/disciplinas/pegarDisciplinas"
+      "api/disciplinas/pegarDisciplinas",
     );
     setMenu(true);
     setDados((prevDados) => ({ ...prevDados, codigo: matriculaNova.data }));
@@ -69,7 +69,7 @@ export function CadastroTurmaProvider({ children }: { children: ReactNode }) {
           Fim: dados.fim,
           Sala: dados.sala,
           Dias: dados.dias,
-          Disciplinas: dados.disciplinas
+          Disciplinas: dados.disciplinas,
         })
         .then(function () {
           resolveCallback(true);
@@ -235,7 +235,7 @@ export function useCadastroTurma() {
   const context = useContext(CadastroTurmaContext);
   if (!context) {
     throw new Error(
-      "useCadastroTurma deve ser usado dentro do CadastroTurmaProvider"
+      "useCadastroTurma deve ser usado dentro do CadastroTurmaProvider",
     );
   }
   return context;

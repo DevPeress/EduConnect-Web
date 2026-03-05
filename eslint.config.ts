@@ -13,10 +13,10 @@ export default defineConfig([
     ignores: ["dist", "node_modules"],
 
     extends: [
-      js.configs.recommended,            
-      tseslint.configs.recommended,         
-      reactHooks.configs["recommended-latest"], 
-      reactRefresh.configs.vite,           
+      js.configs.recommended,
+      tseslint.configs.recommended,
+      reactHooks.configs["recommended-latest"],
+      reactRefresh.configs.vite,
     ],
 
     languageOptions: {

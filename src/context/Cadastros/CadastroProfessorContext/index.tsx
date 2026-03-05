@@ -248,7 +248,7 @@ export function useCadastroProfessor() {
   const context = useContext(CadastroProfessorContext);
   if (!context) {
     throw new Error(
-      "useCadastroProfessor deve ser usado dentro do CadastroProfessorProvider"
+      "useCadastroProfessor deve ser usado dentro do CadastroProfessorProvider",
     );
   }
   return context;

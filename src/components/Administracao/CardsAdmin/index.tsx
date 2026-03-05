@@ -1,4 +1,9 @@
-import { TotalAlunos, TotalProfessores, TotalReceita, TotalTurmas } from "../../../assets/HTML";
+import {
+  TotalAlunos,
+  TotalProfessores,
+  TotalReceita,
+  TotalTurmas,
+} from "../../../assets/HTML";
 import type { CardsAdminType } from "../../../types/types";
 import { formatBRL } from "../../../utils/codigos";
 const CardsAdmin = ({ dados }: { dados: CardsAdminType }) => {

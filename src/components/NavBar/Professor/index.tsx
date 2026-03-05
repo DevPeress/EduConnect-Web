@@ -17,7 +17,7 @@ const Paginas: Nav[] = [
     nome: "Calendário",
     pagina: "/admin/calendario",
     svg: NavCalendario,
-  }
+  },
 ];
 
 const NavProfessores = ({ pagina }: { pagina: string }) => {

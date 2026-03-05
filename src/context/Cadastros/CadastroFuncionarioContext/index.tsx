@@ -246,7 +246,7 @@ export function useCadastroFuncionario() {
   const context = useContext(CadastroFuncionarioContext);
   if (!context) {
     throw new Error(
-      "useCadastroFuncionario deve ser usado dentro do CadastroFuncionarioProvider"
+      "useCadastroFuncionario deve ser usado dentro do CadastroFuncionarioProvider",
     );
   }
   return context;

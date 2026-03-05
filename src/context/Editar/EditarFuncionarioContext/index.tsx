@@ -46,7 +46,7 @@ export function EditarFuncionarioProvider({
   >(null);
 
   const openMenu = async (
-    registro: string
+    registro: string,
   ): Promise<EditarFuncionarioInput | null> => {
     await http.get(`api/funcionarios/${registro}`).then(function (dados) {
       const infos = dados.data;
@@ -257,7 +257,7 @@ export function useEditarFuncionario() {
   const context = useContext(EditarFuncionarioContext);
   if (!context) {
     throw new Error(
-      "useEditarFuncionario deve ser usado dentro do EditarFuncionarioProvider"
+      "useEditarFuncionario deve ser usado dentro do EditarFuncionarioProvider",
     );
   }
   return context;

@@ -158,7 +158,7 @@ export function useCadastroDisciplinas() {
   const context = useContext(CadastroDisciplinasContext);
   if (!context) {
     throw new Error(
-      "useCadastroDisciplinas deve ser usado dentro do CadastroDisciplinasProvider"
+      "useCadastroDisciplinas deve ser usado dentro do CadastroDisciplinasProvider",
     );
   }
   return context;

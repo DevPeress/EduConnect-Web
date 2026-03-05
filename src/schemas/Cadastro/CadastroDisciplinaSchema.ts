@@ -6,4 +6,6 @@ export const cadastroDisciplinasSchema = z.object({
   descricao: z.string(),
 });
 
-export type CadastroDisciplinasInput = z.infer<typeof cadastroDisciplinasSchema>;
+export type CadastroDisciplinasInput = z.infer<
+  typeof cadastroDisciplinasSchema
+>;

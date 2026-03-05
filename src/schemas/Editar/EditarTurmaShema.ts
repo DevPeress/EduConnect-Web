@@ -7,7 +7,7 @@ export const editarTurmaSchema = z.object({
     .string()
     .refine(
       (value) => value !== "Selecionar o Turno",
-      "Selecione um turno válido!"
+      "Selecione um turno válido!",
     ),
   status: z.string(),
   ano: z.string().min(3, "Ano Letivo inválido!"),

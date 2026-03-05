@@ -9,7 +9,7 @@ export const cadastroTurmaSchema = z.object({
     .string()
     .refine(
       (value) => value !== "Selecionar o Turno",
-      "Selecione um turno válido!"
+      "Selecione um turno válido!",
     ),
   sala: z.string().min(2, "Sala inválida!"),
   capacidade: z.number(),

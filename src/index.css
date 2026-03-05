@@ -1,11 +1,15 @@
 @import "tailwindcss";
 
 * {
-  @apply transition-colors duration-400
+  @apply transition-colors duration-400;
 }
 
-html, body, #root {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+html,
+body,
+#root {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
   min-height: 100vh;
   margin: 0;
   padding: 0;
@@ -18,7 +22,7 @@ html, body, #root {
   --text-primary: #1f2937;
   --text-secondary: #6b7280;
   --text-muted: #6b7280;
-  --border-color: #D1D5DB;
+  --border-color: #d1d5db;
   --border-light: #4b5563;
   --bg-body: #f3f4f6;
   --bg-card: #ffffff;
@@ -37,17 +41,17 @@ html, body, #root {
   --orange: #f59e0b;
   --purple: #8b5cf6;
 
-  --aluno-card: #BFDBFE;
-  --presenca-card: #DDD6FE;
-  --professor-card: #A7F3D0;
-  --turma-card: #FDE68A;
+  --aluno-card: #bfdbfe;
+  --presenca-card: #ddd6fe;
+  --professor-card: #a7f3d0;
+  --turma-card: #fde68a;
 
-  --cabecalho: #D6D6D6;
-  --atividades-recentes: #E2ECFE;
+  --cabecalho: #d6d6d6;
+  --atividades-recentes: #e2ecfe;
 
   /* Calendario */
   --calendario-bg-offrange: #f3f4f6;
-  --calendario-texto-offrange: #9ca3af; 
+  --calendario-texto-offrange: #9ca3af;
 
   --calendario-bg-geral: #ffffff;
   --calendario-texto-titulo: #1a1a1a;
@@ -75,7 +79,7 @@ html, body, #root {
   --bg-sidebar: #1a1f2e;
   --error-color: #ef4444;
   --success-color: #10b981;
-  --alert-color: #EF444419;
+  --alert-color: #ef444419;
   --shadowalert-color: rgba(239, 68, 68, 0.3);
   --shadowalert-color2: rgba(239, 68, 68, 0);
   --bg-liner: 135deg, #0f172a 0%, #1e1b4b 100%;
@@ -86,13 +90,13 @@ html, body, #root {
   --orange: #f59e0b;
   --purple: #8b5cf6;
 
-  --aluno-card: #3B82F61A;
-  --presenca-card: #8B5CF61A;
-  --professor-card: #10B9811A;
-  --turma-card: #F59E0B1A;
+  --aluno-card: #3b82f61a;
+  --presenca-card: #8b5cf61a;
+  --professor-card: #10b9811a;
+  --turma-card: #f59e0b1a;
 
   --cabecalho: #00000033;
-  --atividades-recentes: #3B82F626;
+  --atividades-recentes: #3b82f626;
 
   /* Calendario */
   --calendario-bg-offrange: #353535;
@@ -118,7 +122,6 @@ textarea {
   --animate-float: float 3s ease-in-out infinite;
 
   @keyframes float {
-
     0%,
     100% {
       transform: translateY(0);
@@ -172,7 +175,6 @@ textarea {
   --animate-glow: glow 2s ease-in-out infinite;
 
   @keyframes glow {
-
     0%,
     100% {
       filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.5));
@@ -186,7 +188,6 @@ textarea {
   --animate-pulse: pulse 4s ease-in-out infinite;
 
   @keyframes pulse {
-
     0%,
     100% {
       transform: scale(1);
@@ -202,7 +203,6 @@ textarea {
   --animate-pulse403: pulse 2s ease-in-out infinite;
 
   @keyframes pulse {
-
     0%,
     100% {
       transform: scale(1);
@@ -218,7 +218,6 @@ textarea {
   --animate-shake: shake 0.5s ease-in-out 2s;
 
   @keyframes shake {
-
     0%,
     100% {
       transform: translateX(0);

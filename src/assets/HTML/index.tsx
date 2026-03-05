@@ -47,5 +47,5 @@ export {
   Recebido,
   Pendente,
   Atrasado,
-  Total
+  Total,
 };

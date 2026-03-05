@@ -60,7 +60,10 @@ function App() {
         >
           <Route path="/professores/dashboard" element={<InicioPage />} />
           <Route path="/professores/alunos" element={<AlunosPage />} />
-          <Route path="/professores/professores" element={<ProfessoresPage />} />
+          <Route
+            path="/professores/professores"
+            element={<ProfessoresPage />}
+          />
           <Route path="/professores/turmas" element={<TurmasPage />} />
           <Route path="/professores/calendario" element={<CalendarioPage />} />
           <Route path="/professores/financeiro" element={<FinanceiroPage />} />

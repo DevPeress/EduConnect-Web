@@ -41,7 +41,7 @@ const Login = ({ logado, cargo }: AuthPaginas) => {
         loading: "Entrando...",
         success: (data) => {
           const opcao = Options.find((option) =>
-            option.cargos?.includes(data.data)
+            option.cargos?.includes(data.data),
           );
 
           auth.AtualizarAuth();
@@ -71,7 +71,7 @@ const Login = ({ logado, cargo }: AuthPaginas) => {
         error: {
           duration: 6000,
         },
-      }
+      },
     );
   };
 

@@ -192,7 +192,7 @@ export function useCadastroPagamento() {
   const context = useContext(CadastroPagamentoContext);
   if (!context) {
     throw new Error(
-      "useCadastroPagamento deve ser usado dentro do CadastroPagamentoProvider"
+      "useCadastroPagamento deve ser usado dentro do CadastroPagamentoProvider",
     );
   }
   return context;

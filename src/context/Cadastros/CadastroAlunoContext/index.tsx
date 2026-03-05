@@ -214,7 +214,7 @@ export function useCadastroAluno() {
   const context = useContext(CadastroAlunoContext);
   if (!context) {
     throw new Error(
-      "useCadastroAluno deve ser usado dentro do CadastroAlunoProvider"
+      "useCadastroAluno deve ser usado dentro do CadastroAlunoProvider",
     );
   }
   return context;

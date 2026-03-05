@@ -55,41 +55,41 @@ const Table = ({ exibicao, excluir, editar }: TablePropsTable) => {
             "turmaRegistro" in item
               ? item.turmaRegistro
               : "turno" in item
-              ? item.turno
-              : "cargo" in item
-              ? item.cargo
-              : "R$ " + formatBRL(item.valor);
+                ? item.turno
+                : "cargo" in item
+                  ? item.cargo
+                  : "R$ " + formatBRL(item.valor);
           const dado3: string =
             "email" in item
               ? item.email
               : "professor" in item
-              ? item.professor
-              : "departamento" in item
-              ? item.departamento
-              : new Date(item.dataVencimento + "T00:00:00").toLocaleDateString(
-                  "pt-BR"
-                );
+                ? item.professor
+                : "departamento" in item
+                  ? item.departamento
+                  : new Date(
+                      item.dataVencimento + "T00:00:00",
+                    ).toLocaleDateString("pt-BR");
           const dado4: string =
             "dataAdmissao" in item
               ? new Date(item.dataAdmissao + "T00:00:00").toLocaleDateString(
-                  "pt-BR"
+                  "pt-BR",
                 )
               : "dataPagamento" in item
-              ? new Date(item.dataPagamento + "T00:00:00").toLocaleDateString(
-                  "pt-BR"
-                )
-              : "telefone" in item
-              ? formatTelefone(item.telefone)
-              : "horario" in item
-              ? item.horario
-              : "Aguardando";
+                ? new Date(item.dataPagamento + "T00:00:00").toLocaleDateString(
+                    "pt-BR",
+                  )
+                : "telefone" in item
+                  ? formatTelefone(item.telefone)
+                  : "horario" in item
+                    ? item.horario
+                    : "Aguardando";
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const dado5: any =
             "capacidade" in item
               ? item.capacidade
               : "horario" in item
-              ? item.horario
-              : item.status;
+                ? item.horario
+                : item.status;
 
           return (
             <tr

@@ -39,7 +39,7 @@ export function EditarTurmaProvider({ children }: { children: ReactNode }) {
   >(null);
 
   const openMenu = async (
-    registro: string
+    registro: string,
   ): Promise<EditarTurmaInput | null> => {
     await http.get(`api/turma/${registro}`).then(function (dados) {
       const infos = dados.data;
@@ -231,7 +231,7 @@ export function useEditarTurma() {
   const context = useContext(EditarTurmaContext);
   if (!context) {
     throw new Error(
-      "useEditarTurma deve ser usado dentro do EditarTurmaProvider"
+      "useEditarTurma deve ser usado dentro do EditarTurmaProvider",
     );
   }
   return context;

@@ -9,19 +9,19 @@ export const cadastroPagamentoSchema = z.object({
     .string()
     .refine(
       (value) => value !== "Selecionar categoria",
-      "Selecione uma categoria válida!"
+      "Selecione uma categoria válida!",
     ),
   statuspagamento: z
     .string()
     .refine(
       (value) => value !== "Selecionar status",
-      "Selecione um status válido!"
+      "Selecione um status válido!",
     ),
   metodo: z
     .string()
     .refine(
       (value) => value !== "Selecionar método",
-      "Selecione um método válido!"
+      "Selecione um método válido!",
     ),
   dataVencimento: z.string(),
   dataPagamento: z.string(),
