@@ -10,7 +10,7 @@ const SideBarFooter = () => {
     <div className="fixed w-72 bottom-0 p-3.5 border-t-2 border-(--border-color)">
       <Link
         to={"/config"}
-        className="flex items-center gap-3 px-[11px] py-2 rounded-[10px] text-[14px] font-medium relative hover:bg-(--bg-hover) hover:text-(--text-primary)"
+        className="flex items-center gap-3 px-2.75 py-2 rounded-[10px] text-[14px] font-medium relative hover:bg-(--bg-hover) hover:text-(--text-primary)"
         style={{
           color: paginaAtual ? "white" : "var(--text-secondary)",
           boxShadow: paginaAtual ? "0 4px 12px rgba(59, 130, 246, 0.3)" : "",
@@ -36,7 +36,7 @@ const SideBarFooter = () => {
       <Link
         onClick={auth.removeAuth}
         to={"/login"}
-        className="flex items-center gap-3 px-[11px] py-2 rounded-[10px] text-[14px] text-(--red) font-medium relative hover:bg-(--bg-hover) hover:text-(--text-primary)"
+        className="flex items-center gap-3 px-2.75 py-2 rounded-[10px] text-[14px] text-(--red) font-medium relative hover:bg-(--bg-hover) hover:text-(--text-primary)"
       >
         <svg
           width="20"

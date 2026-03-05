@@ -2,7 +2,7 @@ import type { PaginaMainProps } from "../../../types/types";
 
 const PaginaMain = ({ titulo, desc, botao, children }: PaginaMainProps) => {
   return (
-    <div className="py-8 px-8 max-w-[1600px] m-0 mx-auto w-full">
+    <div className="py-8 px-8 max-w-400 m-0 mx-auto w-full">
       <div className="flex justify-between mb-5">
         <div className="flex-1">
           <h1 className="text-[20px] font-bold text-(--text-primary)">

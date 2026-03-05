@@ -8,7 +8,7 @@ const SemAcesso = ({ logado, cargo }: AuthPaginas) => {
 
   return (
     <FundoBolhas>
-      <div className="inline-flex items-center justify-center w-[100px] h-[100px] bg-(--alert-color) rounded-[50%] mb-5 animate-pulse403">
+      <div className="inline-flex items-center justify-center w-25 h-25 bg-(--alert-color) rounded-[50%] mb-5 animate-pulse403">
         <svg
           className="text-[#ef4444] animate-shake"
           width="80"

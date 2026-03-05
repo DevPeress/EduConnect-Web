@@ -123,7 +123,7 @@ export function CadastroProfessorProvider({
       {menu && (
         <div className="flex fixed top-0 bottom-0 right-0 left-0 bg-[#000000B3] backdrop-blur-sm z-10 animate-fadeIn items-center justify-center p-5">
           <div
-            className="bg-(--bg-card) border border-(--border-color) rounded-2xl w-full max-w-[700px] max-h-[90vh] overflow-hidden amimate-slideUp flex flex-col"
+            className="bg-(--bg-card) border border-(--border-color) rounded-2xl w-full max-w-175 max-h-[90vh] overflow-hidden amimate-slideUp flex flex-col"
             style={{ boxShadow: "0 20px 60px rgba(0, 0, 0, 0.5)" }}
           >
             <TituloContext
