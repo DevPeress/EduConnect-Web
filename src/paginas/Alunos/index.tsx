@@ -81,7 +81,7 @@ const AlunosPage = () => {
 
   const Excluir = async (Registro: string) => {
     http
-      .delete(`api/funcionarios/${Registro}`)
+      .delete(`api/alunos/${Registro}`)
       .then(function () {
         toast.success("Aluno deletado com sucesso!");
       })
