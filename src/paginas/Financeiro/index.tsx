@@ -98,7 +98,7 @@ const FinanceiroPage = () => {
 
   const Excluir = async (Registro: string) => {
     http
-      .delete(`api/funcionarios/${Registro}`)
+      .delete(`api/financeiro/${Registro}`)
       .then(function () {
         toast.success("Fatura deletada com sucesso!");
       })
