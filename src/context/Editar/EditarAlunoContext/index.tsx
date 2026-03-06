@@ -11,6 +11,7 @@ import {
   type EditarAlunoInput,
 } from "../../../schemas/Editar/EditarAlunoSchema";
 import toast from "react-hot-toast";
+import type { AxiosError } from "axios";
 
 const EditarAlunoContext = createContext<
   EditarContextType<EditarAlunoInput> | undefined
@@ -85,10 +86,12 @@ export function EditarAlunoProvider({ children }: { children: ReactNode }) {
           setResolveCallback(null);
           toast.success("Cadastro realizado com sucesso!");
         })
-        .catch(function (error) {
-          console.log(error);
+        .catch(function (err) {
+          const error = err as AxiosError;
+          const msg = error?.response?.data as string;
+
           resolveCallback(null);
-          toast.error("Não foi possível realizar o cadastro!");
+          toast.error(msg ?? "Erro ao cadastrar");
         })
         .finally(function () {
           setResolveCallback(null);

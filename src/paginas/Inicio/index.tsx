@@ -12,6 +12,7 @@ import AcoesAdmin from "../../components/Administracao/AcoesAdmin";
 import { http } from "../../utils/axios";
 import toast from "react-hot-toast";
 import LayoutLogado from "../LayoutLogado";
+import type { AxiosError } from "axios";
 
 const InicioPage = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -33,13 +34,11 @@ const InicioPage = () => {
       .then(function (dados) {
         setDados(dados.data);
       })
-      .catch(function (error) {
-        console.log(error);
-        toast.error(
-          error.message == "Network Error"
-            ? "Não foi possível pegar os Dados!"
-            : "Erro inesperado",
-        );
+      .catch(function (err) {
+        const error = err as AxiosError;
+        const msg = error?.response?.data as string;
+
+        toast.error(msg ?? "Não foi possível pegar os Dados!");
       });
 
     await http
@@ -48,13 +47,11 @@ const InicioPage = () => {
         setAtividades(dados.data);
         setLoading(false);
       })
-      .catch(function (error) {
-        console.log(error);
-        toast.error(
-          error.message == "Network Error"
-            ? "Não foi possível pegar os Dados!"
-            : "Erro inesperado",
-        );
+      .catch(function (err) {
+        const error = err as AxiosError;
+        const msg = error?.response?.data as string;
+
+        toast.error(msg ?? "Não foi possível pegar os Dados!");
       });
   };
 

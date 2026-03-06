@@ -11,6 +11,7 @@ import {
 } from "../../../schemas/Cadastro/CadastroProfessorSchema";
 import toast from "react-hot-toast";
 import { http } from "../../../utils/axios";
+import type { AxiosError } from "axios";
 
 const CadastroProfessorContext = createContext<
   ContextType<CadastroProfessorInput> | undefined
@@ -77,10 +78,12 @@ export function CadastroProfessorProvider({
           setResolveCallback(null);
           toast.success("Cadastro realizado com sucesso!");
         })
-        .catch(function (error) {
-          console.log(error);
+        .catch(function (err) {
+          const error = err as AxiosError;
+          const msg = error?.response?.data as string;
+
           resolveCallback(null);
-          toast.error("Não foi possível realizar o cadastro!");
+          toast.error(msg ?? "Erro ao cadastrar");
         })
         .finally(function () {
           setResolveCallback(null);

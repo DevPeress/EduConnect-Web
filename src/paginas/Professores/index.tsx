@@ -7,6 +7,7 @@ import Selects from "../../components/Administracao/Selects";
 import { useCadastroMenu, useEditarMenu } from "../../context";
 import TrocaPagina from "../../components/TrocaPagina";
 import toast from "react-hot-toast";
+import type { AxiosError } from "axios";
 
 const ITENS_POR_PAGINA = 6;
 
@@ -36,7 +37,7 @@ const ProfessoresPage = () => {
       pesquisa: pesquisaFinal,
     });
 
-    const url = `api/alunos/filtro?${params.toString()}`;
+    const url = `api/professores/filtro?${params.toString()}`;
 
     http
       .get(url)
@@ -44,8 +45,11 @@ const ProfessoresPage = () => {
         setTotal(dados.data.total);
         setProfessores(dados.data.dados);
       })
-      .catch(function (error) {
-        console.log(error);
+      .catch(function (err) {
+        const error = err as AxiosError;
+        const msg = error?.response?.data as string;
+
+        toast.error(msg ?? "Erro ao obter lista de professores");
       })
       .finally(function () {
         setLoading(false);
@@ -77,13 +81,15 @@ const ProfessoresPage = () => {
 
   const Excluir = async (Registro: string) => {
     http
-      .delete(`api/funcionarios/${Registro}`)
+      .delete(`api/professores/${Registro}`)
       .then(function () {
         toast.success("Professor deletado com sucesso!");
       })
-      .catch(function (error) {
-        console.log(error);
-        toast.error("Não foi possivel deletar o Professor!");
+      .catch(function (err) {
+        const error = err as AxiosError;
+        const msg = error?.response?.data as string;
+
+        toast.error(msg ?? "Erro ao deletar professor");
       })
       .finally(function () {
         Pesquisa();

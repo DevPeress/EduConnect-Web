@@ -11,6 +11,7 @@ import {
   cadastroPagamentoSchema,
   type CadastroPagamentoInput,
 } from "../../../schemas/Cadastro/CadastroPagementoSchema";
+import type { AxiosError } from "axios";
 
 const CadastroPagamentoContext = createContext<
   ContextType<CadastroPagamentoInput> | undefined
@@ -65,10 +66,12 @@ export function CadastroPagamentoProvider({
           resolveCallback(true);
           toast.success("Cadastro realizado com sucesso!");
         })
-        .catch(function (error) {
-          console.log(error);
+        .catch(function (err) {
+          const error = err as AxiosError;
+          const msg = error?.response?.data as string;
+
           resolveCallback(null);
-          toast.error("Não foi possível realizar o cadastro!");
+          toast.error(msg ?? "Erro ao cadastrar");
         })
         .finally(function () {
           setResolveCallback(null);

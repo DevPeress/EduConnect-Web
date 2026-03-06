@@ -11,6 +11,7 @@ import {
   type CadastroTurmaInput,
 } from "../../../schemas/Cadastro/CadastroTurmaSchema";
 import { http } from "../../../utils/axios";
+import type { AxiosError } from "axios";
 
 const CadastroTurmaContext = createContext<
   ContextType<CadastroTurmaInput> | undefined
@@ -75,10 +76,12 @@ export function CadastroTurmaProvider({ children }: { children: ReactNode }) {
           resolveCallback(true);
           toast.success("Cadastro realizado com sucesso!");
         })
-        .catch(function (error) {
-          console.log(error);
+        .catch(function (err) {
+          const error = err as AxiosError;
+          const msg = error?.response?.data as string;
+
           resolveCallback(null);
-          toast.error("Não foi possível realizar o cadastro!");
+          toast.error(msg ?? "Erro ao cadastrar");
         })
         .finally(function () {
           setResolveCallback(null);

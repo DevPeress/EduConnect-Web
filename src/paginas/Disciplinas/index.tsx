@@ -5,6 +5,7 @@ import { http } from "../../utils/axios";
 import TrocaPagina from "../../components/TrocaPagina";
 import { useCadastroMenu } from "../../context";
 import toast from "react-hot-toast";
+import type { AxiosError } from "axios";
 
 const ITENS_POR_PAGINA = 6;
 
@@ -32,8 +33,11 @@ const DisciplinasPage = () => {
         setTotal(dados.data.total);
         setDisciplinas(dados.data.dados);
       })
-      .catch(function (error) {
-        console.log(error);
+      .catch(function (err) {
+        const error = err as AxiosError;
+        const msg = error?.response?.data as string;
+
+        toast.error(msg ?? "Erro ao obter lista de disciplinas");
       })
       .finally(function () {
         setLoading(false);
@@ -46,9 +50,11 @@ const DisciplinasPage = () => {
       .then(function () {
         Pesquisa();
       })
-      .catch(function (error) {
-        console.log(error);
-        toast.error("Não foi possível realizar a exclusão da disciplina!");
+      .catch(function (err) {
+        const error = err as AxiosError;
+        const msg = error?.response?.data as string;
+
+        toast.error(msg ?? "Erro ao deletar disciplina");
       });
   };
 

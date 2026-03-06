@@ -7,6 +7,7 @@ import Selects from "../../components/Administracao/Selects";
 import { useCadastroMenu, useEditarMenu } from "../../context";
 import TrocaPagina from "../../components/TrocaPagina";
 import toast from "react-hot-toast";
+import type { AxiosError } from "axios";
 
 const ITENS_POR_PAGINA = 6;
 
@@ -44,8 +45,11 @@ const AlunosPage = () => {
         setTotal(dados.data.total);
         setAlunos(dados.data.dados);
       })
-      .catch(function (error) {
-        console.log(error);
+      .catch(function (err) {
+        const error = err as AxiosError;
+        const msg = error?.response?.data as string;
+
+        toast.error(msg ?? "Erro ao obter lista de alunos");
       })
       .finally(function () {
         setLoading(false);
@@ -81,9 +85,11 @@ const AlunosPage = () => {
       .then(function () {
         toast.success("Aluno deletado com sucesso!");
       })
-      .catch(function (error) {
-        console.log(error);
-        toast.error("Não foi possivel deletar o Aluno!");
+      .catch(function (err) {
+        const error = err as AxiosError;
+        const msg = error?.response?.data as string;
+
+        toast.error(msg ?? "Erro ao deletar aluno");
       })
       .finally(function () {
         Pesquisa();

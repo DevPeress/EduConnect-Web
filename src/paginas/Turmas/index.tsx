@@ -7,6 +7,7 @@ import Selects from "../../components/Administracao/Selects";
 import TrocaPagina from "../../components/TrocaPagina";
 import { useCadastroMenu, useEditarMenu } from "../../context";
 import toast from "react-hot-toast";
+import type { AxiosError } from "axios";
 
 const ITENS_POR_PAGINA = 6;
 
@@ -34,7 +35,7 @@ const TurmasPage = () => {
       pesquisa: pesquisaFinal,
     });
 
-    const url = `api/alunos/filtro?${params.toString()}`;
+    const url = `api/turma/filtro?${params.toString()}`;
 
     http
       .get(url)
@@ -42,8 +43,11 @@ const TurmasPage = () => {
         setTotal(dados.data.total);
         setTurmas(dados.data.dados);
       })
-      .catch(function (error) {
-        console.log(error);
+      .catch(function (err) {
+        const error = err as AxiosError;
+        const msg = error?.response?.data as string;
+
+        toast.error(msg ?? "Erro ao obter lista de turmas");
       })
       .finally(function () {
         setLoading(false);
@@ -75,13 +79,15 @@ const TurmasPage = () => {
 
   const Excluir = async (Registro: string) => {
     http
-      .delete(`api/funcionarios/${Registro}`)
+      .delete(`api/turma/${Registro}`)
       .then(function () {
         toast.success("Turma deletada com sucesso!");
       })
-      .catch(function (error) {
-        console.log(error);
-        toast.error("Não foi possivel deletar a Turma!");
+      .catch(function (err) {
+        const error = err as AxiosError;
+        const msg = error?.response?.data as string;
+
+        toast.error(msg ?? "Erro ao deletar turma");
       })
       .finally(function () {
         Pesquisa();

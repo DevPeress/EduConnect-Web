@@ -7,6 +7,7 @@ import Selects from "../../components/Administracao/Selects";
 import TrocaPagina from "../../components/TrocaPagina";
 import { useCadastroMenu, useEditarMenu } from "../../context";
 import toast from "react-hot-toast";
+import type { AxiosError } from "axios";
 
 const ITENS_POR_PAGINA = 6;
 
@@ -46,8 +47,11 @@ const FuncionariosPage = () => {
         setTotal(dados.data.total);
         setFuncionarios(dados.data.dados);
       })
-      .catch(function (error) {
-        console.log(error);
+      .catch(function (err) {
+        const error = err as AxiosError;
+        const msg = error?.response?.data as string;
+
+        toast.error(msg ?? "Erro ao obter lista de funcionários");
       })
       .finally(function () {
         setLoading(false);
@@ -82,9 +86,11 @@ const FuncionariosPage = () => {
       .then(function () {
         toast.success("Funcionário deletado com sucesso!");
       })
-      .catch(function (error) {
-        console.log(error);
-        toast.error("Não foi possivel deletar o Funcionário");
+      .catch(function (err) {
+        const error = err as AxiosError;
+        const msg = error?.response?.data as string;
+
+        toast.error(msg ?? "Erro ao deletar funcionário");
       })
       .finally(function () {
         Pesquisa();

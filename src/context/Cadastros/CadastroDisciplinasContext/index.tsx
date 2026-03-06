@@ -11,6 +11,7 @@ import {
   cadastroDisciplinasSchema,
   type CadastroDisciplinasInput,
 } from "../../../schemas/Cadastro/CadastroDisciplinaSchema";
+import type { AxiosError } from "axios";
 
 const CadastroDisciplinasContext = createContext<
   ContextType<CadastroDisciplinasInput> | undefined
@@ -54,10 +55,12 @@ export function CadastroDisciplinasProvider({
           resolveCallback(true);
           toast.success("Cadastro realizado com sucesso!");
         })
-        .catch(function (error) {
-          console.log(error);
+        .catch(function (err) {
+          const error = err as AxiosError;
+          const msg = error?.response?.data as string;
+
           resolveCallback(null);
-          toast.error("Não foi possível realizar o cadastro!");
+          toast.error(msg ?? "Erro ao cadastrar");
         })
         .finally(function () {
           setResolveCallback(null);

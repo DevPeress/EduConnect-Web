@@ -8,6 +8,7 @@ import Selects from "../../components/Administracao/Selects";
 import { useCadastroMenu } from "../../context";
 import TrocaPagina from "../../components/TrocaPagina";
 import toast from "react-hot-toast";
+import type { AxiosError } from "axios";
 
 const ITENS_POR_PAGINA = 6;
 
@@ -43,8 +44,11 @@ const FinanceiroPage = () => {
         setTotal(dados.data.total);
         setPagamentos(dados.data.dados);
       })
-      .catch(function (error) {
-        console.log(error);
+      .catch(function (err) {
+        const error = err as AxiosError;
+        const msg = error?.response?.data as string;
+
+        toast.error(msg ?? "Erro ao obter lista do financeiro");
       })
       .finally(function () {
         setLoading(false);
@@ -58,8 +62,11 @@ const FinanceiroPage = () => {
       .then(function (dados) {
         setTipo(dados.data);
       })
-      .catch(function (error) {
-        console.log(error);
+      .catch(function (err) {
+        const error = err as AxiosError;
+        const msg = error?.response?.data as string;
+
+        toast.error(msg ?? "Erro ao obter dados do dashboard");
       });
   };
 
@@ -95,9 +102,11 @@ const FinanceiroPage = () => {
       .then(function () {
         toast.success("Fatura deletada com sucesso!");
       })
-      .catch(function (error) {
-        console.log(error);
-        toast.error("Não foi possivel deletar a Fatura!");
+      .catch(function (err) {
+        const error = err as AxiosError;
+        const msg = error?.response?.data as string;
+
+        toast.error(msg ?? "Erro ao deletar fatura");
       })
       .finally(function () {
         Pesquisa();
