@@ -94,10 +94,11 @@ const Flex1Context = <
   }
 
   function temDisciplinasValidas(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    data: any,
-  ): data is { disciplinasValidas: Disciplina[] } {
-    return Array.isArray(data?.disciplinasValidas);
+    data: T,
+  ): data is T & { disciplinasValidas: Disciplina[] } {
+    return (
+      "disciplinasValidas" in data && Array.isArray(data.disciplinasValidas)
+    );
   }
 
   useEffect(() => {
