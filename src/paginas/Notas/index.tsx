@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { Pessoa } from "../../types/types";
+import type { Notas } from "../../types/types";
 import LayoutLogado from "../LayoutLogado";
 import Table from "../../components/Table";
 import { http } from "../../utils/axios";
@@ -17,7 +17,7 @@ const NotasPage = () => {
   const [status, setStatus] = useState<string>("Todos os Status");
   const [ano, setAno] = useState<string>("Todos os Anos");
   const [pesquisa, setPesquisa] = useState<string>("");
-  const [notas, setNotas] = useState<Pessoa[]>([]);
+  const [notas, setNotas] = useState<Notas[]>([]);
   const [anos, setAnos] = useState<string[]>([]);
   const [total, setTotal] = useState<number>(0);
   const [pagina, setPagina] = useState<number>(1);
