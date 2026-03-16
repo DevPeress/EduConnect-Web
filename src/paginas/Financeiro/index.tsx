@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type { CardsFinanceiroType, Financeiro } from "../../types/types";
 import LayoutLogado from "../LayoutLogado";
 import Table from "../../components/Table";
@@ -26,7 +26,7 @@ const FinanceiroPage = () => {
   const [pagina, setPagina] = useState<number>(1);
 
   // API para requisitar os Dados
-  const Pesquisa = () => {
+  const Pesquisa = useCallback(() => {
     const pesquisaFinal = pesquisa == "" ? "Todos" : pesquisa;
     const params = new URLSearchParams({
       categoria: categorias,
@@ -53,7 +53,7 @@ const FinanceiroPage = () => {
       .finally(function () {
         setLoading(false);
       });
-  };
+  }, [categorias, meses, pagina, pesquisa, status]);
 
   //API para requisitar os dados
   const Dados = () => {
@@ -73,8 +73,7 @@ const FinanceiroPage = () => {
   // Requisita os dados novos toda vez que status, categoria ou meses mudar
   useEffect(() => {
     Pesquisa();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [categorias, meses, pagina, status, pesquisa]);
+  }, [Pesquisa]);
 
   // Atualiza sempre que os pagamentos mudar para página 1
   useEffect(() => {

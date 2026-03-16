@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type { Turmas } from "../../types/types";
 import LayoutLogado from "../LayoutLogado";
 import Table from "../../components/Table";
@@ -25,7 +25,7 @@ const TurmasPage = () => {
   const [total, setTotal] = useState<number>(0);
   const [pagina, setPagina] = useState<number>(1);
 
-  const Pesquisa = () => {
+  const Pesquisa = useCallback(() => {
     const pesquisaFinal = pesquisa == "" ? "Todos" : pesquisa;
     const params = new URLSearchParams({
       turno,
@@ -52,13 +52,12 @@ const TurmasPage = () => {
       .finally(function () {
         setLoading(false);
       });
-  };
+  }, [ano, pagina, pesquisa, status, turno]);
 
   // Requisita os dados novos toda vez que status, categoria ou meses mudar
   useEffect(() => {
     Pesquisa();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [turno, status, pagina, ano, pesquisa]);
+  }, [Pesquisa]);
 
   // Atualiza sempre que os pagamentos mudar para página 1
   useEffect(() => {

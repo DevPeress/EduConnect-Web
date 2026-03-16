@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type { Disciplinas } from "../../types/types";
 import LayoutLogado from "../LayoutLogado";
 import { http } from "../../utils/axios";
@@ -18,7 +18,7 @@ const DisciplinasPage = () => {
   const [total, setTotal] = useState<number>(0);
   const [pagina, setPagina] = useState<number>(1);
 
-  const Pesquisa = () => {
+  const Pesquisa = useCallback(() => {
     const pesquisaFinal = pesquisa == "" ? "Todos" : pesquisa;
     const params = new URLSearchParams({
       page: String(pagina),
@@ -42,7 +42,7 @@ const DisciplinasPage = () => {
       .finally(function () {
         setLoading(false);
       });
-  };
+  }, [pagina, pesquisa]);
 
   const Deletar = (Registro: string) => {
     http
@@ -60,8 +60,7 @@ const DisciplinasPage = () => {
 
   useEffect(() => {
     Pesquisa();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pagina, pesquisa]);
+  }, [Pesquisa]);
 
   // Atualiza sempre que os pagamentos mudar para página 1
   useEffect(() => {

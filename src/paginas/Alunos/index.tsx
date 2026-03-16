@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type { Pessoa } from "../../types/types";
 import LayoutLogado from "../LayoutLogado";
 import Table from "../../components/Table";
@@ -27,7 +27,7 @@ const AlunosPage = () => {
   const [pagina, setPagina] = useState<number>(1);
 
   // Requisita os dados novos toda vez que status, categoria ou meses mudar
-  const Pesquisa = () => {
+  const Pesquisa = useCallback(() => {
     const pesquisaFinal = pesquisa == "" ? "Todos" : pesquisa;
     const params = new URLSearchParams({
       selecionada,
@@ -54,12 +54,11 @@ const AlunosPage = () => {
       .finally(function () {
         setLoading(false);
       });
-  };
+  }, [ano, pagina, pesquisa, selecionada, status]);
 
   useEffect(() => {
     Pesquisa();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pagina, selecionada, status, ano, pesquisa]);
+  }, [Pesquisa]);
 
   // Atualiza sempre que os pagamentos mudar para página 1
   useEffect(() => {
