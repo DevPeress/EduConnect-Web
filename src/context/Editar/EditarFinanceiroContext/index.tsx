@@ -5,28 +5,28 @@ import {
   TituloContext,
 } from "../../../components/TypeContext";
 import { http } from "../../../utils/axios";
-import {
-  editarAlunoSchema,
-  type EditarAlunoInput,
-} from "../../../schemas/Editar/EditarAlunoSchema";
 import toast from "react-hot-toast";
 import type { AxiosError } from "axios";
-import { EditarAlunoContext } from "./EditarFinanceiroContext";
+import { EditarFinanceiroContext } from "./EditarFinanceiroContext";
+import {
+  editarFinanceiroSchema,
+  type EditarFinanceiroInput,
+} from "../../../schemas/Editar/EditarFinanceiroSchema";
 
 export function EditarAlunoProvider({ children }: { children: ReactNode }) {
   const [menu, setMenu] = useState<boolean>(false);
-  const [dados, setDados] = useState<EditarAlunoInput>({
-    matricula: "",
-    status: "Ativo",
-    nome: "",
-    cpf: "",
-    turma: "Selecionar Turma",
-    email: "",
-    telefone: "",
-    endereco: "",
-    nascimento: new Date().toISOString().split("T")[0],
-    nomeEmergencia: "",
-    telefoneEmergencia: "",
+  const [dados, setDados] = useState<EditarFinanceiroInput>({
+    registro: "",
+    categoria: "Selecionar categoria",
+    metodo: "Selecionar método",
+    descricao: "",
+    valor: 0,
+    dataVencimento: "",
+    pago: false,
+    cancelado: false,
+    dataPagamento: "",
+    observacoes: "",
+    aluno: "",
   });
 
   const [resolveCallback, setResolveCallback] = useState<
@@ -35,21 +35,21 @@ export function EditarAlunoProvider({ children }: { children: ReactNode }) {
 
   const openMenu = async (
     registro: string,
-  ): Promise<EditarAlunoInput | null> => {
-    await http.get(`api/alunos/${registro}`).then(function (dados) {
+  ): Promise<EditarFinanceiroInput | null> => {
+    await http.get(`api/financeiro/${registro}`).then(function (dados) {
       const infos = dados.data;
       setDados({
-        matricula: infos.Registro,
-        status: infos.status,
-        nome: infos.nome,
-        cpf: infos.cpf,
-        turma: infos.turmaRegistro,
-        email: infos.email,
-        telefone: infos.telefone,
-        endereco: infos.endereco,
-        nascimento: infos.Nasc,
-        nomeEmergencia: infos.nomeEmergencia,
-        telefoneEmergencia: infos.contatoEmergencia,
+        registro: infos.registro,
+        categoria: infos.categoria,
+        metodo: infos.metodo,
+        descricao: infos.descricao,
+        valor: infos.valor,
+        dataVencimento: infos.dataVencimento,
+        pago: infos.pago,
+        cancelado: infos.cancelado,
+        dataPagamento: infos.dataPagamento,
+        observacoes: infos.observacoes,
+        aluno: infos.aluno,
       });
     });
     setMenu(true);
@@ -59,35 +59,35 @@ export function EditarAlunoProvider({ children }: { children: ReactNode }) {
   };
 
   const Confirm = async () => {
-    const result = editarAlunoSchema.safeParse(dados);
+    const result = editarFinanceiroSchema.safeParse(dados);
     if (!result.success) return toast.error(result.error.issues[0].message);
 
     if (resolveCallback) {
       await http
         .post("api/Aluno", {
-          Registro: dados.matricula,
-          Status: dados.status,
-          Nome: dados.nome,
-          Cpf: dados.cpf,
-          TurmaRegistro: dados.turma,
-          Email: dados.email,
-          Telefone: dados.telefone,
-          Rndereco: dados.endereco,
-          Nasc: dados.nascimento,
-          NomeEmergencia: dados.nomeEmergencia,
-          ContatoEmergencia: dados.telefoneEmergencia,
+          registro: dados.registro,
+          categoria: dados.categoria,
+          metodo: dados.metodo,
+          descricao: dados.descricao,
+          valor: dados.valor,
+          dataVencimento: dados.dataVencimento,
+          pago: dados.pago,
+          cancelado: dados.cancelado,
+          dataPagamento: dados.dataPagamento,
+          observacoes: dados.observacoes,
+          aluno: dados.aluno,
         })
         .then(function () {
           resolveCallback(true);
           setResolveCallback(null);
-          toast.success("Cadastro realizado com sucesso!");
+          toast.success("Registro atualizado com sucesso!");
         })
         .catch(function (err) {
           const error = err as AxiosError;
           const msg = error?.response?.data as string;
 
           resolveCallback(null);
-          toast.error(msg ?? "Erro ao cadastrar");
+          toast.error(msg ?? "Erro ao atualizar");
         })
         .finally(function () {
           setResolveCallback(null);
@@ -103,7 +103,7 @@ export function EditarAlunoProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <EditarAlunoContext.Provider value={{ openMenu, setDados }}>
+    <EditarFinanceiroContext.Provider value={{ openMenu, setDados }}>
       {children}
       {menu && (
         <div className="flex fixed top-0 bottom-0 right-0 left-0 bg-[#000000B3] backdrop-blur-sm z-10 animate-fadeIn items-center justify-center p-5">
@@ -111,93 +111,49 @@ export function EditarAlunoProvider({ children }: { children: ReactNode }) {
             className="bg-(--bg-card) border border-(--border-color) rounded-2xl w-full max-w-175 max-h-[90vh] overflow-hidden amimate-slideUp flex flex-col"
             style={{ boxShadow: "0 20px 60px rgba(0, 0, 0, 0.5)" }}
           >
-            <TituloContext titulo="Editar Funcionário" cancelar={Cancel} />
+            <TituloContext titulo="Registrar Pagamento" cancelar={Cancel} />
 
             <form className="p-7 overflow-y-auto flex-1">
               <div className="mb-7">
                 <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
-                  Informações Pessoais
+                  Informações do Pagamento
                 </h3>
                 <Flex2Context
-                  opcao1="Registro"
-                  opcao2="Status"
-                  infos={dados}
-                  setInfos={setDados}
-                />
-
-                <Flex2Context
-                  opcao1="Data de Nascimento"
-                  opcao2="CPF/Documento"
+                  opcao1="Aluno"
+                  opcao2="Categoria"
                   infos={dados}
                   setInfos={setDados}
                 />
 
                 <Flex1Context
-                  titulo="Nome completo"
+                  titulo="Descrição"
                   infos={dados}
                   setInfos={setDados}
-                  place="ex: Fabrício Peres ..."
+                  place="ex: Mensalidade Dezembro 2025"
                 />
-              </div>
 
-              <div className="mb-7">
-                <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
-                  Profissional
-                </h3>
                 <Flex2Context
-                  opcao1="Foto"
-                  opcao2="Salario"
+                  opcao1="Valor"
+                  opcao2="Vencimento"
                   infos={dados}
                   setInfos={setDados}
                 />
 
                 <Flex2Context
-                  opcao1="Cargo"
-                  opcao2="Departamento"
+                  opcao1="Status do Pagamento"
+                  opcao2="Data do Pagamento"
                   infos={dados}
                   setInfos={setDados}
                 />
 
                 <Flex2Context
-                  opcao1="SuperVisor"
-                  opcao2="Turno"
-                  infos={dados}
-                  setInfos={setDados}
-                />
-              </div>
-
-              <div className="mb-7">
-                <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
-                  Contato
-                </h3>
-                <Flex2Context
-                  opcao1="E-mail"
-                  opcao2="Telefone"
-                  infos={dados}
-                  setInfos={setDados}
-                />
-
-                <Flex1Context
-                  titulo="Endereço"
-                  infos={dados}
-                  setInfos={setDados}
-                  place="Rua, número, bairro, cidade - Estado"
-                />
-              </div>
-
-              <div className="mb-7">
-                <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
-                  Contato de Emergência
-                </h3>
-                <Flex2Context
-                  opcao1="Nome do Contato de Emergência"
-                  opcao2="Telefone do Contato de Emergência"
+                  opcao1="Método do Pagameto"
+                  opcao2="Observações"
                   infos={dados}
                   setInfos={setDados}
                 />
               </div>
             </form>
-
             <div className="py-5 px-7 border-t border-(--border-color) flex justify-end gap-3 bg-[#0000001A]">
               <button
                 onClick={Cancel}
@@ -223,12 +179,12 @@ export function EditarAlunoProvider({ children }: { children: ReactNode }) {
                 >
                   <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
-                Salvar Funcionário
+                Salvar Pagamento
               </button>
             </div>
           </div>
         </div>
       )}
-    </EditarAlunoContext.Provider>
+    </EditarFinanceiroContext.Provider>
   );
 }
