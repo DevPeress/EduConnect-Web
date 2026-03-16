@@ -88,6 +88,11 @@ export enum AuditAction {
   Material = 11,
 }
 
+export enum TiposAvalicaoes {
+  Prova = 1,
+  Trabalho = 2
+}
+
 export interface AtividadeType {
   tipo: AuditAction;
   dado: string;
@@ -106,6 +111,8 @@ export interface Notas {
   nota: number;
   data: Date;
   materia: string;
+  professor: string;
+  tipoAvalicao: TiposAvalicaoes
 }
 
 export interface Pessoa {
@@ -220,7 +227,7 @@ export interface SelectProps {
 }
 
 export interface TablePropsTable {
-  exibicao: Pessoa[] | Financeiro[] | Turmas[] | Funcionario[];
+  exibicao: Pessoa[] | Financeiro[] | Turmas[] | Funcionario[] | Notas[];
   excluir: (valor: string) => void;
   editar: (valor: string) => void;
 }
