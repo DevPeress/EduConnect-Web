@@ -101,6 +101,13 @@ export interface CalendarioType {
   horario: string;
 }
 
+export interface Notas {
+  registro: string;
+  nota: number;
+  data: Date;
+  materia: string;
+}
+
 export interface Pessoa {
   registro: string;
   nome: string;
