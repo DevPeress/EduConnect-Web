@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import type { TablePropsTable } from "../../types/types";
+import type { TablePropsTable, TiposAvalicaoes } from "../../types/types";
 import { formatBRL, formatTelefone } from "../../utils/codigos";
 import { Head } from "../../utils/head";
 import { useState } from "react";
@@ -50,15 +50,24 @@ const Table = ({ exibicao, excluir, editar }: TablePropsTable) => {
       <tbody>
         {exibicao.map((item) => {
           const registro: string = "aluno" in item ? item.aluno : item.registro;
-          const dado1: string = "aluno" in item ? item.categoria : item.nome;
-          const dado2: string[] | string =
+          const dado1: string | TiposAvalicaoes =
+            "aluno" in item
+              ? item.categoria
+              : "tipoAvalicao" in item
+                ? item.tipoAvalicao
+                : item.nome;
+
+          const dado2: string[] | string | number =
             "turmaRegistro" in item
               ? item.turmaRegistro
               : "turno" in item
                 ? item.turno
                 : "cargo" in item
                   ? item.cargo
-                  : "R$ " + formatBRL(item.valor);
+                  : "nota" in item
+                    ? item.nota
+                    : "R$ " + formatBRL(item.valor);
+
           const dado3: string =
             "email" in item
               ? item.email
@@ -69,6 +78,7 @@ const Table = ({ exibicao, excluir, editar }: TablePropsTable) => {
                   : new Date(
                       item.dataVencimento + "T00:00:00",
                     ).toLocaleDateString("pt-BR");
+
           const dado4: string =
             "dataAdmissao" in item
               ? new Date(item.dataAdmissao + "T00:00:00").toLocaleDateString(
@@ -82,14 +92,20 @@ const Table = ({ exibicao, excluir, editar }: TablePropsTable) => {
                   ? formatTelefone(item.telefone)
                   : "horario" in item
                     ? item.horario
-                    : "Aguardando";
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          const dado5: any =
+                    : "materia" in item
+                      ? item.materia
+                      : "Aguardando";
+
+          const dado5: string | number =
             "capacidade" in item
               ? item.capacidade
               : "horario" in item
-                ? item.horario
-                : item.status;
+                ? (item.horario as string)
+                : "data" in item
+                  ? new Date(item.data + "T00:00:00").toLocaleDateString(
+                      "pt-BR",
+                    )
+                  : item.status;
 
           return (
             <tr
@@ -110,7 +126,9 @@ const Table = ({ exibicao, excluir, editar }: TablePropsTable) => {
                 </span>
               </td>
               <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
-                {"nasc" in item && "telefone" in item ? (
+                {"nasc" in item &&
+                "telefone" in item &&
+                typeof dado1 == "string" ? (
                   <ImgExibicao foto={item.foto} nome={dado1} data={item.nasc} />
                 ) : (
                   <>{dado1}</>
