@@ -1,21 +1,17 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import {
   Flex1Context,
   Flex2Context,
   TituloContext,
 } from "../../../components/TypeContext";
 import { http } from "../../../utils/axios";
-import type { EditarContextType } from "../../../types/types";
 import {
   editarProfessorSchema,
   type EditarProfessorInput,
 } from "../../../schemas/Editar/EditarProfessorSchema";
 import toast from "react-hot-toast";
 import type { AxiosError } from "axios";
-
-const EditarProfessorContext = createContext<
-  EditarContextType<EditarProfessorInput> | undefined
->(undefined);
+import { EditarProfessorContext } from "./EditarProfessorContext";
 
 export function EditarProfessorProvider({ children }: { children: ReactNode }) {
   const [menu, setMenu] = useState<boolean>(false);
@@ -237,15 +233,4 @@ export function EditarProfessorProvider({ children }: { children: ReactNode }) {
       )}
     </EditarProfessorContext.Provider>
   );
-}
-
-// eslint-disable-next-line react-refresh/only-export-components
-export function useEditarProfessor() {
-  const context = useContext(EditarProfessorContext);
-  if (!context) {
-    throw new Error(
-      "useEditarProfessor deve ser usado dentro do EditarProfessorProvider",
-    );
-  }
-  return context;
 }

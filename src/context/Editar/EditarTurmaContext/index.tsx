@@ -1,21 +1,17 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import {
   Flex1Context,
   Flex2Context,
   TituloContext,
 } from "../../../components/TypeContext";
 import { http } from "../../../utils/axios";
-import type { EditarContextType } from "../../../types/types";
 import {
   editarTurmaSchema,
   type EditarTurmaInput,
 } from "../../../schemas/Editar/EditarTurmaShema";
 import toast from "react-hot-toast";
 import type { AxiosError } from "axios";
-
-const EditarTurmaContext = createContext<
-  EditarContextType<EditarTurmaInput> | undefined
->(undefined);
+import { EditarTurmaContext } from "./EditarTurmaContext";
 
 export function EditarTurmaProvider({ children }: { children: ReactNode }) {
   const [menu, setMenu] = useState<boolean>(false);
@@ -227,15 +223,4 @@ export function EditarTurmaProvider({ children }: { children: ReactNode }) {
       )}
     </EditarTurmaContext.Provider>
   );
-}
-
-// eslint-disable-next-line react-refresh/only-export-components
-export function useEditarTurma() {
-  const context = useContext(EditarTurmaContext);
-  if (!context) {
-    throw new Error(
-      "useEditarTurma deve ser usado dentro do EditarTurmaProvider",
-    );
-  }
-  return context;
 }

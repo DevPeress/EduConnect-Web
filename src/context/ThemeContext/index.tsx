@@ -1,7 +1,6 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import type { ReactNode } from "react";
-import type { ThemeType } from "../../types/types";
 import { CadastroAlunoProvider } from "../Cadastros/CadastroAlunoContext";
 import { CadastroProfessorProvider } from "../Cadastros/CadastroProfessorContext";
 import { CadastroPagamentoProvider } from "../Cadastros/CadastroPagamentoContext";
@@ -11,9 +10,8 @@ import { CadastroDisciplinasProvider } from "../Cadastros/CadastroDisciplinasCon
 import { EditarFuncionarioProvider } from "../Editar/EditarFuncionarioContext";
 import { EditarTurmaProvider } from "../Editar/EditarTurmaContext";
 import { EditarAlunoProvider } from "../Editar/EditarAlunoContext";
-import { EditarProfessorProvider } from "../Editar/EditarProfessorSchema";
-
-const ThemeContext = createContext<ThemeType | undefined>(undefined);
+import { EditarProfessorProvider } from "../Editar/EditarProfessorContext";
+import { ThemeContext } from "./ThemeContext";
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   // Gerencia a temática selecionada, salvando-a no localStorage para uso posterior.
@@ -62,13 +60,4 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       <Toaster toastOptions={{}} />
     </ThemeContext.Provider>
   );
-}
-
-// eslint-disable-next-line react-refresh/only-export-components
-export function useTheme() {
-  const context = useContext(ThemeContext);
-  if (!context) {
-    throw new Error("useTheme deve ser usado dentro do ThemeProvider");
-  }
-  return context;
 }

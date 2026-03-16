@@ -1,5 +1,4 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
-import type { ContextType } from "../../../types/types";
+import { useState, type ReactNode } from "react";
 import {
   Flex1Context,
   Flex2Context,
@@ -12,10 +11,8 @@ import {
   type CadastroFuncionarioInput,
 } from "../../../schemas/Cadastro/CadastroFuncionarioSchema";
 import type { AxiosError } from "axios";
+import { CadastroFuncionarioContext } from "./CadstroFuncionarioContext";
 
-const CadastroFuncionarioContext = createContext<
-  ContextType<CadastroFuncionarioInput> | undefined
->(undefined);
 export function CadastroFuncionarioProvider({
   children,
 }: {
@@ -242,15 +239,4 @@ export function CadastroFuncionarioProvider({
       )}
     </CadastroFuncionarioContext.Provider>
   );
-}
-
-// eslint-disable-next-line react-refresh/only-export-components
-export function useCadastroFuncionario() {
-  const context = useContext(CadastroFuncionarioContext);
-  if (!context) {
-    throw new Error(
-      "useCadastroFuncionario deve ser usado dentro do CadastroFuncionarioProvider",
-    );
-  }
-  return context;
 }

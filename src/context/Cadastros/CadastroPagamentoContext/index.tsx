@@ -1,5 +1,4 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
-import type { ContextType } from "../../../types/types";
+import { useState, type ReactNode } from "react";
 import {
   Flex1Context,
   Flex2Context,
@@ -12,10 +11,8 @@ import {
   type CadastroPagamentoInput,
 } from "../../../schemas/Cadastro/CadastroPagementoSchema";
 import type { AxiosError } from "axios";
+import { CadastroPagamentoContext } from "./CadastroPagamentoContext";
 
-const CadastroPagamentoContext = createContext<
-  ContextType<CadastroPagamentoInput> | undefined
->(undefined);
 export function CadastroPagamentoProvider({
   children,
 }: {
@@ -188,15 +185,4 @@ export function CadastroPagamentoProvider({
       )}
     </CadastroPagamentoContext.Provider>
   );
-}
-
-// eslint-disable-next-line react-refresh/only-export-components
-export function useCadastroPagamento() {
-  const context = useContext(CadastroPagamentoContext);
-  if (!context) {
-    throw new Error(
-      "useCadastroPagamento deve ser usado dentro do CadastroPagamentoProvider",
-    );
-  }
-  return context;
 }

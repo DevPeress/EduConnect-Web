@@ -1,21 +1,17 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import {
   Flex1Context,
   Flex2Context,
   TituloContext,
 } from "../../../components/TypeContext";
 import { http } from "../../../utils/axios";
-import type { EditarContextType } from "../../../types/types";
 import {
   editarFuncionarioSchema,
   type EditarFuncionarioInput,
 } from "../../../schemas/Editar/EditarFuncionarioSchema";
 import toast from "react-hot-toast";
 import type { AxiosError } from "axios";
-
-const EditarFuncionarioContext = createContext<
-  EditarContextType<EditarFuncionarioInput> | undefined
->(undefined);
+import { EditarFuncionarioContext } from "./EditarFuncionarioContext";
 
 export function EditarFuncionarioProvider({
   children,
@@ -253,15 +249,4 @@ export function EditarFuncionarioProvider({
       )}
     </EditarFuncionarioContext.Provider>
   );
-}
-
-// eslint-disable-next-line react-refresh/only-export-components
-export function useEditarFuncionario() {
-  const context = useContext(EditarFuncionarioContext);
-  if (!context) {
-    throw new Error(
-      "useEditarFuncionario deve ser usado dentro do EditarFuncionarioProvider",
-    );
-  }
-  return context;
 }

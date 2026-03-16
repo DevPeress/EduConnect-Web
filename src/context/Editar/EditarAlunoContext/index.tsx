@@ -1,21 +1,17 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import {
   Flex1Context,
   Flex2Context,
   TituloContext,
 } from "../../../components/TypeContext";
 import { http } from "../../../utils/axios";
-import type { EditarContextType } from "../../../types/types";
 import {
   editarAlunoSchema,
   type EditarAlunoInput,
 } from "../../../schemas/Editar/EditarAlunoSchema";
 import toast from "react-hot-toast";
 import type { AxiosError } from "axios";
-
-const EditarAlunoContext = createContext<
-  EditarContextType<EditarAlunoInput> | undefined
->(undefined);
+import { EditarAlunoContext } from "./EditarAlunoContext";
 
 export function EditarAlunoProvider({ children }: { children: ReactNode }) {
   const [menu, setMenu] = useState<boolean>(false);
@@ -235,15 +231,4 @@ export function EditarAlunoProvider({ children }: { children: ReactNode }) {
       )}
     </EditarAlunoContext.Provider>
   );
-}
-
-// eslint-disable-next-line react-refresh/only-export-components
-export function useEditarAluno() {
-  const context = useContext(EditarAlunoContext);
-  if (!context) {
-    throw new Error(
-      "useEditarAluno deve ser usado dentro do EditarAlunoProvider",
-    );
-  }
-  return context;
 }

@@ -1,5 +1,4 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
-import type { ContextType } from "../../../types/types";
+import { useState, type ReactNode } from "react";
 import {
   Flex1Context,
   Flex2Context,
@@ -12,10 +11,9 @@ import {
   type CadastroDisciplinasInput,
 } from "../../../schemas/Cadastro/CadastroDisciplinaSchema";
 import type { AxiosError } from "axios";
+import { CadastroDisciplinasContext } from "./CadsatroDisciplinasContext";
 
-const CadastroDisciplinasContext = createContext<
-  ContextType<CadastroDisciplinasInput> | undefined
->(undefined);
+
 export function CadastroDisciplinasProvider({
   children,
 }: {
@@ -154,15 +152,4 @@ export function CadastroDisciplinasProvider({
       )}
     </CadastroDisciplinasContext.Provider>
   );
-}
-
-// eslint-disable-next-line react-refresh/only-export-components
-export function useCadastroDisciplinas() {
-  const context = useContext(CadastroDisciplinasContext);
-  if (!context) {
-    throw new Error(
-      "useCadastroDisciplinas deve ser usado dentro do CadastroDisciplinasProvider",
-    );
-  }
-  return context;
 }

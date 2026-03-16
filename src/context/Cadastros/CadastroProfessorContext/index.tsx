@@ -1,5 +1,4 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
-import type { ContextType } from "../../../types/types";
+import { useState, type ReactNode } from "react";
 import {
   Flex1Context,
   Flex2Context,
@@ -12,10 +11,8 @@ import {
 import toast from "react-hot-toast";
 import { http } from "../../../utils/axios";
 import type { AxiosError } from "axios";
+import { CadastroProfessorContext } from "./CadastroProfessorContext";
 
-const CadastroProfessorContext = createContext<
-  ContextType<CadastroProfessorInput> | undefined
->(undefined);
 export function CadastroProfessorProvider({
   children,
 }: {
@@ -244,15 +241,4 @@ export function CadastroProfessorProvider({
       )}
     </CadastroProfessorContext.Provider>
   );
-}
-
-// eslint-disable-next-line react-refresh/only-export-components
-export function useCadastroProfessor() {
-  const context = useContext(CadastroProfessorContext);
-  if (!context) {
-    throw new Error(
-      "useCadastroProfessor deve ser usado dentro do CadastroProfessorProvider",
-    );
-  }
-  return context;
 }

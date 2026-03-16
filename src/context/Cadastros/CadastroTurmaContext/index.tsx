@@ -1,5 +1,4 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
-import type { ContextType } from "../../../types/types";
+import { useState, type ReactNode } from "react";
 import {
   Flex1Context,
   Flex2Context,
@@ -12,10 +11,8 @@ import {
 } from "../../../schemas/Cadastro/CadastroTurmaSchema";
 import { http } from "../../../utils/axios";
 import type { AxiosError } from "axios";
+import { CadastroTurmaContext } from "./CadastroTurmaContext";
 
-const CadastroTurmaContext = createContext<
-  ContextType<CadastroTurmaInput> | undefined
->(undefined);
 export function CadastroTurmaProvider({ children }: { children: ReactNode }) {
   const [menu, setMenu] = useState<boolean>(false);
   const [dados, setDados] = useState<CadastroTurmaInput>({
@@ -231,15 +228,4 @@ export function CadastroTurmaProvider({ children }: { children: ReactNode }) {
       )}
     </CadastroTurmaContext.Provider>
   );
-}
-
-// eslint-disable-next-line react-refresh/only-export-components
-export function useCadastroTurma() {
-  const context = useContext(CadastroTurmaContext);
-  if (!context) {
-    throw new Error(
-      "useCadastroTurma deve ser usado dentro do CadastroTurmaProvider",
-    );
-  }
-  return context;
 }

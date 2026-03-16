@@ -1,5 +1,4 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
-import type { ContextType } from "../../../types/types";
+import { useState, type ReactNode } from "react";
 import {
   Flex1Context,
   Flex2Context,
@@ -12,10 +11,8 @@ import {
 } from "../../../schemas/Cadastro/CadastroAlunoSchema";
 import { http } from "../../../utils/axios";
 import type { AxiosError } from "axios";
+import { CadastroAlunoContext } from "./CadastroAlunoContext";
 
-const CadastroAlunoContext = createContext<
-  ContextType<CadastroAlunoInput> | undefined
->(undefined);
 export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
   const [menu, setMenu] = useState<boolean>(false);
   const [dados, setDados] = useState<CadastroAlunoInput>({
@@ -210,15 +207,4 @@ export function CadastroAlunoProvider({ children }: { children: ReactNode }) {
       )}
     </CadastroAlunoContext.Provider>
   );
-}
-
-// eslint-disable-next-line react-refresh/only-export-components
-export function useCadastroAluno() {
-  const context = useContext(CadastroAlunoContext);
-  if (!context) {
-    throw new Error(
-      "useCadastroAluno deve ser usado dentro do CadastroAlunoProvider",
-    );
-  }
-  return context;
 }
