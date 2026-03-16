@@ -11,7 +11,7 @@ import {
   type CadastroFuncionarioInput,
 } from "../../../schemas/Cadastro/CadastroFuncionarioSchema";
 import type { AxiosError } from "axios";
-import { CadastroFuncionarioContext } from "./CadstroFuncionarioContext";
+import { CadastroFuncionarioContext } from "./CadastroFuncionarioContext";
 
 export function CadastroFuncionarioProvider({
   children,

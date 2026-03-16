@@ -11,8 +11,7 @@ import {
   type CadastroDisciplinasInput,
 } from "../../../schemas/Cadastro/CadastroDisciplinaSchema";
 import type { AxiosError } from "axios";
-import { CadastroDisciplinasContext } from "./CadsatroDisciplinasContext";
-
+import { CadastroDisciplinasContext } from "./CadastroDisciplinasContext";
 
 export function CadastroDisciplinasProvider({
   children,

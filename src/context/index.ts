@@ -7,8 +7,8 @@ import { EditarAlunoContext } from "./Editar/EditarAlunoContext/EditarAlunoConte
 import { CadastroTurmaContext } from "./Cadastros/CadastroTurmaContext/CadastroTurmaContext";
 import { CadastroProfessorContext } from "./Cadastros/CadastroProfessorContext/CadastroProfessorContext";
 import { CadastroPagamentoContext } from "./Cadastros/CadastroPagamentoContext/CadastroPagamentoContext";
-import { CadastroFuncionarioContext } from "./Cadastros/CadastroFuncionarioContext/CadstroFuncionarioContext";
-import { CadastroDisciplinasContext } from "./Cadastros/CadastroDisciplinasContext/CadsatroDisciplinasContext";
+import { CadastroFuncionarioContext } from "./Cadastros/CadastroFuncionarioContext/CadastroFuncionarioContext";
+import { CadastroDisciplinasContext } from "./Cadastros/CadastroDisciplinasContext/CadastroDisciplinasContext";
 import { CadastroAlunoContext } from "./Cadastros/CadastroAlunoContext/CadastroAlunoContext";
 
 export function useTheme() {
