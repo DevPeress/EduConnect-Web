@@ -13,6 +13,7 @@ import TurmasPage from "./paginas/Turmas";
 import FuncionariosPage from "./paginas/Funcionarios";
 import DisciplinasPage from "./paginas/Disciplinas";
 import { useAuth } from "./context";
+import NotasPage from "./paginas/Notas";
 
 function App() {
   const auth = useAuth();
@@ -46,6 +47,7 @@ function App() {
           <Route path="/alunos/turmas" element={<TurmasPage />} />
           <Route path="/alunos/calendario" element={<CalendarioPage />} />
           <Route path="/alunos/financeiro" element={<FinanceiroPage />} />
+          <Route path="/alunos/notas" element={<NotasPage />} />
         </Route>
 
         {/* Acesso Professores, Admin e Funcionario*/}
@@ -67,6 +69,7 @@ function App() {
           <Route path="/professores/turmas" element={<TurmasPage />} />
           <Route path="/professores/calendario" element={<CalendarioPage />} />
           <Route path="/professores/financeiro" element={<FinanceiroPage />} />
+          <Route path="/professores/notas" element={<NotasPage />} />
         </Route>
 
         {/* Acesso Admin e Funcionario*/}
@@ -85,6 +88,7 @@ function App() {
           <Route path="/admin/turmas" element={<TurmasPage />} />
           <Route path="/admin/calendario" element={<CalendarioPage />} />
           <Route path="/admin/financeiro" element={<FinanceiroPage />} />
+          <Route path="/admin/notas" element={<NotasPage />} />
         </Route>
 
         {/* Acesso Admin */}
