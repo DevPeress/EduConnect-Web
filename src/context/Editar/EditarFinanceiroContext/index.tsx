@@ -13,7 +13,7 @@ import {
   type EditarFinanceiroInput,
 } from "../../../schemas/Editar/EditarFinanceiroSchema";
 
-export function EditarAlunoProvider({ children }: { children: ReactNode }) {
+export function EditarFinanceiroProvider({ children }: { children: ReactNode }) {
   const [menu, setMenu] = useState<boolean>(false);
   const [dados, setDados] = useState<EditarFinanceiroInput>({
     registro: "",
@@ -64,7 +64,7 @@ export function EditarAlunoProvider({ children }: { children: ReactNode }) {
 
     if (resolveCallback) {
       await http
-        .post("api/Aluno", {
+        .post("api/financeiro", {
           registro: dados.registro,
           categoria: dados.categoria,
           metodo: dados.metodo,

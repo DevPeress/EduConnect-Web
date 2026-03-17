@@ -151,6 +151,7 @@ export function useEditarMenu() {
   const editarTurmaCtx = useEditarTurma();
   const editarAlunoCtx = useEditarAluno();
   const editarProfessorCtx = useEditarProfessor();
+  const editarPagamentoCtx = useEditarFuncionario();
 
   return {
     editarFuncionario: (registro: string) =>
@@ -159,5 +160,7 @@ export function useEditarMenu() {
     editarAluno: (registro: string) => editarAlunoCtx.openMenu(registro),
     editarProfessor: (registro: string) =>
       editarProfessorCtx.openMenu(registro),
+    editarPagamentoCtx: (registro: string) =>
+      editarPagamentoCtx.openMenu(registro)
   };
 }
