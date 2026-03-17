@@ -35,7 +35,12 @@ const Table = ({ exibicao, excluir, editar }: TablePropsTable) => {
     }
   };
 
-  if (cargo === "Administrador" || cargo === "Funcionário") {
+  const LiberarMenu: boolean =
+    cargo === "Administrador" ||
+    cargo === "Funcionário" ||
+    (pagina === "Notas" && cargo === "Professor");
+
+  if (LiberarMenu) {
     head.push("Ação");
   }
 
@@ -161,7 +166,7 @@ const Table = ({ exibicao, excluir, editar }: TablePropsTable) => {
                   {dado5}
                 </span>
               </td>
-              {(cargo === "Administrador" || cargo === "Funcionário") && (
+              {LiberarMenu && (
                 <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
                   <div>
                     {menuAberto == registro ? (
