@@ -5,7 +5,7 @@ import Table from "../../components/Table";
 import CardsFinanceiro from "../../components/Administracao/CardsFinanceiro";
 import { http } from "../../utils/axios";
 import Selects from "../../components/Administracao/Selects";
-import { useCadastroMenu } from "../../context";
+import { useCadastroMenu, useEditarMenu } from "../../context";
 import TrocaPagina from "../../components/TrocaPagina";
 import toast from "react-hot-toast";
 import type { AxiosError } from "axios";
@@ -14,6 +14,7 @@ const ITENS_POR_PAGINA = 6;
 
 const FinanceiroPage = () => {
   const { cadastroPagamento } = useCadastroMenu();
+  const { editarPagamento } = useEditarMenu();
 
   const [loading, setLoading] = useState<boolean>(true);
   const [status, setStatus] = useState<string>("Todos os Status");
@@ -113,7 +114,8 @@ const FinanceiroPage = () => {
   };
 
   const Editar = async (Registro: string) => {
-    console.log(Registro);
+    const dados = await editarPagamento(Registro);
+    if (!dados) return;
     return Pesquisa();
   };
 

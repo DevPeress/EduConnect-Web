@@ -160,7 +160,7 @@ export function useEditarMenu() {
     editarAluno: (registro: string) => editarAlunoCtx.openMenu(registro),
     editarProfessor: (registro: string) =>
       editarProfessorCtx.openMenu(registro),
-    editarPagamentoCtx: (registro: string) =>
+    editarPagamento: (registro: string) =>
       editarPagamentoCtx.openMenu(registro)
   };
 }
