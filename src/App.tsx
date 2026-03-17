@@ -3,7 +3,6 @@ import NaoEncontrada from "./paginas/NaoEncontrada";
 import Login from "./paginas/Login";
 import Inicial from "./paginas/Inicial";
 import SemAcesso from "./paginas/SemAcesso";
-import { useAuth } from "./context/AuthContext";
 import InicioPage from "./paginas/Inicio";
 import AlunosPage from "./paginas/Alunos";
 import ProfessoresPage from "./paginas/Professores";
@@ -13,6 +12,7 @@ import FinanceiroPage from "./paginas/Financeiro";
 import TurmasPage from "./paginas/Turmas";
 import FuncionariosPage from "./paginas/Funcionarios";
 import DisciplinasPage from "./paginas/Disciplinas";
+import { useAuth } from "./context";
 
 function App() {
   const auth = useAuth();
