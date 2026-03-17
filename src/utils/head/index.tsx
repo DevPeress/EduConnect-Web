@@ -37,5 +37,5 @@ export const Head = (tipo: string): string[] => {
       break;
   }
 
-  return [...tipos, "Ação"];
+  return [...tipos];
 };
