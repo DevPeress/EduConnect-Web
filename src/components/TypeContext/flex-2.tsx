@@ -14,6 +14,7 @@ import type { CadastroFuncionarioInput } from "../../schemas/Cadastro/CadastroFu
 import type { CadastroDisciplinasInput } from "../../schemas/Cadastro/CadastroDisciplinaSchema";
 import type { EditarFuncionarioInput } from "../../schemas/Editar/EditarFuncionarioSchema";
 import type { EditarProfessorInput } from "../../schemas/Editar/EditarProfessorSchema";
+import type { EditarFinanceiroInput } from "../../schemas/Editar/EditarFinanceiroSchema";
 
 interface Flex2ContextProp<
   T extends
@@ -24,7 +25,8 @@ interface Flex2ContextProp<
     | CadastroFuncionarioInput
     | CadastroDisciplinasInput
     | EditarFuncionarioInput
-    | EditarProfessorInput,
+    | EditarProfessorInput
+    | EditarFinanceiroInput,
 > extends FlexContext<T> {
   opcao1: string;
   opcao2: string;
@@ -39,7 +41,8 @@ const Flex2Context = <
     | CadastroFuncionarioInput
     | CadastroDisciplinasInput
     | EditarFuncionarioInput
-    | EditarProfessorInput,
+    | EditarProfessorInput
+    | EditarFinanceiroInput,
 >({
   opcao1,
   opcao2,

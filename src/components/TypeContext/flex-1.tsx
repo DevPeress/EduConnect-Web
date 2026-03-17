@@ -9,6 +9,7 @@ import { IdentificarTipo } from "../../utils/codigos";
 import type { CadastroDisciplinasInput } from "../../schemas/Cadastro/CadastroDisciplinaSchema";
 import type { EditarFuncionarioInput } from "../../schemas/Editar/EditarFuncionarioSchema";
 import type { EditarProfessorInput } from "../../schemas/Editar/EditarProfessorSchema";
+import type { EditarFinanceiroInput } from "../../schemas/Editar/EditarFinanceiroSchema";
 
 type Disciplina = {
   registro: string;
@@ -24,7 +25,8 @@ interface Flex1ContextProp<
     | CadastroFuncionarioInput
     | CadastroDisciplinasInput
     | EditarFuncionarioInput
-    | EditarProfessorInput,
+    | EditarProfessorInput
+    | EditarFinanceiroInput,
 > extends FlexContext<T> {
   titulo: string;
   place: string;
@@ -39,7 +41,8 @@ const Flex1Context = <
     | CadastroFuncionarioInput
     | CadastroDisciplinasInput
     | EditarFuncionarioInput
-    | EditarProfessorInput,
+    | EditarProfessorInput
+    | EditarFinanceiroInput,
 >({
   titulo,
   infos,
