@@ -1,9 +1,9 @@
 import { useLocation } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
 import NavAdministrador from "./Administrador";
 import NavFuncionario from "./Funcionario";
 import NavProfessores from "./Professor";
 import NavAlunos from "./Alunos";
+import { useAuth } from "../../context";
 
 const NavBar = () => {
   const location = useLocation();

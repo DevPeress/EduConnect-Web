@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import Dia from "../../assets/SVG/Dia.svg";
 import Noite from "../../assets/SVG/Noite.svg";
-import { useAuth } from "../../context/AuthContext";
-import { useTheme } from "../../context/ThemeContext";
 import { http } from "../../utils/axios";
+import { useAuth, useTheme } from "../../context";
 
 const Header = ({
   exibirPesquisa,

@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { loginSchema, type LoginInput } from "../../schemas/loginSchema";
 import { useNavigate } from "react-router-dom";
 import { Options } from "../../utils/paginação";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../context";
 
 const Login = ({ logado, cargo }: AuthPaginas) => {
   const navegar = useNavigate();
