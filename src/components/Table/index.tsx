@@ -4,9 +4,12 @@ import { formatBRL, formatTelefone } from "../../utils/codigos";
 import { Head } from "../../utils/head";
 import { useState } from "react";
 import ImgExibicao from "./imgExibicao";
+import { useAuth } from "../../context";
 
 const Table = ({ exibicao, excluir, editar }: TablePropsTable) => {
+  const auth = useAuth();
   const location = useLocation();
+  const cargo: string = auth.cargo;
   const pagina = location.pathname;
   const head: string[] = Head(pagina);
   const [menuAberto, setMenuAberto] = useState<string>("");
@@ -31,6 +34,10 @@ const Table = ({ exibicao, excluir, editar }: TablePropsTable) => {
         return { bg: "rgba(239, 68, 68, 0.15)", color: "var(--red)" };
     }
   };
+
+  if (cargo === "Administrador" || cargo === "Funcionário") {
+    head.push("Ação");
+  }
 
   return (
     <table className="w-full border-collapse">
@@ -154,59 +161,61 @@ const Table = ({ exibicao, excluir, editar }: TablePropsTable) => {
                   {dado5}
                 </span>
               </td>
-              <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
-                <div>
-                  {menuAberto == registro ? (
-                    <div className="flex gap-2">
-                      <button
-                        className="hover:scale-110 hover:cursor-pointer"
-                        onClick={() => {
-                          if (menuAberto === registro) {
-                            setMenuAberto("");
-                            editar(registro);
-                          } else {
-                            setMenuAberto(registro);
-                          }
-                        }}
-                      >
-                        ✏️
-                      </button>
+              {(cargo === "Administrador" || cargo === "Funcionário") && (
+                <td className="py-4 px-5 border-b-2 border-(--border-color) text-[14px]">
+                  <div>
+                    {menuAberto == registro ? (
+                      <div className="flex gap-2">
+                        <button
+                          className="hover:scale-110 hover:cursor-pointer"
+                          onClick={() => {
+                            if (menuAberto === registro) {
+                              setMenuAberto("");
+                              editar(registro);
+                            } else {
+                              setMenuAberto(registro);
+                            }
+                          }}
+                        >
+                          ✏️
+                        </button>
 
+                        <button
+                          className="hover:scale-110 hover:cursor-pointer"
+                          onClick={() => {
+                            if (menuAberto === registro) {
+                              setMenuAberto("");
+                              excluir(registro);
+                            } else {
+                              setMenuAberto(registro);
+                            }
+                          }}
+                        >
+                          ❌
+                        </button>
+                      </div>
+                    ) : (
                       <button
-                        className="hover:scale-110 hover:cursor-pointer"
-                        onClick={() => {
-                          if (menuAberto === registro) {
-                            setMenuAberto("");
-                            excluir(registro);
-                          } else {
-                            setMenuAberto(registro);
-                          }
-                        }}
+                        onClick={() =>
+                          setMenuAberto(menuAberto === registro ? "" : registro)
+                        }
+                        className="relative bg-transparent border-none text-(--text-secondary) cursor-pointer py-1 px-2 rounded-sm flex items-center justify-center"
                       >
-                        ❌
+                        <svg
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          fill="currentColor"
+                        >
+                          <circle cx="12" cy="5" r="2"></circle>
+                          <circle cx="12" cy="12" r="2"></circle>
+                          <circle cx="12" cy="19" r="2"></circle>
+                        </svg>
                       </button>
-                    </div>
-                  ) : (
-                    <button
-                      onClick={() =>
-                        setMenuAberto(menuAberto === registro ? "" : registro)
-                      }
-                      className="relative bg-transparent border-none text-(--text-secondary) cursor-pointer py-1 px-2 rounded-sm flex items-center justify-center"
-                    >
-                      <svg
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        fill="currentColor"
-                      >
-                        <circle cx="12" cy="5" r="2"></circle>
-                        <circle cx="12" cy="12" r="2"></circle>
-                        <circle cx="12" cy="19" r="2"></circle>
-                      </svg>
-                    </button>
-                  )}
-                </div>
-              </td>
+                    )}
+                  </div>
+                </td>
+              )}
             </tr>
           );
         })}
