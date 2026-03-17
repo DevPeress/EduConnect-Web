@@ -64,7 +64,7 @@ export function EditarAlunoProvider({ children }: { children: ReactNode }) {
 
     if (resolveCallback) {
       await http
-        .post("api/Aluno", {
+        .post("api/alunos", {
           Registro: dados.matricula,
           Status: dados.status,
           Nome: dados.nome,
