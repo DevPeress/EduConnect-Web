@@ -77,6 +77,8 @@ function IdentificarTipo(dado: string) {
       return "categoria";
     case "Status do Pagamento":
       return "statuspagamento";
+      case "Cancelado":
+        return "cancelado"
     case "Método do Pagameto":
       return "metodo";
     case "Observações":

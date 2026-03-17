@@ -17,7 +17,12 @@ export const editarFinanceiroSchema = z.object({
   descricao: z.string().min(5, "Descrição inválida!"),
   valor: z.number().min(1, "Valor inválido!"),
   dataVencimento: z.string(),
-  pago: z.boolean(),
+  statuspagamento: z
+    .string()
+    .refine(
+      (value) => value !== "Selecionar status",
+      "Selecione um status válido!",
+    ),
   cancelado: z.boolean(),
   dataPagamento: z.string(),
   observacoes: z.string(),

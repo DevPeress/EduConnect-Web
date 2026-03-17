@@ -22,7 +22,7 @@ export function EditarAlunoProvider({ children }: { children: ReactNode }) {
     descricao: "",
     valor: 0,
     dataVencimento: "",
-    pago: false,
+    statuspagamento: "false",
     cancelado: false,
     dataPagamento: "",
     observacoes: "",
@@ -45,7 +45,7 @@ export function EditarAlunoProvider({ children }: { children: ReactNode }) {
         descricao: infos.descricao,
         valor: infos.valor,
         dataVencimento: infos.dataVencimento,
-        pago: infos.pago,
+        statuspagamento: infos.pago,
         cancelado: infos.cancelado,
         dataPagamento: infos.dataPagamento,
         observacoes: infos.observacoes,
@@ -71,9 +71,10 @@ export function EditarAlunoProvider({ children }: { children: ReactNode }) {
           descricao: dados.descricao,
           valor: dados.valor,
           dataVencimento: dados.dataVencimento,
-          pago: dados.pago,
+          pago: dados.statuspagamento === "Pago" ? true : false,
           cancelado: dados.cancelado,
-          dataPagamento: dados.dataPagamento,
+          dataPagamento:
+            dados.dataPagamento !== "" ? dados.dataPagamento : null,
           observacoes: dados.observacoes,
           aluno: dados.aluno,
         })
@@ -118,9 +119,10 @@ export function EditarAlunoProvider({ children }: { children: ReactNode }) {
                 <h3 className="text-[15px] font-bold text-(--text-primary) mb-4 pb-2 border-b-2 border-(--border-color)">
                   Informações do Pagamento
                 </h3>
+
                 <Flex2Context
-                  opcao1="Aluno"
-                  opcao2="Categoria"
+                  opcao1="Registro"
+                  opcao2="Aluno"
                   infos={dados}
                   setInfos={setDados}
                 />
@@ -130,6 +132,13 @@ export function EditarAlunoProvider({ children }: { children: ReactNode }) {
                   infos={dados}
                   setInfos={setDados}
                   place="ex: Mensalidade Dezembro 2025"
+                />
+
+                <Flex2Context
+                  opcao1="Categoria"
+                  opcao2="Método do Pagameto"
+                  infos={dados}
+                  setInfos={setDados}
                 />
 
                 <Flex2Context
@@ -147,7 +156,7 @@ export function EditarAlunoProvider({ children }: { children: ReactNode }) {
                 />
 
                 <Flex2Context
-                  opcao1="Método do Pagameto"
+                  opcao1="Cancelado"
                   opcao2="Observações"
                   infos={dados}
                   setInfos={setDados}
