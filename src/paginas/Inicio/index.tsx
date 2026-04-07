@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import CardsAdmin from "../../components/Administracao/CardsAdmin";
 import type {
   AtividadeType,
@@ -37,7 +37,7 @@ const InicioPage = () => {
     },
   ]);
 
-  const PegarDadosAdmin = async () => {
+  const PegarDadosAdmin = useCallback(async () => {
     await http
       .get("api/dashboardadmin/Cards")
       .then(function (dados) {
@@ -54,6 +54,7 @@ const InicioPage = () => {
       .get("api/dashboardadmin/Atividades")
       .then(function (dados) {
         setAtividades(dados.data);
+        pegarGrafico();
       })
       .catch(function (err) {
         const error = err as AxiosError;
@@ -61,7 +62,9 @@ const InicioPage = () => {
 
         toast.error(msg ?? "Não foi possível pegar os Dados!");
       });
+  }, []);
 
+  const pegarGrafico = async () => {
     await http
       .get("api/dashboardadmin/Grafico")
       .then(function (dados) {
@@ -74,13 +77,15 @@ const InicioPage = () => {
 
         toast.error(msg ?? "Não foi possível pegar os Dados!");
       });
-  };
+  }
 
   useEffect(() => {
     if (cargo === "Administrador" || cargo === "Funcionário") {
       PegarDadosAdmin();
+    } else {
+      pegarGrafico()
     }
-  }, [cargo]);
+  }, [PegarDadosAdmin, cargo]);
 
   return (
     <LayoutLogado
