@@ -66,7 +66,7 @@ const AcoesRapidas = () => {
 
       baixarBoletim(registro);
     } else {
-      const registro = await openMenu(); // 👈 AQUI
+      const registro = await openMenu();
 
       if (!registro) return;
 
