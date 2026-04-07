@@ -9,20 +9,20 @@ export function BoletimProvider({ children }: { children: ReactNode }) {
   const [registro, setRegistro] = useState<string>("");
 
   const [resolveCallback, setResolveCallback] = useState<
-    ((data: true | null) => void) | null
+    ((data: string | null) => void) | null
   >(null);
 
-  const openMenu = async (): Promise<true | null> => {
+  const openMenu = async (): Promise<string | null> => {
     setMenu(true);
 
-    return new Promise<true | null>((resolve) => {
+    return new Promise<string | null>((resolve) => {
       setResolveCallback(() => resolve);
     });
   };
 
   const Confirm = async () => {
     if (resolveCallback) {
-      resolveCallback(true);
+      resolveCallback(registro);
       setResolveCallback(null);
     }
     setMenu(false);

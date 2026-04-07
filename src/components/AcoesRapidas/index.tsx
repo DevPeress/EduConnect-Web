@@ -4,11 +4,12 @@ import {
   RegistrarPresenca,
   GerarRelatorio,
 } from "../../assets/HTML";
-import { useAuth, useCadastroMenu } from "../../context";
+import { useAuth, useBoletimMenu, useCadastroMenu } from "../../context";
 import { http } from "../../utils/axios";
 
 const AcoesRapidas = () => {
   const { cadastroAluno } = useCadastroMenu();
+  const openMenu = useBoletimMenu();
   const auth = useAuth();
   const cargo = auth.cargo;
 
@@ -58,30 +59,38 @@ const AcoesRapidas = () => {
     }
   };
 
-  const gerarBoletim = () => {
+  const gerarBoletim = async () => {
     if (cargo === "Aluno") {
       const { data } = await http.get("/api/auth/usuario");
       const registro = data.id;
 
-      const response = await http.get(`/api/alunos/boletim/${registro}`, {
-        responseType: "blob",
-      });
+      baixarBoletim(registro);
+    } else {
+      const registro = await openMenu(); // 👈 AQUI
 
-      const url = window.URL.createObjectURL(response.data);
+      if (!registro) return;
 
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = "boletim.pdf";
-
-      document.body.appendChild(link);
-      link.click();
-
-      link.remove();
-      window.URL.revokeObjectURL(url);
-    } else (
-
-    )
+      baixarBoletim(registro);
+    }
   };
+
+  const baixarBoletim = async (registro: string) => {
+    const response = await http.get(`/api/alunos/boletim/${registro}`, {
+      responseType: "blob",
+    });
+
+    const url = window.URL.createObjectURL(response.data);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "boletim.pdf";
+
+    document.body.appendChild(link);
+    link.click();
+
+    link.remove();
+    window.URL.revokeObjectURL(url);
+  }
 
   return (
     <div

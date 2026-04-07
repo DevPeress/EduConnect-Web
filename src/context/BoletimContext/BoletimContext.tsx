@@ -1,7 +1,7 @@
 import { createContext } from "react";
 
 type BoletimContextType = {
-  openMenu: () => Promise<true | null>;
+  openMenu: () => Promise<string | null>;
 };
 
 export const BoletimContext = createContext<BoletimContextType | undefined>(

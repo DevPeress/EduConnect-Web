@@ -137,6 +137,12 @@ export function useBoletim() {
   return context;
 }
 
+export function useBoletimMenu() {
+  const boletim = useBoletim().openMenu;
+
+  return boletim;
+}
+
 export function useCadastroMenu() {
   const cadastroProfessor = useCadastroProfessor().openMenu;
   const cadastroAluno = useCadastroAluno().openMenu;
