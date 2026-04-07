@@ -7,12 +7,13 @@ import Selects from "../../components/Administracao/Selects";
 import TrocaPagina from "../../components/TrocaPagina";
 import toast from "react-hot-toast";
 import type { AxiosError } from "axios";
-import { useCadastroMenu } from "../../context";
+import { useCadastroMenu, useEditarMenu } from "../../context";
 
 const ITENS_POR_PAGINA = 6;
 
 const NotasPage = () => {
- const { cadastroNota } = useCadastroMenu();
+  const { cadastroNota } = useCadastroMenu();
+  const { editarNota } = useEditarMenu();
 
   const [loading, setLoading] = useState<boolean>(true);
   const [salas, setSalas] = useState<string[]>([]);
@@ -95,7 +96,8 @@ const NotasPage = () => {
   };
 
   const Editar = async (Registro: string) => {
-    console.log(Number(Registro));
+    const dados = await editarNota(Registro);
+    if (!dados) return;
     return Pesquisa();
   };
 
