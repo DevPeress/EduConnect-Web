@@ -5,6 +5,7 @@ import {
   GerarRelatorio,
 } from "../../assets/HTML";
 import { useAuth, useCadastroMenu } from "../../context";
+import { http } from "../../utils/axios";
 
 const AcoesRapidas = () => {
   const { cadastroAluno } = useCadastroMenu();
@@ -57,6 +58,31 @@ const AcoesRapidas = () => {
     }
   };
 
+  const gerarBoletim = () => {
+    if (cargo === "Aluno") {
+      const { data } = await http.get("/api/auth/usuario");
+      const registro = data.id;
+
+      const response = await http.get(`/api/alunos/boletim/${registro}`, {
+        responseType: "blob",
+      });
+
+      const url = window.URL.createObjectURL(response.data);
+
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "boletim.pdf";
+
+      document.body.appendChild(link);
+      link.click();
+
+      link.remove();
+      window.URL.revokeObjectURL(url);
+    } else (
+
+    )
+  };
+
   return (
     <div
       className="bg-(--bg-card) border-2 border-(--border-color) rounded-lg overflow-hidden"
@@ -72,7 +98,7 @@ const AcoesRapidas = () => {
           {tipos.map((item) => (
             <button
               onClick={async () =>
-                item === "Novo Aluno" ? cadastroAluno() : ""
+                item === "Novo Aluno" ? cadastroAluno() : item === "Gerar Boletim" ? gerarBoletim() : ""
               }
               key={item}
               className="flex items-center gap-3.5 p-3.5 bg-transparent border-2 border-(--border-color) rounded-[10px] cursor-pointer text-left w-full hover:bg-(--bg-hover) hover:border-(--border-light) hover:translate-x-1"
