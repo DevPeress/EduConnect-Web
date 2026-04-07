@@ -12,6 +12,7 @@ import { CadastroDisciplinasContext } from "./Cadastros/CadastroDisciplinasConte
 import { CadastroAlunoContext } from "./Cadastros/CadastroAlunoContext/CadastroAlunoContext";
 import { AuthContext } from "./AuthContext/AuthContext";
 import { BoletimContext } from "./BoletimContext/BoletimContext";
+import { CadastroNotaContext } from "./Cadastros/CadastroNotasContext/CadastroNotaContext";
 
 export function useTheme() {
   const context = useContext(ThemeContext);
@@ -121,6 +122,16 @@ export function useCadastroAluno() {
   return context;
 }
 
+export function useCadastroNota() {
+  const context = useContext(CadastroNotaContext);
+  if (!context) {
+    throw new Error(
+      "useCadastroNota deve ser usado dentro do CadastroNotaProvider",
+    );
+  }
+  return context;
+}
+
 export function useAuth() {
   const context = useContext(AuthContext);
   if (!context) {
@@ -150,6 +161,7 @@ export function useCadastroMenu() {
   const cadastroTurma = useCadastroTurma().openMenu;
   const cadastroFuncionario = useCadastroFuncionario().openMenu;
   const cadastroDisciplinas = useCadastroDisciplinas().openMenu;
+  const cadastroNota = useCadastroNota().openMenu;
 
   return {
     cadastroProfessor,
@@ -158,6 +170,7 @@ export function useCadastroMenu() {
     cadastroTurma,
     cadastroFuncionario,
     cadastroDisciplinas,
+    cadastroNota
   };
 }
 
