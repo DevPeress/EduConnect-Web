@@ -7,10 +7,13 @@ import Selects from "../../components/Administracao/Selects";
 import TrocaPagina from "../../components/TrocaPagina";
 import toast from "react-hot-toast";
 import type { AxiosError } from "axios";
+import { useCadastroMenu } from "../../context";
 
 const ITENS_POR_PAGINA = 6;
 
 const NotasPage = () => {
+ const { cadastroNota } = useCadastroMenu();
+
   const [loading, setLoading] = useState<boolean>(true);
   const [salas, setSalas] = useState<string[]>([]);
   const [selecionada, setSelecionada] = useState<string>("Todas as Salas");
@@ -69,6 +72,8 @@ const NotasPage = () => {
   }, []);
 
   const AdicionarNota = async () => {
+    const dados = await cadastroNota();
+    if (!dados || notas.length > 5) return;
     return Pesquisa();
   };
 
