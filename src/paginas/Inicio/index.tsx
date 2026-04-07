@@ -32,7 +32,7 @@ const InicioPage = () => {
     },
   ]);
 
-  const PegarDados = async () => {
+  const PegarDadosAdmin = async () => {
     await http
       .get("api/dashboardadmin/Cards")
       .then(function (dados) {
@@ -60,8 +60,10 @@ const InicioPage = () => {
   };
 
   useEffect(() => {
-    PegarDados();
-  }, []);
+    if (cargo === "Administrador" || cargo === "Funcionário") {
+      PegarDadosAdmin();
+    }
+  }, [cargo]);
 
   return (
     <LayoutLogado
