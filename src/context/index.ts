@@ -11,13 +11,14 @@ import { CadastroFuncionarioContext } from "./Cadastros/CadastroFuncionarioConte
 import { CadastroDisciplinasContext } from "./Cadastros/CadastroDisciplinasContext/CadastroDisciplinasContext";
 import { CadastroAlunoContext } from "./Cadastros/CadastroAlunoContext/CadastroAlunoContext";
 import { AuthContext } from "./AuthContext/AuthContext";
+import { BoletimContext } from "./BoletimContext/BoletimContext";
 
 export function useTheme() {
   const context = useContext(ThemeContext);
-    if (!context) {
-      throw new Error("useTheme deve ser usado dentro do ThemeProvider");
-    }
-    return context;
+  if (!context) {
+    throw new Error("useTheme deve ser usado dentro do ThemeProvider");
+  }
+  return context;
 }
 
 export function useEditarTurma() {
@@ -124,6 +125,14 @@ export function useAuth() {
   const context = useContext(AuthContext);
   if (!context) {
     throw new Error("useAuth deve ser usado dentro do AuthContext");
+  }
+  return context;
+}
+
+export function useBoletim() {
+  const context = useContext(BoletimContext);
+  if (!context) {
+    throw new Error("useBoletim deve ser usado dentro do BoletimContext");
   }
   return context;
 }
