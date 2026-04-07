@@ -4,17 +4,24 @@ import {
   RegistrarPresenca,
   GerarRelatorio,
 } from "../../assets/HTML";
-import { useCadastroMenu } from "../../context";
+import { useAuth, useCadastroMenu } from "../../context";
 
 const AcoesRapidas = () => {
   const { cadastroAluno } = useCadastroMenu();
+  const auth = useAuth();
+  const cargo = auth.cargo;
 
-  const tipos = [
-    "Novo Aluno",
-    "Lançar Nota",
-    "Registrar Presença",
-    "Gerar Relatório",
-  ];
+  let tipos = [
+    "Gerar Boletim"
+  ]
+
+  if (cargo === "Aluno") {
+    tipos = [...tipos];
+  } else if (cargo === "Professor") {
+    tipos = ["Lançar Nota", "Registrar Presença", ...tipos];
+  } else if (cargo === "Administrador" || cargo === "Funcionário") {
+    tipos = ["Novo Aluno", "Lançar Nota", "Registrar Presença", ...tipos];
+  }
 
   // Processa a opção recebida e retorna o título, o ícone SVG, o background e a cor de acordo com o tipo informado.
   const Acao = (tipo: string) => {
