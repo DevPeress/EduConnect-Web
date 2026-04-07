@@ -8,11 +8,11 @@ import type {
 import AtividadesRecentesAdmin from "../../components/Administracao/AtividadesAdmin";
 import CalendarioAdmin from "../../components/Administracao/CalendarioAdmin";
 import GraficoAdmin from "../../components/Administracao/GraficoAdmin";
-import AcoesAdmin from "../../components/Administracao/AcoesAdmin";
 import { http } from "../../utils/axios";
 import toast from "react-hot-toast";
 import LayoutLogado from "../LayoutLogado";
 import type { AxiosError } from "axios";
+import AcoesRapidas from "../../components/AcoesRapidas";
 
 const InicioPage = () => {
   const [loading, setLoading] = useState<boolean>(true);
@@ -84,7 +84,7 @@ const InicioPage = () => {
       <div className="grid grid-cols-[1.5fr_1fr] gap-3 mb-6">
         <GraficoAdmin />
 
-        <AcoesAdmin />
+        <AcoesRapidas />
       </div>
     </LayoutLogado>
   );

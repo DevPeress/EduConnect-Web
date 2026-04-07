@@ -3,10 +3,10 @@ import {
   LancarNota,
   RegistrarPresenca,
   GerarRelatorio,
-} from "../../../assets/HTML";
-import { useCadastroMenu } from "../../../context";
+} from "../../assets/HTML";
+import { useCadastroMenu } from "../../context";
 
-const AcoesAdmin = () => {
+const AcoesRapidas = () => {
   const { cadastroAluno } = useCadastroMenu();
 
   const tipos = [
@@ -107,4 +107,4 @@ const AcoesAdmin = () => {
   );
 };
 
-export default AcoesAdmin;
+export default AcoesRapidas;
