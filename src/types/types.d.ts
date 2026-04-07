@@ -174,6 +174,7 @@ export interface ContextType<
   | CadastroTurmaInput
   | CadastroFuncionarioInput
   | CadastroDisciplinasInput
+  | CadastroNotaInput
   | EditarFuncionarioInput,
 > {
   openMenu: () => Promise<T | null>;
@@ -205,7 +206,8 @@ export interface FlexContext<
   | CadastroPagamentoInput
   | CadastroTurmaInput
   | CadastroFuncionarioInput
-  | CadastroDisciplinasInput,
+  | CadastroDisciplinasInput
+  | CadastroNotaInput,
 > {
   infos: T;
   setInfos: React.Dispatch<React.SetStateAction<T>>;

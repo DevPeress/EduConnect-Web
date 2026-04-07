@@ -10,6 +10,7 @@ import type { CadastroDisciplinasInput } from "../../schemas/Cadastro/CadastroDi
 import type { EditarFuncionarioInput } from "../../schemas/Editar/EditarFuncionarioSchema";
 import type { EditarProfessorInput } from "../../schemas/Editar/EditarProfessorSchema";
 import type { EditarFinanceiroInput } from "../../schemas/Editar/EditarFinanceiroSchema";
+import type { CadastroNotaInput } from "../../schemas/Cadastro/CadastroNotaSchema";
 
 type Disciplina = {
   registro: string;
@@ -18,15 +19,16 @@ type Disciplina = {
 
 interface Flex1ContextProp<
   T extends
-    | CadastroAlunoInput
-    | CadastroProfessorInput
-    | CadastroPagamentoInput
-    | CadastroTurmaInput
-    | CadastroFuncionarioInput
-    | CadastroDisciplinasInput
-    | EditarFuncionarioInput
-    | EditarProfessorInput
-    | EditarFinanceiroInput,
+  | CadastroAlunoInput
+  | CadastroProfessorInput
+  | CadastroPagamentoInput
+  | CadastroTurmaInput
+  | CadastroFuncionarioInput
+  | CadastroDisciplinasInput
+  | CadastroNotaInput
+  | EditarFuncionarioInput
+  | EditarProfessorInput
+  | EditarFinanceiroInput,
 > extends FlexContext<T> {
   titulo: string;
   place: string;
@@ -34,15 +36,16 @@ interface Flex1ContextProp<
 
 const Flex1Context = <
   T extends
-    | CadastroAlunoInput
-    | CadastroProfessorInput
-    | CadastroPagamentoInput
-    | CadastroTurmaInput
-    | CadastroFuncionarioInput
-    | CadastroDisciplinasInput
-    | EditarFuncionarioInput
-    | EditarProfessorInput
-    | EditarFinanceiroInput,
+  | CadastroAlunoInput
+  | CadastroProfessorInput
+  | CadastroPagamentoInput
+  | CadastroTurmaInput
+  | CadastroFuncionarioInput
+  | CadastroDisciplinasInput
+  | CadastroNotaInput
+  | EditarFuncionarioInput
+  | EditarProfessorInput
+  | EditarFinanceiroInput,
 >({
   titulo,
   infos,
@@ -230,6 +233,35 @@ const Flex1Context = <
                 </span>
               ))}
             </div>
+          </div>
+        );
+      case "materia":
+        return (
+          <div className="w-full py-3 px-4 bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] text-(--text-primary) text-[14px] focus:outline-none focus:border-(--primary-color)">
+            <select
+              className="w-full bg-(--bg-input) border-2 border-(--border-color) rounded-[10px] px-3 py-2 text-(--text-primary) text-[14px]"
+              onChange={(e) =>
+                setInfos((prevDados) => ({
+                  ...prevDados,
+                  [tipo]: e.target.value,
+                }))
+              }
+              defaultValue=""
+            >
+              <option value="" disabled>
+                Selecionar Matéria
+              </option>
+
+              {temDisciplinasValidas(infos) &&
+                infos.disciplinasValidas.map((d) => (
+                  <option
+                    key={d.registro}
+                    value={d.registro}
+                  >
+                    {d.nome}
+                  </option>
+                ))}
+            </select>
           </div>
         );
       default:

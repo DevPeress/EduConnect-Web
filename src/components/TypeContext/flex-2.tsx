@@ -15,18 +15,20 @@ import type { CadastroDisciplinasInput } from "../../schemas/Cadastro/CadastroDi
 import type { EditarFuncionarioInput } from "../../schemas/Editar/EditarFuncionarioSchema";
 import type { EditarProfessorInput } from "../../schemas/Editar/EditarProfessorSchema";
 import type { EditarFinanceiroInput } from "../../schemas/Editar/EditarFinanceiroSchema";
+import type { CadastroNotaInput } from "../../schemas/Cadastro/CadastroNotaSchema";
 
 interface Flex2ContextProp<
   T extends
-    | CadastroAlunoInput
-    | CadastroProfessorInput
-    | CadastroPagamentoInput
-    | CadastroTurmaInput
-    | CadastroFuncionarioInput
-    | CadastroDisciplinasInput
-    | EditarFuncionarioInput
-    | EditarProfessorInput
-    | EditarFinanceiroInput,
+  | CadastroAlunoInput
+  | CadastroProfessorInput
+  | CadastroPagamentoInput
+  | CadastroTurmaInput
+  | CadastroFuncionarioInput
+  | CadastroDisciplinasInput
+  | CadastroNotaInput
+  | EditarFuncionarioInput
+  | EditarProfessorInput
+  | EditarFinanceiroInput,
 > extends FlexContext<T> {
   opcao1: string;
   opcao2: string;
@@ -34,15 +36,16 @@ interface Flex2ContextProp<
 
 const Flex2Context = <
   T extends
-    | CadastroAlunoInput
-    | CadastroProfessorInput
-    | CadastroPagamentoInput
-    | CadastroTurmaInput
-    | CadastroFuncionarioInput
-    | CadastroDisciplinasInput
-    | EditarFuncionarioInput
-    | EditarProfessorInput
-    | EditarFinanceiroInput,
+  | CadastroAlunoInput
+  | CadastroProfessorInput
+  | CadastroPagamentoInput
+  | CadastroTurmaInput
+  | CadastroFuncionarioInput
+  | CadastroDisciplinasInput
+  | CadastroNotaInput
+  | EditarFuncionarioInput
+  | EditarProfessorInput
+  | EditarFinanceiroInput,
 >({
   opcao1,
   opcao2,
@@ -116,6 +119,7 @@ const Flex2Context = <
     inicio: "time",
     fim: "time",
     salario: "number",
+    nota: "number",
   };
 
   // Cria o Select ou Input para ser demonstrado

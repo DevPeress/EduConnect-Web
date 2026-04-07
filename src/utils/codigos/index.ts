@@ -77,8 +77,8 @@ function IdentificarTipo(dado: string) {
       return "categoria";
     case "Status do Pagamento":
       return "statuspagamento";
-      case "Cancelado":
-        return "cancelado"
+    case "Cancelado":
+      return "cancelado"
     case "Método do Pagameto":
       return "metodo";
     case "Observações":
@@ -113,6 +113,12 @@ function IdentificarTipo(dado: string) {
       return "foto";
     case "Salario":
       return "salario";
+    case "Matricula do Aluno":
+      return "alunoRegistro";
+    case "Nota":
+      return "nota";
+    case "Matéria":
+      return "materia";
 
     default:
       return "";
