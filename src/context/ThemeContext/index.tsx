@@ -13,6 +13,7 @@ import { EditarAlunoProvider } from "../Editar/EditarAlunoContext";
 import { EditarProfessorProvider } from "../Editar/EditarProfessorContext";
 import { ThemeContext } from "./ThemeContext";
 import { BoletimProvider } from "../BoletimContext";
+import { CadastroNotaProvider } from "../Cadastros/CadastroNotasContext";
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   // Gerencia a temática selecionada, salvando-a no localStorage para uso posterior.
@@ -42,17 +43,19 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
             <CadastroTurmaProvider>
               <CadastroFuncionarioProvider>
                 <CadastroDisciplinasProvider>
-                  <EditarFuncionarioProvider>
-                    <EditarTurmaProvider>
-                      <EditarAlunoProvider>
-                        <EditarProfessorProvider>
-                          <BoletimProvider>
-                            {children}
-                          </BoletimProvider>
-                        </EditarProfessorProvider>
-                      </EditarAlunoProvider>
-                    </EditarTurmaProvider>
-                  </EditarFuncionarioProvider>
+                  <CadastroNotaProvider>
+                    <EditarFuncionarioProvider>
+                      <EditarTurmaProvider>
+                        <EditarAlunoProvider>
+                          <EditarProfessorProvider>
+                            <BoletimProvider>
+                              {children}
+                            </BoletimProvider>
+                          </EditarProfessorProvider>
+                        </EditarAlunoProvider>
+                      </EditarTurmaProvider>
+                    </EditarFuncionarioProvider>
+                  </CadastroNotaProvider>
                 </CadastroDisciplinasProvider>
               </CadastroFuncionarioProvider>
             </CadastroTurmaProvider>
