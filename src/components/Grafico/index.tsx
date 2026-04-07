@@ -8,7 +8,7 @@ interface GraficoAdminProps {
   periodoOptions?: string[];
 }
 
-const GraficoAdmin: React.FC<GraficoAdminProps> = ({ dados, periodoOptions = ["Último mês", "Último trimestre", "Último ano"] }) => {
+const Grafico: React.FC<GraficoAdminProps> = ({ dados, periodoOptions = ["Último mês", "Último trimestre", "Último ano"] }) => {
   /**
   * dados = {
   *   mediaGeral: [150, 140, 145, ...],
@@ -76,4 +76,4 @@ const GraficoAdmin: React.FC<GraficoAdminProps> = ({ dados, periodoOptions = ["�
   );
 };
 
-export default GraficoAdmin;
+export default Grafico;
