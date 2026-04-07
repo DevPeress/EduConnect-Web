@@ -6,7 +6,7 @@ import type {
   CardsAdminType,
 } from "../../types/types";
 import AtividadesRecentesAdmin from "../../components/Administracao/AtividadesAdmin";
-import CalendarioAdmin from "../../components/Administracao/CalendarioAdmin";
+import CalendarioCard from "../../components/CalendarioCard";
 import GraficoAdmin from "../../components/Administracao/GraficoAdmin";
 import { http } from "../../utils/axios";
 import toast from "react-hot-toast";
@@ -79,7 +79,7 @@ const InicioPage = () => {
       <div className="grid grid-cols-[repeat(auto-fit,minmax(450px,1fr))] gap-3 mb-6">
         <AtividadesRecentesAdmin atividades={atividades} />
 
-        <CalendarioAdmin calendario={calendario} />
+        <CalendarioCard calendario={calendario} />
       </div>
       <div className="grid grid-cols-[1.5fr_1fr] gap-3 mb-6">
         <GraficoAdmin />
