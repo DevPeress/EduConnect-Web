@@ -106,9 +106,10 @@ const AcoesRapidas = () => {
         <div className="flex flex-col gap-1">
           {tipos.map((item) => (
             <button
-              onClick={async () =>
-                item === "Novo Aluno" ? cadastroAluno() : item === "Gerar Boletim" ? gerarBoletim() : ""
-              }
+              onClick={async () => {
+                if (item === "Novo Aluno") return cadastroAluno();
+                if (item === "Gerar Boletim") return gerarBoletim();
+              }}
               key={item}
               className="flex items-center gap-3.5 p-3.5 bg-transparent border-2 border-(--border-color) rounded-[10px] cursor-pointer text-left w-full hover:bg-(--bg-hover) hover:border-(--border-light) hover:translate-x-1"
             >
