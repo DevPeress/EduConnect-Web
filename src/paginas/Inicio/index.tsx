@@ -13,8 +13,12 @@ import toast from "react-hot-toast";
 import LayoutLogado from "../LayoutLogado";
 import type { AxiosError } from "axios";
 import AcoesRapidas from "../../components/AcoesRapidas";
+import { useAuth } from "../../context";
 
 const InicioPage = () => {
+  const auth = useAuth();
+  const cargo = auth.cargo;
+
   const [loading, setLoading] = useState<boolean>(true);
   const [dados, setDados] = useState<CardsAdminType[]>([]);
   const [atividades, setAtividades] = useState<AtividadeType[]>([]);
@@ -71,11 +75,13 @@ const InicioPage = () => {
       }}
       load={loading}
     >
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-6 mb-6">
-        {dados.map((item) => (
-          <CardsAdmin key={item.dado} dados={item} />
-        ))}
-      </div>
+      {(cargo === "Administrador" || cargo === "Funcionário") &&
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-6 mb-6">
+          {dados.map((item) => (
+            <CardsAdmin key={item.dado} dados={item} />
+          ))}
+        </div>
+      }
       <div className="grid grid-cols-[repeat(auto-fit,minmax(450px,1fr))] gap-3 mb-6">
         <AtividadesRecentesAdmin atividades={atividades} />
 
