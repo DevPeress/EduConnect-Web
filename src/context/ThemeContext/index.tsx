@@ -12,6 +12,7 @@ import { EditarTurmaProvider } from "../Editar/EditarTurmaContext";
 import { EditarAlunoProvider } from "../Editar/EditarAlunoContext";
 import { EditarProfessorProvider } from "../Editar/EditarProfessorContext";
 import { ThemeContext } from "./ThemeContext";
+import { BoletimProvider } from "../BoletimContext";
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   // Gerencia a temática selecionada, salvando-a no localStorage para uso posterior.
@@ -45,7 +46,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
                     <EditarTurmaProvider>
                       <EditarAlunoProvider>
                         <EditarProfessorProvider>
-                          {children}
+                          <BoletimProvider>
+                            {children}
+                          </BoletimProvider>
                         </EditarProfessorProvider>
                       </EditarAlunoProvider>
                     </EditarTurmaProvider>
