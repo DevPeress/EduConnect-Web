@@ -1,12 +1,4 @@
-interface GraficoDados {
-  mediaGeral: number[];
-  meta: number[];
-}
-
-interface GraficoAdminProps {
-  dados: GraficoDados;
-  periodoOptions?: string[];
-}
+import type { GraficoAdminProps } from "../../types/types";
 
 const Grafico: React.FC<GraficoAdminProps> = ({ dados, periodoOptions = ["Último mês", "Último trimestre", "Último ano"] }) => {
   /**

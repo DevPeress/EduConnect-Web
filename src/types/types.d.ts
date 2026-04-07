@@ -168,13 +168,13 @@ export interface Disciplinas {
 
 export interface ContextType<
   T extends
-    | CadastroProfessorInput
-    | CadastroAlunoInput
-    | CadastroPagamentoInput
-    | CadastroTurmaInput
-    | CadastroFuncionarioInput
-    | CadastroDisciplinasInput
-    | EditarFuncionarioInput,
+  | CadastroProfessorInput
+  | CadastroAlunoInput
+  | CadastroPagamentoInput
+  | CadastroTurmaInput
+  | CadastroFuncionarioInput
+  | CadastroDisciplinasInput
+  | EditarFuncionarioInput,
 > {
   openMenu: () => Promise<T | null>;
   setDados: React.Dispatch<React.SetStateAction<T>>;
@@ -200,12 +200,12 @@ export interface SlotInfo {
 
 export interface FlexContext<
   T extends
-    | CadastroAlunoInput
-    | CadastroProfessorInput
-    | CadastroPagamentoInput
-    | CadastroTurmaInput
-    | CadastroFuncionarioInput
-    | CadastroDisciplinasInput,
+  | CadastroAlunoInput
+  | CadastroProfessorInput
+  | CadastroPagamentoInput
+  | CadastroTurmaInput
+  | CadastroFuncionarioInput
+  | CadastroDisciplinasInput,
 > {
   infos: T;
   setInfos: React.Dispatch<React.SetStateAction<T>>;
@@ -243,4 +243,14 @@ export interface TrocaPaginas {
   maxPagina: number;
   total: number;
   trocaPagina: (valor: number) => void;
+}
+
+export interface GraficoDados {
+  mediaGeral: number[];
+  meta: number[];
+}
+
+export interface GraficoAdminProps {
+  dados: GraficoDados;
+  periodoOptions?: string[];
 }

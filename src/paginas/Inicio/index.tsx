@@ -4,10 +4,11 @@ import type {
   AtividadeType,
   CalendarioType,
   CardsAdminType,
+  GraficoDados,
 } from "../../types/types";
 import AtividadesRecentesAdmin from "../../components/Administracao/AtividadesAdmin";
 import CalendarioCard from "../../components/CalendarioCard";
-import GraficoAdmin from "../../components/Administracao/GraficoAdmin";
+import Grafico from "../../components/Grafico";
 import { http } from "../../utils/axios";
 import toast from "react-hot-toast";
 import LayoutLogado from "../LayoutLogado";
@@ -22,6 +23,10 @@ const InicioPage = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [dados, setDados] = useState<CardsAdminType[]>([]);
   const [atividades, setAtividades] = useState<AtividadeType[]>([]);
+  const [dadosGrafico, setDadosGrafico] = useState<GraficoDados>({
+    mediaGeral: [],
+    meta: [],
+  });
 
   const [calendario] = useState<CalendarioType[]>([
     {
@@ -49,6 +54,18 @@ const InicioPage = () => {
       .get("api/dashboardadmin/Atividades")
       .then(function (dados) {
         setAtividades(dados.data);
+      })
+      .catch(function (err) {
+        const error = err as AxiosError;
+        const msg = error?.response?.data as string;
+
+        toast.error(msg ?? "Não foi possível pegar os Dados!");
+      });
+
+    await http
+      .get("api/dashboardadmin/Grafico")
+      .then(function (dados) {
+        setDadosGrafico(dados.data);
         setLoading(false);
       })
       .catch(function (err) {
@@ -90,7 +107,7 @@ const InicioPage = () => {
         <CalendarioCard calendario={calendario} />
       </div>
       <div className="grid grid-cols-[1.5fr_1fr] gap-3 mb-6">
-        <GraficoAdmin />
+        <Grafico dados={dadosGrafico} />
 
         <AcoesRapidas />
       </div>
