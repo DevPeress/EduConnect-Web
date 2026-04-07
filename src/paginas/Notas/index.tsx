@@ -107,7 +107,7 @@ const NotasPage = () => {
       }}
       botao={{
         ativo: true,
-        mensagem: "Nova Nova",
+        mensagem: "Nova Nota",
         adicionar: AdicionarNota,
       }}
       load={loading}
