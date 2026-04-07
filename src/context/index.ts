@@ -13,6 +13,7 @@ import { CadastroAlunoContext } from "./Cadastros/CadastroAlunoContext/CadastroA
 import { AuthContext } from "./AuthContext/AuthContext";
 import { BoletimContext } from "./BoletimContext/BoletimContext";
 import { CadastroNotaContext } from "./Cadastros/CadastroNotasContext/CadastroNotaContext";
+import { EditarNotaContext } from "./Editar/EditarNotaContext/EditarNotaContext";
 
 export function useTheme() {
   const context = useContext(ThemeContext);
@@ -57,6 +58,16 @@ export function useEditarAluno() {
   if (!context) {
     throw new Error(
       "useEditarAluno deve ser usado dentro do EditarAlunoProvider",
+    );
+  }
+  return context;
+}
+
+export function useEditarNota() {
+  const context = useContext(EditarNotaContext);
+  if (!context) {
+    throw new Error(
+      "useEditarNota deve ser usado dentro do EditarNotaProvider",
     );
   }
   return context;
@@ -180,6 +191,7 @@ export function useEditarMenu() {
   const editarAlunoCtx = useEditarAluno();
   const editarProfessorCtx = useEditarProfessor();
   const editarPagamentoCtx = useEditarFuncionario();
+  const editarNotaCtx = useEditarNota();
 
   return {
     editarFuncionario: (registro: string) =>
@@ -189,6 +201,7 @@ export function useEditarMenu() {
     editarProfessor: (registro: string) =>
       editarProfessorCtx.openMenu(registro),
     editarPagamento: (registro: string) =>
-      editarPagamentoCtx.openMenu(registro)
+      editarPagamentoCtx.openMenu(registro),
+    editarNota: (registro: string) => editarNotaCtx.openMenu(registro),
   };
 }
