@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import CardsAdmin from "../../components/Administracao/CardsAdmin";
+import CardsAdmin from "../../components/CardsAdmin";
 import type {
   AtividadeType,
   CalendarioType,

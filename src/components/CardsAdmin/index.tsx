@@ -3,9 +3,9 @@ import {
   TotalProfessores,
   TotalReceita,
   TotalTurmas,
-} from "../../../assets/HTML";
-import type { CardsAdminType } from "../../../types/types";
-import { formatBRL } from "../../../utils/codigos";
+} from "../../assets/HTML";
+import type { CardsAdminType } from "../../types/types";
+import { formatBRL } from "../../utils/codigos";
 const CardsAdmin = ({ dados }: { dados: CardsAdminType }) => {
   const tipo: string = dados.dado;
   const porcentagem: boolean = dados.porcentagem > 0;

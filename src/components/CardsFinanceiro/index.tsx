@@ -1,6 +1,6 @@
-import { Atrasado, Pendente, Recebido, Total } from "../../../assets/HTML";
-import type { CardsFinanceiroType } from "../../../types/types";
-import { formatBRL } from "../../../utils/codigos";
+import { Atrasado, Pendente, Recebido, Total } from "../../assets/HTML";
+import type { CardsFinanceiroType } from "../../types/types";
+import { formatBRL } from "../../utils/codigos";
 
 const CardsFinanceiro = ({ dados }: { dados: CardsFinanceiroType }) => {
   const Card = (tipo: string) => {
@@ -35,9 +35,8 @@ const CardsFinanceiro = ({ dados }: { dados: CardsFinanceiroType }) => {
   return (
     <div className="bg-(--bg-card) border border-(--border-color) rounded-2xl p-5 flex items-center gap-4 hover:-translate-y-1">
       <div
-        className={`w-14 h-14 rounded-lg flex items-center justify-center shrink-0 ${
-          Card(dados.dado)?.bg
-        } ${Card(dados.dado)?.text}`}
+        className={`w-14 h-14 rounded-lg flex items-center justify-center shrink-0 ${Card(dados.dado)?.bg
+          } ${Card(dados.dado)?.text}`}
       >
         {Card(dados.dado)?.svg}
       </div>

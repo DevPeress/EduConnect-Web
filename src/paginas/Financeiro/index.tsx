@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import type { CardsFinanceiroType, Financeiro } from "../../types/types";
 import LayoutLogado from "../LayoutLogado";
 import Table from "../../components/Table";
-import CardsFinanceiro from "../../components/Administracao/CardsFinanceiro";
+import CardsFinanceiro from "../../components/CardsFinanceiro";
 import { http } from "../../utils/axios";
 import Selects from "../../components/Selects";
 import { useCadastroMenu, useEditarMenu } from "../../context";
