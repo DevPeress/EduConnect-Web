@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import type { AtividadeType, AuditAction } from "../../../types/types";
+import type { AtividadeType, AuditAction } from "../../types/types";
 
-const AtividadesRecentesAdmin = ({
+const AtividadesRecentes = ({
   atividades,
 }: {
   atividades: AtividadeType[];
@@ -82,4 +82,4 @@ const AtividadesRecentesAdmin = ({
   );
 };
 
-export default AtividadesRecentesAdmin;
+export default AtividadesRecentes;

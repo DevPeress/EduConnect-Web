@@ -6,7 +6,7 @@ import type {
   CardsAdminType,
   GraficoDados,
 } from "../../types/types";
-import AtividadesRecentesAdmin from "../../components/Administracao/AtividadesAdmin";
+import AtividadesRecentes from "../../components/Atividades";
 import CalendarioCard from "../../components/CalendarioCard";
 import Grafico from "../../components/Grafico";
 import { http } from "../../utils/axios";
@@ -107,7 +107,7 @@ const InicioPage = () => {
         </div>
       }
       <div className="grid grid-cols-[repeat(auto-fit,minmax(450px,1fr))] gap-3 mb-6">
-        <AtividadesRecentesAdmin atividades={atividades} />
+        <AtividadesRecentes atividades={atividades} />
 
         <CalendarioCard calendario={calendario} />
       </div>
