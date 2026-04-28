@@ -1,4 +1,4 @@
-import type { SelectProps } from "../../../types/types";
+import type { SelectProps } from "../../types/types";
 
 const Retornos = (tipo: string) => {
   switch (tipo) {
@@ -115,9 +115,9 @@ const Selects = ({
         </select>
       )}
       {tipo === "Financeiro" &&
-      selecionadoPagamento &&
-      selecionadoCategorias &&
-      selecionadoMeses ? (
+        selecionadoPagamento &&
+        selecionadoCategorias &&
+        selecionadoMeses ? (
         <>
           <select
             onChange={(e) => selecionadoPagamento(e.target.value)}

@@ -3,7 +3,7 @@ import type { Notas } from "../../types/types";
 import LayoutLogado from "../LayoutLogado";
 import Table from "../../components/Table";
 import { http } from "../../utils/axios";
-import Selects from "../../components/Administracao/Selects";
+import Selects from "../../components/Selects";
 import TrocaPagina from "../../components/TrocaPagina";
 import toast from "react-hot-toast";
 import type { AxiosError } from "axios";

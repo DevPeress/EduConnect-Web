@@ -4,7 +4,7 @@ import LayoutLogado from "../LayoutLogado";
 import Table from "../../components/Table";
 import CardsFinanceiro from "../../components/Administracao/CardsFinanceiro";
 import { http } from "../../utils/axios";
-import Selects from "../../components/Administracao/Selects";
+import Selects from "../../components/Selects";
 import { useCadastroMenu, useEditarMenu } from "../../context";
 import TrocaPagina from "../../components/TrocaPagina";
 import toast from "react-hot-toast";

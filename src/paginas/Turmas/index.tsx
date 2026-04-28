@@ -3,7 +3,7 @@ import type { Turmas } from "../../types/types";
 import LayoutLogado from "../LayoutLogado";
 import Table from "../../components/Table";
 import { http } from "../../utils/axios";
-import Selects from "../../components/Administracao/Selects";
+import Selects from "../../components/Selects";
 import TrocaPagina from "../../components/TrocaPagina";
 import { useCadastroMenu, useEditarMenu } from "../../context";
 import toast from "react-hot-toast";
